@@ -1,0 +1,138 @@
+aid: barchart
+name: Barchart
+review:
+  question: Does Barchart expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Barchart's documented public developer
+    surface - the OnDemand API at ondemand.websol.barchart.com - is
+    request/response REST (GET/POST, plus SOAP) returning JSON, XML, or CSV.
+    There is no openly documented, self-service WebSocket (ws:// or wss://)
+    endpoint. Barchart does offer a real-time push capability - the OnDemand
+    "Event-Based API" is described as REST and/or Socket.IO endpoints for
+    market-data and news alerts, and Barchart separately sells a streaming
+    market-data product - but those are entitlement/enterprise-gated, use
+    Socket.IO (which negotiates its own transport, long-polling or WebSocket)
+    rather than a documented raw public WebSocket contract, and are provisioned
+    through sales rather than published as a machine-readable spec. There is no
+    stable, publicly documented WebSocket message contract to model.
+findings:
+  summary: |
+    Barchart does not publish a documented public WebSocket API. Barchart's
+    developer offering is the OnDemand API, a commercially licensed
+    market-data and commodity-data service hosted at
+    https://ondemand.websol.barchart.com. Every call is authenticated with an
+    `apikey` query parameter and each endpoint responds in JSON, XML, or CSV
+    selected by the path suffix (e.g. getQuote.json / .xml / .csv); GET, POST,
+    and SOAP are supported. The catalog is broad - getQuote, getHistory,
+    getEquitiesByExchange, getFuturesOptions, getProfile, getCrypto,
+    getGrainBids, getNews, getWeather and dozens more - but it is pure
+    request/response HTTP. Real-time streaming exists as a separate,
+    sales-gated product (the Event-Based API over REST/Socket.IO, and a
+    dedicated streaming market-data service), not as an openly documented
+    public WebSocket contract.
+  openSource: |
+    Barchart OnDemand is a proprietary, commercially licensed service, not open
+    source. Barchart maintains open-source CLIENT libraries on GitHub
+    (github.com/barchart), such as barchart-ondemand-client-js and
+    barchart-ondemand-client-php, which wrap the same apikey-authenticated REST
+    endpoints. The data service itself and its entitlements are closed and
+    subscription/enterprise gated.
+  accessModel: |
+    Subscription and enterprise gated. An apikey is required on every request
+    and is provisioned via a Barchart OnDemand subscription or a custom
+    enterprise agreement; a limited free trial key is available for evaluation.
+    Real-time exchange data additionally requires exchange licensing/fees.
+    Intraday data may be delayed by up to ~20 minutes on some tiers due to
+    caching. Default result sets are capped (records limited to 20 unless a
+    maxRecords parameter is supplied).
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://ondemand.websol.barchart.com
+      documented: true
+      note: >-
+        Primary OnDemand surface. GET and POST, apikey query auth, JSON/XML/CSV
+        by path suffix (e.g. /getQuote.json). SOAP is also supported via a WSDL
+        at /service?wsdl.
+    - protocol: SOAP
+      scheme: https
+      documented: true
+      note: WSDL at https://ondemand.websol.barchart.com/service?wsdl exposes the same operations.
+    - protocol: Socket.IO
+      scheme: https
+      documented: partial
+      note: >-
+        The OnDemand Event-Based API is described as REST and/or Socket.IO
+        endpoints for real-time market-data and news alerts. Entitlement-gated;
+        Socket.IO negotiates its own transport rather than exposing a documented
+        raw public WebSocket contract.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: >-
+        No openly documented, self-service public WebSocket endpoint or message
+        contract is published for Barchart OnDemand as of the review date.
+  endpointsModeled: true
+  endpointsModeledNote: |
+    Endpoint names, HTTP method, apikey auth, format suffixes, and documented
+    request parameters are accurate and drawn from Barchart's public OnDemand
+    documentation. Response payloads and exact field catalogs are
+    entitlement-specific and not published in machine-readable form, so the
+    OpenAPI response schemas are honestly modeled rather than captured from
+    live authenticated responses.
+  endpointsDocumentedRest:
+    - GET https://ondemand.websol.barchart.com/getQuote.json
+    - GET https://ondemand.websol.barchart.com/getQuoteEod.json
+    - GET https://ondemand.websol.barchart.com/getHistory.json
+    - GET https://ondemand.websol.barchart.com/getEquitiesByExchange.json
+    - GET https://ondemand.websol.barchart.com/getInstrumentDefinition.json
+    - GET https://ondemand.websol.barchart.com/getFuturesByExchange.json
+    - GET https://ondemand.websol.barchart.com/getFuturesOptions.json
+    - GET https://ondemand.websol.barchart.com/getOptionsScreener.json
+    - GET https://ondemand.websol.barchart.com/getProfile.json
+    - GET https://ondemand.websol.barchart.com/getIncomeStatements.json
+    - GET https://ondemand.websol.barchart.com/getRatings.json
+    - GET https://ondemand.websol.barchart.com/getCorporateActions.json
+    - GET https://ondemand.websol.barchart.com/getEarningsCalendar.json
+    - GET https://ondemand.websol.barchart.com/getCrypto.json
+    - GET https://ondemand.websol.barchart.com/getCryptoHistory.json
+    - GET https://ondemand.websol.barchart.com/getGrainBids.json
+    - GET https://ondemand.websol.barchart.com/getCmdtyStats.json
+    - GET https://ondemand.websol.barchart.com/getFuelPrices.json
+    - GET https://ondemand.websol.barchart.com/getTechnicals.json
+    - GET https://ondemand.websol.barchart.com/getSignal.json
+    - GET https://ondemand.websol.barchart.com/getNews.json
+    - GET https://ondemand.websol.barchart.com/getSECFilings.json
+    - GET https://ondemand.websol.barchart.com/getWeather.json
+sources:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+    note: OnDemand API endpoint catalog. REST, apikey auth, JSON/XML/CSV; no public WebSocket.
+  - url: https://www.barchart.com/ondemand/api/getQuote
+    type: APIReference
+    note: getQuote host ondemand.websol.barchart.com, apikey query param, format suffix.
+  - url: https://www.barchart.com/ondemand/api/getHistory
+    type: APIReference
+    note: getHistory time-series types and parameters (startDate, endDate, maxRecords).
+  - url: https://www.barchart.com/ondemand/faq
+    type: Documentation
+    note: apikey usage, 20-minute delay note, default 20-record cap; no WebSocket documented.
+  - url: https://www.barchart.com/solutions/services/ondemand
+    type: Documentation
+    note: Subscription/enterprise model, free trial, GET/POST/SOAP, XML/JSON/CSV.
+  - url: https://github.com/barchart/barchart-ondemand-client-js
+    type: SourceCode
+    note: Open-source JS client wrapping the apikey-authenticated REST endpoints.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No openly documented public WebSocket protocol surface exists. Barchart's
+    documented public API (OnDemand) is request/response REST/SOAP with an
+    apikey. Real-time push exists only as sales-gated products (Event-Based API
+    over REST/Socket.IO and a separate streaming market-data service) with no
+    published raw WebSocket contract, so no AsyncAPI document was created.

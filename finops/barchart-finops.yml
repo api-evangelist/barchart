@@ -1,0 +1,92 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Barchart
+providerId: barchart
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Market Data
+- Financial Data
+- Commodities
+- Reference Data
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Barchart OnDemand spend. Barchart is a commercially licensed
+  market-data vendor billed through packaged subscriptions or custom enterprise
+  agreements rather than transparent usage rates. The dominant cost drivers are
+  the breadth of licensed endpoints and asset classes, data timeliness
+  (end-of-day vs. delayed vs. real-time), symbol/exchange coverage, and - for
+  real-time - separately levied exchange licensing fees. Redistribution rights
+  and streaming (Event-Based API / streaming market data) add cost at the
+  enterprise tier.
+notes: >-
+  Barchart does not publish per-unit rates; costs are contract-negotiated.
+  Reconcile the licensed package, exchange fees, and any redistribution terms
+  directly with Barchart. Right-size by licensing only the endpoints, asset
+  classes, and timeliness actually required.
+sources:
+- https://www.barchart.com/ondemand/api
+- https://www.barchart.com/solutions/services/ondemand
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Barchart
+serviceCategory: Market Data and Financial Data
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: Barchart OnDemand
+  ServiceCategory: Market Data and Financial Data
+  ProviderName: Barchart
+  PublisherName: Barchart
+  InvoiceIssuerName: Barchart
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: subscription_package
+  description: Packaged subscription fee scoped to licensed endpoints, asset classes, and data timeliness.
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+  - package
+- name: exchange_licensing
+  description: Exchange fees levied for real-time market data, separate from the Barchart subscription.
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+  - exchange
+- name: api_requests
+  description: OnDemand API requests against the licensed key; bounded by entitlement rather than metered price.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - apikey
+  - endpoint
+principles:
+- name: Visibility
+  description: Track which endpoints and asset classes each key is licensed for and how requests map to teams and use cases.
+- name: Allocation
+  description: Issue separate keys/packages per application so subscription and exchange costs map to internal cost centers.
+- name: Optimization
+  description: License only the timeliness you need (end-of-day or delayed instead of real-time), scope symbols/exchanges tightly, and use maxRecords and date ranges to avoid oversized pulls.
+- name: Accountability
+  description: Review the package scope and exchange fees against actual usage each renewal; drop unused endpoints or asset classes.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

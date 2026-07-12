@@ -1,0 +1,283 @@
+{
+  "info": {
+    "name": "Barchart OnDemand API",
+    "description": "Barchart OnDemand market-data and commodity-data API hosted at https://ondemand.websol.barchart.com. Subscription/enterprise gated; every request requires an `apikey` query parameter provisioned by Barchart. Endpoint names and parameters are taken from Barchart's public OnDemand documentation; response payloads and field sets are entitlement-specific (endpointsModeled).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "apikey", "type": "string" },
+      { "key": "value", "value": "{{apikey}}", "type": "string" },
+      { "key": "in", "value": "query", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://ondemand.websol.barchart.com", "type": "string" },
+    { "key": "apikey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Quotes",
+      "item": [
+        {
+          "name": "Get quotes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getQuote.json?apikey={{apikey}}&symbols=AAPL,GOOG", "host": ["{{baseUrl}}"], "path": ["getQuote.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "AAPL,GOOG" }] },
+            "description": "Real-time, delayed, or end-of-day price data by symbol across asset classes."
+          }
+        },
+        {
+          "name": "Get end-of-day quotes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getQuoteEod.json?apikey={{apikey}}&symbols=AAPL", "host": ["{{baseUrl}}"], "path": ["getQuoteEod.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "AAPL" }] },
+            "description": "End-of-day price data by exchange and symbol."
+          }
+        }
+      ]
+    },
+    {
+      "name": "History",
+      "item": [
+        {
+          "name": "Get historical time series",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getHistory.json?apikey={{apikey}}&symbol=IBM&type=daily&maxRecords=100", "host": ["{{baseUrl}}"], "path": ["getHistory.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbol", "value": "IBM" }, { "key": "type", "value": "daily" }, { "key": "maxRecords", "value": "100" }] },
+            "description": "Tick, minute-bar, or end-of-day historical time series with daily/weekly/monthly/continuation variants."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reference & Equities",
+      "item": [
+        {
+          "name": "Get all equities by exchange",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getEquitiesByExchange.json?apikey={{apikey}}&exchange=NYSE", "host": ["{{baseUrl}}"], "path": ["getEquitiesByExchange.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "exchange", "value": "NYSE" }] },
+            "description": "Market data for all equities on a given exchange in one query."
+          }
+        },
+        {
+          "name": "Get instrument definitions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getInstrumentDefinition.json?apikey={{apikey}}&symbols=AAPL", "host": ["{{baseUrl}}"], "path": ["getInstrumentDefinition.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "AAPL" }] },
+            "description": "Instrument metadata by symbol, exchange, or MIC."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Futures & Options",
+      "item": [
+        {
+          "name": "Get futures by exchange",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getFuturesByExchange.json?apikey={{apikey}}&exchange=CME", "host": ["{{baseUrl}}"], "path": ["getFuturesByExchange.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "exchange", "value": "CME" }] },
+            "description": "Futures data for all contracts on an exchange."
+          }
+        },
+        {
+          "name": "Get futures options",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getFuturesOptions.json?apikey={{apikey}}&root=CL", "host": ["{{baseUrl}}"], "path": ["getFuturesOptions.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "root", "value": "CL" }] },
+            "description": "Intraday options-on-futures data - strike, volume, open interest, IV, greeks."
+          }
+        },
+        {
+          "name": "Screen equity/ETF options",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getOptionsScreener.json?apikey={{apikey}}&baseSymbol=AAPL", "host": ["{{baseUrl}}"], "path": ["getOptionsScreener.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "baseSymbol", "value": "AAPL" }] },
+            "description": "Screen equity and ETF options for unusual activity."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fundamentals",
+      "item": [
+        {
+          "name": "Get company profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getProfile.json?apikey={{apikey}}&symbols=MSFT", "host": ["{{baseUrl}}"], "path": ["getProfile.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "MSFT" }] },
+            "description": "Sector, industry, CEO, earnings, P/E, and address."
+          }
+        },
+        {
+          "name": "Get income statements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getIncomeStatements.json?apikey={{apikey}}&symbols=MSFT&frequency=annual", "host": ["{{baseUrl}}"], "path": ["getIncomeStatements.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "MSFT" }, { "key": "frequency", "value": "annual" }] },
+            "description": "Public-company income statement data."
+          }
+        },
+        {
+          "name": "Get analyst ratings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getRatings.json?apikey={{apikey}}&symbols=MSFT", "host": ["{{baseUrl}}"], "path": ["getRatings.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "MSFT" }] },
+            "description": "Analyst ratings from strong buy through strong sell."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Corporate Actions & Earnings",
+      "item": [
+        {
+          "name": "Get corporate actions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getCorporateActions.json?apikey={{apikey}}&symbols=AAPL&eventType=dividends", "host": ["{{baseUrl}}"], "path": ["getCorporateActions.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "AAPL" }, { "key": "eventType", "value": "dividends" }] },
+            "description": "Splits, dividends, and earnings data."
+          }
+        },
+        {
+          "name": "Get earnings calendar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getEarningsCalendar.json?apikey={{apikey}}&date=20260713", "host": ["{{baseUrl}}"], "path": ["getEarningsCalendar.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "date", "value": "20260713" }] },
+            "description": "Upcoming earnings totals and data by date."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cryptocurrency",
+      "item": [
+        {
+          "name": "Get crypto quotes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getCrypto.json?apikey={{apikey}}&symbols=^BTCUSD,^ETHUSD", "host": ["{{baseUrl}}"], "path": ["getCrypto.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "^BTCUSD,^ETHUSD" }] },
+            "description": "Spot-market cryptocurrency price data."
+          }
+        },
+        {
+          "name": "Get crypto history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getCryptoHistory.json?apikey={{apikey}}&symbol=^BTCUSD&type=daily", "host": ["{{baseUrl}}"], "path": ["getCryptoHistory.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbol", "value": "^BTCUSD" }, { "key": "type", "value": "daily" }] },
+            "description": "Historical price data for spot cryptocurrencies."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Commodities & Agriculture",
+      "item": [
+        {
+          "name": "Get grain cash bids",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getGrainBids.json?apikey={{apikey}}&zipCode=60654", "host": ["{{baseUrl}}"], "path": ["getGrainBids.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "zipCode", "value": "60654" }] },
+            "description": "Cash bid data for the 30 closest grain locations."
+          }
+        },
+        {
+          "name": "Get commodity statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getCmdtyStats.json?apikey={{apikey}}", "host": ["{{baseUrl}}"], "path": ["getCmdtyStats.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }] },
+            "description": "Commodity fundamentals, statistics, and economic data."
+          }
+        },
+        {
+          "name": "Get fuel prices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getFuelPrices.json?apikey={{apikey}}&zipCode=60654", "host": ["{{baseUrl}}"], "path": ["getFuelPrices.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "zipCode", "value": "60654" }] },
+            "description": "Refined fuel price and reference data by location."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Technicals & Charts",
+      "item": [
+        {
+          "name": "Get technicals",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getTechnicals.json?apikey={{apikey}}&symbols=AAPL", "host": ["{{baseUrl}}"], "path": ["getTechnicals.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "AAPL" }] },
+            "description": "Technical data and statistics across asset classes."
+          }
+        },
+        {
+          "name": "Get technical signal",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getSignal.json?apikey={{apikey}}&symbols=AAPL", "host": ["{{baseUrl}}"], "path": ["getSignal.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "AAPL" }] },
+            "description": "Buy/sell/hold technical opinion."
+          }
+        }
+      ]
+    },
+    {
+      "name": "News & Filings",
+      "item": [
+        {
+          "name": "Get news",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getNews.json?apikey={{apikey}}&symbols=AAPL&maxRecords=20", "host": ["{{baseUrl}}"], "path": ["getNews.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "AAPL" }, { "key": "maxRecords", "value": "20" }] },
+            "description": "News headlines, articles, and photos by source, category, or keyword."
+          }
+        },
+        {
+          "name": "Get SEC filings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getSECFilings.json?apikey={{apikey}}&symbols=AAPL", "host": ["{{baseUrl}}"], "path": ["getSECFilings.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "symbols", "value": "AAPL" }] },
+            "description": "Quarterly, annual, and regulatory SEC filings."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Weather",
+      "item": [
+        {
+          "name": "Get weather",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/getWeather.json?apikey={{apikey}}&zipCode=60654", "host": ["{{baseUrl}}"], "path": ["getWeather.json"], "query": [{ "key": "apikey", "value": "{{apikey}}" }, { "key": "zipCode", "value": "60654" }] },
+            "description": "Current conditions, forecasts, and maps by zip code."
+          }
+        }
+      ]
+    }
+  ]
+}

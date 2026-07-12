@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.barchart.com
+  https: true
+  cert_expires: Dec 28 23:59:59 2026 GMT
+- host: ondemand.websol.barchart.com
+  https: true
+  cert_expires: Nov  6 23:59:59 2026 GMT
+domains:
+- domain: barchart.com
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

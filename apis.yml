@@ -1,0 +1,340 @@
+aid: barchart
+url: https://raw.githubusercontent.com/api-evangelist/barchart/refs/heads/main/apis.yml
+name: Barchart
+kind: company
+description: >-
+  Barchart is a leading provider of market data and commodity data, delivering
+  real-time, delayed, and historical financial and reference data across
+  equities, futures, options, forex, cryptocurrencies, ETFs, mutual funds,
+  indexes, and physical commodities. The Barchart OnDemand API is a
+  commercially licensed REST/JSON (also XML and CSV) service hosted at
+  ondemand.websol.barchart.com, authenticated with an apikey and packaged into
+  subscription and enterprise plans. It exposes a broad documented endpoint
+  catalog - getQuote, getHistory, getEquitiesByExchange, getFuturesOptions,
+  getProfile, getCrypto, getGrainBids, getNews, and dozens more - covering
+  quotes, historical time series, fundamentals, corporate actions, options
+  analytics, agricultural and energy commodity data, technicals, and news.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Market Data
+- Financial Data
+- Commodities
+- Futures
+- Options
+- Reference Data
+- Equities
+- Historical Data
+- Cryptocurrency
+- Agriculture
+created: '2026-07-11'
+modified: '2026-07-11'
+specificationVersion: '0.19'
+apis:
+- aid: barchart:barchart-quotes-api
+  name: Barchart Quotes API
+  tags:
+  - Quotes
+  - Market Data
+  - Real Time
+  - End of Day
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api/getQuote
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Real-time, delayed, and end-of-day price quotes by symbol across stocks,
+    indexes, mutual funds, ETFs, futures, forex, and cryptocurrencies -
+    getQuote, getQuoteEod, getClosePrice - plus market movers via getLeaders
+    and 52-week getHighsLows. Futures notation such as root*0 (active contract)
+    and root^F (all contracts) is supported.
+- aid: barchart:barchart-history-api
+  name: Barchart History API
+  tags:
+  - Historical Data
+  - Time Series
+  - OHLC
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api/getHistory
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api/getHistory
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api/getHistory
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Historical time series on stocks, indexes, mutual funds, ETFs, futures,
+    forex, and crypto via getHistory - tick, minute-bar, and end-of-day data
+    with daily, weekly, monthly, quarterly, and yearly aggregations plus
+    nearest/continuation contract variants. Restricted-session history is
+    available through getRestrictedSessionHistory and
+    getRestrictedSessionOHLCPrices.
+- aid: barchart:barchart-reference-equities-api
+  name: Barchart Reference & Equities API
+  tags:
+  - Reference Data
+  - Equities
+  - Instruments
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api/getEquitiesByExchange
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Reference and instrument metadata plus bulk equities data by exchange -
+    getEquitiesByExchange returns every equity on an exchange in one query,
+    while getInstrumentDefinition, getRelatedInstruments, getSymbolChange, and
+    getUniqueIdentifier (FIGI) resolve symbols, codes, MICs, tick increments,
+    and cross-exchange listings.
+- aid: barchart:barchart-futures-options-api
+  name: Barchart Futures & Options API
+  tags:
+  - Futures
+  - Options
+  - Commodities
+  - Derivatives
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api/getFuturesOptions
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api/getFuturesOptions
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Futures and options market data and analytics - getFuturesByExchange,
+    getFuturesOptions and getFuturesOptionsEOD (strike, volume, volatility),
+    getFuturesSpreads, getEquityOptions and getEquityOptionsHistory, plus the
+    getOptionsScreener for unusual-activity screening and contract reference
+    via getFuturesSpecifications and getFuturesExpirations.
+- aid: barchart:barchart-fundamentals-api
+  name: Barchart Fundamentals API
+  tags:
+  - Fundamentals
+  - Financial Data
+  - Company Profiles
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api/getProfile
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api/getProfile
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Company fundamentals and financial statements - getProfile (sector,
+    industry, CEO, P/E), getFinancialHighlights, getFinancialRatios,
+    getIncomeStatements, getBalanceSheets, getCashFlow, analyst getRatings,
+    getCompetitors, and index constituents via getIndexMembers.
+- aid: barchart:barchart-corporate-actions-earnings-api
+  name: Barchart Corporate Actions & Earnings API
+  tags:
+  - Corporate Actions
+  - Dividends
+  - Earnings
+  - Reference Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Splits, dividends, and earnings reference data - getCorporateActions,
+    getEarningsEstimates, getDividendData and getDividendStocks, plus forward
+    calendars via getEarningsCalendar, getDividendsCalendar, and
+    getEarningsAndDividendsCalendar.
+- aid: barchart:barchart-cryptocurrency-api
+  name: Barchart Cryptocurrency API
+  tags:
+  - Cryptocurrency
+  - Market Data
+  - Digital Assets
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Spot cryptocurrency market data - getCrypto returns current spot prices for
+    Bitcoin, Ethereum, Ripple, Litecoin and other digital assets, and
+    getCryptoHistory returns historical spot price time series.
+- aid: barchart:barchart-commodities-agriculture-api
+  name: Barchart Commodities & Agriculture API
+  tags:
+  - Commodities
+  - Agriculture
+  - Grain
+  - Energy
+  - Reference Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Physical commodity, agricultural, and economic reference data - grain cash
+    bids via getGrainBids and getUSDAGrainPrices, commodity fundamentals and
+    statistics via getCmdtyStats and getCmdtyStatsId, getBLSIndexes,
+    getCmdtyCalendar, refined getFuelPrices, weather-driven getCropFactors,
+    getYieldForecastPlanet grain forecasts, and getForexForwardCurves.
+- aid: barchart:barchart-technicals-charts-api
+  name: Barchart Technicals & Charts API
+  tags:
+  - Technical Analysis
+  - Charts
+  - Signals
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Technical analysis and charting data - getChart renders custom chart images
+    with indicators, getTechnicals and getTechnicalIndicatorData return
+    computed studies, getSignal returns a buy/sell/hold opinion, getMomentum
+    summarizes advancers/decliners, and getSectors returns weighted-alpha
+    sector returns.
+- aid: barchart:barchart-news-filings-api
+  name: Barchart News & Filings API
+  tags:
+  - News
+  - SEC Filings
+  - Reference Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Financial news and regulatory filings - getNews returns headlines,
+    articles, and photos by source, category, or keyword, getNewsSources and
+    getNewsCategories describe the available catalog, and getSECFilings returns
+    quarterly, annual, and regulatory SEC filings.
+- aid: barchart:barchart-weather-api
+  name: Barchart Weather API
+  tags:
+  - Weather
+  - Reference Data
+  - Agriculture
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.barchart.com/ondemand/api/getWeather
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - url: https://www.barchart.com/ondemand/api
+    type: Documentation
+  - url: https://www.barchart.com/ondemand/api/getWeather
+    type: APIReference
+  - url: openapi/barchart-openapi.yml
+    type: OpenAPI
+  - url: collections/barchart.postman_collection.json
+    type: PostmanCollection
+  - url: collections/barchart.opencollection.json
+    type: OpenCollection
+  description: >-
+    Weather data via getWeather - current conditions, forecasts, and maps by
+    zip code, complementing Barchart's agricultural and commodity data for
+    weather-sensitive markets.
+common:
+- type: Authentication
+  url: authentication/barchart-authentication.yml
+- type: DomainSecurity
+  url: security/barchart-domain-security.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/barchart-com
+- type: Website
+  url: https://www.barchart.com
+- type: Documentation
+  url: https://www.barchart.com/ondemand/api
+- type: SignUp
+  url: https://www.barchart.com/solutions/services/ondemand
+- type: Plans
+  url: plans/barchart-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/barchart-rate-limits.yml
+- type: FinOps
+  url: finops/barchart-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

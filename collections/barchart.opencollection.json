@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand API",
+    "version": "1.0",
+    "description": "Barchart OnDemand market-data and commodity-data API hosted at https://ondemand.websol.barchart.com. Subscription/enterprise gated; every request requires an apikey query parameter. Endpoint names and parameters are from Barchart's public documentation; example values are illustrative (endpointsModeled)."
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "in": "query",
+      "key": "apikey",
+      "value": "{{apikey}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Quotes", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get quotes", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getQuote.json?apikey={{apikey}}&symbols=AAPL,GOOG" },
+          "docs": "Real-time, delayed, or end-of-day price data by symbol across asset classes."
+        },
+        {
+          "info": { "name": "Get end-of-day quotes", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getQuoteEod.json?apikey={{apikey}}&symbols=AAPL" },
+          "docs": "End-of-day price data by exchange and symbol."
+        }
+      ]
+    },
+    {
+      "info": { "name": "History", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get historical time series", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getHistory.json?apikey={{apikey}}&symbol=IBM&type=daily&maxRecords=100" },
+          "docs": "Tick, minute-bar, or end-of-day historical time series with daily/weekly/monthly/continuation variants."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Reference & Equities", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all equities by exchange", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getEquitiesByExchange.json?apikey={{apikey}}&exchange=NYSE" },
+          "docs": "Market data for all equities on a given exchange in one query."
+        },
+        {
+          "info": { "name": "Get instrument definitions", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getInstrumentDefinition.json?apikey={{apikey}}&symbols=AAPL" },
+          "docs": "Instrument metadata by symbol, exchange, or MIC."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Futures & Options", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get futures by exchange", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getFuturesByExchange.json?apikey={{apikey}}&exchange=CME" },
+          "docs": "Futures data for all contracts on an exchange."
+        },
+        {
+          "info": { "name": "Get futures options", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getFuturesOptions.json?apikey={{apikey}}&root=CL" },
+          "docs": "Intraday options-on-futures data - strike, volume, open interest, IV, greeks."
+        },
+        {
+          "info": { "name": "Screen equity/ETF options", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getOptionsScreener.json?apikey={{apikey}}&baseSymbol=AAPL" },
+          "docs": "Screen equity and ETF options for unusual activity."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Fundamentals", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get company profile", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getProfile.json?apikey={{apikey}}&symbols=MSFT" },
+          "docs": "Sector, industry, CEO, earnings, P/E, and address."
+        },
+        {
+          "info": { "name": "Get income statements", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getIncomeStatements.json?apikey={{apikey}}&symbols=MSFT&frequency=annual" },
+          "docs": "Public-company income statement data."
+        },
+        {
+          "info": { "name": "Get analyst ratings", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getRatings.json?apikey={{apikey}}&symbols=MSFT" },
+          "docs": "Analyst ratings from strong buy through strong sell."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Corporate Actions & Earnings", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get corporate actions", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getCorporateActions.json?apikey={{apikey}}&symbols=AAPL&eventType=dividends" },
+          "docs": "Splits, dividends, and earnings data."
+        },
+        {
+          "info": { "name": "Get earnings calendar", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getEarningsCalendar.json?apikey={{apikey}}&date=20260713" },
+          "docs": "Upcoming earnings totals and data by date."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Cryptocurrency", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get crypto quotes", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getCrypto.json?apikey={{apikey}}&symbols=^BTCUSD,^ETHUSD" },
+          "docs": "Spot-market cryptocurrency price data."
+        },
+        {
+          "info": { "name": "Get crypto history", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getCryptoHistory.json?apikey={{apikey}}&symbol=^BTCUSD&type=daily" },
+          "docs": "Historical price data for spot cryptocurrencies."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Commodities & Agriculture", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get grain cash bids", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getGrainBids.json?apikey={{apikey}}&zipCode=60654" },
+          "docs": "Cash bid data for the 30 closest grain locations."
+        },
+        {
+          "info": { "name": "Get commodity statistics", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getCmdtyStats.json?apikey={{apikey}}" },
+          "docs": "Commodity fundamentals, statistics, and economic data."
+        },
+        {
+          "info": { "name": "Get fuel prices", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getFuelPrices.json?apikey={{apikey}}&zipCode=60654" },
+          "docs": "Refined fuel price and reference data by location."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Technicals & Charts", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get technicals", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getTechnicals.json?apikey={{apikey}}&symbols=AAPL" },
+          "docs": "Technical data and statistics across asset classes."
+        },
+        {
+          "info": { "name": "Get technical signal", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getSignal.json?apikey={{apikey}}&symbols=AAPL" },
+          "docs": "Buy/sell/hold technical opinion."
+        }
+      ]
+    },
+    {
+      "info": { "name": "News & Filings", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get news", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getNews.json?apikey={{apikey}}&symbols=AAPL&maxRecords=20" },
+          "docs": "News headlines, articles, and photos by source, category, or keyword."
+        },
+        {
+          "info": { "name": "Get SEC filings", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getSECFilings.json?apikey={{apikey}}&symbols=AAPL" },
+          "docs": "Quarterly, annual, and regulatory SEC filings."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Weather", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get weather", "type": "http" },
+          "http": { "method": "GET", "url": "https://ondemand.websol.barchart.com/getWeather.json?apikey={{apikey}}&zipCode=60654" },
+          "docs": "Current conditions, forecasts, and maps by zip code."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

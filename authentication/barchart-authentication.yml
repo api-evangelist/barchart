@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: documented
+source: https://www.barchart.com/ondemand/api + openapi/barchart-openapi.yml
+summary:
+  types:
+  - apiKey
+schemes:
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  keyName: apikey
+  description: >-
+    Every Barchart OnDemand request carries an `apikey` query parameter (for
+    example `?apikey=YOUR_API_KEY`). Keys are issued with a Barchart OnDemand
+    subscription or enterprise agreement; a limited free trial key is available
+    for evaluation. Real-time exchange data additionally requires exchange
+    licensing.
+  sources:
+  - https://www.barchart.com/ondemand/api/getQuote
+  - https://www.barchart.com/ondemand/faq

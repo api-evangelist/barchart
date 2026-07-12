@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Barchart
+providerId: barchart
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Market Data
+- Financial Data
+- Commodities
+- Reference Data
+- Rate Limiting
+- Quotas
+description: >-
+  Barchart OnDemand does not publish fixed numeric request-rate limits. Usage
+  is governed by the entitlements in your subscription or enterprise package -
+  which endpoints, asset classes, symbols, and data timeliness you are licensed
+  for - rather than by a single public per-minute cap. Two documented behaviors
+  do shape responses - default result sets are capped at 20 records unless a
+  `maxRecords` parameter is supplied, and intraday data may be delayed by up to
+  ~20 minutes on some tiers due to caching. Some datasets (for example futures
+  options) refresh only at scheduled times during the day.
+notes: >-
+  Numeric per-key request limits are not documented publicly and are set per
+  contract. Verify your key's request quota, symbol/endpoint entitlements, and
+  data timeliness with Barchart during reconciliation.
+sources:
+- https://www.barchart.com/ondemand/api
+- https://www.barchart.com/ondemand/faq
+- https://www.barchart.com/solutions/services/ondemand
+responseCodes:
+  throttled: 429
+limits:
+- name: Request Rate
+  scope: apikey
+  metric: requests
+  limit: not published (per-contract entitlement)
+  notes: No fixed public per-minute request cap; governed by subscription/enterprise terms.
+- name: Default Result Cap
+  scope: request
+  metric: records
+  limit: 20 (unless maxRecords is set)
+  notes: Results default to 20 records per call unless the maxRecords parameter increases it.
+- name: Symbol / Endpoint Entitlement
+  scope: apikey
+  metric: entitlement
+  limit: per package
+  notes: Access to specific endpoints, asset classes, and symbols is scoped by your licensed package.
+- name: Data Timeliness
+  scope: apikey
+  metric: latency
+  limit: real-time / delayed / end-of-day per entitlement
+  notes: Intraday data may be delayed up to ~20 minutes on some tiers; real-time requires exchange licensing.
+policies:
+- name: Scheduled Refresh
+  description: Some datasets (e.g. getFuturesOptions) update only at scheduled intervals during the day rather than continuously.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Pagination via maxRecords
+  description: Use the maxRecords parameter (and date ranges on history endpoints) to bound response size instead of relying on the 20-record default.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

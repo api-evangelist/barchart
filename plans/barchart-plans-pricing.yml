@@ -1,0 +1,107 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Barchart
+providerId: barchart
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Market Data
+- Financial Data
+- Commodities
+- Futures
+- Reference Data
+- Plans
+description: >-
+  Barchart OnDemand is commercially licensed and sold as packaged subscriptions
+  and custom enterprise agreements rather than published pay-as-you-go rates.
+  Barchart states it builds a custom package - small, medium, large, or
+  enterprise - and directs prospective customers to contact sales. A limited
+  free trial API key is available for evaluation. Pricing is not publicly
+  posted; real-time exchange data carries additional exchange licensing fees
+  beyond the Barchart subscription. Delayed and end-of-day data are typically
+  more accessible than real-time.
+notes: >-
+  Exact prices are not published by Barchart. Tiers below are honestly modeled
+  from Barchart's stated custom-package and free-trial language; confirm scope,
+  entitlements, and exchange fees directly with Barchart sales during
+  reconciliation.
+sources:
+- https://www.barchart.com/ondemand/api
+- https://www.barchart.com/ondemand/faq
+- https://www.barchart.com/solutions/services/ondemand
+plans:
+- id: barchart-free-trial
+  name: Free Trial
+  type: trial
+  description: >-
+    Limited evaluation API key for testing the OnDemand endpoints with a capped
+    number of requests and restricted data before committing to a subscription.
+  entries:
+  - label: Trial Requests
+    name: trial_requests
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (limited requests / restricted data)
+    userMultiplied: false
+  elements:
+  - name: apikey Access
+  - name: Delayed / End-of-Day Data
+  - name: Selected Endpoints
+- id: barchart-subscription
+  name: OnDemand Subscription
+  type: subscription
+  description: >-
+    Packaged subscription scoped to the endpoints, asset classes, and data
+    timeliness (delayed, end-of-day, or real-time) the customer needs. Barchart
+    assembles a small/medium/large package; price is quoted per package.
+  entries:
+  - label: Subscription Package
+    name: subscription_package
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: quoted per package (contact sales)
+    userMultiplied: false
+  elements:
+  - name: Scoped Endpoint Access
+  - name: Quotes and History
+  - name: Fundamentals and Corporate Actions
+  - name: Futures, Options, and Commodities
+  - name: News and Reference Data
+- id: barchart-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom enterprise agreement for high-volume or wide-coverage usage,
+    real-time streaming (Event-Based API / streaming market data), redistribution,
+    negotiated SLAs, and full asset-class and exchange coverage. Real-time
+    exchange data requires additional exchange licensing/fees.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Real-Time Market Data
+  - name: Streaming / Event-Based API
+  - name: Full Asset-Class Coverage
+  - name: Redistribution Rights
+  - name: Custom Volume Pricing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
