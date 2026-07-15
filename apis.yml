@@ -317,6 +317,8 @@ apis:
     zip code, complementing Barchart's agricultural and commodity data for
     weather-sensitive markets.
 common:
+- type: AgenticAccess
+  url: agentic-access/barchart-agentic-access.yml
 - type: Authentication
   url: authentication/barchart-authentication.yml
 - type: DomainSecurity
