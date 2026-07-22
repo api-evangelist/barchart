@@ -1,0 +1,77 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/barchart-ondemand-official-openapi.yml
+description: >-
+  Entity graph of the Barchart OnDemand API, derived from the official
+  OpenAPI 3.0.3 (71 operations). OnDemand is a read-only market-data surface:
+  there are no writable resources, and the join key across nearly every
+  entity is the instrument symbol (equities, futures, options, forex, crypto,
+  indexes) plus exchange codes. Entities below group the response families by
+  the operations that return them.
+join_keys:
+- name: symbol
+  description: >-
+    Instrument identifier used by 41 of 71 operations (symbols list param on
+    28, singular symbol on 13); connects quotes, history, profiles,
+    fundamentals, corporate actions, technicals, and news.
+- name: exchange
+  description: Exchange code scoping bulk endpoints (getEquitiesByExchange, getFuturesByExchange, getCorporateActionsByExchange).
+entities:
+- name: Quote
+  operations: [get-getQuote, get-getQuoteEod, get-getClosePrice, get-getCrypto]
+  description: Current, end-of-day, and close price snapshots for a symbol.
+- name: HistoryBar
+  operations: [get-getHistory, get-getCryptoHistory, get-getRestrictedSessionHistory, get-getRestrictedSessionOHLCPrices]
+  description: Tick/minute/daily time-series bars for a symbol over a date window.
+- name: Instrument
+  operations: [get-getInstrumentDefinition, get-getSymbolChange, get-getRelatedInstruments, get-getFuturesSpecifications, get-getFuturesExpirations]
+  description: Reference metadata defining an instrument and its lifecycle.
+- name: EquityListing
+  operations: [get-getEquitiesByExchange, get-getIndexMembers, get-getSectors, get-getLeaders, get-getHighsLows]
+  description: Bulk equity listings by exchange, index membership, sector, and leaderboards.
+- name: FuturesContract
+  operations: [get-getFuturesByExchange, get-getFuturesSpreads, get-getForexForwardCurves]
+  description: Futures contracts, spreads, and forward curves.
+- name: OptionContract
+  operations: [get-getFuturesOptions, get-getFuturesOptionsEOD, get-getEquityOptions, get-getEquityOptionsHistory, get-getSpecialOptions, get-getOptionsScreener]
+  description: Equity/futures option chains, histories, and screeners.
+- name: CompanyProfile
+  operations: [get-getProfile, get-getCompetitors, get-getRatings]
+  description: Company identity, competitors, and analyst ratings for a symbol.
+- name: FinancialStatement
+  operations: [get-getFinancialHighlights, get-getFinancialRatios, get-getIncomeStatements, get-getBalanceSheets, get-getCashFlow]
+  description: Fundamentals statements and ratios for a company.
+- name: CorporateAction
+  operations: [get-getCorporateActions, get-getCorporateActionsByExchange, get-getDividendData, get-getDividendStocks]
+  description: Splits, dividends, and other corporate actions.
+- name: CalendarEvent
+  operations: [get-getEarningsCalendar, get-getDividendsCalendar, get-getEarningsAndDividendsCalendar, get-getEarningsEstimates, get-getCmdtyCalendar]
+  description: Earnings, dividend, and commodity calendar events.
+- name: ETF
+  operations: [get-getETFDetails, get-getETFConstituents]
+  description: ETF metadata and constituent holdings.
+- name: TechnicalStudy
+  operations: [get-getTechnicals, get-getSignal, get-getMomentum, get-getTechnicalIndicatorData, get-getChart]
+  description: Technical indicators, signals, momentum, and chart renders for a symbol.
+- name: NewsArticle
+  operations: [get-getNews, get-getNewsSources, get-getNewsCategories, get-getSECFilings]
+  description: News stories, sources, categories, and SEC filings.
+- name: CommodityRecord
+  operations: [get-getGrainBids, get-getUSDAGrainPrices, get-getCmdtyStats, get-getCmdtyStatsId, get-getGrainInstruments, get-getBLSIndexes, get-getFuelPrices]
+  description: Physical commodity data - grain bids, USDA prices, statistics, fuel, BLS indexes.
+- name: WeatherObservation
+  operations: [get-getWeather]
+  description: Current conditions and forecasts for agricultural regions.
+relationships:
+- {from: Quote, to: Instrument, kind: belongs_to, via: symbol}
+- {from: HistoryBar, to: Instrument, kind: belongs_to, via: symbol}
+- {from: OptionContract, to: Instrument, kind: belongs_to, via: root/underlying symbol}
+- {from: FuturesContract, to: Instrument, kind: belongs_to, via: root symbol}
+- {from: CompanyProfile, to: Instrument, kind: has_one, via: symbol}
+- {from: CompanyProfile, to: FinancialStatement, kind: has_many, via: symbol}
+- {from: CompanyProfile, to: CorporateAction, kind: has_many, via: symbol}
+- {from: CompanyProfile, to: CalendarEvent, kind: has_many, via: symbol}
+- {from: ETF, to: EquityListing, kind: has_many, via: constituent symbols}
+- {from: Instrument, to: TechnicalStudy, kind: has_many, via: symbol}
+- {from: Instrument, to: NewsArticle, kind: has_many, via: symbol}
+- {from: EquityListing, to: Instrument, kind: has_many, via: exchange}

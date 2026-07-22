@@ -1,0 +1,55 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/barchart-ondemand-official-openapi.yml + openapi/_original/barchart-openapi.yml
+format: status-envelope
+description: >-
+  Error surface of the Barchart OnDemand API, derived from the official
+  OpenAPI 3.0.3 (71 operations, each declaring 200/204/400/500) and the
+  documented apikey behavior. Barchart does not use RFC 9457
+  application/problem+json; errors are signaled with the HTTP status code and
+  a proprietary envelope - the same {status: {code, message}, results: []}
+  object shape used for successful responses, where status.code and
+  status.message carry the error.
+envelope:
+  shape: '{status: {code: <int>, message: <string>}, results: []}'
+  fields:
+  - {name: status.code, description: Numeric status of the response (mirrors or refines the HTTP code).}
+  - {name: status.message, description: Human-readable status message (e.g. "Success.").}
+problems:
+- status: 200
+  title: OK (Success)
+  description: Successful response; results[] carries the data, status.code 200.
+- status: 204
+  title: No Content
+  description: >-
+    The request was valid but no data matched (unknown symbol, empty window,
+    or data outside your entitlement). Declared on all 71 official operations.
+- status: 400
+  title: Bad Request
+  description: >-
+    Malformed or missing parameters (e.g. missing required symbols/symbol, bad
+    date format). Declared on all 71 official operations. Correct the request
+    parameters against the OpenAPI parameter schemas before retrying.
+- status: 401
+  title: Unauthorized
+  description: >-
+    Missing or invalid apikey query parameter, or the key is not entitled to
+    the requested endpoint/data. From the modeled per-tag specs and documented
+    apikey behavior. Obtain or renew a key via the free trial or your
+    subscription.
+- status: 429
+  title: Too Many Requests
+  description: >-
+    Request quota exceeded for your contract entitlement. Documented as the
+    throttled response code in rate-limits/barchart-rate-limits.yml; apply
+    exponential backoff and honor Retry-After.
+- status: 500
+  title: Internal Server Error
+  description: >-
+    Server-side failure. Declared on all 71 official operations. Retry with
+    backoff; all operations are GET and safe to retry.
+remediation:
+  retry_safe: true
+  notes: >-
+    Every OnDemand operation is an HTTP GET - retries are always safe. Bound
+    result sizes with maxRecords to avoid oversized responses.

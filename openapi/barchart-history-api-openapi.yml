@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Barchart OnDemand Commodities & Agriculture History API
+  description: 'The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.
+
+    ACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart''s public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.'
+  version: '1.0'
+  contact:
+    name: Barchart OnDemand
+    url: https://www.barchart.com/ondemand/api
+  x-access-model: subscription-and-enterprise (apikey required; contact sales / free trial)
+  x-endpoints-modeled: true
+servers:
+- url: https://ondemand.websol.barchart.com
+  description: Barchart OnDemand production host
+security:
+- apiKeyQuery: []
+tags:
+- name: History
+  description: Historical tick, minute, and end-of-day time series.
+paths:
+  /getHistory.json:
+    get:
+      operationId: getHistory
+      tags:
+      - History
+      summary: Get historical time series
+      description: Historical time series (tick, minute bars, or end-of-day) for stocks, indexes, mutual funds, ETFs, futures, forex, or crypto, with daily, weekly, monthly, quarterly, yearly and nearest/continuation variants.
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - name: symbol
+        in: query
+        required: true
+        description: A single instrument symbol.
+        schema:
+          type: string
+        example: IBM
+      - name: type
+        in: query
+        required: true
+        description: Time series type, e.g. ticks, minutes, nearbyMinutes, formTMinutes, daily, dailyNearest, dailyContinue, weekly, monthly, quarterly, yearly (and their Nearest/Continue variants).
+        schema:
+          type: string
+          example: daily
+      - name: startDate
+        in: query
+        required: false
+        description: Inclusive start date/time (YYYYMMDD or YYYYMMDDHHmmss).
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: false
+        description: Inclusive end date/time.
+        schema:
+          type: string
+      - name: maxRecords
+        in: query
+        required: false
+        description: Maximum number of records to return.
+        schema:
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/HistoryResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    ApiKey:
+      name: apikey
+      in: query
+      required: true
+      description: Barchart-issued API key.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or unentitled API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    HistoryResults:
+      description: A status envelope plus an array of historical bars (modeled).
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bar'
+  schemas:
+    Bar:
+      type: object
+      description: Modeled historical bar.
+      properties:
+        symbol:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        tradingDay:
+          type: string
+        open:
+          type: number
+        high:
+          type: number
+        low:
+          type: number
+        close:
+          type: number
+        volume:
+          type: integer
+        openInterest:
+          type: integer
+      additionalProperties: true
+    Status:
+      type: object
+      description: Standard Barchart OnDemand status envelope.
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Success.
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: Barchart-issued API key passed as the `apikey` query parameter on every request (for example `?apikey=YOUR_API_KEY`). Keys are provisioned with a Barchart OnDemand subscription or enterprise agreement.

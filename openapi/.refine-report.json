@@ -1,0 +1,34 @@
+{
+  "provider": "barchart",
+  "sources": [
+    "barchart-commodities-agriculture-api-openapi.yml",
+    "barchart-corporate-actions-earnings-api-openapi.yml",
+    "barchart-cryptocurrency-api-openapi.yml",
+    "barchart-fundamentals-api-openapi.yml",
+    "barchart-futures-options-api-openapi.yml",
+    "barchart-history-api-openapi.yml",
+    "barchart-news-filings-api-openapi.yml",
+    "barchart-quotes-api-openapi.yml",
+    "barchart-reference-equities-api-openapi.yml",
+    "barchart-technicals-charts-api-openapi.yml",
+    "barchart-weather-api-openapi.yml"
+  ],
+  "outputs": [
+    "barchart-commodities-agriculture-api-openapi.yml",
+    "barchart-corporate-actions-earnings-api-openapi.yml",
+    "barchart-cryptocurrency-api-openapi.yml",
+    "barchart-fundamentals-api-openapi.yml",
+    "barchart-futures-options-api-openapi.yml",
+    "barchart-history-api-openapi.yml",
+    "barchart-news-filings-api-openapi.yml",
+    "barchart-quotes-api-openapi.yml",
+    "barchart-reference-equities-api-openapi.yml",
+    "barchart-technicals-charts-api-openapi.yml",
+    "barchart-weather-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

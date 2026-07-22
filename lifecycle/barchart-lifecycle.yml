@@ -1,0 +1,30 @@
+generated: '2026-07-22'
+method: searched
+source: https://status.barchart.com + https://ondemand.websol.barchart.com/openapi.yaml + https://www.barchart.com/ondemand/api
+description: >-
+  Lifecycle posture of the Barchart OnDemand API. Barchart operates a public
+  Statuspage ("Barchart Status for Market Data APIs Feeds and Digital
+  Solutions") at status.barchart.com. The API itself is unversioned in the
+  URL - the official OpenAPI is info.version 1.0.1 with a stable
+  ondemand.websol.barchart.com host - and no public deprecation policy,
+  Sunset/Deprecation header support, or dated changelog was found on
+  2026-07-22, so no Deprecation pointer is emitted. SLAs are negotiated in
+  subscription/enterprise agreements rather than published.
+versioning:
+  scheme: none (stable unversioned endpoint paths)
+  current: '1.0.1'
+  evidence: info.version in the official OpenAPI; endpoint paths carry no version segment.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No public deprecation policy or RFC 8594 Sunset support found.
+sla:
+  url: null
+  notes: SLAs are per subscription/enterprise contract; not publicly published.
+status_page: https://status.barchart.com
+deprecated_operations: []
+notes: >-
+  Some datasets refresh on schedules rather than continuously (e.g.
+  getFuturesOptions), and intraday data can be delayed up to ~20 minutes on
+  some tiers - operational behaviors captured in
+  rate-limits/barchart-rate-limits.yml.

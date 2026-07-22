@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: Barchart OnDemand Commodities & Agriculture Quotes API
+  description: 'The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.
+
+    ACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart''s public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.'
+  version: '1.0'
+  contact:
+    name: Barchart OnDemand
+    url: https://www.barchart.com/ondemand/api
+  x-access-model: subscription-and-enterprise (apikey required; contact sales / free trial)
+  x-endpoints-modeled: true
+servers:
+- url: https://ondemand.websol.barchart.com
+  description: Barchart OnDemand production host
+security:
+- apiKeyQuery: []
+tags:
+- name: Quotes
+  description: Real-time, delayed, and end-of-day price quotes.
+paths:
+  /getQuote.json:
+    get:
+      operationId: getQuote
+      tags:
+      - Quotes
+      summary: Get quotes
+      description: Request real-time, delayed, or end-of-day price data by symbol for stocks, indexes, mutual funds, ETFs, futures, forex, or cryptocurrencies. Multiple comma-separated symbols are supported, as is futures notation such as `ESZ25`, `ES*0` (active), and `ES^F` (all contracts).
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - name: symbols
+        in: query
+        required: true
+        description: One or more comma-separated instrument symbols.
+        schema:
+          type: string
+        example: AAPL,GOOG,ESZ25
+      - name: fields
+        in: query
+        required: false
+        description: Comma- or semicolon-delimited list of additional fields to return.
+        schema:
+          type: string
+        example: fiftyTwoWkHigh,fiftyTwoWkLow
+      responses:
+        '200':
+          $ref: '#/components/responses/QuoteResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /getQuoteEod.json:
+    get:
+      operationId: getQuoteEod
+      tags:
+      - Quotes
+      summary: Get end-of-day quotes
+      description: End-of-day price data by exchange and symbol.
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - name: symbols
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: exchange
+        in: query
+        required: false
+        description: Exchange acronym to scope the request.
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/QuoteResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    ApiKey:
+      name: apikey
+      in: query
+      required: true
+      description: Barchart-issued API key.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or unentitled API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    QuoteResults:
+      description: A status envelope plus an array of quote records. Field set depends on your data entitlement (modeled).
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quote'
+  schemas:
+    Quote:
+      type: object
+      description: Modeled quote record; the exact fields returned depend on entitlement.
+      properties:
+        symbol:
+          type: string
+        name:
+          type: string
+        exchange:
+          type: string
+        lastPrice:
+          type: number
+        netChange:
+          type: number
+        percentChange:
+          type: number
+        open:
+          type: number
+        high:
+          type: number
+        low:
+          type: number
+        volume:
+          type: integer
+        tradeTimestamp:
+          type: string
+          format: date-time
+      additionalProperties: true
+    Status:
+      type: object
+      description: Standard Barchart OnDemand status envelope.
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Success.
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: Barchart-issued API key passed as the `apikey` query parameter on every request (for example `?apikey=YOUR_API_KEY`). Keys are provisioned with a Barchart OnDemand subscription or enterprise agreement.

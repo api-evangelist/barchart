@@ -1,0 +1,79 @@
+generated: '2026-07-22'
+method: derived
+source: >-
+  openapi/barchart-ondemand-official-openapi.yml (official, 71 operations) +
+  https://www.barchart.com/ondemand/api docs + rate-limits/ and
+  authentication/ artifacts.
+description: >-
+  Cross-cutting request/response conventions of the Barchart OnDemand API -
+  the runtime semantics that apply to every operation rather than any single
+  endpoint: apikey query authentication, format-suffix content selection,
+  maxRecords result bounding, fields selection, the status/results response
+  envelope, and retry-safety of the all-GET surface.
+base_url: https://ondemand.websol.barchart.com
+api_style: REST over HTTPS, GET requests with query parameters; JSON, XML, or CSV responses
+
+authentication:
+  scheme: apikey query parameter on every request (?apikey=YOUR_API_KEY)
+  detail: authentication/barchart-authentication.yml
+  notes: >-
+    Keys are issued with a subscription or enterprise agreement; a limited
+    free trial key is available. Real-time exchange data additionally
+    requires exchange licensing.
+
+idempotency:
+  supported: true
+  mechanism: >-
+    The entire OnDemand surface is HTTP GET (71/71 operations in the official
+    OpenAPI) - every call is safe and idempotent per RFC 9110. There are no
+    write operations, so no Idempotency-Key header exists or is needed;
+    agents may retry any request without side effects.
+  applies_to: All operations (read-only API).
+
+content_selection:
+  style: path suffix
+  formats: [json, xml, csv]
+  example: /getQuote.json vs /getQuote.xml vs /getQuote.csv
+  notes: Format is chosen by the path suffix, not an Accept header.
+
+pagination:
+  style: bounded result sets (no cursor/offset pagination)
+  request_params:
+    maxRecords: raises the default 20-record cap on list-style responses
+    startDate/endDate: window history and calendar endpoints
+    interval: aggregation interval on time-series endpoints
+  response_fields:
+    status: '{code, message} envelope status'
+    results: array of result records
+  notes: >-
+    Results default to 20 records unless maxRecords is supplied; there is no
+    next-page token - bound the window with dates and maxRecords.
+
+field_selection:
+  supported: true
+  param: fields
+  notes: >-
+    35 of 71 operations accept a fields query parameter requesting additional
+    or specific response fields; symbols/symbol select instruments (28/13
+    operations respectively).
+
+error_envelope:
+  shape: '{status: {code, message}, results: []}'
+  detail: errors/barchart-problem-types.yml
+  codes: [200, 204, 400, 401, 429, 500]
+
+rate_limit_signaling:
+  throttled_status: 429
+  headers: none documented
+  detail: rate-limits/barchart-rate-limits.yml
+  notes: >-
+    No public numeric per-key caps; usage is governed by contract
+    entitlements. Intraday data may be delayed up to ~20 minutes on some
+    tiers; some datasets refresh on schedules.
+
+versioning:
+  scheme: none (stable unversioned paths; official spec info.version 1.0.1)
+  detail: lifecycle/barchart-lifecycle.yml
+
+request_tracing:
+  request_id_header: none documented

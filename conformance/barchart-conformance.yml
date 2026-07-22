@@ -1,0 +1,52 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/barchart-ondemand-official-openapi.yml + https://www.barchart.com/ondemand/api
+description: >-
+  Cross-cutting standards conformance for the Barchart OnDemand API, derived
+  from the official OpenAPI 3.0.3 (71 operations) and the public docs. Barchart
+  is a market-data provider: auth is a simple apikey query parameter, responses
+  use a proprietary status/results envelope (not RFC 9457), and result sizing
+  is bounded by a maxRecords parameter rather than cursor pagination. No
+  published compliance program (SOC 2 / ISO 27001 trust center) was found on
+  2026-07-22, so no Compliance pointer is emitted.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Official OpenAPI 3.0.3 published at https://ondemand.websol.barchart.com/openapi.yaml
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme; every operation authenticates with an apikey query parameter.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on both hosts.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a proprietary {status:{code,message}} envelope, not application/problem+json.
+- id: json-api
+  conforms: false
+  evidence: Responses are plain JSON objects with a status/results envelope, not JSON:API documents.
+- id: pagination
+  conforms: partial
+  evidence: >-
+    No cursor/offset pagination; result sets default to 20 records and are
+    bounded with the maxRecords parameter plus startDate/endDate windows on
+    history endpoints.
+- id: idempotency
+  conforms: true
+  evidence: >-
+    The entire OnDemand surface is HTTP GET (71/71 operations) - safe and
+    idempotent per RFC 9110; no write operations exist, so no Idempotency-Key
+    mechanism is needed.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on both hosts.
+- id: content-negotiation
+  conforms: partial
+  evidence: >-
+    Response format is selected by path suffix (/getQuote.json, .xml, .csv)
+    rather than an Accept header.
+- id: protobuf-streaming
+  conforms: true
+  evidence: >-
+    Barchart publishes the Openfeed protobuf streaming protocol
+    (github.com/openfeed-org/proto, saved in grpc/) for real-time market data.

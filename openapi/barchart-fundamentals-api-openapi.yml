@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info:
+  title: Barchart OnDemand Commodities & Agriculture Fundamentals API
+  description: 'The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.
+
+    ACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart''s public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.'
+  version: '1.0'
+  contact:
+    name: Barchart OnDemand
+    url: https://www.barchart.com/ondemand/api
+  x-access-model: subscription-and-enterprise (apikey required; contact sales / free trial)
+  x-endpoints-modeled: true
+servers:
+- url: https://ondemand.websol.barchart.com
+  description: Barchart OnDemand production host
+security:
+- apiKeyQuery: []
+tags:
+- name: Fundamentals
+  description: Company profiles and financial statements.
+paths:
+  /getProfile.json:
+    get:
+      operationId: getProfile
+      tags:
+      - Fundamentals
+      summary: Get company profile
+      description: Company information - sector, industry, CEO, earnings, P/E ratio, and address.
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - name: symbols
+        in: query
+        required: true
+        schema:
+          type: string
+        example: MSFT
+      responses:
+        '200':
+          $ref: '#/components/responses/GenericResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /getFinancialHighlights.json:
+    get:
+      operationId: getFinancialHighlights
+      tags:
+      - Fundamentals
+      summary: Get financial highlights
+      description: Key financial metrics such as market cap, revenue, net income, and EPS.
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - name: symbols
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/GenericResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /getIncomeStatements.json:
+    get:
+      operationId: getIncomeStatements
+      tags:
+      - Fundamentals
+      summary: Get income statements
+      description: Public-company income statement data.
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - name: symbols
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: frequency
+        in: query
+        required: false
+        description: annual or quarter.
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/GenericResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /getRatings.json:
+    get:
+      operationId: getRatings
+      tags:
+      - Fundamentals
+      summary: Get analyst ratings
+      description: Analyst ratings from strong buy through strong sell.
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - name: symbols
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/GenericResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Status:
+      type: object
+      description: Standard Barchart OnDemand status envelope.
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Success.
+  parameters:
+    ApiKey:
+      name: apikey
+      in: query
+      required: true
+      description: Barchart-issued API key.
+      schema:
+        type: string
+  responses:
+    GenericResults:
+      description: A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: '#/components/schemas/Status'
+              results:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+    Unauthorized:
+      description: Missing, invalid, or unentitled API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apikey
+      description: Barchart-issued API key passed as the `apikey` query parameter on every request (for example `?apikey=YOUR_API_KEY`). Keys are provisioned with a Barchart OnDemand subscription or enterprise agreement.

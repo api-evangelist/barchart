@@ -1,0 +1,37 @@
+generated: '2026-07-22'
+method: probed
+source: live probe of /.well-known/* on Barchart hosts (2026-07-22)
+description: >-
+  Probe of the /.well-known/ discovery surface on Barchart's primary hosts.
+  Barchart does not publish machine-readable discovery documents at these
+  paths - every probed path returned 404. Absence is recorded as valid data;
+  no WellKnown rating pointer is emitted because no catalog was found.
+  Barchart OnDemand authenticates with an apikey query parameter (no
+  OAuth/OIDC discovery surface), and no RFC 9116 security.txt was found on
+  either host.
+hosts:
+- host: https://ondemand.websol.barchart.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /security.txt, status: 404}
+- host: https://www.barchart.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /security.txt, status: 404}
+- host: https://docs.barchart.com
+  documents:
+  - {path: /llms.txt, status: 404}
+  - {path: /openapi.json, status: 404}
+notes: >-
+  A real machine-readable OpenAPI 3.0.3 IS published by Barchart, just not
+  under /.well-known/ - it is live at
+  https://ondemand.websol.barchart.com/openapi.yaml and saved verbatim at
+  openapi/barchart-ondemand-official-openapi.yml.

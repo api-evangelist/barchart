@@ -1,0 +1,86 @@
+generated: '2026-07-22'
+method: searched
+source: npm registry + PyPI + github.com/barchart (Barchart, Inc., 173 public repos)
+description: >-
+  First-party client libraries published by Barchart, Inc. Barchart maintains
+  official OnDemand REST clients for Python, JavaScript, Java, and PHP under
+  its github.com/barchart organization, plus a family of @barchart-scoped npm
+  SDKs for its streaming market data (WebSockets), alerting, portfolio, and
+  watchlist services, and the Openfeed streaming SDK. The PyPI package
+  `ondemand` is the official Python OnDemand client. Unofficial
+  community packages (e.g. PyPI `barchart`) are listed with official: false.
+packages:
+- language: python
+  registry: pypi
+  name: ondemand
+  url: https://pypi.org/project/ondemand/
+  install: pip install ondemand
+  official: true
+  notes: Simple client for Barchart OnDemand REST APIs (github.com/barchart/barchart-ondemand-client-python).
+- language: javascript
+  registry: github
+  name: barchart-ondemand-client-js
+  url: https://github.com/barchart/barchart-ondemand-client-js
+  official: true
+  notes: A JavaScript client for Barchart OnDemand.
+- language: java
+  registry: github
+  name: barchart-ondemand-client-java
+  url: https://github.com/barchart/barchart-ondemand-client-java
+  official: true
+  notes: A Java client for Barchart OnDemand.
+- language: php
+  registry: github
+  name: barchart-ondemand-client-php
+  url: https://github.com/barchart/barchart-ondemand-client-php
+  official: true
+  notes: PHP client for Barchart OnDemand.
+- language: javascript
+  registry: npm
+  name: "@barchart/marketdata-api-js"
+  url: https://www.npmjs.com/package/@barchart/marketdata-api-js
+  install: npm install @barchart/marketdata-api-js
+  official: true
+  notes: SDK for streaming market data from Barchart.com via WebSockets (v6.x).
+- language: javascript
+  registry: npm
+  name: "@barchart/alerts-client-js"
+  url: https://www.npmjs.com/package/@barchart/alerts-client-js
+  install: npm install @barchart/alerts-client-js
+  official: true
+  notes: JavaScript SDK for the Barchart Alerting Service (github.com/barchart/alerting-service-public).
+- language: javascript
+  registry: npm
+  name: "@barchart/portfolio-client-js"
+  url: https://www.npmjs.com/package/@barchart/portfolio-client-js
+  install: npm install @barchart/portfolio-client-js
+  official: true
+  notes: JavaScript SDK for the Barchart Portfolio Service.
+- language: javascript
+  registry: npm
+  name: "@barchart/watchlist-client-js"
+  url: https://www.npmjs.com/package/@barchart/watchlist-client-js
+  install: npm install @barchart/watchlist-client-js
+  official: true
+  notes: JavaScript SDK for Barchart's Watchlist Service (github.com/barchart/watchlist-client-js).
+- language: javascript
+  registry: npm
+  name: "@openfeed/sdk-js"
+  url: https://www.npmjs.com/package/@openfeed/sdk-js
+  install: npm install @openfeed/sdk-js
+  official: true
+  notes: JavaScript SDK for Barchart Openfeed streaming (protobuf-based; see grpc/).
+- language: javascript
+  registry: npm
+  name: "@barchart/chart-lib"
+  url: https://www.npmjs.com/package/@barchart/chart-lib
+  install: npm install @barchart/chart-lib
+  official: true
+  notes: Barchart HTML5 Streaming Chart component (docs at docs.barchart.com/chart; see components/).
+- language: python
+  registry: pypi
+  name: barchart
+  url: https://pypi.org/project/barchart/
+  install: pip install barchart
+  official: false
+  notes: Community package - "The Unofficial API for barchart.com" (not published by Barchart, Inc.).

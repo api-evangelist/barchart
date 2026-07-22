@@ -1,0 +1,25 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.barchart.com/chart + https://www.npmjs.com/package/@barchart/chart-lib
+description: >-
+  Client-side / embeddable UI components published by Barchart. Barchart ships
+  an HTML5 streaming chart library (@barchart/chart-lib on npm) with its own
+  documentation site at docs.barchart.com (which redirects to /chart), used to
+  embed interactive, streaming market-data charts in websites and
+  applications. Distinct from the server-side OnDemand clients catalogued in
+  packages/.
+families:
+- name: Charts
+  components:
+  - name: Barchart HTML5 Streaming Chart
+    kind: javascript-chart-library
+    package: "@barchart/chart-lib"
+    registry: npm
+    install: npm install @barchart/chart-lib
+    docs: https://docs.barchart.com/chart
+    description: >-
+      Interactive HTML5 chart component streaming Barchart market data;
+      pairs with @barchart/marketdata-api-js for live WebSocket data.
+loaders:
+- package: "@barchart/marketdata-api-js"
+  purpose: WebSocket streaming market-data feed consumed by the chart component.

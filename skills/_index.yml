@@ -1,0 +1,21 @@
+generated: '2026-07-22'
+method: generated
+source: >-
+  Packaged Agent Skills generated from the official Barchart OnDemand
+  OpenAPI (openapi/barchart-ondemand-official-openapi.yml, 71 operations).
+  Every step is grounded in an operationId verified verbatim in the spec;
+  cross-cutting rules cite conventions/, errors/, authentication/, and
+  rate-limits/.
+skills:
+- file: barchart-quote-and-history.md
+  name: Look up a quote and its price history
+  api: openapi/barchart-ondemand-official-openapi.yml
+  operations: [get-getQuote, get-getHistory, get-getQuoteEod]
+- file: barchart-company-fundamentals-snapshot.md
+  name: Build a company fundamentals snapshot
+  api: openapi/barchart-ondemand-official-openapi.yml
+  operations: [get-getProfile, get-getFinancialHighlights, get-getIncomeStatements, get-getBalanceSheets, get-getRatings, get-getCorporateActions]
+- file: barchart-commodity-grain-desk.md
+  name: Run a commodity grain desk lookup
+  api: openapi/barchart-ondemand-official-openapi.yml
+  operations: [get-getGrainBids, get-getUSDAGrainPrices, get-getCmdtyStats, get-getGrainInstruments, get-getWeather]

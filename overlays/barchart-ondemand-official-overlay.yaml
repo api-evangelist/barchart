@@ -1,0 +1,44 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Barchart OnDemand official OpenAPI
+  version: 1.0.0
+  x-generated: '2026-07-22'
+  x-method: generated
+extends: openapi/barchart-ondemand-official-openapi.yml
+actions:
+- target: $.info
+  description: Catalog identity, access-model, and provenance annotations.
+  update:
+    x-apievangelist:
+      provider: barchart
+      catalog: https://raw.githubusercontent.com/api-evangelist/barchart/refs/heads/main/apis.yml
+      harvested: '2026-07-22'
+      source: https://ondemand.websol.barchart.com/openapi.yaml
+    x-access-model: subscription-and-enterprise (apikey required; free trial available)
+- target: $.components
+  description: >-
+    The official spec documents the apikey as a per-operation query parameter
+    but declares no securitySchemes; this adds the formal scheme our
+    authentication/barchart-authentication.yml profile captures.
+  update:
+    securitySchemes:
+      apiKeyQuery:
+        type: apiKey
+        in: query
+        name: apikey
+        description: Barchart OnDemand API key issued with a subscription, enterprise agreement, or free trial.
+- target: $
+  description: Declare the global security requirement matching the added scheme.
+  update:
+    security:
+    - apiKeyQuery: []
+- target: $.info
+  description: >-
+    Runtime semantics not expressed in the spec: responses default to 20
+    records unless maxRecords is set; format is selected by path suffix
+    (.json/.xml/.csv); the response envelope is {status:{code,message},
+    results:[]}; intraday data may be delayed up to ~20 minutes on some tiers.
+  update:
+    x-conventions: conventions/barchart-conventions.yml
+    x-error-catalog: errors/barchart-problem-types.yml
+    x-rate-limits: rate-limits/barchart-rate-limits.yml

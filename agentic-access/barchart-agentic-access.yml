@@ -1,20 +1,25 @@
-generated: '2026-07-15'
+generated: '2026-07-22'
 method: generated
-source: openapi/barchart-openapi.yml
+source: openapi/barchart-commodities-agriculture-api-openapi.yml, openapi/barchart-corporate-actions-earnings-api-openapi.yml,
+  openapi/barchart-cryptocurrency-api-openapi.yml, openapi/barchart-fundamentals-api-openapi.yml,
+  openapi/barchart-futures-options-api-openapi.yml, openapi/barchart-history-api-openapi.yml,
+  openapi/barchart-news-filings-api-openapi.yml, openapi/barchart-ondemand-official-openapi.yml,
+  openapi/barchart-quotes-api-openapi.yml, openapi/barchart-reference-equities-api-openapi.yml,
+  openapi/barchart-technicals-charts-api-openapi.yml, openapi/barchart-weather-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 24
+  operations: 95
   by_action_class:
-    connected: 24
+    connected: 95
   by_consequence:
-    read: 24
+    read: 95
   human_in_the_loop_required: 0
 operations:
-- path: /getQuote.json
+- path: /getGrainBids.json
   method: get
-  operationId: getQuote
+  operationId: getGrainBids
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -22,9 +27,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /getQuoteEod.json
+- path: /getCmdtyStats.json
   method: get
-  operationId: getQuoteEod
+  operationId: getCmdtyStats
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -32,99 +37,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /getHistory.json
+- path: /getFuelPrices.json
   method: get
-  operationId: getHistory
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getEquitiesByExchange.json
-  method: get
-  operationId: getEquitiesByExchange
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getInstrumentDefinition.json
-  method: get
-  operationId: getInstrumentDefinition
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getFuturesOptions.json
-  method: get
-  operationId: getFuturesOptions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getFuturesByExchange.json
-  method: get
-  operationId: getFuturesByExchange
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getOptionsScreener.json
-  method: get
-  operationId: getOptionsScreener
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getProfile.json
-  method: get
-  operationId: getProfile
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getFinancialHighlights.json
-  method: get
-  operationId: getFinancialHighlights
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getIncomeStatements.json
-  method: get
-  operationId: getIncomeStatements
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /getRatings.json
-  method: get
-  operationId: getRatings
+  operationId: getFuelPrices
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -172,9 +87,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /getGrainBids.json
+- path: /getProfile.json
   method: get
-  operationId: getGrainBids
+  operationId: getProfile
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -182,9 +97,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /getCmdtyStats.json
+- path: /getFinancialHighlights.json
   method: get
-  operationId: getCmdtyStats
+  operationId: getFinancialHighlights
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -192,9 +107,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /getFuelPrices.json
+- path: /getIncomeStatements.json
   method: get
-  operationId: getFuelPrices
+  operationId: getIncomeStatements
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -202,9 +117,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /getTechnicals.json
+- path: /getRatings.json
   method: get
-  operationId: getTechnicals
+  operationId: getRatings
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -212,9 +127,39 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /getSignal.json
+- path: /getFuturesOptions.json
   method: get
-  operationId: getSignal
+  operationId: getFuturesOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuturesByExchange.json
+  method: get
+  operationId: getFuturesByExchange
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getOptionsScreener.json
+  method: get
+  operationId: getOptionsScreener
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getHistory.json
+  method: get
+  operationId: getHistory
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -235,6 +180,776 @@ operations:
 - path: /getSECFilings.json
   method: get
   operationId: getSECFilings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getQuote.json
+  method: get
+  operationId: get-getQuote
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getHistory.json
+  method: get
+  operationId: get-getHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getClosePrice.json
+  method: get
+  operationId: get-getClosePrice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getQuoteEod.json
+  method: get
+  operationId: get-getQuoteEod
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEquitiesByExchange.json
+  method: get
+  operationId: get-getEquitiesByExchange
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuturesByExchange.json
+  method: get
+  operationId: get-getFuturesByExchange
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuturesOptions.json
+  method: get
+  operationId: get-getFuturesOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuturesOptionsEOD.json
+  method: get
+  operationId: get-getFuturesOptionsEOD
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuturesSpreads.json
+  method: get
+  operationId: get-getFuturesSpreads
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getSpecialOptions.json
+  method: get
+  operationId: get-getSpecialOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEquityOptions.json
+  method: get
+  operationId: get-getEquityOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEquityOptionsHistory.json
+  method: get
+  operationId: get-getEquityOptionsHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEquityOptionsOverviewHistory.json
+  method: get
+  operationId: get-getEquityOptionsOverviewHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEquityOptionsOverviewSummary.json
+  method: get
+  operationId: get-getEquityOptionsOverviewSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getOptionsScreener.json
+  method: get
+  operationId: get-getOptionsScreener
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getAmeriborRate.json
+  method: get
+  operationId: get-getAmeriborRate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getRestrictedSessionHistory.json
+  method: get
+  operationId: get-getRestrictedSessionHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getRestrictedSessionOHLCPrices.json
+  method: get
+  operationId: get-getRestrictedSessionOHLCPrices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCrypto.json
+  method: get
+  operationId: get-getCrypto
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCryptoHistory.json
+  method: get
+  operationId: get-getCryptoHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getProfile.json
+  method: get
+  operationId: get-getProfile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFinancialHighlights.json
+  method: get
+  operationId: get-getFinancialHighlights
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFinancialRatios.json
+  method: get
+  operationId: get-getFinancialRatios
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getIncomeStatements.json
+  method: get
+  operationId: get-getIncomeStatements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getBalanceSheets.json
+  method: get
+  operationId: get-getBalanceSheets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCompetitors.json
+  method: get
+  operationId: get-getCompetitors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getRatings.json
+  method: get
+  operationId: get-getRatings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getIndexMembers.json
+  method: get
+  operationId: get-getIndexMembers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCashFlow.json
+  method: get
+  operationId: get-getCashFlow
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCorporateActions.json
+  method: get
+  operationId: get-getCorporateActions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEarningsEstimates.json
+  method: get
+  operationId: get-getEarningsEstimates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getDividendData.json
+  method: get
+  operationId: get-getDividendData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getDividendStocks.json
+  method: get
+  operationId: get-getDividendStocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCorporateActionsByExchange.json
+  method: get
+  operationId: get-getCorporateActionsByExchange
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEarningsCalendar.json
+  method: get
+  operationId: get-getEarningsCalendar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getDividendsCalendar.json
+  method: get
+  operationId: get-getDividendsCalendar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEarningsAndDividendsCalendar.json
+  method: get
+  operationId: get-getEarningsAndDividendsCalendar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getLeaders.json
+  method: get
+  operationId: get-getLeaders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getHighsLows.json
+  method: get
+  operationId: get-getHighsLows
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getSectors.json
+  method: get
+  operationId: get-getSectors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getChart.json
+  method: get
+  operationId: get-getChart
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getTechnicals.json
+  method: get
+  operationId: get-getTechnicals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getSignal.json
+  method: get
+  operationId: get-getSignal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getMomentum.json
+  method: get
+  operationId: get-getMomentum
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getTechnicalIndicatorData.json
+  method: get
+  operationId: get-getTechnicalIndicatorData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getETFDetails.json
+  method: get
+  operationId: get-getETFDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getETFConstituents.json
+  method: get
+  operationId: get-getETFConstituents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getNews.json
+  method: get
+  operationId: get-getNews
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getNewsSources.json
+  method: get
+  operationId: get-getNewsSources
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getNewsCategories.json
+  method: get
+  operationId: get-getNewsCategories
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getSECFilings.json
+  method: get
+  operationId: get-getSECFilings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getInstrumentDefinition.json
+  method: get
+  operationId: get-getInstrumentDefinition
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuturesSpecifications.json
+  method: get
+  operationId: get-getFuturesSpecifications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuturesExpirations.json
+  method: get
+  operationId: get-getFuturesExpirations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuturesOptionsExpirations.json
+  method: get
+  operationId: get-getFuturesOptionsExpirations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getSpecialOptionsClassification.json
+  method: get
+  operationId: get-getSpecialOptionsClassification
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getForexForwardCurves.json
+  method: get
+  operationId: get-getForexForwardCurves
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getSymbolChange.json
+  method: get
+  operationId: get-getSymbolChange
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getRelatedInstruments.json
+  method: get
+  operationId: get-getRelatedInstruments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getWeather.json
+  method: get
+  operationId: get-getWeather
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getGrainBids.json
+  method: get
+  operationId: get-getGrainBids
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getUSDAGrainPrices.json
+  method: get
+  operationId: get-getUSDAGrainPrices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCmdtyStatsId.json
+  method: get
+  operationId: get-getCmdtyStatsId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCmdtyStats.json
+  method: get
+  operationId: get-getCmdtyStats
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getGrainInstruments.json
+  method: get
+  operationId: get-getGrainInstruments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getBLSIndexes.json
+  method: get
+  operationId: get-getBLSIndexes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCmdtyCalendar.json
+  method: get
+  operationId: get-getCmdtyCalendar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getFuelPrices.json
+  method: get
+  operationId: get-getFuelPrices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getCropFactors.json
+  method: get
+  operationId: get-getCropFactors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getUniqueIdentifier.json
+  method: get
+  operationId: get-getUniqueIdentifier
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getYieldForecastPlanet.json
+  method: get
+  operationId: get-getYieldForecastPlanet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getQuote.json
+  method: get
+  operationId: getQuote
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getQuoteEod.json
+  method: get
+  operationId: getQuoteEod
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getEquitiesByExchange.json
+  method: get
+  operationId: getEquitiesByExchange
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getInstrumentDefinition.json
+  method: get
+  operationId: getInstrumentDefinition
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getTechnicals.json
+  method: get
+  operationId: getTechnicals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /getSignal.json
+  method: get
+  operationId: getSignal
   x-agentic-access:
     action-class: connected
     consequence: read
