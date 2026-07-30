@@ -392,7 +392,17 @@ apis:
     url: https://www.barchart.com/ondemand/api
   - type: APIReference
     url: https://www.barchart.com/ondemand/api/getWeather
+- aid: barchart:barchart-ondemand-official-openapi
+  name: Barchart OnDemand APIs
+  description: Barchart OnDemand APIs from Barchart — 71 path(s) described in OpenAPI.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-ondemand-official-openapi.yml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/barchart/overview
 - type: AgenticAccess
   url: agentic-access/barchart-agentic-access.yml
 - type: Authentication
