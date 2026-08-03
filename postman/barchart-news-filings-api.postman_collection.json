@@ -1,0 +1,361 @@
+{
+  "info": {
+    "_postman_id": "e73efc6e-18e0-4096-b884-21a5898ff4a4",
+    "name": "Barchart OnDemand Commodities & Agriculture News & Filings API",
+    "description": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:11:52.000Z",
+    "updatedAt": "2026-07-28T01:11:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e73efc6e-18e0-4096-b884-21a5898ff4a4"
+  },
+  "item": [
+    {
+      "name": "getNews.json",
+      "item": [
+        {
+          "name": "Get news",
+          "id": "852bd9d5-b1a1-42cf-b9bc-805fe9b7b4ef",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getNews.json?apikey=<string>&sources=<string>&symbols=<string>&maxRecords=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getNews.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "key": "sources",
+                  "value": "<string>"
+                },
+                {
+                  "key": "symbols",
+                  "value": "<string>"
+                },
+                {
+                  "key": "maxRecords",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "News headlines, articles, and photos by source, category, or keyword."
+          },
+          "response": [
+            {
+              "id": "f515dd8c-37ee-4175-a504-6ba7bac7630f",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getNews.json?apikey=<API Key>&sources=<string>&symbols=<string>&maxRecords=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getNews.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxRecords",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"commodo_0\": -14240123.76110579,\n      \"irured\": false\n    },\n    {\n      \"reprehenderit4d3\": true,\n      \"incididunt_\": -2827805\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:53.000Z",
+              "updatedAt": "2026-07-28T01:11:53.000Z",
+              "uid": "35240-f515dd8c-37ee-4175-a504-6ba7bac7630f"
+            },
+            {
+              "id": "da14f59b-c216-4f2f-b1ca-0bf47bcc6c17",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getNews.json?apikey=<API Key>&sources=<string>&symbols=<string>&maxRecords=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getNews.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxRecords",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:53.000Z",
+              "updatedAt": "2026-07-28T01:11:53.000Z",
+              "uid": "35240-da14f59b-c216-4f2f-b1ca-0bf47bcc6c17"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:52.000Z",
+          "updatedAt": "2026-07-28T01:11:52.000Z",
+          "uid": "35240-852bd9d5-b1a1-42cf-b9bc-805fe9b7b4ef"
+        }
+      ],
+      "id": "7029ffd9-9d6a-4287-80c6-3ea8b608e702",
+      "createdAt": "2026-07-28T01:11:52.000Z",
+      "updatedAt": "2026-07-28T01:11:52.000Z",
+      "uid": "35240-7029ffd9-9d6a-4287-80c6-3ea8b608e702"
+    },
+    {
+      "name": "getSECFilings.json",
+      "item": [
+        {
+          "name": "Get SEC filings",
+          "id": "c8419676-b7c0-4ce0-b931-c940d646d726",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getSECFilings.json?apikey=<string>&symbols=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getSECFilings.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "symbols",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Quarterly, annual, and regulatory SEC filings."
+          },
+          "response": [
+            {
+              "id": "0fb608ed-d1de-4a6e-8f1f-6ddd2bc4659e",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getSECFilings.json?apikey=<API Key>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getSECFilings.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"commodo_0\": -14240123.76110579,\n      \"irured\": false\n    },\n    {\n      \"reprehenderit4d3\": true,\n      \"incididunt_\": -2827805\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:53.000Z",
+              "updatedAt": "2026-07-28T01:11:53.000Z",
+              "uid": "35240-0fb608ed-d1de-4a6e-8f1f-6ddd2bc4659e"
+            },
+            {
+              "id": "4c357ed1-c4dd-4495-b9b9-f90a73dd7b16",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getSECFilings.json?apikey=<API Key>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getSECFilings.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:53.000Z",
+              "updatedAt": "2026-07-28T01:11:53.000Z",
+              "uid": "35240-4c357ed1-c4dd-4495-b9b9-f90a73dd7b16"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:52.000Z",
+          "updatedAt": "2026-07-28T01:11:52.000Z",
+          "uid": "35240-c8419676-b7c0-4ce0-b931-c940d646d726"
+        }
+      ],
+      "id": "b4392ccb-1e50-43f1-9cdb-25eb3e761d98",
+      "createdAt": "2026-07-28T01:11:52.000Z",
+      "updatedAt": "2026-07-28T01:11:52.000Z",
+      "uid": "35240-b4392ccb-1e50-43f1-9cdb-25eb3e761d98"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ondemand.websol.barchart.com"
+    }
+  ]
+}

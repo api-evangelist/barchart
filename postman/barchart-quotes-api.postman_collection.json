@@ -1,0 +1,370 @@
+{
+  "info": {
+    "_postman_id": "4c6e3bde-8d4a-4691-8ec8-fa9507724b98",
+    "name": "Barchart OnDemand Commodities & Agriculture Quotes API",
+    "description": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:11:54.000Z",
+    "updatedAt": "2026-07-28T01:11:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4c6e3bde-8d4a-4691-8ec8-fa9507724b98"
+  },
+  "item": [
+    {
+      "name": "getQuote.json",
+      "item": [
+        {
+          "name": "Get quotes",
+          "id": "558ebe64-a25e-44bb-981d-d63706d9b9e2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getQuote.json?apikey=<string>&symbols=<string>&fields=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getQuote.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) One or more comma-separated instrument symbols.",
+                  "key": "symbols",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma- or semicolon-delimited list of additional fields to return.",
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Request real-time, delayed, or end-of-day price data by symbol for stocks, indexes, mutual funds, ETFs, futures, forex, or cryptocurrencies. Multiple comma-separated symbols are supported, as is futures notation such as `ESZ25`, `ES*0` (active), and `ES^F` (all contracts)."
+          },
+          "response": [
+            {
+              "id": "98b66597-be25-45dd-b19e-9d1fcff1ed4a",
+              "name": "A status envelope plus an array of quote records. Field set depends on your data entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQuote.json?apikey=<API Key>&symbols=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQuote.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) One or more comma-separated instrument symbols.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma- or semicolon-delimited list of additional fields to return.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"symbol\": \"<string>\",\n      \"name\": \"<string>\",\n      \"exchange\": \"<string>\",\n      \"lastPrice\": \"<number>\",\n      \"netChange\": \"<number>\",\n      \"percentChange\": \"<number>\",\n      \"open\": \"<number>\",\n      \"high\": \"<number>\",\n      \"low\": \"<number>\",\n      \"volume\": \"<integer>\",\n      \"tradeTimestamp\": \"<dateTime>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"name\": \"<string>\",\n      \"exchange\": \"<string>\",\n      \"lastPrice\": \"<number>\",\n      \"netChange\": \"<number>\",\n      \"percentChange\": \"<number>\",\n      \"open\": \"<number>\",\n      \"high\": \"<number>\",\n      \"low\": \"<number>\",\n      \"volume\": \"<integer>\",\n      \"tradeTimestamp\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:55.000Z",
+              "updatedAt": "2026-07-28T01:11:55.000Z",
+              "uid": "35240-98b66597-be25-45dd-b19e-9d1fcff1ed4a"
+            },
+            {
+              "id": "ce1633c4-29d2-4628-99e9-84fec1bc524b",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQuote.json?apikey=<API Key>&symbols=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQuote.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) One or more comma-separated instrument symbols.",
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma- or semicolon-delimited list of additional fields to return.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:55.000Z",
+              "updatedAt": "2026-07-28T01:11:55.000Z",
+              "uid": "35240-ce1633c4-29d2-4628-99e9-84fec1bc524b"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:55.000Z",
+          "updatedAt": "2026-07-28T01:11:55.000Z",
+          "uid": "35240-558ebe64-a25e-44bb-981d-d63706d9b9e2"
+        }
+      ],
+      "id": "1f68ccec-2889-4b21-ba4b-c24be3cd401d",
+      "createdAt": "2026-07-28T01:11:55.000Z",
+      "updatedAt": "2026-07-28T01:11:55.000Z",
+      "uid": "35240-1f68ccec-2889-4b21-ba4b-c24be3cd401d"
+    },
+    {
+      "name": "getQuoteEod.json",
+      "item": [
+        {
+          "name": "Get end-of-day quotes",
+          "id": "2df47f2f-bfd5-4d1a-9352-dc280dd459eb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getQuoteEod.json?apikey=<string>&symbols=<string>&exchange=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getQuoteEod.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "symbols",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Exchange acronym to scope the request.",
+                  "key": "exchange",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "End-of-day price data by exchange and symbol."
+          },
+          "response": [
+            {
+              "id": "275b3958-1b3b-4936-8d9c-b1d054a0c92e",
+              "name": "A status envelope plus an array of quote records. Field set depends on your data entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQuoteEod.json?apikey=<API Key>&symbols=<string>&exchange=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQuoteEod.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Exchange acronym to scope the request.",
+                      "key": "exchange",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"symbol\": \"<string>\",\n      \"name\": \"<string>\",\n      \"exchange\": \"<string>\",\n      \"lastPrice\": \"<number>\",\n      \"netChange\": \"<number>\",\n      \"percentChange\": \"<number>\",\n      \"open\": \"<number>\",\n      \"high\": \"<number>\",\n      \"low\": \"<number>\",\n      \"volume\": \"<integer>\",\n      \"tradeTimestamp\": \"<dateTime>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"name\": \"<string>\",\n      \"exchange\": \"<string>\",\n      \"lastPrice\": \"<number>\",\n      \"netChange\": \"<number>\",\n      \"percentChange\": \"<number>\",\n      \"open\": \"<number>\",\n      \"high\": \"<number>\",\n      \"low\": \"<number>\",\n      \"volume\": \"<integer>\",\n      \"tradeTimestamp\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:55.000Z",
+              "updatedAt": "2026-07-28T01:11:55.000Z",
+              "uid": "35240-275b3958-1b3b-4936-8d9c-b1d054a0c92e"
+            },
+            {
+              "id": "fe8dced4-d2cd-4572-9a8e-80865e541230",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQuoteEod.json?apikey=<API Key>&symbols=<string>&exchange=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQuoteEod.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Exchange acronym to scope the request.",
+                      "key": "exchange",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:55.000Z",
+              "updatedAt": "2026-07-28T01:11:55.000Z",
+              "uid": "35240-fe8dced4-d2cd-4572-9a8e-80865e541230"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:55.000Z",
+          "updatedAt": "2026-07-28T01:11:55.000Z",
+          "uid": "35240-2df47f2f-bfd5-4d1a-9352-dc280dd459eb"
+        }
+      ],
+      "id": "87a315bf-bc62-473e-b1d4-91afdc555c51",
+      "createdAt": "2026-07-28T01:11:55.000Z",
+      "updatedAt": "2026-07-28T01:11:55.000Z",
+      "uid": "35240-87a315bf-bc62-473e-b1d4-91afdc555c51"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ondemand.websol.barchart.com"
+    }
+  ]
+}

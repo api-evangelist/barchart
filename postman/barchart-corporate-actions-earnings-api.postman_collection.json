@@ -1,0 +1,355 @@
+{
+  "info": {
+    "_postman_id": "cf7e8224-395a-4778-b985-12ac30e4bde5",
+    "name": "Barchart OnDemand Commodities & Agriculture Corporate Actions & Earnings API",
+    "description": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:11:48.000Z",
+    "updatedAt": "2026-07-28T01:11:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cf7e8224-395a-4778-b985-12ac30e4bde5"
+  },
+  "item": [
+    {
+      "name": "getCorporateActions.json",
+      "item": [
+        {
+          "name": "Get corporate actions",
+          "id": "21058c6a-2c09-4e84-8dc5-df77f7edffb1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getCorporateActions.json?apikey=<string>&symbols=<string>&eventType=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getCorporateActions.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "symbols",
+                  "value": "<string>"
+                },
+                {
+                  "description": "splits, dividends, or earnings.",
+                  "key": "eventType",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Splits, dividends, and earnings data for the requested symbols."
+          },
+          "response": [
+            {
+              "id": "bfbe38d4-0cae-4f77-8dd7-27b0a38e4dba",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getCorporateActions.json?apikey=<API Key>&symbols=<string>&eventType=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getCorporateActions.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "splits, dividends, or earnings.",
+                      "key": "eventType",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"iruree\": 96103457,\n      \"eiusmod7de\": -68608514\n    },\n    {\n      \"id_1\": false,\n      \"cillum1\": \"do Excepteur\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:48.000Z",
+              "updatedAt": "2026-07-28T01:11:48.000Z",
+              "uid": "35240-bfbe38d4-0cae-4f77-8dd7-27b0a38e4dba"
+            },
+            {
+              "id": "98ea46ae-d78b-4861-a3b4-3565051bf91a",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getCorporateActions.json?apikey=<API Key>&symbols=<string>&eventType=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getCorporateActions.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "splits, dividends, or earnings.",
+                      "key": "eventType",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:48.000Z",
+              "updatedAt": "2026-07-28T01:11:48.000Z",
+              "uid": "35240-98ea46ae-d78b-4861-a3b4-3565051bf91a"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:48.000Z",
+          "updatedAt": "2026-07-28T01:11:48.000Z",
+          "uid": "35240-21058c6a-2c09-4e84-8dc5-df77f7edffb1"
+        }
+      ],
+      "id": "871259a8-f28f-4435-b970-3b9fa4b30cd2",
+      "createdAt": "2026-07-28T01:11:48.000Z",
+      "updatedAt": "2026-07-28T01:11:48.000Z",
+      "uid": "35240-871259a8-f28f-4435-b970-3b9fa4b30cd2"
+    },
+    {
+      "name": "getEarningsCalendar.json",
+      "item": [
+        {
+          "name": "Get earnings calendar",
+          "id": "2b952e72-e566-406a-92d2-fbab7fdf37a2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getEarningsCalendar.json?apikey=<string>&date=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getEarningsCalendar.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Calendar date (YYYYMMDD).",
+                  "key": "date",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Upcoming earnings totals and data by date."
+          },
+          "response": [
+            {
+              "id": "078c2c72-8135-4ded-aa4f-85bfc3b823a9",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getEarningsCalendar.json?apikey=<API Key>&date=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getEarningsCalendar.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Calendar date (YYYYMMDD).",
+                      "key": "date",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"iruree\": 96103457,\n      \"eiusmod7de\": -68608514\n    },\n    {\n      \"id_1\": false,\n      \"cillum1\": \"do Excepteur\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:48.000Z",
+              "updatedAt": "2026-07-28T01:11:48.000Z",
+              "uid": "35240-078c2c72-8135-4ded-aa4f-85bfc3b823a9"
+            },
+            {
+              "id": "46172d3e-1683-4e74-99b0-5f32ded649a3",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getEarningsCalendar.json?apikey=<API Key>&date=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getEarningsCalendar.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Calendar date (YYYYMMDD).",
+                      "key": "date",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:48.000Z",
+              "updatedAt": "2026-07-28T01:11:48.000Z",
+              "uid": "35240-46172d3e-1683-4e74-99b0-5f32ded649a3"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:48.000Z",
+          "updatedAt": "2026-07-28T01:11:48.000Z",
+          "uid": "35240-2b952e72-e566-406a-92d2-fbab7fdf37a2"
+        }
+      ],
+      "id": "19d290dd-7e0f-4ba8-b3f6-b68ceeed3a13",
+      "createdAt": "2026-07-28T01:11:48.000Z",
+      "updatedAt": "2026-07-28T01:11:48.000Z",
+      "uid": "35240-19d290dd-7e0f-4ba8-b3f6-b68ceeed3a13"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ondemand.websol.barchart.com"
+    }
+  ]
+}

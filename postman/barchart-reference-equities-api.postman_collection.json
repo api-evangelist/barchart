@@ -1,0 +1,361 @@
+{
+  "info": {
+    "_postman_id": "d18bfa4a-8ef1-4c50-ab88-b64db4f8cad0",
+    "name": "Barchart OnDemand Commodities & Agriculture Reference & Equities API",
+    "description": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:11:55.000Z",
+    "updatedAt": "2026-07-28T01:11:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d18bfa4a-8ef1-4c50-ab88-b64db4f8cad0"
+  },
+  "item": [
+    {
+      "name": "getEquitiesByExchange.json",
+      "item": [
+        {
+          "name": "Get all equities by exchange",
+          "id": "0fcd393a-82b2-4b0d-994e-ef9b15cf6976",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getEquitiesByExchange.json?apikey=<string>&exchange=<string>&fields=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getEquitiesByExchange.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Exchange acronym (e.g. NYSE, NASDAQ, AMEX).",
+                  "key": "exchange",
+                  "value": "<string>"
+                },
+                {
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns market data for all equities on a given exchange in a single query."
+          },
+          "response": [
+            {
+              "id": "a5c8905f-06e8-4e33-8304-8d83b46f9e39",
+              "name": "A status envelope plus an array of quote records. Field set depends on your data entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getEquitiesByExchange.json?apikey=<API Key>&exchange=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getEquitiesByExchange.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Exchange acronym (e.g. NYSE, NASDAQ, AMEX).",
+                      "key": "exchange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"symbol\": \"<string>\",\n      \"name\": \"<string>\",\n      \"exchange\": \"<string>\",\n      \"lastPrice\": \"<number>\",\n      \"netChange\": \"<number>\",\n      \"percentChange\": \"<number>\",\n      \"open\": \"<number>\",\n      \"high\": \"<number>\",\n      \"low\": \"<number>\",\n      \"volume\": \"<integer>\",\n      \"tradeTimestamp\": \"<dateTime>\"\n    },\n    {\n      \"symbol\": \"<string>\",\n      \"name\": \"<string>\",\n      \"exchange\": \"<string>\",\n      \"lastPrice\": \"<number>\",\n      \"netChange\": \"<number>\",\n      \"percentChange\": \"<number>\",\n      \"open\": \"<number>\",\n      \"high\": \"<number>\",\n      \"low\": \"<number>\",\n      \"volume\": \"<integer>\",\n      \"tradeTimestamp\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:56.000Z",
+              "updatedAt": "2026-07-28T01:11:56.000Z",
+              "uid": "35240-a5c8905f-06e8-4e33-8304-8d83b46f9e39"
+            },
+            {
+              "id": "89bf2db0-6ef6-45e3-bb81-4ca18c31c414",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getEquitiesByExchange.json?apikey=<API Key>&exchange=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getEquitiesByExchange.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Exchange acronym (e.g. NYSE, NASDAQ, AMEX).",
+                      "key": "exchange",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:56.000Z",
+              "updatedAt": "2026-07-28T01:11:56.000Z",
+              "uid": "35240-89bf2db0-6ef6-45e3-bb81-4ca18c31c414"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:56.000Z",
+          "updatedAt": "2026-07-28T01:11:56.000Z",
+          "uid": "35240-0fcd393a-82b2-4b0d-994e-ef9b15cf6976"
+        }
+      ],
+      "id": "044551f0-7fef-45df-b1a2-8e8bd06e8e83",
+      "createdAt": "2026-07-28T01:11:56.000Z",
+      "updatedAt": "2026-07-28T01:11:56.000Z",
+      "uid": "35240-044551f0-7fef-45df-b1a2-8e8bd06e8e83"
+    },
+    {
+      "name": "getInstrumentDefinition.json",
+      "item": [
+        {
+          "name": "Get instrument definitions",
+          "id": "1c982c13-25d3-4114-9ce7-2f9f2e319c3f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getInstrumentDefinition.json?apikey=<string>&symbols=<string>&exchange=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getInstrumentDefinition.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "key": "symbols",
+                  "value": "<string>"
+                },
+                {
+                  "key": "exchange",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Instrument metadata by symbol, exchange, or MIC (names, codes, tick increments)."
+          },
+          "response": [
+            {
+              "id": "f176e7ec-0aa3-4835-b825-67c77d8cecef",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getInstrumentDefinition.json?apikey=<API Key>&symbols=<string>&exchange=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getInstrumentDefinition.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exchange",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"et0\": 57519371.991485536,\n      \"in_07\": false,\n      \"reprehenderitc5\": 11896682.766279683\n    },\n    {\n      \"Ut_655\": -21749864.07789187\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:56.000Z",
+              "updatedAt": "2026-07-28T01:11:56.000Z",
+              "uid": "35240-f176e7ec-0aa3-4835-b825-67c77d8cecef"
+            },
+            {
+              "id": "efd27882-64ae-4208-8cf0-950275324001",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getInstrumentDefinition.json?apikey=<API Key>&symbols=<string>&exchange=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getInstrumentDefinition.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exchange",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:56.000Z",
+              "updatedAt": "2026-07-28T01:11:56.000Z",
+              "uid": "35240-efd27882-64ae-4208-8cf0-950275324001"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:56.000Z",
+          "updatedAt": "2026-07-28T01:11:56.000Z",
+          "uid": "35240-1c982c13-25d3-4114-9ce7-2f9f2e319c3f"
+        }
+      ],
+      "id": "5c3a955e-7d6b-4267-acf7-3ae4283ca05d",
+      "createdAt": "2026-07-28T01:11:56.000Z",
+      "updatedAt": "2026-07-28T01:11:56.000Z",
+      "uid": "35240-5c3a955e-7d6b-4267-acf7-3ae4283ca05d"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ondemand.websol.barchart.com"
+    }
+  ]
+}

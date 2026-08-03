@@ -1,0 +1,496 @@
+{
+  "info": {
+    "_postman_id": "1e2cbfe2-e0d4-4da6-a30f-734cbcbf52f1",
+    "name": "Barchart OnDemand Commodities & Agriculture API",
+    "description": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:11:47.000Z",
+    "updatedAt": "2026-07-28T01:11:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1e2cbfe2-e0d4-4da6-a30f-734cbcbf52f1"
+  },
+  "item": [
+    {
+      "name": "getGrainBids.json",
+      "item": [
+        {
+          "name": "Get grain cash bids",
+          "id": "d85246d3-2014-49a1-92f5-4b1b10f842ac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getGrainBids.json?apikey=<string>&zipCode=<string>&commodities=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getGrainBids.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "description": "US zip code used to find nearby grain locations.",
+                  "key": "zipCode",
+                  "value": "<string>"
+                },
+                {
+                  "key": "commodities",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Cash bid data for the 30 closest grain locations to a point."
+          },
+          "response": [
+            {
+              "id": "22a0891d-fe9f-431a-9dd8-dc3119c4b42c",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getGrainBids.json?apikey=<API Key>&zipCode=<string>&commodities=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getGrainBids.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "US zip code used to find nearby grain locations.",
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commodities",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"Duis_2f\": 82108836,\n      \"quis_fe\": 48431761.11686507\n    },\n    {\n      \"esse_3c1\": false\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:47.000Z",
+              "updatedAt": "2026-07-28T01:11:47.000Z",
+              "uid": "35240-22a0891d-fe9f-431a-9dd8-dc3119c4b42c"
+            },
+            {
+              "id": "81315e92-ca03-4d24-b6b9-77690569a3e5",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getGrainBids.json?apikey=<API Key>&zipCode=<string>&commodities=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getGrainBids.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "US zip code used to find nearby grain locations.",
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commodities",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:47.000Z",
+              "updatedAt": "2026-07-28T01:11:47.000Z",
+              "uid": "35240-81315e92-ca03-4d24-b6b9-77690569a3e5"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:47.000Z",
+          "updatedAt": "2026-07-28T01:11:47.000Z",
+          "uid": "35240-d85246d3-2014-49a1-92f5-4b1b10f842ac"
+        }
+      ],
+      "id": "49c6f57b-84c7-4021-b494-c566b625be2c",
+      "createdAt": "2026-07-28T01:11:47.000Z",
+      "updatedAt": "2026-07-28T01:11:47.000Z",
+      "uid": "35240-49c6f57b-84c7-4021-b494-c566b625be2c"
+    },
+    {
+      "name": "getCmdtyStats.json",
+      "item": [
+        {
+          "name": "Get commodity statistics",
+          "id": "2edcaa01-01b5-45ac-b741-0ad1940aee8b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getCmdtyStats.json?apikey=<string>&symbols=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getCmdtyStats.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "key": "symbols",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Fundamentals, commodity statistics, and economic data with historical records."
+          },
+          "response": [
+            {
+              "id": "f6bb39de-1944-4158-b145-91ce0a979b5b",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getCmdtyStats.json?apikey=<API Key>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getCmdtyStats.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"Duis_2f\": 82108836,\n      \"quis_fe\": 48431761.11686507\n    },\n    {\n      \"esse_3c1\": false\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:47.000Z",
+              "updatedAt": "2026-07-28T01:11:47.000Z",
+              "uid": "35240-f6bb39de-1944-4158-b145-91ce0a979b5b"
+            },
+            {
+              "id": "f5f3c9c7-bb59-4af2-8254-eec0c609e5a1",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getCmdtyStats.json?apikey=<API Key>&symbols=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getCmdtyStats.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:47.000Z",
+              "updatedAt": "2026-07-28T01:11:47.000Z",
+              "uid": "35240-f5f3c9c7-bb59-4af2-8254-eec0c609e5a1"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:47.000Z",
+          "updatedAt": "2026-07-28T01:11:47.000Z",
+          "uid": "35240-2edcaa01-01b5-45ac-b741-0ad1940aee8b"
+        }
+      ],
+      "id": "4fa3cda6-e0e8-4ae9-be17-43081c0b3a47",
+      "createdAt": "2026-07-28T01:11:47.000Z",
+      "updatedAt": "2026-07-28T01:11:47.000Z",
+      "uid": "35240-4fa3cda6-e0e8-4ae9-be17-43081c0b3a47"
+    },
+    {
+      "name": "getFuelPrices.json",
+      "item": [
+        {
+          "name": "Get fuel prices",
+          "id": "25681f8d-d1e4-4ed0-a266-f848bd444483",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getFuelPrices.json?apikey=<string>&zipCode=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getFuelPrices.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Barchart-issued API key.",
+                  "key": "apikey",
+                  "value": "<string>"
+                },
+                {
+                  "key": "zipCode",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Refined fuel price data and reference data by location or coordinates."
+          },
+          "response": [
+            {
+              "id": "0aa13770-3d81-4d71-ba9c-9ce144b83ac2",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getFuelPrices.json?apikey=<API Key>&zipCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getFuelPrices.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"results\": [\n    {\n      \"Duis_2f\": 82108836,\n      \"quis_fe\": 48431761.11686507\n    },\n    {\n      \"esse_3c1\": false\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:11:47.000Z",
+              "updatedAt": "2026-07-28T01:11:47.000Z",
+              "uid": "35240-0aa13770-3d81-4d71-ba9c-9ce144b83ac2"
+            },
+            {
+              "id": "1dfd6467-7ced-4dd0-8ec5-89f239fbd719",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getFuelPrices.json?apikey=<API Key>&zipCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getFuelPrices.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Barchart-issued API key.",
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:11:47.000Z",
+              "updatedAt": "2026-07-28T01:11:47.000Z",
+              "uid": "35240-1dfd6467-7ced-4dd0-8ec5-89f239fbd719"
+            }
+          ],
+          "createdAt": "2026-07-28T01:11:47.000Z",
+          "updatedAt": "2026-07-28T01:11:47.000Z",
+          "uid": "35240-25681f8d-d1e4-4ed0-a266-f848bd444483"
+        }
+      ],
+      "id": "73bc2ed8-f335-4c31-a77a-baf94d912128",
+      "createdAt": "2026-07-28T01:11:47.000Z",
+      "updatedAt": "2026-07-28T01:11:47.000Z",
+      "uid": "35240-73bc2ed8-f335-4c31-a77a-baf94d912128"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ondemand.websol.barchart.com"
+    }
+  ]
+}
