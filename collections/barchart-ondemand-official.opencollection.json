@@ -1,0 +1,3917 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OnDemand APIs",
+    "version": "1.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Price Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getQuote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getQuote.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used.  For futures, notation such as <root_symbol*0> for the active contract or <root_symbol*1> for the first nearby is supported, as is <root_symbol^F> for all futures contracts for a given root symbol, as is <root_symbol^O> for all options contracts for a given underlying futures symbol."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to change quote type to real-time (\"R\"), delayed (\"I\") or end-of-day (\"D\") if available."
+              },
+              {
+                "name": "jerq",
+                "value": "",
+                "type": "query",
+                "description": "Whether to merge with JERQ data."
+              },
+              {
+                "name": "exchangeFilter",
+                "value": "",
+                "type": "query",
+                "description": "Returns all quotes for specified exchanges (symbols are ignored)."
+              },
+              {
+                "name": "only",
+                "value": "",
+                "type": "query",
+                "description": "Returns only specified fields"
+              },
+              {
+                "name": "shareClassFigi",
+                "value": "",
+                "type": "query",
+                "description": "The unique share class code identifying an instrument globally."
+              },
+              {
+                "name": "figi",
+                "value": "",
+                "type": "query",
+                "description": "The unique code identifying an instrument across all exchanges in a country."
+              },
+              {
+                "name": "compositeFigi",
+                "value": "",
+                "type": "query",
+                "description": "N/A"
+              }
+            ]
+          },
+          "docs": "The getQuote API is used to request price data, either real-time, delayed or end-of-day, by symbol on stocks, indexes, mutual funds, ETFs, futures, foreign exchange, or cryptocurrencies."
+        },
+        {
+          "info": {
+            "name": "getHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getHistory.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of historical data to return, including tick data, minute data, and end-of-day data."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical data query.  This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the beginning of the day specified in the end parameter, if end is specified, or to the beginning of the current day, if end is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end data of the historical data query.  This parameter should be set to the desired end date/time for the query (the result set will include records up to, but not including, this value). If not set, the value will default to the end of the day specified in the start parameter, if specified, or to the end of the current day, if start is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum amount of records returned.  This parameter should be set to the maximum number of records desired. If not specified, there number of records returned will be determined by the date/time parameters specified as well as any defaults that apply to the query."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "The number of minutes for a minute query."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "An arrangement of fields within a particular record (ascending or descending).   This parameter can be set to one of two values (\"asc\" and \"desc\") in order to specify the chronological order of the result set returned. If this parameter is not specified, the order results is not guaranteed."
+              },
+              {
+                "name": "sessionFilter",
+                "value": "",
+                "type": "query",
+                "description": "This parameter modifies the default session codes/sale conditions used to return ticks for each exchange. For NYSE and AMEX, the default session filter is \"@EFKX56V9\" (meaning all ticks with sale conditions corresponding to one of the characters in the filter are included in the results), for NASDAQ the default is \"@ABDEFKOSXY156\", and for everything else all session codes/sale conditions are returned except the settle (session code '*'). If the session filter is set to a string of valid session codes (i.e. \"EFK\"), only ticks with the specified session codes are included in the results. If the string is prefixed with character '!' (i.e.\"!EFK\"), all session codes except those in the string are included in the results. If the string is prefixed with character '+' (i.e. \"+T\"), then all the default session codes in addition to the ones specified in the string are included in the results. And if the string is prefixed with character '-' (i.e. \"-EF\") then all default session codes except the ones specified are included in the results. Please note that the '+' character should be escaped (to %2B) when entering the URL in a web browser or executing the query in an API that does not escape it by default."
+              },
+              {
+                "name": "splits",
+                "value": "",
+                "type": "query",
+                "description": "An adjustment of stock value due to corporate action.   This parameter only applies to stocks and specifies whether the data returned should be adjusted for splits or not. Set to true to query for adjusted the data, or to false for non-adjusted data. If not specified, the default is true. In order to guarantee the same adjustment settings in the future, this parameter should be specified."
+              },
+              {
+                "name": "dividends",
+                "value": "",
+                "type": "query",
+                "description": "A distribution of a portion of a company's earnings.  This parameter only applies to stocks and specifies whether the data returned should be adjusted for dividends or not. Set to true to query for adjusted the data, or to false for non-adjusted data. If not specified, the default is true. In order to guarantee the same adjustment settings in the future, this parameter should be specified."
+              },
+              {
+                "name": "volume",
+                "value": "",
+                "type": "query",
+                "description": "The quantity of shares or contracts traded.  For futures, this parameter can be set to one of two values (contract and total) in order to specify whether the volume returned should be the contract volume or the total volume. For aggregates (such as weekly, monthly or yearly), this returns the average volume for the period specified. If the value is preceded by 'sum' (sumcontract and sumtotal), then it returns the sum of the volumes in each daily bar during the period specified. If not specified, the value will default to contract. For aggregate equities queries (such as weekly, monthly or yearly), this parameter can be set to sum to return the sum of the volumes in each daily bar during the period specified. If not specified, then the average volume is returned."
+              },
+              {
+                "name": "nearby",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies the offset from the front month for 'nearest' queries (data parameter set to dailynearest, weeklynearest, monthlynearest, quarterlynearest and yearlynearest). The default value for this parameter is 1, which sets nearest queries to the most current front month. If set to a value greater than 1, then the nth front month is used (for example, in August of 2010, ESU10 would be the current front month, so nearby=2 would use ESZ10, nearby=3 would use ESH11, etc.) This parameter is ignored for all other queries. Alternatively, the same functionality provided by the nearby parameter can be achieved using the symbol notation symbol=RS*n, where RS is the root symbol and n is the nth front month (i.e. symbol=ES*1, symbol=YM*3, etc.). When using this notation on the symbol parameter, the nearby parameter should be omitted."
+              },
+              {
+                "name": "jerq",
+                "value": "",
+                "type": "query",
+                "description": "Whether to merge with JERQ data."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "The list of valid exchange codes to limit symbol search."
+              },
+              {
+                "name": "backAdjust",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies whether the contracts in the series will be adjusted based on the roll-gap between the closing prices of the current contract and the previous contract on the day of the switch. Valid values are true and false. If not specified, the default value is false resulting in a non-adjusted query. This parameter only applies to multi-contract futures queries and is ignored for all other queries."
+              },
+              {
+                "name": "daysToExpiration",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies the number of calendar days prior to a contract expiration when the series of contracts will be switched to the next contract in the series. Valid values are 0 through 60. A value of 0 will tell the system to use the day of expiration. If not specified, the default value (1) is used, resulting in each contract in the series to run until (and including) the day prior to its expiration. This parameter only applies to multi-contract futures queries and is ignored for all other queries."
+              },
+              {
+                "name": "contractRoll",
+                "value": "",
+                "type": "query",
+                "description": "For futures, multi-contract nearest queries (data parameter set to dailynearest, weeklynearest, monthlynearest, quarterlynearest or yearlynearest), this parameter can be set to one of two values (expiration, combined), and determines how the switch from one contract to the next in the series is calculated. When the value specified is 'expiration', the switch from one contract to the next in the series will be based on the expiration date (and the value of the 'daysToExpiration' parameter if specified). When the value specified is 'combined', a combination of volume and openinterest will be used to determine when to switch from one contract to the next in the series (when using this value, the 'daysToExpiration' parameter is ignored)."
+              }
+            ]
+          },
+          "docs": "The getHistory API is used to request historical time series data on stocks, indexes, mutual funds, ETFs, futures, foreign exchange, or cryptocurrencies. Historical data is available as tick, minute bars or end-of-day data."
+        },
+        {
+          "info": {
+            "name": "getClosePrice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getClosePrice.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date of the historical data query. The value should conform to the format yyyymmdd."
+              },
+              {
+                "name": "splits",
+                "value": "",
+                "type": "query",
+                "description": "An adjustment of stock value due to corporate action. This parameter only applies to stocks and specifies whether the data returned should be adjusted for splits or not. Set to true to query for adjusted the data, or to false for non-adjusted data."
+              },
+              {
+                "name": "dividends",
+                "value": "",
+                "type": "query",
+                "description": "A distribution of a portion of a company's earnings. This parameter only applies to stocks and specifies whether the data returned should be adjusted for dividends or not. Set to true to query for adjusted the data, or to false for non-adjusted data."
+              }
+            ]
+          },
+          "docs": "The getClosePrice API provides the close price for given instruments for the given date."
+        },
+        {
+          "info": {
+            "name": "getQuoteEod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getQuoteEod.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "An MIC code or a Country code plus the symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used.  For futures, notation such as <root_symbol*0> for the active contract or <root_symbol*1> for the first nearby is supported, as is <root_symbol^F> for all futures contracts for a given root symbol. If no country code or MIC is passed then the API will behave the same as the getQuote API."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "The list of valid exchange codes to limit symbol search."
+              }
+            ]
+          },
+          "docs": "The getQuoteEod API is used to request end-of-day price data, by combined exchange and symbol, on stocks, indexes, mutual funds, ETFs, futures, foreign exchange, or cryptocurrencies. Historical data is available as tick, minute bars or end-of-day data."
+        },
+        {
+          "info": {
+            "name": "getEquitiesByExchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEquitiesByExchange.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "A valid exchange code."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              },
+              {
+                "name": "fileDate",
+                "value": "",
+                "type": "query",
+                "description": "The specific date for which data should be returned. The requested date cannot be more than 30 days back."
+              }
+            ]
+          },
+          "docs": "Receive all real-time or delayed equities market data by exchange through a single onDemand query with the getEquitiesByExchangeAPI from Barchart OnDemand."
+        },
+        {
+          "info": {
+            "name": "getFuturesByExchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesByExchange.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "The exchange code for which the list of commodities are required."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Category of the commodity."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Request additional optional fields."
+              }
+            ]
+          },
+          "docs": "Receive all real-time or delayed, or end-of-day futures data by exchange through a single onDemand query with the get FuturesByExchange API from Barchart OnDemand."
+        },
+        {
+          "info": {
+            "name": "getFuturesOptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesOptions.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "root",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies an option root."
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies an options contract."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies an option.  Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Exchange code for the marketplace where the financial instruments are listed."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of option desired, Call or Put."
+              },
+              {
+                "name": "expirationMonth",
+                "value": "",
+                "type": "query",
+                "description": "The numeric representation of the expiration month."
+              },
+              {
+                "name": "expirationDay",
+                "value": "",
+                "type": "query",
+                "description": "The numeric date for of the expiration day."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional fields requested."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to change quote type to real-time (\"R\"), delayed (\"I\") or end-of-day (\"D\") if available."
+              },
+              {
+                "name": "returnExtendedSymbol",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to include the new barchart options symbology that allows users to map to the dataset from the marketreplay system."
+              }
+            ]
+          },
+          "docs": "The getFuturesOptions API provides intraday options data such as strike price, closing price, expiration date, volume, volatility etc on futures contracts."
+        },
+        {
+          "info": {
+            "name": "getFuturesOptionsEOD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesOptionsEOD.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "root",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies an option root."
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies an options contract."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies an option.  Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of option desired, Call or Put."
+              },
+              {
+                "name": "expirationMonth",
+                "value": "",
+                "type": "query",
+                "description": "The numeric representation of the expiration month."
+              },
+              {
+                "name": "expirationDay",
+                "value": "",
+                "type": "query",
+                "description": "The numeric date for of the expiration day."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional fields requested."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to change quote type to real-time (\"R\"), delayed (\"I\") or end-of-day (\"D\") if available."
+              },
+              {
+                "name": "returnExtendedSymbol",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to include the new barchart options symbology that allows users to map to the dataset from the marketreplay system."
+              }
+            ]
+          },
+          "docs": "The getFuturesOptionsEOD API provides end-of-day options data such as strike price, closing price, expiration date, volume, volatility etc on futures contracts."
+        },
+        {
+          "info": {
+            "name": "getFuturesSpreads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesSpreads.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "root",
+                "value": "",
+                "type": "query",
+                "description": "A sequence of characters based on the future contract root symbol."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of the optional output fields that should be included in the query response."
+              }
+            ]
+          },
+          "docs": "The getFuturesSpreads API returns all active futures spread for the requested commodity."
+        },
+        {
+          "info": {
+            "name": "getSpecialOptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getSpecialOptions.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "root",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a option root."
+              },
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies an options contract."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of option desired, Call or Put."
+              },
+              {
+                "name": "premiumRange",
+                "value": "",
+                "type": "query",
+                "description": "Optionally filter the results by premium with a price range."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Delayed (\"I\") or end-of-day (\"D\")."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional fields requested. NOTE: <b>ALL</b> fields will be returned for contract requests.\n"
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query",
+                "description": "Whether to sort the options in ascending or descending order based of the expiration date."
+              }
+            ]
+          },
+          "docs": "The getSpecialOptionsClassification API provides the classification for weekly and special options by commodity."
+        },
+        {
+          "info": {
+            "name": "getEquityOptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEquityOptions.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "underlying_symbols",
+                "value": "",
+                "type": "query",
+                "description": "A valid equity symbol. A maximum of 5 tickers per request."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of option desired, Call or Put."
+              },
+              {
+                "name": "strikePrice",
+                "value": "",
+                "type": "query",
+                "description": "The strike price of the option."
+              },
+              {
+                "name": "expirationMonth",
+                "value": "",
+                "type": "query",
+                "description": "The numeric representation of the expiration month."
+              },
+              {
+                "name": "expirationDate",
+                "value": "",
+                "type": "query",
+                "description": "The numeric date for of the expiration day."
+              },
+              {
+                "name": "optionType",
+                "value": "",
+                "type": "query",
+                "description": "Type of option to be returned. Possible Values: Monthly, Weekly. By default both are returned.\n"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional fields requested."
+              },
+              {
+                "name": "onlyStrikes",
+                "value": "",
+                "type": "query",
+                "description": "To return only the strike prices."
+              },
+              {
+                "name": "legacySymbols",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return our new symbology (AAPL|20200417|250.00C) or legacy symbology (AAPL200417C00250000). Only applies to customers starting before April 13, 2020, newer customers should request the legacySymbol field."
+              },
+              {
+                "name": "returnActualLegacySymbol",
+                "value": "",
+                "type": "query",
+                "description": "Traditionally our legacy symbols have ignored \".X\" or \"-X\" syntax from preferred equities. If you would like the options symbol to include it, please pass this parameter with a value of 1."
+              }
+            ]
+          },
+          "docs": "The getEquityOptions API from Barchart OnDemand provides intraday or end-of-day options data such as strike price, closing price, expiration date, volume and volatility, etc."
+        },
+        {
+          "info": {
+            "name": "getEquityOptionsHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEquityOptionsHistory.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Any valid equity options symbol."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "The country in which the options exchange is located. To help distinguish when requesting a dually listed instrument."
+              },
+              {
+                "name": "askbid",
+                "value": "",
+                "type": "query",
+                "description": "Boolean flag field to include ask and bid data in the result."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional fields requested."
+              }
+            ]
+          },
+          "docs": "The getEquityOptionsHistory API from Barchart OnDemand allows users to get historical prices for equity options."
+        },
+        {
+          "info": {
+            "name": "getEquityOptionsOverviewHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEquityOptionsOverviewHistory.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "N/A"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical options data query."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the historical options data query."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "N/A"
+              }
+            ]
+          },
+          "docs": "The getEquityOptionsOverviewHistory API provides implied volatility (IV) options metrics for a single equity symbol at a time. It returns historical daily values such as weighted implied volatility, IV rank and percentile, total volume, open interest, and put/call ratios."
+        },
+        {
+          "info": {
+            "name": "getEquityOptionsOverviewSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEquityOptionsOverviewSummary.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "N/A"
+              }
+            ]
+          },
+          "docs": "The getEquityOptionsOverviewSummary API  provides implied volatility option metrics for equity symbols intraday. It delivers current-day values such as weighted implied volatility, IV rank and percentile, total volume, open interest, and put/call ratios."
+        },
+        {
+          "info": {
+            "name": "getOptionsScreener",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getOptionsScreener.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "instrumentType",
+                "value": "",
+                "type": "query",
+                "description": "The type of underlying instrument of the option. If a user does not specify a particular instrument type, then stocks are returned by default."
+              },
+              {
+                "name": "optionType",
+                "value": "",
+                "type": "query",
+                "description": "Specify whether to return calls, puts, or both types of instruments"
+              },
+              {
+                "name": "minVolume",
+                "value": "",
+                "type": "query",
+                "description": "The minimum volume for the data set"
+              },
+              {
+                "name": "maxVolume",
+                "value": "",
+                "type": "query",
+                "description": "The maximum volume for the data set"
+              },
+              {
+                "name": "minOpenInterest",
+                "value": "",
+                "type": "query",
+                "description": "The minimum open interest value for the data set"
+              },
+              {
+                "name": "maxOpenInterest",
+                "value": "",
+                "type": "query",
+                "description": "The maximum open interest value for the data set"
+              },
+              {
+                "name": "minDTE",
+                "value": "",
+                "type": "query",
+                "description": "The minimum days to expiry (DTE) of the options returned in the dataset.  DTE is based on calendar days"
+              },
+              {
+                "name": "maxDTE",
+                "value": "",
+                "type": "query",
+                "description": "The maximum days to expiry (DTE) of the options returned in the dataset.  DTE is based on calendar days"
+              },
+              {
+                "name": "minPrice",
+                "value": "",
+                "type": "query",
+                "description": "The minimum price for a particular strike to be returned in the data set"
+              },
+              {
+                "name": "maxPrice",
+                "value": "",
+                "type": "query",
+                "description": "The maximum price for a particular strike to be returned in the data set"
+              },
+              {
+                "name": "minVolumeOpenInterestRatio",
+                "value": "",
+                "type": "query",
+                "description": "The minimum volume/open interest ratio for the data set"
+              },
+              {
+                "name": "maxVolumeOpenInterestRatio",
+                "value": "",
+                "type": "query",
+                "description": "The maximum volume/open interest ratio for the data set"
+              },
+              {
+                "name": "minDelta",
+                "value": "",
+                "type": "query",
+                "description": "The minimum delta value for the data set"
+              },
+              {
+                "name": "maxDelta",
+                "value": "",
+                "type": "query",
+                "description": "The maximum delta value for the data set"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of the optional output fields that should be included in the result."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of maximum results that should be returned"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to return the results. This sets the offset for the results.s"
+              },
+              {
+                "name": "eod",
+                "value": "",
+                "type": "query",
+                "description": "End of day data is returned by default.  Pass ‘false’ to return intraday values"
+              }
+            ]
+          },
+          "docs": "The getOptionsScreener API allows a user to screen for specific equity and ETF option strikes using a variety of filters and parameters that highlight where unusual options activity may be occuring. Users can build powerful market scanners to implement professional trading strategies."
+        },
+        {
+          "info": {
+            "name": "getAmeriborRate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getAmeriborRate.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              }
+            ]
+          },
+          "docs": "AMERIBOR&reg; is an interbank interest rate reflecting the borrowing rates based on actual transactions of the members of the American Financial Exchange (AFX). AMERIBOR&reg; is a transaction-based short-term interest rate based on loans executed between U.S. depositories on the American Financial Exchange Electronic Trading System. The rate is calculated using the 30 trading day rolling average of the weighted average daily volume in the AFX overnight unsecured market. The rate is denoted as a "
+        },
+        {
+          "info": {
+            "name": "getRestrictedSessionHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getRestrictedSessionHistory.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of historical data to return, including tick data, minute data, and end-of-day data."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical data query.  This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the beginning of the day specified in the end parameter, if end is specified, or to the beginning of the current day, if end is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end data of the historical data query.  This parameter should be set to the desired end date/time for the query (the result set will include records up to, but not including, this value). If not set, the value will default to the end of the day specified in the start parameter, if specified, or to the end of the current day, if start is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "startMinute",
+                "value": "",
+                "type": "query",
+                "description": "The start time value in 24 hour format."
+              },
+              {
+                "name": "endMinute",
+                "value": "",
+                "type": "query",
+                "description": "The end time value in 24 hour format"
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum amount of records returned.  This parameter should be set to the maximum number of records desired. If not specified, there number of records returned will be determined by the date/time parameters specified as well as any defaults that apply to the query."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "The number of minutes for a minute query."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "An arrangement of fields within a particular record (ascending or descending).   This parameter can be set to one of two values (\"asc\" and \"desc\") in order to specify the chronological order of the result set returned. If this parameter is not specified, the order results is not guaranteed."
+              },
+              {
+                "name": "sessionFilter",
+                "value": "",
+                "type": "query",
+                "description": "This parameter modifies the default session codes/sale conditions used to return ticks for each exchange. For NYSE and AMEX, the default session filter is \"@EFKX56V9\" (meaning all ticks with sale conditions corresponding to one of the characters in the filter are included in the results), for NASDAQ the default is \"@ABDEFKOSXY156\", and for everything else all session codes/sale conditions are returned except the settle (session code '*'). If the session filter is set to a string of valid session codes (i.e. \"EFK\"), only ticks with the specified session codes are included in the results. If the string is prefixed with character '!' (i.e.\"!EFK\"), all session codes except those in the string are included in the results. If the string is prefixed with character '+' (i.e. \"+T\"), then all the default session codes in addition to the ones specified in the string are included in the results. And if the string is prefixed with character '-' (i.e. \"-EF\") then all default session codes except the ones specified are included in the results. Please note that the '+' character should be escaped (to %2B) when entering the URL in a web browser or executing the query in an API that does not escape it by default."
+              },
+              {
+                "name": "splits",
+                "value": "",
+                "type": "query",
+                "description": "An adjustment of stock value due to corporate action.   This parameter only applies to stocks and specifies whether the data returned should be adjusted for splits or not. Set to true to query for adjusted the data, or to false for non-adjusted data. If not specified, the default is true. In order to guarantee the same adjustment settings in the future, this parameter should be specified."
+              },
+              {
+                "name": "dividends",
+                "value": "",
+                "type": "query",
+                "description": "A distribution of a portion of a company's earnings.  This parameter only applies to stocks and specifies whether the data returned should be adjusted for dividends or not. Set to true to query for adjusted the data, or to false for non-adjusted data. If not specified, the default is true. In order to guarantee the same adjustment settings in the future, this parameter should be specified."
+              },
+              {
+                "name": "volume",
+                "value": "",
+                "type": "query",
+                "description": "The quantity of shares or contracts traded.  For futures, this parameter can be set to one of two values (contract and total) in order to specify whether the volume returned should be the contract volume or the total volume. For aggregates (such as weekly, monthly or yearly), this returns the average volume for the period specified. If the value is preceded by 'sum' (sumcontract and sumtotal), then it returns the sum of the volumes in each daily bar during the period specified. If not specified, the value will default to contract. For aggregate equities queries (such as weekly, monthly or yearly), this parameter can be set to sum to return the sum of the volumes in each daily bar during the period specified. If not specified, then the average volume is returned."
+              },
+              {
+                "name": "nearby",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies the offset from the front month for 'nearest' queries (data parameter set to dailynearest, weeklynearest, monthlynearest, quarterlynearest and yearlynearest). The default value for this parameter is 1, which sets nearest queries to the most current front month. If set to a value greater than 1, then the nth front month is used (for example, in August of 2010, ESU10 would be the current front month, so nearby=2 would use ESZ10, nearby=3 would use ESH11, etc.) This parameter is ignored for all other queries. Alternatively, the same functionality provided by the nearby parameter can be achieved using the symbol notation symbol=RS*n, where RS is the root symbol and n is the nth front month (i.e. symbol=ES*1, symbol=YM*3, etc.). When using this notation on the symbol parameter, the nearby parameter should be omitted."
+              },
+              {
+                "name": "jerq",
+                "value": "",
+                "type": "query",
+                "description": "Whether to merge with JERQ data."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "The list of valid exchange codes to limit symbol search."
+              },
+              {
+                "name": "backAdjust",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies whether the contracts in the series will be adjusted based on the roll-gap between the closing prices of the current contract and the previous contract on the day of the switch. Valid values are true and false. If not specified, the default value is false resulting in a non-adjusted query. This parameter only applies to multi-contract futures queries and is ignored for all other queries."
+              },
+              {
+                "name": "daysToExpiration",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies the number of calendar days prior to a contract expiration when the series of contracts will be switched to the next contract in the series. Valid values are 0 through 60. A value of 0 will tell the system to use the day of expiration. If not specified, the default value (1) is used, resulting in each contract in the series to run until (and including) the day prior to its expiration. This parameter only applies to multi-contract futures queries and is ignored for all other queries."
+              },
+              {
+                "name": "contractRoll",
+                "value": "",
+                "type": "query",
+                "description": "For futures, multi-contract nearest queries (data parameter set to dailynearest, weeklynearest, monthlynearest, quarterlynearest or yearlynearest), this parameter can be set to one of two values (expiration, combined), and determines how the switch from one contract to the next in the series is calculated. When the value specified is 'expiration', the switch from one contract to the next in the series will be based on the expiration date (and the value of the 'daysToExpiration' parameter if specified). When the value specified is 'combined', a combination of volume and openinterest will be used to determine when to switch from one contract to the next in the series (when using this value, the 'daysToExpiration' parameter is ignored)."
+              }
+            ]
+          },
+          "docs": "The getRestrictedSessionHistory API is used to request historical time series data on stocks, indexes, mutual funds, ETFs, futures, foreign exchange, or cryptocurrencies. Historical data is available as minute bars data. This API also requests startMinute and endMinute parameter and will return price data for the requested date ranges for timestamp between the requested start and end minutes."
+        },
+        {
+          "info": {
+            "name": "getRestrictedSessionOHLCPrices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getRestrictedSessionOHLCPrices.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of historical data to return, including tick data, minute data, and end-of-day data."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical data query.  This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the beginning of the day specified in the end parameter, if end is specified, or to the beginning of the current day, if end is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end data of the historical data query.  This parameter should be set to the desired end date/time for the query (the result set will include records up to, but not including, this value). If not set, the value will default to the end of the day specified in the start parameter, if specified, or to the end of the current day, if start is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "startMinute",
+                "value": "",
+                "type": "query",
+                "description": "The start time value in 24 hour format."
+              },
+              {
+                "name": "endMinute",
+                "value": "",
+                "type": "query",
+                "description": "The end time value in 24 hour format"
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum amount of records returned.  This parameter should be set to the maximum number of records desired. If not specified, there number of records returned will be determined by the date/time parameters specified as well as any defaults that apply to the query."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "The number of minutes for a minute query."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "An arrangement of fields within a particular record (ascending or descending).   This parameter can be set to one of two values (\"asc\" and \"desc\") in order to specify the chronological order of the result set returned. If this parameter is not specified, the order results is not guaranteed."
+              },
+              {
+                "name": "sessionFilter",
+                "value": "",
+                "type": "query",
+                "description": "This parameter modifies the default session codes/sale conditions used to return ticks for each exchange. For NYSE and AMEX, the default session filter is \"@EFKX56V9\" (meaning all ticks with sale conditions corresponding to one of the characters in the filter are included in the results), for NASDAQ the default is \"@ABDEFKOSXY156\", and for everything else all session codes/sale conditions are returned except the settle (session code '*'). If the session filter is set to a string of valid session codes (i.e. \"EFK\"), only ticks with the specified session codes are included in the results. If the string is prefixed with character '!' (i.e.\"!EFK\"), all session codes except those in the string are included in the results. If the string is prefixed with character '+' (i.e. \"+T\"), then all the default session codes in addition to the ones specified in the string are included in the results. And if the string is prefixed with character '-' (i.e. \"-EF\") then all default session codes except the ones specified are included in the results. Please note that the '+' character should be escaped (to %2B) when entering the URL in a web browser or executing the query in an API that does not escape it by default."
+              },
+              {
+                "name": "splits",
+                "value": "",
+                "type": "query",
+                "description": "An adjustment of stock value due to corporate action.   This parameter only applies to stocks and specifies whether the data returned should be adjusted for splits or not. Set to true to query for adjusted the data, or to false for non-adjusted data. If not specified, the default is true. In order to guarantee the same adjustment settings in the future, this parameter should be specified."
+              },
+              {
+                "name": "dividends",
+                "value": "",
+                "type": "query",
+                "description": "A distribution of a portion of a company's earnings.  This parameter only applies to stocks and specifies whether the data returned should be adjusted for dividends or not. Set to true to query for adjusted the data, or to false for non-adjusted data. If not specified, the default is true. In order to guarantee the same adjustment settings in the future, this parameter should be specified."
+              },
+              {
+                "name": "volume",
+                "value": "",
+                "type": "query",
+                "description": "The quantity of shares or contracts traded.  For futures, this parameter can be set to one of two values (contract and total) in order to specify whether the volume returned should be the contract volume or the total volume. For aggregates (such as weekly, monthly or yearly), this returns the average volume for the period specified. If the value is preceded by 'sum' (sumcontract and sumtotal), then it returns the sum of the volumes in each daily bar during the period specified. If not specified, the value will default to contract. For aggregate equities queries (such as weekly, monthly or yearly), this parameter can be set to sum to return the sum of the volumes in each daily bar during the period specified. If not specified, then the average volume is returned."
+              },
+              {
+                "name": "nearby",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies the offset from the front month for 'nearest' queries (data parameter set to dailynearest, weeklynearest, monthlynearest, quarterlynearest and yearlynearest). The default value for this parameter is 1, which sets nearest queries to the most current front month. If set to a value greater than 1, then the nth front month is used (for example, in August of 2010, ESU10 would be the current front month, so nearby=2 would use ESZ10, nearby=3 would use ESH11, etc.) This parameter is ignored for all other queries. Alternatively, the same functionality provided by the nearby parameter can be achieved using the symbol notation symbol=RS*n, where RS is the root symbol and n is the nth front month (i.e. symbol=ES*1, symbol=YM*3, etc.). When using this notation on the symbol parameter, the nearby parameter should be omitted."
+              },
+              {
+                "name": "jerq",
+                "value": "",
+                "type": "query",
+                "description": "Whether to merge with JERQ data."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "The list of valid exchange codes to limit symbol search."
+              },
+              {
+                "name": "backAdjust",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies whether the contracts in the series will be adjusted based on the roll-gap between the closing prices of the current contract and the previous contract on the day of the switch. Valid values are true and false. If not specified, the default value is false resulting in a non-adjusted query. This parameter only applies to multi-contract futures queries and is ignored for all other queries."
+              },
+              {
+                "name": "daysToExpiration",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies the number of calendar days prior to a contract expiration when the series of contracts will be switched to the next contract in the series. Valid values are 0 through 60. A value of 0 will tell the system to use the day of expiration. If not specified, the default value (1) is used, resulting in each contract in the series to run until (and including) the day prior to its expiration. This parameter only applies to multi-contract futures queries and is ignored for all other queries."
+              },
+              {
+                "name": "contractRoll",
+                "value": "",
+                "type": "query",
+                "description": "For futures, multi-contract nearest queries (data parameter set to dailynearest, weeklynearest, monthlynearest, quarterlynearest or yearlynearest), this parameter can be set to one of two values (expiration, combined), and determines how the switch from one contract to the next in the series is calculated. When the value specified is 'expiration', the switch from one contract to the next in the series will be based on the expiration date (and the value of the 'daysToExpiration' parameter if specified). When the value specified is 'combined', a combination of volume and openinterest will be used to determine when to switch from one contract to the next in the series (when using this value, the 'daysToExpiration' parameter is ignored)."
+              }
+            ]
+          },
+          "docs": "The getRestrictedSessionOHLCPrices API is used to request open,high,low and close data n stocks, indexes, mutual funds, ETFs, futures, foreign exchange, or cryptocurrencies for the time range between the startMinute and endMinute parameters for the given date range. Historical data is available as minute bars data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cryptocurrency Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCrypto",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCrypto.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A valid cryptocurrency symbol. Multiple symbols separated by a comma may be used."
+              }
+            ]
+          },
+          "docs": "The getCrypto API provides price data by symbol for spot market cryptocurrencies, including Bitcoin, Ethereum, Ripple, Litecoin and more. <a href=\"https://www.barchart.com/futures/bitcoin\" target=\"_blank\">Bitcoin futures</a> are available through <a href=\"https://www.barchart.com/ondemand/api/getQuote\" target=\"_blank\">getQuote</a>. In addition to last price, other fields such as open, high, low, close, price change, percent change are available."
+        },
+        {
+          "info": {
+            "name": "getCryptoHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCryptoHistory.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A valid cryptocurrency symbol."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of historical data to return, including tick data, minute data, and end-of-day data."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical data query.  This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the beginning of the day specified in the end parameter, if end is specified, or to the beginning of the current day, if end is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end data of the historical data query.  This parameter should be set to the desired end date/time for the query (the result set will include records up to, but not including, this value). If not set, the value will default to the end of the day specified in the start parameter, if specified, or to the end of the current day, if start is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum amount of records returned.  This parameter should be set to the maximum number of records desired. If not specified, there number of records returned will be determined by the date/time parameters specified as well as any defaults that apply to the query."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "The number of minutes for a minute query."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "An arrangement of fields within a particular record (ascending or descending). This parameter can be set to one of two values (\"asc\" and \"desc\") in order to specify the chronological order of the result set returned. If this parameter is not specified, the order results is not guaranteed."
+              }
+            ]
+          },
+          "docs": "The getCryptoHistory API provides historical price data for spot cryptocurrencies, including Bitcoin, Ethereum, Ripple, Litecoin and more. Bitcoin futures historical data is available through the getHistory API."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Profiles and Financial Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getProfile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getProfile.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              }
+            ]
+          },
+          "docs": "The getProfile API is used to request information about a publicly traded company, such as sector, industry, company description, CEO, recent earnings, P/E ratio, and address, based on symbol."
+        },
+        {
+          "info": {
+            "name": "getFinancialHighlights",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFinancialHighlights.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              }
+            ]
+          },
+          "docs": "The getFinancialHighlights API provides key financial highlights, ratios and statistics for equities based on symbol. Fields include market capitalization, revenue, net income, revenue growth and earnings per share."
+        },
+        {
+          "info": {
+            "name": "getFinancialRatios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFinancialRatios.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              }
+            ]
+          },
+          "docs": "The getFinancialRatios API provides key financial ratios for equities based on symbol. The fields include earnings per share, return on equity and price to earnings."
+        },
+        {
+          "info": {
+            "name": "getIncomeStatements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getIncomeStatements.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "The frequency of financial statement reporting, either Quarterly (\"Quarter\") or Annually (\"Annual\")."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of Quarterly or Annual periods of financial statements to return."
+              },
+              {
+                "name": "rawData",
+                "value": "",
+                "type": "query",
+                "description": "Return raw data, otherwise sales, costs, expenses, tax, and income data is displayed in thousands."
+              }
+            ]
+          },
+          "docs": "The getIncomeStatements API from Barchart OnDemand provides access to public company financial income statements based on symbol."
+        },
+        {
+          "info": {
+            "name": "getBalanceSheets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getBalanceSheets.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "The frequency of financial statement reporting, either Quarterly (\"Quarter\") or Annually (\"Annual\")."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of Quarterly or Annual periods of financial statements to return."
+              },
+              {
+                "name": "rawData",
+                "value": "",
+                "type": "query",
+                "description": "Return raw data, otherwise sales, costs, expenses, tax, and income data is displayed in thousands."
+              }
+            ]
+          },
+          "docs": "The getBalanceSheets API from Barchart OnDemand provides access to public company financial balance sheet data based on symbol."
+        },
+        {
+          "info": {
+            "name": "getCompetitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCompetitors.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to show in the return."
+              },
+              {
+                "name": "excludePriceAndVolumeFilter",
+                "value": "",
+                "type": "query",
+                "description": "Pass this boolean parameter if you would like the API to exclude filter on volume and last price."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getCompetitors API provides a list of related stock symbols (competitors) for an underlying stock input."
+        },
+        {
+          "info": {
+            "name": "getRatings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getRatings.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used.  For futures, notation such as <root_symbol*0> for the active contract or <root_symbol*1> for the first nearby is supported, as is <root_symbol^F> for all futures contracts for a given root symbol, as is <root_symbol^O> for all options contracts for a given underlying futures symbol."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getRatings API provides analysts ratings on stocks (strong buy, moderate buy, hold, moderate sell or strong sell) based on symbol."
+        },
+        {
+          "info": {
+            "name": "getIndexMembers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getIndexMembers.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies an index."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              }
+            ]
+          },
+          "docs": "The getIndexMembers API from Barchart OnDemand returns the constituents comprising an index."
+        },
+        {
+          "info": {
+            "name": "getCashFlow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCashFlow.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "reportPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return quarterly (3M) or annual (12M) reports."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              },
+              {
+                "name": "numberOfYears",
+                "value": "",
+                "type": "query",
+                "description": "The number of years to return data for."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getCashFlow API provides information about cash flow, income and cash equivalents of publicly traded companies."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Splits, Dividends, and Earnings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCorporateActions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCorporateActions.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The beginning date for the query."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for the query."
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "The type of event: \"split\", \"dividend\", \"earnings\".\n"
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to return."
+              }
+            ]
+          },
+          "docs": "The getCorporateActions API from Barchart OnDemand provides corporate actions data on equities including splits, dividends and earnings, based on a symbol."
+        },
+        {
+          "info": {
+            "name": "getEarningsEstimates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEarningsEstimates.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional fields requested."
+              }
+            ]
+          },
+          "docs": "The getEarningsEstimates API from Barchart OnDemand provides per share earnings estimates on public companies for quarterly and annual periods based on symbol."
+        },
+        {
+          "info": {
+            "name": "getDividendData",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getDividendData.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used."
+              }
+            ]
+          },
+          "docs": "The getDividendData API from Barchart OnDemand provides the most recent dividend data for requested instruments."
+        },
+        {
+          "info": {
+            "name": "getDividendStocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getDividendStocks.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "The country code for which the instruments list is to be queried and returned."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Request additional optional fields to be included in the output."
+              }
+            ]
+          },
+          "docs": "The getDividendStocks API returns dividend info for all US instruments."
+        },
+        {
+          "info": {
+            "name": "getCorporateActionsByExchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCorporateActionsByExchange.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of action for which data is being requested."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "A valid exchange code.<br/>Available values (multiple values separated by a comma may be used): *NYSE, NASDAQ, AMEX, OTC-BB, LSE, TSX, TSX-V, ASX, CNSX, FUND, CADFUNDS*.\n"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Set period in days for which the event data should be returned."
+              },
+              {
+                "name": "eventDates",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of dates for which event data should be returned. Dates need to be in [YYYYMMDD] format."
+              }
+            ]
+          },
+          "docs": "The getCorporateActions API from Barchart OnDemand provides splits or dividends data for US equities, mutual funds and Canadian equities by exchange."
+        },
+        {
+          "info": {
+            "name": "getEarningsCalendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEarningsCalendar.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "The exchange(s) for which the data is requested. US-ALL and CA-ALL will query for all permitted US and Canadian exchanges for your account."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A boolean parameter that when set to true, will return all earnings data for the requested start date. If no start date is passed, it will return the data for the current date."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for earnings total and the date for which the earnings information will be returned."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for earnings total. This input parameter is ignored when requesting the actual earnings information."
+              }
+            ]
+          },
+          "docs": "The getEarningsCalendar API provides the total number of upcoming earnings by date. And will also return the earnings data for the requested date. Please note that the output of this API will change based on the type of data requested. When requesting 'totals' (default type), it will return the date and total earnings for that date. And when requesting 'earnings' it will return earnings data for all symbols for the requested start date."
+        },
+        {
+          "info": {
+            "name": "getDividendsCalendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getDividendsCalendar.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "The exchange(s) for which the data is requested. US-ALL and CA-ALL will query for all permitted US and Canadian exchanges for your account."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A boolean parameter that when set to true, will return all dividends data for the requested start date. If no start date is passed, it will return the data for the current date."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for dividends total and the date for which the dividends information will be returned."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for dividends total. This input parameter is ignored when requesting the actual dividends information."
+              }
+            ]
+          },
+          "docs": "The getDividendsCalendar API provides the total number of upcoming dividends by date. And will also return the dividends data for the requested date. Please note that the output of this API will change based on the type of data requested. When requesting 'totals' (default type), it will return the date and total dividends for that date. And when requesting 'dividends' it will return dividend data for all symbols for the requested start date."
+        },
+        {
+          "info": {
+            "name": "getEarningsAndDividendsCalendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEarningsAndDividendsCalendar.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "The exchange(s) for which the data is requested. US-ALL and CA-ALL will query for all permitted US and Canadian exchanges for your account."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A boolean parameter that when set to true, will return all earnings and dividends data for the requested start date. If no start date is passed, it will return the data for the current date."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for earnings and dividends total and the date for which the earnings and dividends information will be returned."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for earnings and dividends total. This input parameter is ignored when requesting the actual earnings or dividends or earnings and dividends information."
+              }
+            ]
+          },
+          "docs": "The getEarningsAndDividendsCalendar API provides the total number of upcoming earnings and dividends by date. And will also return the earnings and dividends for the requested date. Please note that the output of this API will change based on the type of data requested. When requesting 'totals' (default type), it will return the date and total earnings and dividends for that date, when requesting 'earnings' it will return earnings data for all symbols for the requested start date, when requestin"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Leaderboards and Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getLeaders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getLeaders.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "Exchange code for the marketplace where the financial instruments are listed.<br/>Available values (multiple values separated by a comma may be used): *AMEX, CBOT, CBOTM, CME, COMEX, COMEX, FOREX, GBLX, ICE, ICEFI, ICEUS, WCE, CADFUNDS, FUND, INDEX, INDEX-CBOE, INDEX-DOW, INDEX-NQ, INDEX-NY, INDEX-SP, INDEX-TSX, IOM, IMM, KCBT, LCE, MIAX, NASDAQ, OTHER OTC, RATES, RATE, NYMEX, NYMI, NYSE, NLIF, TSX, TSX-V, NEO, SECTOR, CNSX, LIFFE, EUIDX, EUREX, BMF, MATIF, CXMI, CXMI, HKFE, SPECIAL, INDEX-RL, MATBA, NCDEX, ASX, ROFEX, OTC-BB, SIMEX, CZCE, CROSS, BSE, MNTRL, ECON, TOCOM, MEFF, ENDEX, SAFEX, TIFFE, CASH, MCX, NZX, MDEX, DGCX, NSE, CBOE, GME, OMX, CFE, TURK, TFEX, TAIWA, SHFE, DCE, BATS, LSE, LME, EEX, CFFEX, JPX, SFE, KFE, ISE, CRYPTO, GRBIDS, AGIDX_B_COU, AGIDX_B_CRD, AGIDX_B_NAT, AGIDX_B_REG, AGIDX_B_STA, AGIDX_P_COU, AGIDX_P_CRD, AGIDX_P_NAT, AGIDX_P_REG, AGIDX_P_STA, MTIDX_P_NAT_SY, C3, CXE, EURNXT_EQ_BE, EURNXT_EQ_FR, EURNXT_EQ_NL, EURNXT_EQ_PT, AGYIELD, CMDTY_STATS, CSTATS_BARCHART, CSTATS_BHUGHES, CSTATS_CFTC, CSTATS_ENGCORPS, CSTATS_EUSTAT, CSTATS_STATCAN, CSTATS_USBEA, CSTATS_USBLS, CSTATS_USCB, CSTATS_USDA, CSTATS_USEIA, CMENRF, CMENRF_IDX, CMENWF, CMMTPM, AGYIELD_BIW, SCB_BIOFUEL_EU, SCB_BIOFUEL_US, SCB_ETHANOL, SMALL, AGIDX_B_FCST, MER_ORG_GRN, MER_ORG_IMP, CSTATS_IBGE, PRM_GLB_BIO, PRM_LOW_CAR, AGYIELD_SA, CSTATS_CONAB, FSMK_JCB_BIOFL, FSMK_JCB_FATINT, FSMK_JCB_FATOIL, FSMK_JCB_GRNFD, FSMK_JCB_HEMP, FSMK_JCB_HIDE, FSMK_JCB_HIDINT, FSMK_JCB_ORGN, FSMK_JCB_PROT, FSMK_JCB_SSG, FSMK_JCB_VEGOIL, EEX_POWER, EEX_GAS, AGYIELD_BP_COU, AGYIELD_BP_CRD, AGYIELD_BP_NAT, AGYIELD_BP_STA, SGCOM, SGXFX, SGXNZ, SGIDX, BALTIC, AMEX, NASDAQ, NYSE*.\n"
+              },
+              {
+                "name": "assetType",
+                "value": "",
+                "type": "query",
+                "description": "The type of asset.  Includes: equities (\"STK\"), mutual funds (\"FUNDS\"), ETFs (\"ETF\"), futures (\"FUT\"), forex (\"FOREX\")\n"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of leaderboard to display."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to show in the return."
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "A value representing the time period."
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query",
+                "description": "To determine the sort direction."
+              },
+              {
+                "name": "excludeEtfsFromStocks",
+                "value": "",
+                "type": "query",
+                "description": "When requesting Stocks data, if you would like the API to exclude ETFs please set this parameter to true."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getLeaders API provides leaderboard lists for equities, futures, forex, mutual funds and ETFs, including most active, gainers, losers, what's hot and what's not hot."
+        },
+        {
+          "info": {
+            "name": "getHighsLows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getHighsLows.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "Exchange code for the marketplace where the financial instruments are listed.<br/>Available values (multiple values separated by a comma may be used): *AMEX, CBOT, CBOTM, CME, COMEX, COMEX, FOREX, GBLX, ICE, ICEFI, ICEUS, WCE, CADFUNDS, FUND, INDEX, INDEX-CBOE, INDEX-DOW, INDEX-NQ, INDEX-NY, INDEX-SP, INDEX-TSX, IOM, IMM, KCBT, LCE, MIAX, NASDAQ, OTHER OTC, RATES, RATE, NYMEX, NYMI, NYSE, NLIF, TSX, TSX-V, NEO, SECTOR, CNSX, LIFFE, EUIDX, EUREX, BMF, MATIF, CXMI, CXMI, HKFE, SPECIAL, INDEX-RL, MATBA, NCDEX, ASX, ROFEX, OTC-BB, SIMEX, CZCE, CROSS, BSE, MNTRL, ECON, TOCOM, MEFF, ENDEX, SAFEX, TIFFE, CASH, MCX, NZX, MDEX, DGCX, NSE, CBOE, GME, OMX, CFE, TURK, TFEX, TAIWA, SHFE, DCE, BATS, LSE, LME, EEX, CFFEX, JPX, SFE, KFE, ISE, CRYPTO, GRBIDS, AGIDX_B_COU, AGIDX_B_CRD, AGIDX_B_NAT, AGIDX_B_REG, AGIDX_B_STA, AGIDX_P_COU, AGIDX_P_CRD, AGIDX_P_NAT, AGIDX_P_REG, AGIDX_P_STA, MTIDX_P_NAT_SY, C3, CXE, EURNXT_EQ_BE, EURNXT_EQ_FR, EURNXT_EQ_NL, EURNXT_EQ_PT, AGYIELD, CMDTY_STATS, CSTATS_BARCHART, CSTATS_BHUGHES, CSTATS_CFTC, CSTATS_ENGCORPS, CSTATS_EUSTAT, CSTATS_STATCAN, CSTATS_USBEA, CSTATS_USBLS, CSTATS_USCB, CSTATS_USDA, CSTATS_USEIA, CMENRF, CMENRF_IDX, CMENWF, CMMTPM, AGYIELD_BIW, SCB_BIOFUEL_EU, SCB_BIOFUEL_US, SCB_ETHANOL, SMALL, AGIDX_B_FCST, MER_ORG_GRN, MER_ORG_IMP, CSTATS_IBGE, PRM_GLB_BIO, PRM_LOW_CAR, AGYIELD_SA, CSTATS_CONAB, FSMK_JCB_BIOFL, FSMK_JCB_FATINT, FSMK_JCB_FATOIL, FSMK_JCB_GRNFD, FSMK_JCB_HEMP, FSMK_JCB_HIDE, FSMK_JCB_HIDINT, FSMK_JCB_ORGN, FSMK_JCB_PROT, FSMK_JCB_SSG, FSMK_JCB_VEGOIL, EEX_POWER, EEX_GAS, AGYIELD_BP_COU, AGYIELD_BP_CRD, AGYIELD_BP_NAT, AGYIELD_BP_STA, SGCOM, SGXFX, SGXNZ, SGIDX, BALTIC, AMEX, NASDAQ, NYSE*.\n"
+              },
+              {
+                "name": "assetType",
+                "value": "",
+                "type": "query",
+                "description": "The type of asset.  Includes: equities (\"STK\"), mutual funds (\"FUNDS\"), ETFs (\"ETF\"), futures (\"FUT\"), forex (\"FOREX\")\n"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of high/low list to return."
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "A value representing the time period."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to show in the return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "A value denoting where to start results from."
+              }
+            ]
+          },
+          "docs": "The getHighsLows API from Barchart OnDemand provides lists for new 52-week highs or 52-week lows based on exchange and asset type."
+        },
+        {
+          "info": {
+            "name": "getSectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getSectors.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "sector",
+                "value": "",
+                "type": "query",
+                "description": "The symbol of the sector.  Multiple sectors separated by a comma may be used."
+              },
+              {
+                "name": "sectorPeriod",
+                "value": "",
+                "type": "query",
+                "description": "The period used to calculate the weighted alpha return by the sector, includes: 1-day (\"1DA\"), 1-month (\"1MO\"), 3-month (\"3MO\"), 6-month (\"6MO\"), 9-month (\"9MO\"), 12-month (\"12MO\") and year-to-date (\"YTD\").\n"
+              },
+              {
+                "name": "dailyData",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include daily data: Open, High, Low, Close, Previous Close, 52-week high and 52-week low\n"
+              },
+              {
+                "name": "components",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include components of the sector."
+              },
+              {
+                "name": "sortDir",
+                "value": "",
+                "type": "query",
+                "description": "Sorting method that should be applied."
+              }
+            ]
+          },
+          "docs": "The getSectors API from Barchart OnDemand provides returns using weighted alpha on sectors covering multiple periods, including 1-day, 1-month, 3-month, 6-month, 9-month, 12-month and year-to-date."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Charts and Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getChart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getChart.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of chart, includes: bar chart (\"BAR\"), candlestick (\"CANDLE\"), area (\"AREA\") or line (\"LINE\") chart.\n"
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "query",
+                "description": "The width of chart in pixels."
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "The height of the chart, in pixels, with no indicators in pixels."
+              },
+              {
+                "name": "volume",
+                "value": "",
+                "type": "query",
+                "description": "An option to display the volume indicator on the chart."
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "The period to display the chart."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Period type: DO (Daily Contract), DN (Daily Nearest), WO (Weekly Contract), WN (Weekly Nearest), MO (Monthly Contract), MN (Monthly Nearest).\n"
+              },
+              {
+                "name": "indicators",
+                "value": "",
+                "type": "query",
+                "description": "A semi-colon delimited list of indicators."
+              },
+              {
+                "name": "frequencyType",
+                "value": "",
+                "type": "query",
+                "description": "Frequency type: DO (Daily Contract), DN (Daily Nearest), DC (Daily Continuation), WO (Weekly Contract), WN (Weekly Nearest), WC (Weekly Continuation), MO (Monthly Contract), MN (Monthly Nearest), MC (Monthly Continuation)\n"
+              },
+              {
+                "name": "gradientTop",
+                "value": "",
+                "type": "query",
+                "description": "The HTML color code without the preceding hashtag for the AREA chart."
+              },
+              {
+                "name": "gradientBottom",
+                "value": "",
+                "type": "query",
+                "description": "The HTML color code without the preceding hashtag for the AREA chart."
+              },
+              {
+                "name": "bgColor",
+                "value": "",
+                "type": "query",
+                "description": "The HTML color code without the preceding hashtag for chart background color."
+              }
+            ]
+          },
+          "docs": "The getChart API from Barchart OnDemand is used to request a custom chart image with variables such as chart type, size, period and technical indicators, based on a symbol."
+        },
+        {
+          "info": {
+            "name": "getTechnicals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getTechnicals.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getTechnicals API provides technical data and statistics for equities, indices, futures, currencies, cryptocurrencies and mutual funds based on symbol. Fields include moving averages, percent changes over different time periods and stochastics."
+        },
+        {
+          "info": {
+            "name": "getSignal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getSignal.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used. For futures, notation such as <root_symbol*0> for the active contract or <root_symbol*1> for the first nearby is supported, as is <root_symbol^F> for all futures contracts for a given root symbol, as is <root_symbol^O> for all options contracts for a given underlying futures symbol."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to show in the return."
+              }
+            ]
+          },
+          "docs": "The getSignal API provides the Barchart Technical Opinion / Signal (buy, sell or hold) based on a variety of short, medium and long-term technical indicators based on a symbol."
+        },
+        {
+          "info": {
+            "name": "getMomentum",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getMomentum.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "A country code identifying a group of stocks listed in a country."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "The code for the exchange a group of financial instruments are listed on."
+              }
+            ]
+          },
+          "docs": "The getMomentum API provides a daily summary on the number of advancing, declining and unchanged stocks, as well as the percentage of stocks above moving averages of different lengths."
+        },
+        {
+          "info": {
+            "name": "getTechnicalIndicatorData",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getTechnicalIndicatorData.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "requestType",
+                "value": "",
+                "type": "query",
+                "description": "The type of response requested from the API. <i>getStudies</i> will return the list of all available indicators with their input sources, periodicity, offset, and meta information. <i>getStudy</i> will return the data for the requested indicator."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "studyId",
+                "value": "",
+                "type": "query",
+                "description": "A valid indicator code that identifies a technical indicator when the argument is passed to <i>getStudies</i>."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for which the indicator records should be returned."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which the indicator records should be returned."
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies whether the data to be returned should be tick, minutes (intraday), day (daily), weekly, monthly, quarterly, or yearly."
+              },
+              {
+                "name": "numberOfBars",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records requested over the requested date range."
+              },
+              {
+                "name": "inputs",
+                "value": "",
+                "type": "query",
+                "description": "You can pass any valid input values for the selected study that are not always returned via this parameter. For example, for <i>Moving Average (MA)</i>, you can pass values as - inputs[Period]=50&inputs[Source]=Open&inputs[Offset]=1. For an input field of type enumeration, please ensure you pass a value from the provided list of values."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Pass any optional price fields you would like to be included in the response.<br/>Available values (multiple values separated by a comma may be used): *open, high, low, close, volume, open_interest*.\n"
+              },
+              {
+                "name": "spec",
+                "value": "",
+                "type": "query",
+                "description": "This parameter is used to specify whether the data should be plain, nearest or continuation records. Nearest and continuation are ignored for equities, and if specified the query will simply return plain records."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "N/A"
+              },
+              {
+                "name": "isContractVolume",
+                "value": "",
+                "type": "query",
+                "description": "For futures, this parameter determines whether the returned volume should be the contract volume or the total volume. By default, it returns the total volume."
+              },
+              {
+                "name": "dividendsAdjust",
+                "value": "",
+                "type": "query",
+                "description": "Turns on/off dividends adjustment for stock data. By default it is off."
+              },
+              {
+                "name": "backAdjust",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies whether the contracts in the series will be adjusted based on the roll-gap between the closing prices of the current contract and the previous contract on the day of the switch. Valid values are true and false. If not specified, the default value is false resulting in a non-adjusted query. Adjustments are reflected starting from the current date, regardless if an end date is set or not. This parameter only applies to multi-contract futures queries and is ignored for all other queries."
+              },
+              {
+                "name": "daysToExpiration",
+                "value": "",
+                "type": "query",
+                "description": "This parameter specifies the number of calendar days prior to a contract expiration when the series of contracts will be switched to the next contract in the series. Valid values are 0 through 60. A value of 0 will tell the system to use the day of expiration. If not specified, the default value (1) is used, resulting in each contract in the series to run until (and including) the day prior to its expiration. This parameter only applies to multi-contract futures queries and is ignored for all other queries."
+              },
+              {
+                "name": "contractRoll",
+                "value": "",
+                "type": "query",
+                "description": "For futures, this parameter determines the switch from one contract to the next in the series is calculated. When the value specified is 'expiration', the switch from one contract to the next in the series will be based on the expiration date (and the value of the 'daystoexpiration' parameter if specified). When the value specified is 'combined', a combination of volume and openinterest will be used to determine when to switch from one contract to the next in the series (when using this value, the 'daystoexpiration' parameter is ignored)."
+              },
+              {
+                "name": "decimalPrecision",
+                "value": "",
+                "type": "query",
+                "description": "The decimal precision to be applied to the requested study fields in the response."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "To aggregate sets of contiguous minute records (the number of minute records in each set is equal to the specified interval) into one record."
+              }
+            ]
+          },
+          "docs": "The getTechnicalIndicatorData API from Barchart OnDemand provides the requested technical indicators data for the requested symbol."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ETFs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getETFDetails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getETFDetails.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A valid equity symbol.  Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "A valid asset class value. Multiple asset classes separated by a comma may be used."
+              },
+              {
+                "name": "subCategories",
+                "value": "",
+                "type": "query",
+                "description": "A valid sub-category (classification) value. Multiple values separated by a comma may be used."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getETFDetails API provides ETF profile information including descriptions, fund family, underlying index, inception date, alpha, beta, shares outstanding, management fee, assets under management, top 10 holdings and more."
+        },
+        {
+          "info": {
+            "name": "getETFConstituents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getETFConstituents.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A valid ETF symbol."
+              }
+            ]
+          },
+          "docs": "The getETFConstituents API from Barchart OnDemand provides the complete list of constituents for a given ETF."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "News and Filings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getNews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getNews.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "sources",
+                "value": "",
+                "type": "query",
+                "description": "The news feed code.<br/>Available values (multiple values separated by a comma may be used): *AP, APAI, BC, BCNEWS, CP, CNW, CRB, CMTX, CMTX:PCS, CMTX:PCC, CMTX:SEC, IF, USDA, PRNW, ZACKS, BRUG, AGWEB, SETZ, SPC, NASS, ESTMZ, DVND, LME-WHS, DLFRX, GLDRPT, COT, MAX, CMDTY_AGLITE, CMDTY_AG, CMDTY_ENERGY, BCCONT, SYNDTGAM, FCTGAM, BCSYND, HDLNE, HDLNEG, HDLNEP, BARCHART_PT, DJ*.\n"
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "A grouping of related news content."
+              },
+              {
+                "name": "subCategory",
+                "value": "",
+                "type": "query",
+                "description": "A more specific category of related news content."
+              },
+              {
+                "name": "series",
+                "value": "",
+                "type": "query",
+                "description": "A grouping of stories under a recurring news topic. e.g. Morning Call (MORNCALL).<br/>Available values (multiple values separated by a comma may be used): *MORNCALL, COD*.\n"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "A term used to create searches."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to show in the return."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The beginning date for the query."
+              },
+              {
+                "name": "displayType",
+                "value": "",
+                "type": "query",
+                "description": "The type of new displayed: headlines only, headline and preview, or full.\n"
+              },
+              {
+                "name": "images",
+                "value": "",
+                "type": "query",
+                "description": "An option for returning the images contained in the news article."
+              },
+              {
+                "name": "storyId",
+                "value": "",
+                "type": "query",
+                "description": "Parameter allows to get specific story by providing newsID. Parameters: sources, symbols, category, subCategory, keyword, maxRecords, startDate will be ignored.\n"
+              },
+              {
+                "name": "rss",
+                "value": "",
+                "type": "query",
+                "description": "Parameter formats XML requests as RSS feeds. This parameter has no effect on JSON or CSV requests."
+              },
+              {
+                "name": "rssTitle",
+                "value": "",
+                "type": "query",
+                "description": "Parameter overrides the default RSS feed title and description."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The additional fields requested."
+              },
+              {
+                "name": "barchartClassification",
+                "value": "",
+                "type": "query",
+                "description": "Classify stories in some categories."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "N/A<br/>Available values (multiple values separated by a comma may be used): *Barchart, AgWeb, Brownfield Ag News, Successful Farming, Baystreet, Walsh Trading, Zacks, Brave NewCoin, Swift Trading Company, Best Weather Inc., CME Group, Sidwell Strategies, MarketBeat, Scrap Monster, Blue Line Futures, AI-generated - The Globe and Mail, Automated Summaries - The Globe and Mail, Grainnet, USDA Exports, USDA, Sunshine Profits, NatGasWeather.com, Sure Dividend, Taurus Trading LLC, DeCarley Trading, KeyStone Financial, Trade Precise, RJO Futures, Stock Picking, Options Trading for Income, Market Tea Leaves, Renewable Fuels Association, Elliott Wave Forecast, Total Farm Marketing, Levi Donohoe, Wavetraders, Direxion, Tradable Patterns, Prosper Trading Academy, CarbonCredits.com, Peter Knight, ElliottWaveTrader.net, The Futures Management Group, Luis Flavio Nunes, Marcus Weather Inc., The Smart Investor, Cannon Trading, GoldIRAGuide.com, Zaye Capital Markets, Due Inc., EdgeClear, The REIT Forum, CFRN, Peter Mooses, WealthUp, TradeGuidance, NO BULL, HTS Commodities, The Tokenist, Monica Kingsley, VMware Inc., My Trading IQ, Solvid, Hedder, ElliottWave-Forecast, ONE44 Analytics, Monetive Wealth, Kolhanov.com, Banghart Properties, TradingView, SpreadEdge Capital, LLC, Astocks92, Klarenbach Research, Capital Truth, Hackett Financial Advisors, Inc., Pinion Risk Management, Heartland Investor Services Inc., Tanvir Zafar, The PRICE Futures Group, IncomeInsider.org, HedgeFundTips.com, Hashtag Investing, OptionMetrics, Bull Strangle Newsletter, EW-Forecast.com, Gold Price Forecast, Coachman's Research, OTOS Inc., MoneyShow, Young & The Invested, CommodityTrends, Archna Trades, Alpine Trading, Ivan Patriki, Gold Predictors, Espacio Media Incubator, Trade The Pool, 24/7 Wall St., New York Post, Decrypt, BullionVault, OilPrice.com, mint, tastytrade, Real Estate News, Business Standard, Banking Dive, DailyFX, Financial Post, Bitcoin Magazine, Financial Express, CBS News, ETF Express, TipRanks, Benzinga, FX Street, Moneycontrol, CoinDesk, ETF Trends, Brave New Coin, Seeking Alpha, AP, Dow Jones Newswires, PR Newswire, Canadian Press, CFTC, GlobeNewswire, ACCESS Newswire, Business Wire, ACN Newswire, ACCESSWIRE, Canada Newswire, Food Dive, Beef Magazine, StockStory, Markets Insider, Sugar Online, Rigzone, The Street, Kitco, Cotton Outlook, CNBC, FreightWaves, Daily Coffee News, EIA, Packaging World, Plastics Today, Stock Target Advisor, Stocktwits, Zacks Investment Research, Invezz, Wall Street Horizon, ETF Market Canada, Tipranks, The Globe and Mail, Under 30 CEO, INK Research, KillerStartups, B-TV.com, Fundata Canada Inc., wealthyventurecapitalist.com, Plus500, AllPennyStocks.com, ValuEngine, Inc, Zacks.com, Quiver Quantitative, Inc., NewsBTC, The Associated Press, NAWG, stocknews.com, Oil Market Journal, Schaeffers Investment Research, Business Insider, Exame, TechCrunch, wallstreet online, France24.com, Bank of England, Investimentos e Noticias, Fox Business, The Guardian Nigeria, Canal Rural, El Economista, Shine News, Bloomberg, finews.ch, CEPEA, European Energy Commission, The Real Deal, Malay Mail, Economic Times (India), MarketWatch, E&E News, El Comercio Ecuador, Renewable Energy World, US Federal Reserve, CNN, The Guardian, CNET, MSNBC, Journal of Commerce, Reuters, Hellenic Shipping News Worldwide, finanzen, El Comercio Peru, Bundesbank, Fox Weather, ETF.com, Deutsche Welle, Blockworks, Barron's, Aljazeera, Quartz, Weather Channel, Investor's Business Daily, FinanceFeeds, Connect CRE, Bisnow, Finextra, Advanced Biofuels Association, Supermarket News, Globe PR Wire, GetNews, Plentisoft, Press Advantage, PRISM News, Newsfile, Barchart Impact, Worldnewswire, Financial Times, Paper Advance, BBC, Meat & Poultry, Forbes, Papnews, Bio Bio Chile, Handelsblatt, The Economist, Securities and Exchange Commission, Biodiesel Magazine, Infobae, The Jerusalem Post, Undercurrent News, Risk.net, Biofuels International, WirtschaftsWoche, Offshore Energy, Wired, Japan Times, E15, Upstream, S&P Global, The Moscow Times, American Banker, IntraFish, Energypost.eu, Engadget, AgFax, Der Spiegel, Carbon Capture Magazine, Transport Topics, Wall Street Journal, Fortune, Hubtas*.\n"
+              },
+              {
+                "name": "lang",
+                "value": "",
+                "type": "query",
+                "description": "The news story language. The stories returned will be in the requested language, if any exists.<br/>Available values (multiple values separated by a comma may be used): *all, hi, de, ps, en-us, pt, hu, zh-cn, yo, uk, cpe, id, ur, ig, aa, uz, mr, en, am, my, es, ar, vi, ne, ja, az, fa, fa-af, ro, en-gb, en-ca, ru, rw, fr, bn, br, si, es-ec, so, gd, om, sr, ko, sw, zh-tw, pt-br, ta, gu, ky, cs, te, pa, th, ti, cy, ha, pl, tr*.\n"
+              },
+              {
+                "name": "sourceFeed",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by the original sourceFeed."
+              },
+              {
+                "name": "exactCategoryMatch",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, the api will return stories with only the requested category and ignore any that might have additional categories associated with it."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getNews API returns news headlines, articles and related photos based upon news sources, category, sub-category and/or keyword."
+        },
+        {
+          "info": {
+            "name": "getNewsSources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getNewsSources.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "strict",
+                "value": "",
+                "type": "query",
+                "description": "Return only the authorized news sources."
+              }
+            ]
+          },
+          "docs": "The getNewsSources API from Barchart OnDemand provides access to public news sources and your authorization status per source."
+        },
+        {
+          "info": {
+            "name": "getNewsCategories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getNewsCategories.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "sources",
+                "value": "",
+                "type": "query",
+                "description": "An id or code that identifies a news source. Multiple sources separated by a comma may be used."
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "An integer that will limit how many levels of the category tree to show. By default all levels are returned."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getNewsCategories API provides access to news source category and sub-category data."
+        },
+        {
+          "info": {
+            "name": "getSECFilings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getSECFilings.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "filingType",
+                "value": "",
+                "type": "query",
+                "description": "The type of SEC filing. Includes: All Filings, except stock transaction reports (\"AllEx\"), All, including stock transaction reports (\"All\"), Annual 10-K Reports (\"10k\") and Quarterly 10-Q Reports (\"10q\").\n"
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records to show in the return."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The beginning date for the query."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getSECFilings API provides access to quarterly, annual and other required regulatory/SEC filings for U.S. publicly traded companies based on symbol."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getInstrumentDefinition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getInstrumentDefinition.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "Exchange code for the marketplace where the financial instruments are listed.<br/>Available values (multiple values separated by a comma may be used): *FOREX, RATE, RATES, SECTOR, DGCX, DME, MATBA, ROFEX, ASX, SFE, BMF, BSE, CNSX, INDEX-TSX, MNTRL, TSX, TSX-V, WCE, CFFEX, CZCE, DCE, SHFE, EEX, EUIDX, EUREX, MEFF, MATIF, HKFE, MCX, NCDEX, NSE, ISE, JPX, TOCOM, KFE, MDEX, NZX, MOEX, OMX, ICESI, TFEX, TAIWA, ICE, LCE, LIFFE, LME, LSE, AMEX, BATS, CADFUNDS, CBOT, CBOTM, CFE, CME, COMEX, CRYPTO, CXMI, ERIS, FUND, GBLX, GREEN, ICEUS, INDEX, INDEX-CBOE, INDEX-DOW, INDEX-NQ, INDEX-NY, INDEX-RL, INDEX-SP, KCBT, MIAX, NASDAQ, NYMEX, NYMI, NYSE, OTC-BB, OTHER OTC, TRADAIR, SAFEX, SIMEX, C3, C3_BUNKER, PLATTS, CXE, BXE, DXE, EURNXT_EQ_BE, EURNXT_EQ_FR, EURNXT_EQ_NL, EURNXT_EQ_PT, ENDEX, EEX_POWER, OMX_POWER, GPC_PRICES*.\n"
+              },
+              {
+                "name": "exchangeMics",
+                "value": "",
+                "type": "query",
+                "description": "Market Indicator Code for the marketplace where the financial instruments are listed."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records requested."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "A value denoting where to start results from."
+              },
+              {
+                "name": "returnExpired",
+                "value": "",
+                "type": "query",
+                "description": "If you would like to request data for an expired futures contract, please set this parameter to true."
+              }
+            ]
+          },
+          "docs": "The getInstrumentDefinition API from Barchart OnDemand is available to request metadata on financial instruments by symbol, exchange, or exchange MIC. Metadata includes instrument names, exchange codes, tick increments, base codes, expiration dates and more."
+        },
+        {
+          "info": {
+            "name": "getFuturesSpecifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesSpecifications.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "exchanges",
+                "value": "",
+                "type": "query",
+                "description": "The code for the exchange a group of financial instruments are listed on."
+              },
+              {
+                "name": "futuresCategory",
+                "value": "",
+                "type": "query",
+                "description": "Futures categories include: Energies, Financials, Grains, Indices, Meats, Metals, Softs and Currencies.\n"
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getFuturesSpecifications API provides contract information such as trading hours, contract size and tick size for futures contracts."
+        },
+        {
+          "info": {
+            "name": "getFuturesExpirations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesExpirations.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "roots",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a futures root."
+              },
+              {
+                "name": "contracts",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a futures contract."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              }
+            ]
+          },
+          "docs": "The getFuturesExpiration API from Barchart OnDemand provides first notice and last trade dates for futures contracts."
+        },
+        {
+          "info": {
+            "name": "getFuturesOptionsExpirations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesOptionsExpirations.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "roots",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a futures root. Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "contracts",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a futures contract. Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a futures option. Multiple symbols separated by a comma may be used."
+              }
+            ]
+          },
+          "docs": "The getFuturesOptionsExpirations API provides last trade dates for options on futures contracts."
+        },
+        {
+          "info": {
+            "name": "getSpecialOptionsClassification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getSpecialOptionsClassification.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "root",
+                "value": "",
+                "type": "query",
+                "description": "Commodity root code for which the classification is requested. Multiple roots can be passed, separated by a comma."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "The category classification of the special option"
+              }
+            ]
+          },
+          "docs": "The getSpecialOptionsClassifications API from Barchart OnDemand provides the classification for weekly and special options by commodity."
+        },
+        {
+          "info": {
+            "name": "getForexForwardCurves",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getForexForwardCurves.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query",
+                "description": "A valid forex symbol."
+              }
+            ]
+          },
+          "docs": "The getForexForwardCurves API from Barchart OnDemand provides the bid, ask, and mid price data for all available forward curves (forward rates) for a given forex symbol."
+        },
+        {
+          "info": {
+            "name": "getSymbolChange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getSymbolChange.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for which the symbol change records should be returned."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which the symbol change records should be returned."
+              },
+              {
+                "name": "coverage",
+                "value": "",
+                "type": "query",
+                "description": "The exchange/exchanges for which the symbol change records should be returned (Non-US coverage includes all available international markets)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Include the requested optional fields in the output."
+              },
+              {
+                "name": "includeUpcomingChanges",
+                "value": "",
+                "type": "query",
+                "description": "N/A"
+              }
+            ]
+          },
+          "docs": "The getSymbolChange API from Barchart OnDemand provides the list of symbols that have gone through a change."
+        },
+        {
+          "info": {
+            "name": "getRelatedInstruments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getRelatedInstruments.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used."
+              },
+              {
+                "name": "shareClassFigi",
+                "value": "",
+                "type": "query",
+                "description": "The unique share class code identifying an instrument globally."
+              },
+              {
+                "name": "figi",
+                "value": "",
+                "type": "query",
+                "description": "The unique code identifying an instrument across all exchanges in a country."
+              },
+              {
+                "name": "compositeFigi",
+                "value": "",
+                "type": "query",
+                "description": "N/A"
+              }
+            ]
+          },
+          "docs": "The getRelatedInstruments API from Barchart OnDemand provides the list of all symbols for a given company across different countries and exchanges."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Other Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getWeather",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getWeather.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "weatherType",
+                "value": "",
+                "type": "query",
+                "description": "The type of weather requested. Includes: Current Conditions (\"CC\") and Forecast (\"F\").\n"
+              },
+              {
+                "name": "zipCode",
+                "value": "",
+                "type": "query",
+                "description": "The zip code of the location as a 5-digit numeric value."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields requested."
+              },
+              {
+                "name": "mapType",
+                "value": "",
+                "type": "query",
+                "description": "The type of map required. Only valid when using the \"MAP\" weatherType."
+              },
+              {
+                "name": "mapRegion",
+                "value": "",
+                "type": "query",
+                "description": "The region of map required."
+              },
+              {
+                "name": "mapWidth",
+                "value": "",
+                "type": "query",
+                "description": "The width of the map."
+              },
+              {
+                "name": "mapHeight",
+                "value": "",
+                "type": "query",
+                "description": "The height of the map."
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getWeather API provides current conditions and forecasts based on zip code. As well as weather maps based on type or region."
+        },
+        {
+          "info": {
+            "name": "getGrainBids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getGrainBids.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "requestType",
+                "value": "",
+                "type": "query",
+                "description": "The type of request that is being requested in order to determine the type of data to be returned."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "A location id or a code identifies a or multiple grain buying location(s) that cash bid will be returned for. A valid code consist of multiple location ids separated by a comma, and the code can contain up to 100 locations. A list of valid location ids can be retrieved by using this API with input: requestType = location. location and several other inputs -geographic coordinates, zipCode, maxDistance, county, totalLocations- are mutually exclusive.\n"
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "The latitude of a valid geographic coordinates to define the center of area that cashbid will be returned for. Geographic coordinates and Zipcode are mutually exclusive."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "The longitude of a valid geographic coordinates to define the center of area that cashbid will be returned for. Geographic coordinates and Zipcode are mutually exclusive."
+              },
+              {
+                "name": "zipCode",
+                "value": "",
+                "type": "query",
+                "description": "A valid US or Canadian zip code to define the area that cash bids orginate from."
+              },
+              {
+                "name": "maxDistance",
+                "value": "",
+                "type": "query",
+                "description": "The maximum distance from searched zipcode or the requested geo coordinates in miles. This input helps to define the area that cash bids will be returned from. Maximum value is 250."
+              },
+              {
+                "name": "county",
+                "value": "",
+                "type": "query",
+                "description": "A valid string code which represents the concatenation of county name and state code seperated by a hyphen."
+              },
+              {
+                "name": "fipsCode",
+                "value": "",
+                "type": "query",
+                "description": "A concatenation of state FIPS code and county FIPS code without separator to define the county that cash bids will be returned for. Please click <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">here</a> to get a list of possible values."
+              },
+              {
+                "name": "commodityName",
+                "value": "",
+                "type": "query",
+                "description": "A standard commodity name or a name list that separated by pipe (|) to filter cashbid. Note that the input need to be encoded in UTF-8. A list of valid commodity names can be retrieved by using this API with input: requestType = commodities.\n"
+              },
+              {
+                "name": "totalLocations",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of locations to be returned based of the zip code provided by the user. Default value is 30."
+              },
+              {
+                "name": "getAllBids",
+                "value": "",
+                "type": "query",
+                "description": "Return all cash bids for each location."
+              },
+              {
+                "name": "bidsPerCom",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of cash bids to be returned for each commodity per location. This parameter should be set to the maximum number of cash bids the user wishes to be returned."
+              },
+              {
+                "name": "numOfDecimals",
+                "value": "",
+                "type": "query",
+                "description": "The level of precision in decimal places of price and basis to be returned."
+              },
+              {
+                "name": "companyName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the applicable grain buying elevator."
+              },
+              {
+                "name": "getAllLocations",
+                "value": "",
+                "type": "query",
+                "description": "Return all locations based of the searched zip code."
+              },
+              {
+                "name": "rawDistance",
+                "value": "",
+                "type": "query",
+                "description": "Remove the appended string, \"mile away\", from output:distance."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional as per-requested fields that the user can define. Requested fields should be separated by a comma."
+              },
+              {
+                "name": "deliveryStart",
+                "value": "",
+                "type": "query",
+                "description": "The start date for the delivery period for qualified bids."
+              },
+              {
+                "name": "deliveryEnd",
+                "value": "",
+                "type": "query",
+                "description": "The end date for the delivery period for qualified bids."
+              }
+            ]
+          },
+          "docs": "The getGrainBids API provides cashbid data for 30 closest locations in relation to the requested zip code. Learn more about Barchart's proprietary <a href=\"https://www.barchart.com/cmdty\" target=\"_blank\">commodity data</a> and grain <a href=\"https://www.barchart.com/cmdty/indexes\" target=\"_blank\">cmdtyIndexes</a>."
+        },
+        {
+          "info": {
+            "name": "getUSDAGrainPrices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getUSDAGrainPrices.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "commodityTypes",
+                "value": "",
+                "type": "query",
+                "description": "The type of commodity. Includes: Corn (\"C\"), Corn Crude Oil (\"CCO\"), Crude Soybean Oil (\"CSO\"), DNS/NS Wheat 14% (\"WDN\"), HRW Wheat (\"HRW\"), HRW Wheat 11.5% (\"HRW11\"), Oats (\"O\"), Ord HRW Wheat (\"HRWORD\"), Soybean Meal 48% (\"SM\"), Soybeans (\"S\"), SRW Wheat (\"SRW\"), SWW Wheat (\"SWW\").<br/>Available values (multiple values separated by a comma may be used): *C, CCO, CSO, WDN, HRW, HRW11, O, HRWORD, SM, S, SRW, SWW*.\n"
+              },
+              {
+                "name": "bidTypes",
+                "value": "",
+                "type": "query",
+                "description": "The type of bid. Includes: Export (\"E\"), Processor (\"P\"), River (\"R\"), Terminal (\"T\") and Barge Loading (\"B\").<br/>Available values (multiple values separated by a comma may be used): *E, P, R, T, B*.\n"
+              }
+            ]
+          },
+          "docs": "Barchart OnDemand's getUSDAGrainPrices API provides daily cash grain bids and prices for grain buying locations throughout the United States covering corn, wheat, oats and soybeans sourcing from USDA reports. This API refreshes on an hourly basis, so bids and prices from USDA reports would be available within an hour after the report is released."
+        },
+        {
+          "info": {
+            "name": "getCmdtyStatsId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCmdtyStatsId.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "commodity",
+                "value": "",
+                "type": "query",
+                "description": "The primary subject of item of a data series. User can pass values such as \"soy\" and expect data series infomation for \"soybean\" and \"soybeans\" to be returned"
+              },
+              {
+                "name": "measurement",
+                "value": "",
+                "type": "query",
+                "description": "The measured aspect of a item"
+              },
+              {
+                "name": "area",
+                "value": "",
+                "type": "query",
+                "description": "The geographic location of data series. Passing less specific queires - such as \"america\" in lieu of \"united states\" may be preferable to return meta for all possibly applicable data series"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The originating sources of a data series. May include organization, associated report, data table, down to sourcing figure"
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum amount of records returned. This parameter should be set to the maximum number of records desired."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page value to use in order to determine the offset while returning results."
+              }
+            ]
+          },
+          "docs": "The getCmdtyStatsId API is used identify instrument identifiers that can be passed to getCmdtyStats in order to request data on the applicable series.  Users can search for data series based on search parameters covering content, source, area, frequency, and more."
+        },
+        {
+          "info": {
+            "name": "getCmdtyStats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCmdtyStats.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "A unique symbol that identifies a data series."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical data query. This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the 1 year back from current data.  Note that if the date range requested by the user is more extensive than the user's permissions allow for, the output range will be determined based on an offset from the startDate."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the historical data query. This parameter should be set to the desired end date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the last day of current year.  Note that if the date range requested by the user is more extensive than the user's permissions allow for, the output range will be determined based on an offset from the startDate."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "An arrangement of fields within a particular record (ascending or descending). This parameter can be set to one of two values (\"asc\" and \"desc\") in order to specify the chronological order of the result set returned."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional fields that the API should return."
+              }
+            ]
+          },
+          "docs": "The getCmdtyStats API is used to request information on various fundamentals, commodity statistics, and economic data.  Users can request information by data series with historical information available through to inception for most series. cmdtyStats™ is the premier source of aggregated commodity statistics – all made available in one easy to use API."
+        },
+        {
+          "info": {
+            "name": "getGrainInstruments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getGrainInstruments.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "instrumentType",
+                "value": "",
+                "type": "query",
+                "description": "The type of grain instruments. This parameter should be set to the desired instrument type for the query."
+              },
+              {
+                "name": "instrumentRoot",
+                "value": "",
+                "type": "query",
+                "description": "A 2-char indicator for commodities. This parameter should be set to the root that represents the desired commodity for the query. Roots that are denoted as \"all\" are valid for both bid and index data - if \"bids\" then there is no index associated with that root.<br /><br />ZC: All kinds of Corn and Milo/Sorghum (all), ZS: All kinds of Soybeans (all), ZW: All kinds of Soft Red Winter Wheat (all), MW: All kinds of Spring Wheat (all), KE: All kinds of Hard Red Winter Wheat (all), FW: All kinds of Feed Wheat (bids), DW:  All kinds of Durum Wheat (bids), CW: Wheat (Club) (bids), ZM: Soybean Meal (bids), HS: Soybeans (Hulls) (bids), ZO: Oats (bids), BB: Barley (bids), ZR: Rice (bids), ZK: Ethanol (E85) (bids), GP: Peas (Green) (bids), YP: Peas (Yellow) (bids), SF: Birdseed or Sunflowers (bids), RY: Rye (bids), RS: Canola (bids), PC: Pulse Crops (Peas, Dry Beans, Lentils & Chickpeas) (bids), PB: Beans (Pinto) (bids), LB: Beans (Lentil) (bids), GB: Beans (Garbonzo) (bids), MI: Millet (bids), MD: Distiller Grains (MWDGS) (bids), DG: Distiller Grains (DDGS) (bids), FL: Flax (bids), CS: Cottonseed (bids)\n"
+              },
+              {
+                "name": "zipCode",
+                "value": "",
+                "type": "query",
+                "description": "A valid zip code to refine the area that cash bids orgin from. This parameter is required if stateFipsCode has not been set. This is the only way to query Canada grain bids."
+              },
+              {
+                "name": "stateFipsCode",
+                "value": "",
+                "type": "query",
+                "description": "A valid 2-digit state code used to define the area that the underlying grain data (bids or indexes) will be returned from. This parameter is required if zipCode and indexGroup have not been set. Note that calls using this field will return instruments for counties and districts that are associated with the requested stateFipsCode - in addition any instruments with an area equal to the user specified stateFipsCode.<br /><br />Please click <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">here</a> to get a list of possible values."
+              },
+              {
+                "name": "districtCode",
+                "value": "",
+                "type": "query",
+                "description": "A valid 2-digit district code used to define the area that the underlying grain data (bids or indexes) will be returned from. Note that calls using this field will return instruments for counties that are associated with the requested districtCode - in addition any instruments with an area equal to the user specified districtCode.<br /><br />Please click <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">here</a> to get a list of possible values."
+              },
+              {
+                "name": "countyFipsCode",
+                "value": "",
+                "type": "query",
+                "description": "A valid 3-digit county code use to define the the area that the underlying grain data (bids or indexes) will be returned from.<br /><br />Please click <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">here</a> to get a list of possible values."
+              },
+              {
+                "name": "deliveryMonth",
+                "value": "",
+                "type": "query",
+                "description": "The last month in the delivery window for cash bids or indexes using the following format: \"YYYYMM\"(i.e. 202607). For example, a bid with a delivery window of 202612 through 202703 can only be retrieved by input of 202703.<br /><br />For instrumentType = 'IndexBasis' or 'IndexCash', this parameter accepts rolling month codes: 'A' - 'L', which represent the forward delivery month from front month (A) to the 11th (L) forward month\n"
+              },
+              {
+                "name": "indexGroup",
+                "value": "",
+                "type": "query",
+                "description": "A valid index aggregate level that returns all index instruments belonging to a specific indexGroup.Combining indexGroup and country or region are the only way to query national indexes and regional indexes.<br /><br />This parameter may required if stateFipsCode has not been set.<br/>Available values (multiple values separated by a comma may be used): *nation, region, state, district, county*.\n"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "The short country name to further refine the index instruments."
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "A short region name to further refine the index instruments."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum amount of records returned. This parameter should be set to the maximum number of records desired. Default value is 200"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The value to set for pagination."
+              },
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "query",
+                "description": "The locationId for which all cash bid symbol should be returned."
+              }
+            ]
+          },
+          "docs": "The getGrainInstruments API is used to request symbol and metadata information regarding physical grain instruments across Barchart's cash bids and grain indexes.  Users can request information based on crop type / root symbol, geo-location, or areas that are codified by FIPS standards. Returned instruments and their corresponding symbols can be passed to getQuote or getHistory to retrieve the associated price data - as requested by the end user. Find our more about our <a target=\"_blank\" href=\""
+        },
+        {
+          "info": {
+            "name": "getBLSIndexes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getBLSIndexes.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of historical data to return, including tick data, minute data, and end-of-day data."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical data query.  This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the date 6 months back from present day. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end data of the historical data query.  This parameter should be set to the desired end date/time for the query (the result set will include records up to, but not including, this value). If not set, the value will default to the end of the current day. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00)."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "The maximum amount of records returned.  This parameter should be set to the maximum number of records desired. If not specified, there number of records returned will be determined by the date/time parameters specified as well as any defaults that apply to the query."
+              }
+            ]
+          },
+          "docs": "The getBLSIndexes API provides historical price data for our cmdty BLS Commodity Price Index Family. The cmdty BLS Commodity Price Indexes measure price movements of 22 basic commodities whose markets are among the first to be influenced by changes in economic conditions. Sub-indices for six major asset classes are calculated."
+        },
+        {
+          "info": {
+            "name": "getCmdtyCalendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCmdtyCalendar.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical data query. This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the beginning of this data series. Note that if the date range requested by the user is more extensive than the user's permissions allow for, the output range will be determined based on an offset from the startDate."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the historical data query. This parameter should be set to the desired end date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the last day of current year."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter returned result by category. Accept string concat category code by comma.<br/>Available values (multiple values separated by a comma may be used): *All, Ag, Energy, Econ*.\n"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter returned result by country/countries. Accept string concat iso-3 country code by comma."
+              },
+              {
+                "name": "importance",
+                "value": "",
+                "type": "query",
+                "description": "Filter returned result by importance level/levels. Accept string concat integer by comma.<br />1 = low, 2 = medium, 3 = high<br/>Available values (multiple values separated by a comma may be used): *1, 2, 3*.\n"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Filter returned result by symbol. Accept valid symbol, which is a unique identifier of a time series, and multiple symbols separated by a comma."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "An arrangement of fields within a particular record (ascending or descending). This parameter can be set to one of two values (\"asc\" and \"desc\") in order to specify the chronological order of the result set returned."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Return extra columns if requested, invalid input is a string concats optional output fields by comma.<br/>Available values (multiple values separated by a comma may be used): *reference_ending, prior_reference_ending, status*.\n"
+              }
+            ]
+          },
+          "docs": "The getCmdtyCalendar API provides user the latest updates of US economic activity and commodity trading events, including previous, revised, and actual values, updated 3 times a day. Users can request calendar events for desired period, and filter the output via various methods - category, importance, event country, and event symbol."
+        },
+        {
+          "info": {
+            "name": "getFuelPrices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuelPrices.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "requestType",
+                "value": "",
+                "type": "query",
+                "description": "A type of reference data to define what reference data will be returned."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "A location id or a code identifies a or multiple fuel selling location(s) that fuel prices will be returned for. A valid code consist of multiple location ids separated by a comma, and the code can contain up to 100 locations. A list of valid location ids can be retrieved by using this API with input: requestType = location. location and several other inputs -geographic coordinates, zipCode, maxDistance, county, totalLocations- are mutually exclusive.\n"
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "The latitude of a valid geographic coordinates to define the center of area that fuel prices will be returned for. Geographic coordinates and Zipcode are mutually exclusive."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "The longitude of a valid geographic coordinates to define the center of area that fuel prices will be returned for. Geographic coordinates and Zipcode are mutually exclusive."
+              },
+              {
+                "name": "zipCode",
+                "value": "",
+                "type": "query",
+                "description": "A valid US or Canadian zip code to define the center of area that fuel prices will be returned for. Default value is 60606. Geographic coordinates and Zipcode are mutually exclusive."
+              },
+              {
+                "name": "maxDistance",
+                "value": "",
+                "type": "query",
+                "description": "A maximum distance from geographic coordinates input or from the center of zip code input in miles to help user define the area that fuel prices will be returned for. Maximum value is 250"
+              },
+              {
+                "name": "county",
+                "value": "",
+                "type": "query",
+                "description": "A valid string code which represents the concatenation of county name and state code seperated by a hyphen."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "A valid 2-char state code."
+              },
+              {
+                "name": "fipsCode",
+                "value": "",
+                "type": "query",
+                "description": "A string concatenation of state FIPS code and county FIPS code without separator to define the county that fuel prices will be returned for. Please click <a target=\"_blank\" href=\"https://www2.census.gov/geo/docs/reference/codes/files/national_county.txt\">here</a> to get a list of possible values."
+              },
+              {
+                "name": "productName",
+                "value": "",
+                "type": "query",
+                "description": "A standard product name or a name list that's separated by pipe (|) to filter prices. Note that the input needs to be encoded in UTF-8. A list of valid product names can be retrieved by using this API with input: requestType = products.\n"
+              },
+              {
+                "name": "totalLocations",
+                "value": "",
+                "type": "query",
+                "description": "The maximum amount of fuel selling locations that fuel prices will be returned for. If zip code is set, then API will provide cashbid for given amount closet locations in relation to the requested zip code. Maximum value is 100."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional as per-requested fields that the user can define. Requested fields should be separated by a comma. Valid per-requested fields are companyId,  locationType, mailingAddress, fax, defLanes, dieselLanes, bioBlend, businessHours, productId, productShort, productFull"
+              }
+            ]
+          },
+          "docs": "The getFuelPrices API provides refined fuel price data and reference data. Refined fuel data can be requested for fuel selling locations, for geographic coordinates and radius, for zip code and radius, and for a specified county. Refined fuel data can be filtered by product name(s), and by number of locations will be returned. Reference data contains fuel selling locations and product names, providing valid values in use for requesting refined fuel data. Reference data can be requested for geogr"
+        },
+        {
+          "info": {
+            "name": "getCropFactors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCropFactors.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "countyCode",
+                "value": "",
+                "type": "query",
+                "description": "A county FIPS code or a code that identifies multiple counties. A valid code consists of multiple county FIPS codes separated by a comma, and the code can contain up to 100 counties. Mutually exclusive with stateCode.<br />Please <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">click</a> here to get a list of possible values."
+              },
+              {
+                "name": "stateCode",
+                "value": "",
+                "type": "query",
+                "description": "A state FIPS code or a code that identifies multiple states. A valid code consists of multiple state FIPS codes separated by a comma, and the code can contain up to 20 states.<br />Please <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">click</a> here to get a list of possible values."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the historical data query. This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to 20260101"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end data of the historical data query. This parameter should be set to the desired end date/time for the query (the result set will include records up to, and including, this value). If not set, the value will default to the day specified in the start parameter."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional as per-requested fields that the user can define. Requested fields should be separated by a comma.<br/>Available values (multiple values separated by a comma may be used): *ndviCount, ndwiCount, lstdCount, lstnCount, tmaxCount, tminCount, prcpCount*.\n"
+              }
+            ]
+          },
+          "docs": "The getCropFactors API provides weather data/factors specific to Ag Industry. With this API, you can retrieve satellite imagery derived weather factors, like Normalized Difference Vegetation Index (<b>NDVI</b>), Normalized Difference Water Index (<b>NDWI</b>), and Land Surface Temperature(<b>LSTD</b> & <b>LSTN</b>), and station collected weather data, like air temperature(<b>TMAX</b> & <b>TMIN</b>), and accumulated precipitation(<b>PRCP</b>).<br />Data can be requested for a combination of count"
+        },
+        {
+          "info": {
+            "name": "getUniqueIdentifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getUniqueIdentifier.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "identifierType",
+                "value": "",
+                "type": "query",
+                "description": "The code/value for the global identifier protocol.<br/>Available values (multiple values separated by a comma may be used): *openFIGI*.\n"
+              },
+              {
+                "name": "barchartSymbols",
+                "value": "",
+                "type": "query",
+                "description": "The unique barchart identifier. Multiple symbols can be requested separated by a comma."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "A valid exchange identifer code."
+              },
+              {
+                "name": "openFIGIGlobal",
+                "value": "",
+                "type": "query",
+                "description": "The unique global OpenFIGI id. Multiple IDs can be requested separated by a comma."
+              },
+              {
+                "name": "openFIGIComposite",
+                "value": "",
+                "type": "query",
+                "description": "The unique composite OpenFIGI id. Multiple IDs can be requested separated by a comma."
+              }
+            ]
+          },
+          "docs": "The getUniqueIdentifier provides the Financial Instrument Global Identifier (FIGI) information for all available instruments. For more information on FIGI, please <a target=\"_blank\" href=\"https://www.openfigi.com/about/figi\">click here</a>."
+        },
+        {
+          "info": {
+            "name": "getYieldForecastPlanet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getYieldForecastPlanet.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Enter the secret API key."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "The ISO-2 country code to further refine the instruments."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "An ANSI-2 state abbreviation to define the state that yield forecast index will be returned for."
+              },
+              {
+                "name": "stateFips",
+                "value": "",
+                "type": "query",
+                "description": "A valid 2-digits state fips code used to define the state that yield forecast index will be returned for. Please click <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">here</a> to get a list of possible values."
+              },
+              {
+                "name": "districtCode",
+                "value": "",
+                "type": "query",
+                "description": "A valid 2-digit district code used to define the district that yield forecast index will be returned for. Please click <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">here</a> to get a list of possible values."
+              },
+              {
+                "name": "county",
+                "value": "",
+                "type": "query",
+                "description": "A county name to define the county that yield forecast index will be returned for."
+              },
+              {
+                "name": "countyFips",
+                "value": "",
+                "type": "query",
+                "description": "A valid 3-digits county fips code to define the county that yield forecast index will be returne for. Please click <a target=\"_blank\" href=\"https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt\">here</a> to get a list of possible values."
+              },
+              {
+                "name": "crop",
+                "value": "",
+                "type": "query",
+                "description": "A commodity name to filter yield forecast index."
+              },
+              {
+                "name": "indexGroup",
+                "value": "",
+                "type": "query",
+                "description": "A valid index aggregate level to filter yield forecast index."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Additional output fields requested. Requested fields should be separated by a comma.<br/>Available values (multiple values separated by a comma may be used): *shortName*.\n"
+              }
+            ]
+          },
+          "docs": "The getYieldForecast API provides Barchart proprietary grain yield forecast data. Yield Index data can be filtered by commodity, by indexGroup, by state, by district, and by county. The unit is in Bushel per Acre."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

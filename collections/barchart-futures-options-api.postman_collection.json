@@ -1,0 +1,506 @@
+{
+  "item": [
+    {
+      "id": "c60890ee-6ef2-429c-b6ec-8be19430ca9e",
+      "name": "Futures & Options",
+      "description": {
+        "content": "Futures and options market data and analytics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea7a3461-e052-4bf8-8224-9355180bc590",
+          "name": "Get futures options",
+          "request": {
+            "name": "Get futures options",
+            "description": {
+              "content": "Intraday options data on futures - strike price, volume, open interest, implied volatility and greeks - for a given root futures symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getFuturesOptions.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "root",
+                  "value": "<string>",
+                  "description": "(Required) Root futures symbol."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e022b62f-9273-4a80-ac5c-f0b2cf1a280a",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getFuturesOptions.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "root",
+                      "value": "CL"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"key_0\": false,\n      \"key_1\": false\n    },\n    {\n      \"key_0\": 8364\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "033009cc-58eb-4075-aeef-06450e9f986d",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getFuturesOptions.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "root",
+                      "value": "CL"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "baff5140-33ce-4c4d-8f03-2f66a030be6c",
+          "name": "Get futures by exchange",
+          "request": {
+            "name": "Get futures by exchange",
+            "description": {
+              "content": "Real-time, delayed, or end-of-day futures data for all contracts on an exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getFuturesByExchange.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "exchange",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67e00e31-600c-4692-9c5a-c645b32bcbb3",
+              "name": "A status envelope plus an array of quote records. Field set depends on your data entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getFuturesByExchange.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exchange",
+                      "value": "CME"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"exchange\": \"string\",\n      \"lastPrice\": 5323.197500722655,\n      \"netChange\": 4428.712959815153,\n      \"percentChange\": 3975.4812137977915,\n      \"open\": 6689.49313960427,\n      \"high\": 9944.787791322879,\n      \"low\": 8886.44763247598,\n      \"volume\": 4272,\n      \"tradeTimestamp\": \"1949-01-20T07:44:24.160Z\"\n    },\n    {\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"exchange\": \"string\",\n      \"lastPrice\": 9678.161130638724,\n      \"netChange\": 8874.992607764536,\n      \"percentChange\": 959.7767733069574,\n      \"open\": 296.4225214390015,\n      \"high\": 9922.067195379193,\n      \"low\": 8459.429545522655,\n      \"volume\": 9883,\n      \"tradeTimestamp\": \"2002-09-21T22:18:40.172Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71ee2cdf-c482-4688-95a0-ddd98a543884",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getFuturesByExchange.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exchange",
+                      "value": "CME"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b303314-133b-4220-bca2-c9de6f1211bd",
+          "name": "Screen equity/ETF options",
+          "request": {
+            "name": "Screen equity/ETF options",
+            "description": {
+              "content": "Screen equity and ETF options using filters to surface unusual activity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getOptionsScreener.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "baseSymbol",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f0f44bc-ccd9-4e76-a23a-f9151e833d84",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getOptionsScreener.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseSymbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 9623\n    },\n    {\n      \"key_0\": 1018.4217377777205,\n      \"key_1\": 7445.608625569064\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2105ba0c-e088-484d-bd84-0aeea3a0ba2c",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getOptionsScreener.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "baseSymbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ondemand.websol.barchart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aca8b877-1657-48e2-a1c9-d2d144856b3e",
+    "name": "Barchart OnDemand Commodities & Agriculture Futures & Options API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+      "type": "text/plain"
+    }
+  }
+}

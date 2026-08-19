@@ -1,0 +1,206 @@
+{
+  "item": [
+    {
+      "id": "e0ed9292-dcf9-4160-85b0-fdc992e0bb03",
+      "name": "Weather",
+      "description": {
+        "content": "Current conditions and forecasts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb5d02ba-f8f5-4b44-b123-fff747ed0140",
+          "name": "Get weather",
+          "request": {
+            "name": "Get weather",
+            "description": {
+              "content": "Current conditions, forecasts, and maps by zip code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getWeather.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "zipCode",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97abbc44-1195-4a12-8202-f09256d9ac1a",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getWeather.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "60654"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 2739.769659763408,\n      \"key_2\": 2807.5168505745305\n    },\n    {\n      \"key_0\": 2269.989424773029\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "144fbfc0-6f1a-487e-8197-a0d431d51882",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getWeather.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "60654"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ondemand.websol.barchart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a949f6e-4343-4ed2-9077-f262d57ec7ba",
+    "name": "Barchart OnDemand Commodities & Agriculture Weather API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+      "type": "text/plain"
+    }
+  }
+}

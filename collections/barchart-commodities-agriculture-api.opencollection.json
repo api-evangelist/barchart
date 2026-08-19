@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Commodities & Agriculture",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get grain cash bids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getGrainBids.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "zipCode",
+                "value": "",
+                "type": "query",
+                "description": "US zip code used to find nearby grain locations."
+              },
+              {
+                "name": "commodities",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Cash bid data for the 30 closest grain locations to a point."
+        },
+        {
+          "info": {
+            "name": "Get commodity statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCmdtyStats.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Fundamentals, commodity statistics, and economic data with historical records."
+        },
+        {
+          "info": {
+            "name": "Get fuel prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuelPrices.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "zipCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Refined fuel price data and reference data by location or coordinates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

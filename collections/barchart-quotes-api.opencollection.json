@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture Quotes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getQuote.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "AAPL,GOOG,ESZ25",
+                "type": "query",
+                "description": "One or more comma-separated instrument symbols."
+              },
+              {
+                "name": "fields",
+                "value": "fiftyTwoWkHigh,fiftyTwoWkLow",
+                "type": "query",
+                "description": "Comma- or semicolon-delimited list of additional fields to return."
+              }
+            ]
+          },
+          "docs": "Request real-time, delayed, or end-of-day price data by symbol for stocks, indexes, mutual funds, ETFs, futures, forex, or cryptocurrencies. Multiple comma-separated symbols are supported, as is futures notation such as `ESZ25`, `ES*0` (active), and `ES^F` (all contracts)."
+        },
+        {
+          "info": {
+            "name": "Get end-of-day quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getQuoteEod.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Exchange acronym to scope the request."
+              }
+            ]
+          },
+          "docs": "End-of-day price data by exchange and symbol."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

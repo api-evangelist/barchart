@@ -1,0 +1,337 @@
+{
+  "item": [
+    {
+      "id": "74029946-650d-426e-8927-c9f383329435",
+      "name": "Technicals & Charts",
+      "description": {
+        "content": "Technical studies, signals, and chart images.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b0d845b-73f5-4551-8440-e40ec91fdadc",
+          "name": "Get technicals",
+          "request": {
+            "name": "Get technicals",
+            "description": {
+              "content": "Technical data and statistics for equities, indices, futures, and currencies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getTechnicals.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe630480-e41e-4220-9d42-0676e69105f8",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getTechnicals.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"key_0\": 6203\n    },\n    {\n      \"key_0\": 6841.494287526443\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b1a4e56-5de3-419f-b730-f3783baf879e",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getTechnicals.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92c04e6c-930c-4e4f-95a0-9c26aca9dd8e",
+          "name": "Get technical signal",
+          "request": {
+            "name": "Get technical signal",
+            "description": {
+              "content": "Technical Opinion/Signal (buy, sell, hold) based on aggregated indicators.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getSignal.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "452ca356-768f-4077-aeb7-675e5106b400",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSignal.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"key_0\": 5654.781708743737\n    },\n    {\n      \"key_0\": 129,\n      \"key_1\": 6335.126162735387,\n      \"key_2\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef6d796f-adef-44f3-b3bc-b028ffdc2311",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSignal.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ondemand.websol.barchart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2da9a608-53ac-4702-b5fc-c95b6e8fce9c",
+    "name": "Barchart OnDemand Commodities & Agriculture Technicals & Charts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+      "type": "text/plain"
+    }
+  }
+}

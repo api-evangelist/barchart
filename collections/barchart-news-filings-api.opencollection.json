@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture News & Filings API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "News & Filings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get news",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getNews.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "sources",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "News headlines, articles, and photos by source, category, or keyword."
+        },
+        {
+          "info": {
+            "name": "Get SEC filings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getSECFilings.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Quarterly, annual, and regulatory SEC filings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

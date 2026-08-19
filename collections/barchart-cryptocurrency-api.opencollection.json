@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture Cryptocurrency API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cryptocurrency",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get crypto quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCrypto.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "^BTCUSD,^ETHUSD",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Spot-market cryptocurrency price data (Bitcoin, Ethereum, Ripple, Litecoin, etc.)."
+        },
+        {
+          "info": {
+            "name": "Get crypto history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCryptoHistory.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Historical price data for spot cryptocurrencies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture Technicals & Charts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Technicals & Charts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get technicals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getTechnicals.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Technical data and statistics for equities, indices, futures, and currencies."
+        },
+        {
+          "info": {
+            "name": "Get technical signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getSignal.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Technical Opinion/Signal (buy, sell, hold) based on aggregated indicators."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

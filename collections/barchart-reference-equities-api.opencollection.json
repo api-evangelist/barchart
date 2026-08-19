@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture Reference & Equities API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reference & Equities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all equities by exchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEquitiesByExchange.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "exchange",
+                "value": "NYSE",
+                "type": "query",
+                "description": "Exchange acronym (e.g. NYSE, NASDAQ, AMEX)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns market data for all equities on a given exchange in a single query."
+        },
+        {
+          "info": {
+            "name": "Get instrument definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getInstrumentDefinition.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Instrument metadata by symbol, exchange, or MIC (names, codes, tick increments)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

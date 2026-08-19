@@ -1,0 +1,249 @@
+{
+  "item": [
+    {
+      "id": "dde6dabb-61e1-4271-aa78-cdba10877ae8",
+      "name": "History",
+      "description": {
+        "content": "Historical tick, minute, and end-of-day time series.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e32bf6d3-d1bf-494b-b60c-be2b03005dcf",
+          "name": "Get historical time series",
+          "request": {
+            "name": "Get historical time series",
+            "description": {
+              "content": "Historical time series (tick, minute bars, or end-of-day) for stocks, indexes, mutual funds, ETFs, futures, forex, or crypto, with daily, weekly, monthly, quarterly, yearly and nearest/continuation variants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getHistory.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) A single instrument symbol."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Time series type, e.g. ticks, minutes, nearbyMinutes, formTMinutes, daily, dailyNearest, dailyContinue, weekly, monthly, quarterly, yearly (and their Nearest/Continue variants)."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Inclusive start date/time (YYYYMMDD or YYYYMMDDHHmmss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "Inclusive end date/time."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxRecords",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab4c70ed-9174-4add-8e35-fa2be0752696",
+              "name": "A status envelope plus an array of historical bars (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getHistory.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "IBM"
+                    },
+                    {
+                      "key": "type",
+                      "value": "daily"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxRecords",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"symbol\": \"string\",\n      \"timestamp\": \"2024-06-20T08:19:59.105Z\",\n      \"tradingDay\": \"string\",\n      \"open\": 8435.505694193456,\n      \"high\": 5897.612578086769,\n      \"low\": 1523.535958626402,\n      \"close\": 6765.302583059807,\n      \"volume\": 1774,\n      \"openInterest\": 6440\n    },\n    {\n      \"symbol\": \"string\",\n      \"timestamp\": \"1985-06-08T17:35:47.381Z\",\n      \"tradingDay\": \"string\",\n      \"open\": 767.5849112455136,\n      \"high\": 9585.468686045537,\n      \"low\": 9845.833839752959,\n      \"close\": 5525.586145659611,\n      \"volume\": 3981,\n      \"openInterest\": 2780,\n      \"key_0\": \"string\",\n      \"key_1\": 2302\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81ea0e30-d135-406a-aca6-302155838768",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getHistory.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "IBM"
+                    },
+                    {
+                      "key": "type",
+                      "value": "daily"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxRecords",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ondemand.websol.barchart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4b93e4de-10bb-449b-b54a-8911dd9dfb5d",
+    "name": "Barchart OnDemand Commodities & Agriculture History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+      "type": "text/plain"
+    }
+  }
+}

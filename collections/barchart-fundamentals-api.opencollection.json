@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture Fundamentals API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fundamentals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get company profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getProfile.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "MSFT",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Company information - sector, industry, CEO, earnings, P/E ratio, and address."
+        },
+        {
+          "info": {
+            "name": "Get financial highlights",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFinancialHighlights.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Key financial metrics such as market cap, revenue, net income, and EPS."
+        },
+        {
+          "info": {
+            "name": "Get income statements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getIncomeStatements.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "annual or quarter."
+              }
+            ]
+          },
+          "docs": "Public-company income statement data."
+        },
+        {
+          "info": {
+            "name": "Get analyst ratings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getRatings.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Analyst ratings from strong buy through strong sell."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

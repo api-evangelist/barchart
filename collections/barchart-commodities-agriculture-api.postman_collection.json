@@ -1,0 +1,492 @@
+{
+  "item": [
+    {
+      "id": "ea8c83fd-d33e-46b0-81b2-5302b03d14bf",
+      "name": "Commodities & Agriculture",
+      "description": {
+        "content": "Grain bids, commodity statistics, fuel, and crop data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb4814d6-288c-4f9d-8456-da09bbab3bbb",
+          "name": "Get grain cash bids",
+          "request": {
+            "name": "Get grain cash bids",
+            "description": {
+              "content": "Cash bid data for the 30 closest grain locations to a point.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getGrainBids.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "zipCode",
+                  "value": "<string>",
+                  "description": "US zip code used to find nearby grain locations."
+                },
+                {
+                  "disabled": false,
+                  "key": "commodities",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b6f0910-a973-4a27-b268-0906a924e3e3",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getGrainBids.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commodities",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"key_0\": false,\n      \"key_1\": 130.66619494751964\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 5720.9449747462,\n      \"key_2\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30cd2c68-a977-40f6-9b41-cd5a4ea6b978",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getGrainBids.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commodities",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15d43415-5515-4dd6-9fbf-11b24fc7255e",
+          "name": "Get commodity statistics",
+          "request": {
+            "name": "Get commodity statistics",
+            "description": {
+              "content": "Fundamentals, commodity statistics, and economic data with historical records.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getCmdtyStats.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e400822a-a419-46c3-bb2e-bca910a12210",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCmdtyStats.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 9924\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0b41f54-0981-40f6-a1fc-8bb836d164d2",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCmdtyStats.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "738d1189-d9c4-45fe-8d89-34ef4bcfb35b",
+          "name": "Get fuel prices",
+          "request": {
+            "name": "Get fuel prices",
+            "description": {
+              "content": "Refined fuel price data and reference data by location or coordinates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getFuelPrices.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "zipCode",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8cd1184-04c1-465f-842d-13c0afccc691",
+              "name": "A status envelope plus an array of result objects whose fields vary by endpoint and entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getFuelPrices.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 9924\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1de18059-ab20-42b0-9f6c-f5789334efe3",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getFuelPrices.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ondemand.websol.barchart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5b1d6773-a543-48d2-9b23-add31ba62408",
+    "name": "Barchart OnDemand Commodities & Agriculture API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+      "type": "text/plain"
+    }
+  }
+}

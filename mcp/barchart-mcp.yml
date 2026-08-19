@@ -2,11 +2,10 @@ generated: '2026-07-22'
 method: derived
 status: candidate
 source: openapi/barchart-ondemand-official-openapi.yml
-description: >-
-  Barchart publishes no official MCP server (checked npm, the official MCP registry, and Barchart
-  docs on 2026-07-22). This is a CANDIDATE tool list derived one-tool-per-operation from the
-  official Barchart OnDemand OpenAPI 3.0.3 (71 GET operations). Every tool inherits its real
-  input schema from the backing operation's parameters; all calls require the apikey query parameter.
+description: Barchart publishes no official MCP server (checked npm, the official MCP registry, and Barchart
+  docs on 2026-07-22). This is a CANDIDATE tool list derived one-tool-per-operation from the official
+  Barchart OnDemand OpenAPI 3.0.3 (71 GET operations). Every tool inherits its real input schema from
+  the backing operation's parameters; all calls require the apikey query parameter.
 server:
   name: barchart-ondemand
   transport: http
@@ -225,3 +224,9 @@ tools:
 - name: get_yield_forecast_planet
   description: getYieldForecastPlanet
   source_operation: openapi/barchart-ondemand-official-openapi.yml#get-getYieldForecastPlanet
+deployment:
+  mode: none
+  verified: derived
+  tools: 71
+  checked: '2026-08-12'
+  source: catalog MCP census

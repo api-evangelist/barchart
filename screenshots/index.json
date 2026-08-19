@@ -1,0 +1,11 @@
+[
+  {
+    "repo": "barchart",
+    "captured_at": "2026-08-17T122638",
+    "source_url": "https://www.barchart.com/ondemand",
+    "source_type": "DeveloperPortal",
+    "file": "barchart-2026-08-17T122638.png",
+    "bytes": 139959,
+    "capture": "playwright-local"
+  }
+]

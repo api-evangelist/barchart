@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture History API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get historical time series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getHistory.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbol",
+                "value": "IBM",
+                "type": "query",
+                "description": "A single instrument symbol."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Time series type, e.g. ticks, minutes, nearbyMinutes, formTMinutes, daily, dailyNearest, dailyContinue, weekly, monthly, quarterly, yearly (and their Nearest/Continue variants)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date/time (YYYYMMDD or YYYYMMDDHHmmss)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date/time."
+              },
+              {
+                "name": "maxRecords",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return."
+              }
+            ]
+          },
+          "docs": "Historical time series (tick, minute bars, or end-of-day) for stocks, indexes, mutual funds, ETFs, futures, forex, or crypto, with daily, weekly, monthly, quarterly, yearly and nearest/continuation variants."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

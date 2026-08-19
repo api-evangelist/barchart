@@ -1,0 +1,350 @@
+{
+  "item": [
+    {
+      "id": "d1288151-edc6-4082-8e09-5c8c7526a3b5",
+      "name": "Cryptocurrency",
+      "description": {
+        "content": "Spot crypto quotes and history.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40b3a86f-0b3c-4b9f-98f2-031e9e9849c5",
+          "name": "Get crypto quotes",
+          "request": {
+            "name": "Get crypto quotes",
+            "description": {
+              "content": "Spot-market cryptocurrency price data (Bitcoin, Ethereum, Ripple, Litecoin, etc.).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getCrypto.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbols",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53f2c9be-8018-432c-9cb3-67eeefd86e19",
+              "name": "A status envelope plus an array of quote records. Field set depends on your data entitlement (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCrypto.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "^BTCUSD,^ETHUSD"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"exchange\": \"string\",\n      \"lastPrice\": 2370.729584672294,\n      \"netChange\": 1900.2011901500493,\n      \"percentChange\": 9844.447074134558,\n      \"open\": 3891.0753918271625,\n      \"high\": 8006.196956487383,\n      \"low\": 9026.282020724,\n      \"volume\": 5359,\n      \"tradeTimestamp\": \"1949-09-27T22:20:42.457Z\",\n      \"key_0\": 7825\n    },\n    {\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"exchange\": \"string\",\n      \"lastPrice\": 8675.535778593403,\n      \"netChange\": 4862.830346431269,\n      \"percentChange\": 491.17854977198226,\n      \"open\": 7654.531831755064,\n      \"high\": 7185.0950211282625,\n      \"low\": 9048.761750872847,\n      \"volume\": 8138,\n      \"tradeTimestamp\": \"1972-07-17T23:25:30.701Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e7a29bb-2841-47b1-aecd-76363ecb4658",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCrypto.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbols",
+                      "value": "^BTCUSD,^ETHUSD"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9733bcef-6080-4119-949b-bc12698c27cc",
+          "name": "Get crypto history",
+          "request": {
+            "name": "Get crypto history",
+            "description": {
+              "content": "Historical price data for spot cryptocurrencies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getCryptoHistory.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Barchart-issued API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02729c80-948b-4cc4-87a0-b87ebbe51310",
+              "name": "A status envelope plus an array of historical bars (modeled).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCryptoHistory.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"message\": \"Success.\"\n  },\n  \"results\": [\n    {\n      \"symbol\": \"string\",\n      \"timestamp\": \"2026-01-16T17:33:25.338Z\",\n      \"tradingDay\": \"string\",\n      \"open\": 5678.831693587563,\n      \"high\": 4212.239219098856,\n      \"low\": 1953.5668636514504,\n      \"close\": 64.3042987553577,\n      \"volume\": 4495,\n      \"openInterest\": 907,\n      \"key_0\": 5037.838237058078\n    },\n    {\n      \"symbol\": \"string\",\n      \"timestamp\": \"1968-12-05T08:05:41.378Z\",\n      \"tradingDay\": \"string\",\n      \"open\": 8989.307156325316,\n      \"high\": 3860.4522701145984,\n      \"low\": 4108.842826002095,\n      \"close\": 8078.530922819891,\n      \"volume\": 1687,\n      \"openInterest\": 558\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71ef2ab9-330e-4693-8cca-e5560b5cd43b",
+              "name": "Missing, invalid, or unentitled API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCryptoHistory.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 200,\n  \"message\": \"Success.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ondemand.websol.barchart.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1cbaec0b-d3c6-496f-bf0d-7ffff3520b13",
+    "name": "Barchart OnDemand Commodities & Agriculture Cryptocurrency API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Barchart OnDemand API is a commercially licensed market-data and commodity-data service hosted at https://ondemand.websol.barchart.com. It exposes a broad catalog of REST endpoints for quotes, historical time series, reference/instrument metadata, futures and options, fundamentals, corporate actions, cryptocurrencies, physical-commodity and agricultural data, technicals, news, and weather. Every call is authenticated with an `apikey` query parameter issued by Barchart, and each endpoint responds in JSON, XML, or CSV selected by the path suffix (for example `/getQuote.json`, `/getQuote.xml`, `/getQuote.csv`); GET, POST, and SOAP transports are supported.\nACCESS NOTE - Barchart OnDemand is subscription and enterprise gated. The endpoint names, HTTP method, `apikey` auth, format suffixes, and the documented request parameters below are taken from Barchart's public OnDemand documentation and are accurate. Because request quotas, the exact field catalogs, and full response payloads are entitlement-specific and not publicly published in machine-readable form, the response schemas in this document are HONESTLY MODELED (endpointsModeled) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.\n\nContact Support:\n Name: Barchart OnDemand",
+      "type": "text/plain"
+    }
+  }
+}

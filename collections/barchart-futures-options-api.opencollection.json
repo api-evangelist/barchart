@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture Futures & Options API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Futures & Options",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get futures options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesOptions.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "root",
+                "value": "CL",
+                "type": "query",
+                "description": "Root futures symbol."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Intraday options data on futures - strike price, volume, open interest, implied volatility and greeks - for a given root futures symbol."
+        },
+        {
+          "info": {
+            "name": "Get futures by exchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getFuturesByExchange.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "exchange",
+                "value": "CME",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Real-time, delayed, or end-of-day futures data for all contracts on an exchange."
+        },
+        {
+          "info": {
+            "name": "Screen equity/ETF options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getOptionsScreener.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "baseSymbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Screen equity and ETF options using filters to surface unusual activity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Barchart OnDemand Commodities & Agriculture Corporate Actions & Earnings API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Corporate Actions & Earnings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get corporate actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getCorporateActions.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "symbols",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "splits, dividends, or earnings."
+              }
+            ]
+          },
+          "docs": "Splits, dividends, and earnings data for the requested symbols."
+        },
+        {
+          "info": {
+            "name": "Get earnings calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ondemand.websol.barchart.com/getEarningsCalendar.json",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Barchart-issued API key."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Calendar date (YYYYMMDD)."
+              }
+            ]
+          },
+          "docs": "Upcoming earnings totals and data by date."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
