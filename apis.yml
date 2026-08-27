@@ -392,14 +392,110 @@ apis:
     url: https://www.barchart.com/ondemand/api
   - type: APIReference
     url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-ondemand-official-openapi
-  name: Barchart OnDemand APIs
-  description: Barchart OnDemand APIs from Barchart — 71 path(s) described in OpenAPI.
+- aid: barchart:barchart-charts-and-analytics-api
+  name: Barchart Charts and Analytics API
+  description: The Charts and Analytics API from Barchart — 5 operation(s) for charts and analytics.
   humanURL: https://www.barchart.com/ondemand/api/getQuote
   baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - Charts and Analytics
   properties:
   - type: OpenAPI
-    url: openapi/barchart-ondemand-official-openapi.yml
+    url: openapi/barchart-charts-and-analytics-api-openapi.yml
+- aid: barchart:barchart-cryptocurrency-data-api
+  name: Barchart Cryptocurrency Data API
+  description: The Cryptocurrency Data API from Barchart — 2 operation(s) for cryptocurrency data.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - Cryptocurrency Data
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-cryptocurrency-data-api-openapi.yml
+- aid: barchart:barchart-etfs-api
+  name: Barchart ET Fs API
+  description: The ETFs API from Barchart — 2 operation(s) for etfs.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - ETFs
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-etfs-api-openapi.yml
+- aid: barchart:barchart-leaderboards-and-lists-api
+  name: Barchart Leaderboards and Lists API
+  description: >-
+    The Leaderboards and Lists API from Barchart — 3 operation(s) for leaderboards and lists.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - Leaderboards and Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-leaderboards-and-lists-api-openapi.yml
+- aid: barchart:barchart-metadata-api
+  name: Barchart Metadata API
+  description: The Metadata API from Barchart — 8 operation(s) for metadata.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-metadata-api-openapi.yml
+- aid: barchart:barchart-news-and-filings-api
+  name: Barchart News and Filings API
+  description: The News and Filings API from Barchart — 4 operation(s) for news and filings.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - News and Filings
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-news-and-filings-api-openapi.yml
+- aid: barchart:barchart-other-data-api
+  name: Barchart Other Data API
+  description: The Other Data API from Barchart — 12 operation(s) for other data.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - Other Data
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-other-data-api-openapi.yml
+- aid: barchart:barchart-price-data-api
+  name: Barchart Price Data API
+  description: The Price Data API from Barchart — 18 operation(s) for price data.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - Price Data
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-price-data-api-openapi.yml
+- aid: barchart:barchart-profiles-and-financial-data-api
+  name: Barchart Profiles and Financial Data API
+  description: >-
+    The Profiles and Financial Data API from Barchart — 9 operation(s) for profiles and financial data.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - Profiles and Financial Data
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-profiles-and-financial-data-api-openapi.yml
+- aid: barchart:barchart-splits-dividends-and-earnings-api
+  name: Barchart Splits, Dividends, and Earnings API
+  description: >-
+    The Splits, Dividends, and Earnings API from Barchart — 8 operation(s) for splits, dividends, and
+    earnings.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - Splits, Dividends, and Earnings
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-splits-dividends-and-earnings-api-openapi.yml
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/barchart/overview
