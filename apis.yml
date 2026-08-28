@@ -11,6 +11,18 @@ description: >-
   endpoint catalog - getQuote, getHistory, getEquitiesByExchange, getFuturesOptions, getProfile,
   getCrypto, getGrainBids, getNews, and dozens more - covering quotes, historical time series, fundamentals,
   corporate actions, options analytics, agricultural and energy commodity data, technicals, and news.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
