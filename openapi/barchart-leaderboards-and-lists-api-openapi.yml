@@ -1,0 +1,752 @@
+openapi: 3.2.0
+info:
+  title: OnDemand Leaderboards and Lists API
+  version: 1.0.1
+  description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
+  contact:
+    name: onDemand API Support
+    url: https://www.barchart.com/ondemand
+    email: support@barchart.com
+  termsOfService: https://www.barchart.com/solutions/company/terms-and-privacy
+servers:
+- url: https://ondemand.websol.barchart.com
+tags:
+- name: Leaderboards and Lists
+paths:
+  /getLeaders.json:
+    get:
+      tags:
+      - Leaderboards and Lists
+      summary: getLeaders
+      operationId: get-getLeaders
+      description: Barchart OnDemand's getLeaders API provides leaderboard lists for equities, futures, forex, mutual funds and ETFs, including most active, gainers, losers, what's hot and what's not hot.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: exchanges
+        description: 'Exchange code for the marketplace where the financial instruments are listed.<br/>Available values (multiple values separated by a comma may be used): *AMEX, CBOT, CBOTM, CME, COMEX, COMEX, FOREX, GBLX, ICE, ICEFI, ICEUS, WCE, CADFUNDS, FUND, INDEX, INDEX-CBOE, INDEX-DOW, INDEX-NQ, INDEX-NY, INDEX-SP, INDEX-TSX, IOM, IMM, KCBT, LCE, MIAX, NASDAQ, OTHER OTC, RATES, RATE, NYMEX, NYMI, NYSE, NLIF, TSX, TSX-V, NEO, SECTOR, CNSX, LIFFE, EUIDX, EUREX, BMF, MATIF, CXMI, CXMI, HKFE, SPECIAL, INDEX-RL, MATBA, NCDEX, ASX, ROFEX, OTC-BB, SIMEX, CZCE, CROSS, BSE, MNTRL, ECON, TOCOM, MEFF, ENDEX, SAFEX, TIFFE, CASH, MCX, NZX, MDEX, DGCX, NSE, CBOE, GME, OMX, CFE, TURK, TFEX, TAIWA, SHFE, DCE, BATS, LSE, LME, EEX, CFFEX, JPX, SFE, KFE, ISE, CRYPTO, GRBIDS, AGIDX_B_COU, AGIDX_B_CRD, AGIDX_B_NAT, AGIDX_B_REG, AGIDX_B_STA, AGIDX_P_COU, AGIDX_P_CRD, AGIDX_P_NAT, AGIDX_P_REG, AGIDX_P_STA, MTIDX_P_NAT_SY, C3, CXE, EURNXT_EQ_BE, EURNXT_EQ_FR, EURNXT_EQ_NL, EURNXT_EQ_PT, AGYIELD, CMDTY_STATS, CSTATS_BARCHART, CSTATS_BHUGHES, CSTATS_CFTC, CSTATS_ENGCORPS, CSTATS_EUSTAT, CSTATS_STATCAN, CSTATS_USBEA, CSTATS_USBLS, CSTATS_USCB, CSTATS_USDA, CSTATS_USEIA, CMENRF, CMENRF_IDX, CMENWF, CMMTPM, AGYIELD_BIW, SCB_BIOFUEL_EU, SCB_BIOFUEL_US, SCB_ETHANOL, SMALL, AGIDX_B_FCST, MER_ORG_GRN, MER_ORG_IMP, CSTATS_IBGE, PRM_GLB_BIO, PRM_LOW_CAR, AGYIELD_SA, CSTATS_CONAB, FSMK_JCB_BIOFL, FSMK_JCB_FATINT, FSMK_JCB_FATOIL, FSMK_JCB_GRNFD, FSMK_JCB_HEMP, FSMK_JCB_HIDE, FSMK_JCB_HIDINT, FSMK_JCB_ORGN, FSMK_JCB_PROT, FSMK_JCB_SSG, FSMK_JCB_VEGOIL, EEX_POWER, EEX_GAS, AGYIELD_BP_COU, AGYIELD_BP_CRD, AGYIELD_BP_NAT, AGYIELD_BP_STA, SGCOM, SGXFX, SGXNZ, SGIDX, BALTIC, AMEX, NASDAQ, NYSE*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: NYSE
+      - in: query
+        name: assetType
+        description: 'The type of asset.  Includes: equities ("STK"), mutual funds ("FUNDS"), ETFs ("ETF"), futures ("FUT"), forex ("FOREX")
+
+          '
+        required: true
+        schema:
+          type: string
+          enum:
+          - STK
+          - ETF
+          - FUND
+          - FUT
+          - FOREX
+          example: STK
+      - in: query
+        name: type
+        description: The type of leaderboard to display.
+        required: true
+        schema:
+          type: string
+          enum:
+          - active
+          - active_5d
+          - active_1m
+          - active_3m
+          - active_6m
+          - active_9m
+          - active_12m
+          - active_ytd
+          - gainers
+          - gainers_5d
+          - gainers_1m
+          - gainers_3m
+          - gainers_6m
+          - gainers_9m
+          - gainers_12m
+          - gainers_ytd
+          - losers
+          - losers_5d
+          - losers_1m
+          - losers_3m
+          - losers_6m
+          - losers_9m
+          - losers_12m
+          - losers_ytd
+          - hot
+          - hot_daily
+          - hot_weekly
+          - hot_monthly
+          - nothot
+          - nothot_daily
+          - nothot_weekly
+          - nothot_monthly
+          - barchart
+          example: hot
+      - in: query
+        name: maxRecords
+        description: The maximum number of records to show in the return.
+        required: false
+        schema:
+          type: integer
+          example: 30
+      - in: query
+        name: period
+        description: A value representing the time period.
+        required: false
+        schema:
+          type: string
+          enum:
+          - 5d
+          - 20d
+          - 65d
+          - 100d
+          - 260d
+          example: 260d
+      - in: query
+        name: sortDirection
+        description: To determine the sort direction.
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          example: DESC
+      - in: query
+        name: excludeEtfsFromStocks
+        description: When requesting Stocks data, if you would like the API to exclude ETFs please set this parameter to true.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: JMP
+                        symbolName:
+                          description: The full name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: JMP Group Inc
+                        exchange:
+                          description: Exchange code for the marketplace where the financial instruments are listed.
+                          type:
+                          - string
+                          - 'null'
+                          example: NYSE
+                        country:
+                          description: The instrument's country of origin.
+                          type:
+                          - string
+                          - 'null'
+                          example: USA
+                        sicSector:
+                          description: A four-digit code for classifying industries.
+                          type:
+                          - string
+                          - 'null'
+                          example: '6211'
+                        industry:
+                          description: A code that identifies a group of businesses that produce similar products or services.
+                          type:
+                          - string
+                          - 'null'
+                          example: Finance
+                        subIndustry:
+                          description: A more specific group of businesses within an industry that produce similar products or services.
+                          type:
+                          - string
+                          - 'null'
+                          example: Investment Brokers
+                        timestamp:
+                          description: The time the message was generated on the server.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-19T11:05:20-06:00'
+                        tradeTimestamp:
+                          description: The exchange timestamp for the last traded price.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-19T11:50:20-06:00'
+                        lastPrice:
+                          description: The last price the instrument traded.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 6.86
+                        priceNetChange:
+                          description: The difference between the last price and the previous day's settlement price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.89
+                        pricePercentChange:
+                          description: The difference between the last price and the previous day's settlement price, expressed as a percentage.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 38.03
+                        previousClose:
+                          description: The closing value of the instrument on the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 4.97
+                        volume:
+                          description: The number of shares or contracts traded.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 19281370
+                        previousVolume:
+                          description: The number of shares or contracts traded for the previous day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2087461
+                        standardDeviation:
+                          description: The standard deviation using the past 20-days of data.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 4.56
+                      required:
+                      - symbol
+                      - symbolName
+                      - exchange
+                      - country
+                      - sicSector
+                      - industry
+                      - subIndustry
+                      - timestamp
+                      - tradeTimestamp
+                      - lastPrice
+                      - priceNetChange
+                      - pricePercentChange
+                      - previousClose
+                      - volume
+                      - previousVolume
+                      - standardDeviation
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getHighsLows.json:
+    get:
+      tags:
+      - Leaderboards and Lists
+      summary: getHighsLows
+      operationId: get-getHighsLows
+      description: The getHighsLows API from Barchart OnDemand provides lists for new 52-week highs or 52-week lows based on exchange and asset type.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: exchanges
+        description: 'Exchange code for the marketplace where the financial instruments are listed.<br/>Available values (multiple values separated by a comma may be used): *AMEX, CBOT, CBOTM, CME, COMEX, COMEX, FOREX, GBLX, ICE, ICEFI, ICEUS, WCE, CADFUNDS, FUND, INDEX, INDEX-CBOE, INDEX-DOW, INDEX-NQ, INDEX-NY, INDEX-SP, INDEX-TSX, IOM, IMM, KCBT, LCE, MIAX, NASDAQ, OTHER OTC, RATES, RATE, NYMEX, NYMI, NYSE, NLIF, TSX, TSX-V, NEO, SECTOR, CNSX, LIFFE, EUIDX, EUREX, BMF, MATIF, CXMI, CXMI, HKFE, SPECIAL, INDEX-RL, MATBA, NCDEX, ASX, ROFEX, OTC-BB, SIMEX, CZCE, CROSS, BSE, MNTRL, ECON, TOCOM, MEFF, ENDEX, SAFEX, TIFFE, CASH, MCX, NZX, MDEX, DGCX, NSE, CBOE, GME, OMX, CFE, TURK, TFEX, TAIWA, SHFE, DCE, BATS, LSE, LME, EEX, CFFEX, JPX, SFE, KFE, ISE, CRYPTO, GRBIDS, AGIDX_B_COU, AGIDX_B_CRD, AGIDX_B_NAT, AGIDX_B_REG, AGIDX_B_STA, AGIDX_P_COU, AGIDX_P_CRD, AGIDX_P_NAT, AGIDX_P_REG, AGIDX_P_STA, MTIDX_P_NAT_SY, C3, CXE, EURNXT_EQ_BE, EURNXT_EQ_FR, EURNXT_EQ_NL, EURNXT_EQ_PT, AGYIELD, CMDTY_STATS, CSTATS_BARCHART, CSTATS_BHUGHES, CSTATS_CFTC, CSTATS_ENGCORPS, CSTATS_EUSTAT, CSTATS_STATCAN, CSTATS_USBEA, CSTATS_USBLS, CSTATS_USCB, CSTATS_USDA, CSTATS_USEIA, CMENRF, CMENRF_IDX, CMENWF, CMMTPM, AGYIELD_BIW, SCB_BIOFUEL_EU, SCB_BIOFUEL_US, SCB_ETHANOL, SMALL, AGIDX_B_FCST, MER_ORG_GRN, MER_ORG_IMP, CSTATS_IBGE, PRM_GLB_BIO, PRM_LOW_CAR, AGYIELD_SA, CSTATS_CONAB, FSMK_JCB_BIOFL, FSMK_JCB_FATINT, FSMK_JCB_FATOIL, FSMK_JCB_GRNFD, FSMK_JCB_HEMP, FSMK_JCB_HIDE, FSMK_JCB_HIDINT, FSMK_JCB_ORGN, FSMK_JCB_PROT, FSMK_JCB_SSG, FSMK_JCB_VEGOIL, EEX_POWER, EEX_GAS, AGYIELD_BP_COU, AGYIELD_BP_CRD, AGYIELD_BP_NAT, AGYIELD_BP_STA, SGCOM, SGXFX, SGXNZ, SGIDX, BALTIC, AMEX, NASDAQ, NYSE*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: NYSE,NASDAQ
+      - in: query
+        name: assetType
+        description: 'The type of asset.  Includes: equities ("STK"), mutual funds ("FUNDS"), ETFs ("ETF"), futures ("FUT"), forex ("FOREX")
+
+          '
+        required: true
+        schema:
+          type: string
+          enum:
+          - STK
+          - ETF
+          - FUND
+          - FUT
+          - FOREX
+          - BARCHART
+          example: STK
+      - in: query
+        name: type
+        description: The type of high/low list to return.
+        required: false
+        schema:
+          type: string
+          enum:
+          - high
+          - low
+          example: low
+      - in: query
+        name: period
+        description: A value representing the time period.
+        required: true
+        schema:
+          type: string
+          enum:
+          - 5d
+          - 20d
+          - 65d
+          - 100d
+          - 260d
+          example: 260d
+      - in: query
+        name: maxRecords
+        description: The maximum number of records to show in the return.
+        required: false
+        schema:
+          type: integer
+          example: 20
+      - in: query
+        name: offset
+        description: A value denoting where to start results from.
+        required: false
+        schema:
+          type: integer
+          example: 5
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: WOOF
+                        symbolName:
+                          description: The full name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Petco Health and Wellness Company Inc Cl A
+                        exchange:
+                          description: Exchange code for the marketplace where the financial instruments are listed.
+                          type:
+                          - string
+                          - 'null'
+                          example: NASDAQ
+                        country:
+                          description: The instrument's country of origin.
+                          type:
+                          - string
+                          - 'null'
+                          example: USA
+                        timestamp:
+                          description: The exchange time of the last traded priced.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1613755487
+                        tradeTime:
+                          description: The exchange time of the last traded priced.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-19T12:09:40-06:00'
+                        lastPrice:
+                          description: The most recent price at which a stock or security traded.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 23.49
+                        priceNetChange:
+                          description: The difference between the last price and the previous day's settlement price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -0.010000000000002
+                        pricePercentChange:
+                          description: The difference between the last price and the previous day's settlement price, expressed as a percentage.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -0.04
+                        previousClose:
+                          description: The closing value of the instrument on the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 23.5
+                        volume:
+                          description: The number of shares or contracts traded.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 684544
+                        previousVolume:
+                          description: The number of shares or contracts traded for the previous day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2087300
+                        selectedPeriodHighPrice:
+                          description: The high price for the selected period
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 31.08
+                        selectedPeriodHighPercent:
+                          description: The high percent change for the selected period
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -24.49
+                        selectedPeriodLowPrice:
+                          description: The low price for the selected period
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 23.4
+                        selectedPeriodLowPercent:
+                          description: The low percent change for the selected period
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.3
+                      required:
+                      - symbol
+                      - symbolName
+                      - exchange
+                      - country
+                      - timestamp
+                      - tradeTime
+                      - lastPrice
+                      - priceNetChange
+                      - pricePercentChange
+                      - previousClose
+                      - volume
+                      - previousVolume
+                      - selectedPeriodHighPrice
+                      - selectedPeriodHighPercent
+                      - selectedPeriodLowPrice
+                      - selectedPeriodLowPercent
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getSectors.json:
+    get:
+      tags:
+      - Leaderboards and Lists
+      summary: getSectors
+      operationId: get-getSectors
+      description: The getSectors API from Barchart OnDemand provides returns using weighted alpha on sectors covering multiple periods, including 1-day, 1-month, 3-month, 6-month, 9-month, 12-month and year-to-date.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: sector
+        description: The symbol of the sector.  Multiple sectors separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: -MEDR
+      - in: query
+        name: sectorPeriod
+        description: 'The period used to calculate the weighted alpha return by the sector, includes: 1-day ("1DA"), 1-month ("1MO"), 3-month ("3MO"), 6-month ("6MO"), 9-month ("9MO"), 12-month ("12MO") and year-to-date ("YTD").
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - 1DA
+          - 1MO
+          - 3MO
+          - 6MO
+          - 9MO
+          - 12MO
+          - YTD
+          example: 1DA
+      - in: query
+        name: dailyData
+        description: 'Whether to include daily data: Open, High, Low, Close, Previous Close, 52-week high and 52-week low
+
+          '
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: components
+        description: Whether to include components of the sector.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sortDir
+        description: Sorting method that should be applied.
+        required: false
+        schema:
+          type: string
+          example: ASC
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: The symbol of the sector.
+                          type:
+                          - string
+                          - 'null'
+                          example: -MEDR
+                        sector:
+                          description: The name of the sector.
+                          type:
+                          - string
+                          - 'null'
+                          example: Medical - Drugs
+                        weightAlpha:
+                          description: The weighted alpha of the sector.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 36.14
+                        lastTrade:
+                          description: The last traded price of the sector.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 35.97
+                        change:
+                          description: The change in last traded price of the sector.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.74
+                        percentChange:
+                          description: The percent change in the last traded price of the sector.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 11.6
+                        stocks:
+                          description: The number of stocks the sector is comprised of.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 190
+                        open:
+                          description: The opening price for the sector for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                        high:
+                          description: The high price for the sector for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 35.97
+                        low:
+                          description: The low price for the sector for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 35.97
+                        close:
+                          description: The closing price for the sector for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 36.14
+                        previousClose:
+                          description: The closing price for the sector for the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 32.24
+                        fiftyTwoWeekHigh:
+                          description: The highest price for the sector over the previous 52-weeks
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 44.21
+                        fiftyTwoWeekLow:
+                          description: The lowest price for the sector over the previous 52-weeks
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -39.13
+                        components:
+                          description: The symbol for a component of the sector.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            properties:
+                              symbol:
+                                type: string
+                                example: ACER
+                              name:
+                                type: string
+                                example: Acer Therapeutics Inc
+                              exchange:
+                                type: string
+                                example: NASDAQ
+                        componentSymbol:
+                          description: The symbol for a component of the sector.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        componentName:
+                          description: The name of a component of the sector.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        timestamp:
+                          description: The timestamp for the data.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-19T11:23:01-06:00'
+                      required:
+                      - symbol
+                      - sector
+                      - weightAlpha
+                      - lastTrade
+                      - change
+                      - percentChange
+                      - stocks
+                      - timestamp
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error

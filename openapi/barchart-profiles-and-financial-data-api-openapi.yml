@@ -1,0 +1,2170 @@
+openapi: 3.2.0
+info:
+  title: OnDemand Profiles and Financial Data API
+  version: 1.0.1
+  description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
+  contact:
+    name: onDemand API Support
+    url: https://www.barchart.com/ondemand
+    email: support@barchart.com
+  termsOfService: https://www.barchart.com/solutions/company/terms-and-privacy
+servers:
+- url: https://ondemand.websol.barchart.com
+tags:
+- name: Profiles and Financial Data
+paths:
+  /getProfile.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getProfile
+      operationId: get-getProfile
+      description: The getProfile API is used to request information about a publicly traded company, such as sector, industry, company description, CEO, recent earnings, P/E ratio, and address, based on symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used.
+        required: true
+        schema:
+          type: string
+          example: AAPL,GOOG
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: qtrOneEarnings,qtrTwoEarnings,qtrThreeEarnings,qtrFourEarnings
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        symbolCode:
+                          description: A code denoting the financial instrument type.
+                          type:
+                          - string
+                          - 'null'
+                          example: STK
+                        exchange:
+                          description: Exchange code for the marketplace where the financial instruments are listed.
+                          type:
+                          - string
+                          - 'null'
+                          example: NASDAQ
+                        exchangeName:
+                          description: The name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Apple Inc
+                        instrumentName:
+                          description: The name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Apple Inc
+                        sicSector:
+                          description: A four-digit code for classifying industries.
+                          type:
+                          - string
+                          - 'null'
+                          example: '3571'
+                        industry:
+                          description: A code that identifies a group of businesses that produce similar products or services.
+                          type:
+                          - string
+                          - 'null'
+                          example: Computer
+                        subIndustry:
+                          description: A more specific group of businesses within an industry that produce similar products or services.
+                          type:
+                          - string
+                          - 'null'
+                          example: Mini
+                        indexMembership:
+                          description: Indices which a stock may be part of, like the DJIA or S&P 500.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: string
+                              example: $DOWC
+                            - type: string
+                              example: $DOWC
+                            - type: string
+                              example: $DOWI
+                            - type: string
+                              example: $RUI
+                            - type: string
+                              example: $RUA
+                            - type: string
+                              example: $SPX
+                            - type: string
+                              example: $ONE
+                        businessSummary:
+                          description: A description of the company.
+                          type:
+                          - string
+                          - 'null'
+                          example: Apple Inc. is engaged in designing, manufacturing and marketing mobile communication and media devices, personal computers, and portable digital music players. The Company\u0027s products and services include iPhone, iPad, Mac, iPod, Apple TV, a portfolio of consumer and professional software applications, the iOS and Mac OS X operating systems, iCloud, and a range of accessory, service and support offerings. It sells its products worldwide through its online stores, its retail stores, its direct sales force, third-party wholesalers, and resellers. Apple Inc. is headquartered in Cupertino, California.
+                        ceo:
+                          description: The Chief Executive Officer.
+                          type:
+                          - string
+                          - 'null'
+                          example: Timothy D. Cook
+                        qtrOneEarnings:
+                          description: The most recent 1st quarter earnings.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.68
+                        qtrOneEarningsDate:
+                          description: The reported date of the most recent 1st quarter earnings.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-01-27'
+                        qtrOneEarningsEndDate:
+                          description: The end date of the most recent 1st quarter earnings.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-12-31'
+                        qtrTwoEarnings:
+                          description: The most recent 2nd quarter earnings.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.73
+                        qtrTwoEarningsDate:
+                          description: The reported date of the most recent 2nd quarter earnings.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-10-29'
+                        qtrTwoEarningsEndDate:
+                          description: The end date of the most recent 2nd quarter earnings.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-09-30'
+                        qtrThreeEarnings:
+                          description: The most recent 3rd quarter earnings.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.64
+                        qtrThreeEarningsDate:
+                          description: The reported date of the most recent 3rd quarter earnings.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-07-30'
+                        qtrThreeEarningsEndDate:
+                          description: The end date of the most recent 3rd quarter earnings.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-06-30'
+                        qtrFourEarnings:
+                          description: The most recent 4th quarter earnings.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.64
+                        qtrFourEarningsDate:
+                          description: The reported date of the most recent 4th quarter earnings.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-04-30'
+                        qtrFourEarningsEndDate:
+                          description: The end date of the most recent 4th quarter earnings.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-03-31'
+                        peRatio:
+                          description: The ratio of a company's current share price relative to its earnings (price divided by earnings).
+                          type:
+                          - string
+                          - 'null'
+                          example: '36.07'
+                        epsGrowth:
+                          description: The annual rate of earnings per share growth over the trailing one-year period.
+                          type:
+                          - string
+                          - 'null'
+                          example: '36.410000'
+                        recentEarnings:
+                          description: The last reported quarterly earnings value.
+                          type:
+                          - string
+                          - 'null'
+                          example: '1.68'
+                        annualEPS:
+                          description: The most recent annual net income divided by the number of shares outstanding.
+                          type:
+                          - string
+                          - 'null'
+                          example: '3.7'
+                        address:
+                          description: The address of the company's headquarters.
+                          type:
+                          - string
+                          - 'null'
+                          example: ONE APPLE PARK WAY
+                        city:
+                          description: The city where the company's headquarters is located.
+                          type:
+                          - string
+                          - 'null'
+                          example: CUPERTINO
+                        state:
+                          description: The state where the company's headquarters is located.
+                          type:
+                          - string
+                          - 'null'
+                          example: CA
+                        country:
+                          description: The country where the company's headquarters is located.
+                          type:
+                          - string
+                          - 'null'
+                          example: USA
+                        zipCode:
+                          description: The zip code of the company's headquarters.
+                          type:
+                          - string
+                          - 'null'
+                          example: '95014'
+                        phoneNumber:
+                          description: The company's main phone number.
+                          type:
+                          - string
+                          - 'null'
+                          example: 408-996-1010
+                        instrumentType:
+                          description: The type of instrument. Ex. Equity, Future or Mutual Fund etc.
+                          type:
+                          - string
+                          - 'null'
+                          example: Equity
+                        figi:
+                          description: This code is unique at exchange level, a pair of exchange and company is assigned a unique figi.
+                          type:
+                          - string
+                          - 'null'
+                          example: BBG000BLNQ16 (unique code for IBM for NYSE.)
+                        compositeFigi:
+                          description: This code is shared in all exchanges across a country for a given company.
+                          type:
+                          - string
+                          - 'null'
+                          example: BBG000BLNNH6 (unique code for IBM for US exchanges.)
+                        shareClassFigi:
+                          description: This code is shared in all exchanges across the world for a given company.
+                          type:
+                          - string
+                          - 'null'
+                          example: BBG001S5S399
+                        cik:
+                          description: The Central Index Key (CIK) is used on the SEC's computer systems to identify corporations and individual people who have filed disclosure with the SEC.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1418091
+                      required:
+                      - symbol
+                      - symbolCode
+                      - exchange
+                      - exchangeName
+                      - instrumentName
+                      - sicSector
+                      - industry
+                      - subIndustry
+                      - businessSummary
+                      - ceo
+                      - address
+                      - city
+                      - state
+                      - country
+                      - zipCode
+                      - phoneNumber
+                      - instrumentType
+                      - figi
+                      - compositeFigi
+                      - shareClassFigi
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getFinancialHighlights.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getFinancialHighlights
+      operationId: get-getFinancialHighlights
+      description: The getFinancialHighlights API provides key financial highlights, ratios and statistics for equities based on symbol. Fields include market capitalization, revenue, net income, revenue growth and earnings per share.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.
+        required: true
+        schema:
+          type: string
+          example: GOOG,YHOO
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: lastQtrEPS,annualEPS,ttmEPS
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: GOOG
+                        marketCapitalization:
+                          description: The total number of outstanding shares multiplied by the current market value. In thousands.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1434772640
+                        insiderShareholders:
+                          description: The percent of stock held by insider shareholders.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.1299
+                        annualRevenue:
+                          description: The company's annual revenue. In millions.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 182527
+                        ttmRevenue:
+                          description: The company's revenue from the last 12 months.
+                          type:
+                          - integer
+                          - 'null'
+                          example: null
+                        sharesOutstanding:
+                          description: The total number of shares outstanding. In thousands.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 674137
+                        institutionalShareholders:
+                          description: The percent of stock held by institutional shareholders.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 31.940000534058
+                        annualNetIncome:
+                          description: The company's annual income after taxes but before the payout of common and preferred dividends.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 40269000000
+                        ttmNetIncome:
+                          description: The net income from the last 12 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 40269
+                        ttmNetProfitMargin:
+                          description: Net income dividend by revenue from the previous 12 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 22.0619
+                        oneYearReturn:
+                          description: The percent change in price over a one-year period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 39.41
+                        threeYearReturn:
+                          description: The percent change in price over a three-year period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 93.05
+                        fiveYearReturn:
+                          description: The percent change in price over a five-year period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 201.26
+                        fiveYearRevenueGrowth:
+                          description: The percent growth in revenue over the past 5-years.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 143.41
+                        fiveYearEarningsGrowth:
+                          description: The percent growth in earnings over the past 5-years.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 156.61
+                        fiveYearDividendGrowth:
+                          description: The percent growth in dividends over the past 5-years.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                        lastQtrEPS:
+                          description: The earnings per share for the most recent quarter.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 22.299999
+                        annualEPS:
+                          description: The earnings per share for the most recent annual period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 58.7
+                        ttmEPS:
+                          description: The earnings per share for the previous 12-months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 58.700001
+                        annualDividendRate:
+                          description: The annual dividend amount.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                        annualDividendYield:
+                          description: The dividends per share over the trailing one-year period as a percentage of the current stock price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                        twelveMonthEPSChg:
+                          description: The change in earnings per share over the past 12-months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 17.49
+                        peRatio:
+                          description: The current price to earnings ratio.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 35.85
+                        recentEarnings:
+                          description: The last reported earnings per share amount.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 22.3
+                        recentDividends:
+                          description: The amount of the most recent dividends issued per share.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.52
+                        recentSplit:
+                          description: The most recent stock split and associated ratio.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        beta:
+                          description: A measure of the volatility of a security in comparison to the volatility of the market.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.98
+                        weightAlpha:
+                          description: The weighted alpha of the sector.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 56.74
+                      required:
+                      - symbol
+                      - marketCapitalization
+                      - insiderShareholders
+                      - annualRevenue
+                      - ttmRevenue
+                      - sharesOutstanding
+                      - institutionalShareholders
+                      - oneYearReturn
+                      - threeYearReturn
+                      - fiveYearReturn
+                      - fiveYearRevenueGrowth
+                      - fiveYearEarningsGrowth
+                      - fiveYearDividendGrowth
+                      - annualEPS
+                      - annualDividendRate
+                      - annualDividendYield
+                      - weightAlpha
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getFinancialRatios.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getFinancialRatios
+      operationId: get-getFinancialRatios
+      description: The getFinancialRatios API provides key financial ratios for equities based on symbol. The fields include earnings per share, return on equity and price to earnings.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.
+        required: true
+        schema:
+          type: string
+          example: AAPL,GOOG
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: debtEquity,interestCoverage,bookValue,dividendPayout
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        eps:
+                          description: Earnings per share, calculated by dividing the total net income by the company's outstanding shares.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.7
+                        profitMargin:
+                          description: Net profit divided by revenue, expressed as a percentage.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 21.73
+                        roe:
+                          description: Net income divided by shareholder equity, expressed as a percentage.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 90.59
+                        roa:
+                          description: Net income divided by total assets, expressed as a percentage.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 19.44
+                        priceSales:
+                          description: Market capitalization divided by revenue.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 8.14529
+                        priceEarnings:
+                          description: Stock price divided by earnings per share.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 36.07
+                        priceBook:
+                          description: Market capitalization divided by total book value.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 21.13
+                        debtEquity:
+                          description: Total debt divided by equity.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.49916
+                        interestCoverage:
+                          description: A measurement of a company's ability to pay interest on outstanding debt.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                        bookValue:
+                          description: Total assets less intangible assets and liabilities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.94
+                        dividendPayout:
+                          description: The percentage of net income a firm pays to its shareholders as dividends.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 21.54
+                      required:
+                      - symbol
+                      - eps
+                      - profitMargin
+                      - roe
+                      - roa
+                      - priceSales
+                      - priceEarnings
+                      - priceBook
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getIncomeStatements.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getIncomeStatements
+      operationId: get-getIncomeStatements
+      description: The getIncomeStatements API from Barchart OnDemand provides access to public company financial income statements based on symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used.
+        required: true
+        schema:
+          type: string
+          example: IBM,AAPL,GOOG
+      - in: query
+        name: frequency
+        description: The frequency of financial statement reporting, either Quarterly ("Quarter") or Annually ("Annual").
+        required: true
+        schema:
+          type: string
+          enum:
+          - Quarter
+          - Annual
+          example: Quarter
+      - in: query
+        name: count
+        description: The number of Quarterly or Annual periods of financial statements to return.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: rawData
+        description: Return raw data, otherwise sales, costs, expenses, tax, and income data is displayed in thousands.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: IBM
+                        date:
+                          description: The date of the financial statement.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-09-30'
+                        sales:
+                          description: Total revenue or sales for the Income Statement period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 17560000
+                        costGoods:
+                          description: The cost of goods sold.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 9130000
+                        grossProfit:
+                          description: Sales less the cost of goods sold.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 8430000
+                        operatingExpenses:
+                          description: Expenses related to operating the business.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 6162000
+                        operatingIncome:
+                          description: Gross profit less operating expenses.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 2268000
+                        interestExpense:
+                          description: The cost incurred by an entity for borrowed funds.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 323000
+                        otherIncomeExpenses:
+                          description: Income or expenses not related to normal business operations.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -118000
+                        preTaxIncome:
+                          description: Operating income net other income or expenses.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1827000
+                        incomeTax:
+                          description: The tax on the company's income.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 128000
+                        netIncome:
+                          description: Net income less all expenses and tax.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1697000
+                        basicEpsContOp:
+                          description: Income from continuing operations divided by the number of shares outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.9
+                        basicEpsTotalOp:
+                          description: Net income divided by the number of shares outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.9
+                        dilutedEpsContOp:
+                          description: Income from continuing operations divided by the number of diluted shares outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.89
+                        dilutedEpsBNRI:
+                          description: Diluted EPS Before Non-Recurring Items
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 2.58
+                        dilutedEpsTotalOp:
+                          description: Net income divided by the number of diluted shares outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.89
+                        ebitda:
+                          description: Earnings before interest, depreciation and amortization.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3951000
+                      required:
+                      - symbol
+                      - date
+                      - sales
+                      - costGoods
+                      - grossProfit
+                      - operatingExpenses
+                      - operatingIncome
+                      - interestExpense
+                      - otherIncomeExpenses
+                      - preTaxIncome
+                      - incomeTax
+                      - netIncome
+                      - basicEpsContOp
+                      - basicEpsTotalOp
+                      - dilutedEpsContOp
+                      - dilutedEpsBNRI
+                      - dilutedEpsTotalOp
+                      - ebitda
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getBalanceSheets.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getBalanceSheets
+      operationId: get-getBalanceSheets
+      description: The getBalanceSheets API from Barchart OnDemand provides access to public company financial balance sheet data based on symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used.
+        required: true
+        schema:
+          type: string
+          example: IBM,AAPL,GOOG
+      - in: query
+        name: frequency
+        description: The frequency of financial statement reporting, either Quarterly ("Quarter") or Annually ("Annual").
+        required: true
+        schema:
+          type: string
+          enum:
+          - Quarter
+          - Annual
+          example: Quarter
+      - in: query
+        name: count
+        description: The number of Quarterly or Annual periods of financial statements to return.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: rawData
+        description: Return raw data, otherwise sales, costs, expenses, tax, and income data is displayed in thousands.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: IBM
+                        date:
+                          description: The date of the financial statement.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-09-30'
+                        cash:
+                          description: Money that is immediately available to a company.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 14553000
+                        marketableSec:
+                          description: Liquid securities that can be converted to cash.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1200000
+                        receivables:
+                          description: The amount of receivables due to a company.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 7022000
+                        prepaidExpenses:
+                          description: A type of asset that arises on a balance sheet as a result of business making payments for goods and services to be received in the near future.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 2188000
+                        inventories:
+                          description: The value of inventory on hand.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1949000
+                        deferredIncomeTax:
+                          description: Income tax that has been deferred.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        otherCurrentAssets:
+                          description: Miscellaneous current assets.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 12933000
+                        totalCurrentAssets:
+                          description: The total amount of current assets.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 39845000
+                        ppeNet:
+                          description: The net value of property, plant and equipment.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 9958000
+                        equityOtherInvestments:
+                          description: The value of company equity and other investments.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1944000
+                        intangibles:
+                          description: The value of intangible assets.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 72317000
+                        otherNonCurrentAssets:
+                          description: Miscellaneous non-current assets.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 30064000
+                        totalNonCurrentAssets:
+                          description: The total amount of non-current assets.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 114283000
+                        totalAssets:
+                          description: The sum of all assets.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 154128000
+                        shorttermDebt:
+                          description: Debt due within one year.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 10285000
+                        accountsPayable:
+                          description: The amount of payables outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3985000
+                        incomeTaxPayable:
+                          description: The amount of income tax outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 2375000
+                        accruedExpenses:
+                          description: Expenses that have already been accrued.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        otherCurrentLiabilities:
+                          description: Miscellaneous current liabilities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 9667000
+                        totalCurrentLiabilities:
+                          description: The total amount of current liabilities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 37993000
+                        longTermDebt:
+                          description: Debt due in more than one-year.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 55129000
+                        deferredLongRevenues:
+                          description: Revenue deferred for more than one-year.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 11681000
+                        otherNonCurrentLiabilities:
+                          description: Miscellaneous non-current liabilities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 35851000
+                        totalNonCurrentLiabilities:
+                          description: The total amount of non-current liabilities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 94800000
+                        totalLiabilities:
+                          description: The sum of all liabilities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 132794000
+                        sharesOutstanding:
+                          description: Shares outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 891057100
+                        commonShares:
+                          description: The par or stated value of shares outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 56366000
+                        retainedEarnings:
+                          description: Earnings retained by the company.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 162806000
+                        otherEquity:
+                          description: Miscellaneous equity.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -28458000
+                        totalShareholdersEquity:
+                          description: The total value of shareholder's equity.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 21334000
+                        totalLiabilitiesAndEquity:
+                          description: The sum of total liabilties and shareholder's equity.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 154128000
+                      required:
+                      - symbol
+                      - date
+                      - cash
+                      - marketableSec
+                      - receivables
+                      - prepaidExpenses
+                      - inventories
+                      - deferredIncomeTax
+                      - otherCurrentAssets
+                      - totalCurrentAssets
+                      - ppeNet
+                      - equityOtherInvestments
+                      - intangibles
+                      - otherNonCurrentAssets
+                      - totalNonCurrentAssets
+                      - totalAssets
+                      - shorttermDebt
+                      - accountsPayable
+                      - incomeTaxPayable
+                      - accruedExpenses
+                      - otherCurrentLiabilities
+                      - totalCurrentLiabilities
+                      - longTermDebt
+                      - deferredLongRevenues
+                      - otherNonCurrentLiabilities
+                      - totalNonCurrentLiabilities
+                      - totalLiabilities
+                      - sharesOutstanding
+                      - commonShares
+                      - retainedEarnings
+                      - otherEquity
+                      - totalShareholdersEquity
+                      - totalLiabilitiesAndEquity
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getCompetitors.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getCompetitors
+      operationId: get-getCompetitors
+      description: Barchart OnDemand's getCompetitors API provides a list of related stock symbols (competitors) for an underlying stock input.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbol
+        description: A symbol or code that identifies a financial instrument.
+        required: true
+        schema:
+          type: string
+          example: AAPL
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: fiftyTwoWkHigh,fiftyTwoWkHighDate,fiftyTwoWkLow,fiftyTwoWkLowDate
+      - in: query
+        name: maxRecords
+        description: The maximum number of records to show in the return.
+        required: false
+        schema:
+          type: integer
+          example: 10
+      - in: query
+        name: excludePriceAndVolumeFilter
+        description: Pass this boolean parameter if you would like the API to exclude filter on volume and last price.
+        required: false
+        schema:
+          type: string
+          example: 'true'
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: HPQ
+                        name:
+                          description: The full name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: HP Inc
+                        exchange:
+                          description: Exchange code for the marketplace where the financial instruments are listed.
+                          type:
+                          - string
+                          - 'null'
+                          example: NYSE
+                        marketCap:
+                          description: The quantity of shares or contracts traded.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 35452101562
+                        fiftyTwoWkHigh:
+                          description: The highest price over the past 52 weeks.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 27.68
+                        fiftyTwoWkHighDate:
+                          description: The date in which the high price was reached over the past 52 weeks.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-02-16'
+                        fiftyTwoWkLow:
+                          description: The low price over the past 52 weeks.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 12.54
+                        fiftyTwoWkLowDate:
+                          description: The date in which the low price was reached over the past 52 weeks.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-03-19'
+                      required:
+                      - symbol
+                      - name
+                      - marketCap
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getRatings.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getRatings
+      operationId: get-getRatings
+      description: Barchart OnDemand's getRatings API provides analysts ratings on stocks (strong buy, moderate buy, hold, moderate sell or strong sell) based on symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used.  For futures, notation such as <root_symbol*0> for the active contract or <root_symbol*1> for the first nearby is supported, as is <root_symbol^F> for all futures contracts for a given root symbol, as is <root_symbol^O> for all options contracts for a given underlying futures symbol.
+        required: true
+        schema:
+          type: string
+          example: AAPL,GOOG
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: strongBuy,hold,strongSell
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        name:
+                          description: The type of symbol used.
+                          type:
+                          - string
+                          - 'null'
+                          example: Apple Inc
+                        averageRecommendation:
+                          description: The average of all ratings (Strong Buy = 1.0, Moderate Buy = 2.0, Hold = 3.0, Moderate Sell = 4.0, Strong Sell = 5.0).
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            current:
+                              type: string
+                              example: '1.44'
+                            one_month_ago:
+                              type: string
+                              example: '1.5'
+                            two_months_ago:
+                              type: string
+                              example: '1.52'
+                            three_months_ago:
+                              type: string
+                              example: '1.54'
+                        strongBuy:
+                          description: The number of Strong Buy ratings.
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            current:
+                              type: string
+                              example: '18'
+                            one_month_ago:
+                              type: string
+                              example: '17'
+                            two_months_ago:
+                              type: string
+                              example: '17'
+                            three_months_ago:
+                              type: string
+                              example: '16'
+                        moderateBuy:
+                          description: The number of Moderate Buy ratings.
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            current:
+                              type: string
+                              example: '3'
+                            one_month_ago:
+                              type: string
+                              example: '2'
+                            two_months_ago:
+                              type: string
+                              example: '3'
+                            three_months_ago:
+                              type: string
+                              example: '3'
+                        hold:
+                          description: The number of Hold ratings.
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            current:
+                              type: string
+                              example: '4'
+                            one_month_ago:
+                              type: string
+                              example: '5'
+                            two_months_ago:
+                              type: string
+                              example: '5'
+                            three_months_ago:
+                              type: string
+                              example: '5'
+                        moderateSell:
+                          description: The number of Moderate Sell ratings.
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            current:
+                              type: string
+                              example: '0'
+                            one_month_ago:
+                              type: string
+                              example: '0'
+                            two_months_ago:
+                              type: string
+                              example: '0'
+                            three_months_ago:
+                              type: string
+                              example: '0'
+                        strongSell:
+                          description: The number of Strong Sell ratings.
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            current:
+                              type: string
+                              example: '0'
+                            one_month_ago:
+                              type: string
+                              example: '0'
+                            two_months_ago:
+                              type: string
+                              example: '0'
+                            three_months_ago:
+                              type: string
+                              example: '0'
+                      required:
+                      - symbol
+                      - name
+                      - averageRecommendation
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getIndexMembers.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getIndexMembers
+      operationId: get-getIndexMembers
+      description: The getIndexMembers API from Barchart OnDemand returns the constituents comprising an index.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbol
+        description: A symbol or code that identifies an index.
+        required: true
+        schema:
+          type: string
+          enum:
+          - $ONE
+          - $IDX
+          - $SPX
+          - $IQY
+          - $RUI
+          - $IUX
+          - $RUA
+          - $IUXX
+          - $DOWC
+          - $DOWT
+          - $DOWU
+          - $DOWI
+          - $TXCX
+          - $JX
+          - $TXSX
+          - $TTCS
+          - $TOOC
+          - $TXTW
+          - $TTCD
+          - $TTCS
+          - $TTEN
+          - $TTFS
+          - $TTIN
+          - $TTTK
+          - $TTMT
+          - $TTHC
+          - $TTRE
+          - $TTTS
+          - $TTUT
+          - $RTCM
+          - $RTRE
+          example: $SPX
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: exchange
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        index:
+                          description: The index that the symbol belongs to.
+                          type:
+                          - string
+                          - 'null'
+                          example: $SPX
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAP
+                        name:
+                          description: The name for the financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Advance Auto Parts Inc
+                        exchange:
+                          description: The exchange code on which the financial instrument trades.
+                          type:
+                          - string
+                          - 'null'
+                          example: NYSE
+                      required:
+                      - index
+                      - symbol
+                      - name
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getCashFlow.json:
+    get:
+      tags:
+      - Profiles and Financial Data
+      summary: getCashFlow
+      operationId: get-getCashFlow
+      description: Barchart OnDemand's getCashFlow API provides information about cash flow, income and cash equivalents of publicly traded companies.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used.
+        required: true
+        schema:
+          type: string
+          example: AAPL,GOOG
+      - in: query
+        name: reportPeriod
+        description: Whether to return quarterly (3M) or annual (12M) reports.
+        required: false
+        schema:
+          type: string
+          enum:
+          - 12M
+          - 3M
+          example: 12M
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: numberOfYears
+        description: The number of years to return data for.
+        required: false
+        schema:
+          type: integer
+          example: 4
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        period:
+                          description: The cash flow period.
+                          type:
+                          - string
+                          - 'null'
+                          example: 09-2020
+                        netIncome:
+                          description: The Net Income value.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 57411000000
+                        depreciationAndAmortization:
+                          description: The depreciation and amortization value.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 11056000000
+                        deferredIncomeTax:
+                          description: Income tax that has been deferred.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -215000000
+                        accountsReceivable:
+                          description: The accounts receivable.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 6917000000
+                        accountsPayable:
+                          description: The amount of payables outstanding.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -4062000000
+                        otherWorkingCapital:
+                          description: The amount of other working capital.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 5690000000
+                        loans:
+                          description: The amount of loans.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        otherOperatingActivities:
+                          description: The amount of other operating activity.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3877000000
+                        netCashFromOperatingActivities:
+                          description: The amount of net cash from operating activities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 80674000000
+                        changeInDepositsWithBank:
+                          description: Change in Deposits with Banks.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 5453000000
+                        investmentsInProperty:
+                          description: Investments In Property, Plant, And Equipment.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -7309000000
+                        netAcquisitions:
+                          description: Net Business Purchase And Sale.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -1524000000
+                        purchasesOfInvestments:
+                          description: Purchases of Investments.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -210000000
+                        salesOfInvestments:
+                          description: Sales/Maturities of Investments.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 92000000
+                        purchasesAndSaleOfIntangibles:
+                          description: Purchases/Sales of Intangibles.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        netChangeInLoans:
+                          description: Change in Loans, Net.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        otherInvestingActivity:
+                          description: The amount of other investing activity.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -791000000
+                        netCashUsedForInvestingActivities:
+                          description: Net cash used for investing activities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -4289000000
+                        changeInDeposits:
+                          description: Change in Deposits.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        changeInShortTermBorrowing:
+                          description: Change in Short-Term Borrowing.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        debtIssued:
+                          description: Debt Issued.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 16091000000
+                        debtRepayment:
+                          description: Debt Repayment.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -12629000000
+                        commonStockIssued:
+                          description: Issuance of Capital Stock.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 880000000
+                        commonStockRepurchased:
+                          description: Repurchase of Capital Stock.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -72358000000
+                        dividendPaid:
+                          description: Payment of Cash Dividends.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -14081000000
+                        otherFinancingActivity:
+                          description: The amount of other financing activity.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -4723000000
+                        netCashProvidedByFinancingActivities:
+                          description: Net cash provided by (used for) financing activities.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -86820000000
+                        effectOfExchangeRateChanges:
+                          description: Effect of Exchange Rate Changes.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        cashAtBeginningOfPeriod:
+                          description: Cash at Beginning of Period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 50224000000
+                        cashAtEndOfPeriod:
+                          description: Cash at End of Period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 39789000000
+                        netChangeInCash:
+                          description: Net Change in Cash & Cash Equiv.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -10435000000
+                        operatingCashFlow:
+                          description: Operating cash flow.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 80674000000
+                        capitalExpenditure:
+                          description: Investments in property, plant, and equipment.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -7309000000
+                        freeCashFlow:
+                          description: Free Cash Flow.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 73365000000
+                      required:
+                      - symbol
+                      - period
+                      - netIncome
+                      - depreciationAndAmortization
+                      - deferredIncomeTax
+                      - accountsReceivable
+                      - accountsPayable
+                      - otherWorkingCapital
+                      - loans
+                      - otherOperatingActivities
+                      - netCashFromOperatingActivities
+                      - changeInDepositsWithBank
+                      - investmentsInProperty
+                      - netAcquisitions
+                      - purchasesOfInvestments
+                      - salesOfInvestments
+                      - purchasesAndSaleOfIntangibles
+                      - netChangeInLoans
+                      - otherInvestingActivity
+                      - netCashUsedForInvestingActivities
+                      - changeInDeposits
+                      - changeInShortTermBorrowing
+                      - debtIssued
+                      - debtRepayment
+                      - commonStockIssued
+                      - commonStockRepurchased
+                      - dividendPaid
+                      - otherFinancingActivity
+                      - netCashProvidedByFinancingActivities
+                      - effectOfExchangeRateChanges
+                      - cashAtBeginningOfPeriod
+                      - cashAtEndOfPeriod
+                      - netChangeInCash
+                      - operatingCashFlow
+                      - capitalExpenditure
+                      - freeCashFlow
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error

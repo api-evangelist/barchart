@@ -1,0 +1,3137 @@
+openapi: 3.2.0
+info:
+  title: OnDemand Charts and Analytics API
+  version: 1.0.1
+  description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
+  contact:
+    name: onDemand API Support
+    url: https://www.barchart.com/ondemand
+    email: support@barchart.com
+  termsOfService: https://www.barchart.com/solutions/company/terms-and-privacy
+servers:
+- url: https://ondemand.websol.barchart.com
+tags:
+- name: Charts and Analytics
+paths:
+  /getChart.json:
+    get:
+      tags:
+      - Charts and Analytics
+      summary: getChart
+      operationId: get-getChart
+      description: The getChart API from Barchart OnDemand is used to request a custom chart image with variables such as chart type, size, period and technical indicators, based on a symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.
+        required: true
+        schema:
+          type: string
+          example: TSLA,MSFT
+      - in: query
+        name: type
+        description: 'The type of chart, includes: bar chart ("BAR"), candlestick ("CANDLE"), area ("AREA") or line ("LINE") chart.
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - BAR
+          - LINE
+          - CANDLE
+          - AREA
+          example: LINE
+      - in: query
+        name: width
+        description: The width of chart in pixels.
+        required: false
+        schema:
+          type: integer
+          example: 700
+      - in: query
+        name: height
+        description: The height of the chart, in pixels, with no indicators in pixels.
+        required: false
+        schema:
+          type: integer
+          example: 550
+      - in: query
+        name: volume
+        description: An option to display the volume indicator on the chart.
+        required: false
+        schema:
+          type: string
+          example: 'false'
+      - in: query
+        name: period
+        description: The period to display the chart.
+        required: false
+        schema:
+          type: string
+          enum:
+          - 1d
+          - 5d
+          - 3d
+          - 10d
+          - 1m
+          - 3m
+          - 6m
+          - 1y
+          - 2y
+          - 3y
+          - 5y
+          - 10y
+          - 15y
+          - 20y
+          - 25y
+          - ytd
+          example: 1d
+      - in: query
+        name: interval
+        description: 'Period type: DO (Daily Contract), DN (Daily Nearest), WO (Weekly Contract), WN (Weekly Nearest), MO (Monthly Contract), MN (Monthly Nearest).
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - DO
+          - DN
+          - WO
+          - WN
+          - MO
+          - MN
+          example: DO
+      - in: query
+        name: indicators
+        description: A semi-colon delimited list of indicators.
+        required: false
+        schema:
+          type: string
+          example: BBANDS(20,2);MACD(12,26,9)
+      - in: query
+        name: frequencyType
+        description: 'Frequency type: DO (Daily Contract), DN (Daily Nearest), DC (Daily Continuation), WO (Weekly Contract), WN (Weekly Nearest), WC (Weekly Continuation), MO (Monthly Contract), MN (Monthly Nearest), MC (Monthly Continuation)
+
+          '
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: gradientTop
+        description: The HTML color code without the preceding hashtag for the AREA chart.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: gradientBottom
+        description: The HTML color code without the preceding hashtag for the AREA chart.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: bgColor
+        description: The HTML color code without the preceding hashtag for chart background color.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: YHOO
+                        imageURL:
+                          description: The URL for the chart image.
+                          type:
+                          - string
+                          - 'null'
+                          example: ////ondemand.websol.barchart.com/chart.png??symbol=YHOO\u0026barType=LINE\u0026time=1d\u0026width=700\u0026height=550\u0026volume=0\u0026indicators=BBANDS%2820%2C2%29%3BMACD%2812%2C26%2C9%29\u0026period=DO\u0026startDate=1499058000\u0026endDate=1499101199
+                      required:
+                      - symbol
+                      - imageURL
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getTechnicals.json:
+    get:
+      tags:
+      - Charts and Analytics
+      summary: getTechnicals
+      operationId: get-getTechnicals
+      description: Barchart OnDemand's getTechnicals API provides technical data and statistics for equities, indices, futures, currencies, cryptocurrencies and mutual funds based on symbol. Fields include moving averages, percent changes over different time periods and stochastics.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.
+        required: true
+        schema:
+          type: string
+          example: AAPL,GOOG
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: averageVolumeFiveDay,averageVolumeTwentyDay,averageVolumeFiftyDay
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        movingAverageFiveDay:
+                          description: The average price of the instrument over 5 days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 127.69
+                        movingAverageTenDay:
+                          description: The average price of the instrument over 10 days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 185.86
+                        movingAverageTwentyDay:
+                          description: The average price of the instrument over 20 days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 134.1
+                        movingAverageFiftyDay:
+                          description: The average price of the instrument over 50 days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 131.9
+                        movingAverageOneHundredDay:
+                          description: The average price of the instrument over 100 days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 124.69
+                        movingAverageOneHundredFiftyDay:
+                          description: The average price of the instrument over 150 days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        movingAverageTwoHundredDay:
+                          description: The average price of the instrument over 200 days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 112.09
+                        movingAverageOneMonth:
+                          description: The average price of the instrument over 1 month.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        movingAverageThreeMonths:
+                          description: The average price of the instrument over 3 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        movingAverageSixMonths:
+                          description: The average price of the instrument over 6 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        movingAverageNineMonths:
+                          description: The average price of the instrument over 9 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        movingAverageFiftyTwoWeeks:
+                          description: The average price of the instrument over 52 weeks.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        movingAverageYTD:
+                          description: The average price of the instrument since the start of the year.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 133.01
+                        priceChangeFiveDay:
+                          description: The change in price over 5-days
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -11.14
+                        priceChangeTwentyDay:
+                          description: The change in price over 20-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -20.86
+                        priceChangeFiftyDay:
+                          description: The change in price over 50-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.28
+                        priceChangeOneHundredDay:
+                          description: The change in price over 100-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 7.97
+                        priceChangeTwoHundredDay:
+                          description: The change in price over 200-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 46.12
+                        priceChangeYTD:
+                          description: The change in price since the start of the year.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -10.64
+                        priceChangeOneMonth:
+                          description: The change in price over 1 month.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -17.02
+                        priceChangeThreeMonth:
+                          description: The change in price over 3 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 8.21
+                        priceChangeSixMonth:
+                          description: The change in price over 6 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -2.32
+                        priceChangeNineMonth:
+                          description: The change in price over 9 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 42.33
+                        priceChangeFiftyTwoWeek:
+                          description: The change in price over 52 weeks.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 43.79
+                        priceChangeTwoYears:
+                          description: The change in price over 2 years.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 78.81
+                        percentChangeFiveDay:
+                          description: The percentage change in price over 5-days
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -8.36
+                        percentChangeTwentyDay:
+                          description: The percentage change in price over 20-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -14.6
+                        percentChangeFiftyDay:
+                          description: The percentage change in price over 50-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.23
+                        percentChangeOneHundredDay:
+                          description: The percentage change in price over 100-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 6.98
+                        percentChangeTwoHundredDay:
+                          description: The percentage change in price over 200-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 60.74
+                        percentChangeYTD:
+                          description: The percentage change in price since the start of the year.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -8.01
+                        percentChangeOneMonth:
+                          description: The percentage change in price over 1 month.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -12.23
+                        percentChangeThreeMonth:
+                          description: The percentage change in price over 3 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 7.21
+                        percentChangeSixMonth:
+                          description: The percentage change in price over 6 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -1.86
+                        percentChangeNineMonth:
+                          description: The percentage change in price over 9 months.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 53.1
+                        percentChangeFiftyTwoWeek:
+                          description: The percentage change in price over 52 weeks.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 55.96
+                        percentChangeTwoYears:
+                          description: The percentage change in price over 2 years.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 182.26
+                        averageVolumeFiveDay:
+                          description: The average daily volume calculated over the past 5-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 95174617
+                        averageVolumeTwentyDay:
+                          description: The average daily volume calculated over the past 20-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 95033719
+                        averageVolumeFiftyDay:
+                          description: The average daily volume calculated over the past 50-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 104940797
+                        averageVolumeOneHundredDay:
+                          description: The average daily volume calculated over the past 100-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 110668281
+                        averageVolumeTwoHundredDay:
+                          description: The average daily volume calculated over the past 200-days.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 135862438
+                        averageVolumeYTD:
+                          description: The average daily volume calculated since the start of the year.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 102347750
+                        nineDayRawStochastic:
+                          description: A 9-day raw stochastic indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 19.7
+                        fourteenDayRawStochastic:
+                          description: A 14-day raw stochastic indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 18.81
+                        twentyDayRawStochastic:
+                          description: A 20-day raw stochastic indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 14.15
+                        fiftyDayRawStochastic:
+                          description: A 50-day raw stochastic indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 13.73
+                        oneHundredDayRawStochastic:
+                          description: A 100-day raw stochastic indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 39.01
+                        nineDayStochasticK:
+                          description: A 9-day stochastic %k indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 15.49
+                        fourteenDayStochasticK:
+                          description: A 14-day stochastic %k indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 15.19
+                        twentyDayStochasticK:
+                          description: A 20-day stochastic %k indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 10.04
+                        fiftyDayStochasticK:
+                          description: A 50-day stochastic %k indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 25.39
+                        oneHundredDayStochasticK:
+                          description: A 100-day stochastic %k indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 49.39
+                        nineDayStochasticD:
+                          description: A 9-day stochastic %d indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 17.44
+                        fourteenDayStochasticD:
+                          description: A 14-day stochastic %d indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 16.75
+                        twentyDayStochasticD:
+                          description: A 20-day stochastic %d indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 11.1
+                        fiftyDayStochasticD:
+                          description: A 50-day stochastic %d indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 33.01
+                        oneHundredDayStochasticD:
+                          description: A 100-day stochastic %d indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 55.56
+                        nineDayATR:
+                          description: A 9-day average true range indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.68
+                        fourteenDayATR:
+                          description: A 14-day average true range indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.63
+                        twentyDayATR:
+                          description: A 20-day average true range indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.61
+                        fiftyDayATR:
+                          description: A 50-day average true range indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.59
+                        oneHundredDayATR:
+                          description: A 100-day average true range indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.37
+                        twoDayRelativeStrength:
+                          description: A 2-day relative strength indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        fiveDayRelativeStrength:
+                          description: A 5-day relative strength indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 68.43
+                        nineDayRelativeStrength:
+                          description: A 9-day relative strength indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 19.25
+                        fourteenDayRelativeStrength:
+                          description: A 14-day relative strength indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 30.16
+                        twentyDayRelativeStrength:
+                          description: A 20-day relative strength indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 37.37
+                        fiftyDayRelativeStrength:
+                          description: A 50-day relative strength indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 48.51
+                        oneHundredDayRelativeStrength:
+                          description: A 100-day relative strength indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52.37
+                        nineDayPercentR:
+                          description: A 9-day percent R indicator
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 80.3
+                        fourteenDayPercentR:
+                          description: A 14-day percent R indicator
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 81.19
+                        twentyDayPercentR:
+                          description: A 20-day percent R indicator
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 85.85
+                        fiftyDayPercentR:
+                          description: A 50-day percent R indicator
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 86.27
+                        oneHundredDayPercentR:
+                          description: A 100-day percent R indicator
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 60.99
+                        nineDayHistoricVolatility:
+                          description: The 9-day historic or realized volatility.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 16.43
+                        fourteenDayHistoricVolatility:
+                          description: The 14-day historic or realized volatility.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 21.4
+                        twentyDayHistoricVolatility:
+                          description: The 20-day historic or realized volatility.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 25.35
+                        thirtyDayHistoricVolatility:
+                          description: The 30-day historic or realized volatility.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 29.45
+                        fiftyDayHistoricVolatility:
+                          description: The 50-day historic or realized volatility.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 31.54
+                        ninetyDayHistoricVolatility:
+                          description: The 90-day historic or realized volatility.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 47.16
+                        oneHundredDayHistoricVolatility:
+                          description: The 100-day historic or realized volatility.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 31.73
+                        nineDayMACD:
+                          description: The 9-day moving average convergence/divergence indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -4.86
+                        fourteenDayMACD:
+                          description: The 14-day moving average convergence/divergence indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -6.78
+                        twentyDayMACD:
+                          description: The 20-day moving average convergence/divergence indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -8.12
+                        fiftyDayMACD:
+                          description: The 50-day moving average convergence/divergence indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -5.92
+                        oneHundredDayMACD:
+                          description: The 100-day moving average convergence/divergence indicator.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.28
+                        standardDeviation:
+                          description: The standard deviation using the past 20-days of data.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -1.99
+                        percentChangeOneYear:
+                          description: The one year return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 55.96
+                        percentChangeThreeYear:
+                          description: The three year return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 186.02
+                        percentChangeFiveYear:
+                          description: The five year return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 389.27
+                        percentChangeTenYear:
+                          description: The ten year return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 898.84
+                        pivotPoint:
+                          description: Pivot Point
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 127.11
+                        firstLevelResistance:
+                          description: Pivot Point 1st level resistance.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 128.61
+                        secondLevelResistance:
+                          description: Pivot Point 2nd level resistance
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 131.23
+                        thirdLevelResistance:
+                          description: Pivot Point 3rd level resistance
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 132.73
+                        firstLevelSupport:
+                          description: Pivot Point 1st level support
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 124.49
+                        secondLevelSupport:
+                          description: Pivot Point 2nd level support
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 122.99
+                        thirdLevelSupport:
+                          description: Pivot Point 3rd level support
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 120.37
+                        fourWkRetracementHigh:
+                          description: 38.2% Fibonacci Retracement from 4 week high.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 134.89
+                        fourWkRetracementLow:
+                          description: 38.2% Fibonacci Retracement from 4 week low.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 128.59
+                        fourWkRetracementHighLow:
+                          description: 50% Fibonacci Retracement from 4 week high/low.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 131.74
+                        thirteenWkRetracementHigh:
+                          description: 38.2% Fibonacci Retracement from 13 week high.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 132.67
+                        thirteenWkRetracementLow:
+                          description: 38.2% Fibonacci Retracement from 13 week low.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 125
+                        thirteenWkRetracementHighLow:
+                          description: 50% Fibonacci Retracement from 13 week high/low.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 128.84
+                        fiftyTwoWkRetracementHigh:
+                          description: 38.2% Fibonacci Retracement from 52 week high.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 109.97
+                        fiftyTwoWkRetracementLow:
+                          description: 38.2% Fibonacci Retracement from 52 week low.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 88.27
+                        fiftyTwoWkRetracementHighLow:
+                          description: 50% Fibonacci Retracement from 52 week high/low
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 99.12
+                        standardDeviationTraditional:
+                          description: The standard deviation using the past year of data.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 24.09
+                        gapUp:
+                          description: The current session Open is higher than the previous session's High.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                        gapUpPercent:
+                          description: The current session Open is higher than the previous session's High.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                        gapDown:
+                          description: The current session Open is lower than the previous session's Low.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -1.84
+                        gapDownPercent:
+                          description: The current session Open is lower than the previous session's Low.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -1.46
+                        percentVolume:
+                          description: Percentage difference between the current volume and the average volume.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -5.98
+                        relativeStrengthTwoDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeStrengthFiveDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeStrengthNineDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeStrengthFourteenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeStrengthTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeStrengthFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeStrengthOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangeNineDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangeFourteenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangeTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangeFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangeOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangePercentNineDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangePercentFourteenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangePercentTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangePercentFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageDailyRangePercentOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangeNineDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangeFourteenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangeTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangeFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangeOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangePercentNineDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangePercentFourteenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangePercentTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangePercentFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        averageTrueRangePercentOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageFiveDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageTenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageOneHundredFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageTwoHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageYTD:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageOneMonth:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageThreeMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageSixMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageNineMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageOneYear:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeMovingAverageTwoYears:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageFiveDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageTenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageOneHundredFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageTwoHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageYTD:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageOneMonth:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageThreeMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageSixMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageNineMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageOneYear:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        slopeExponentialMovingAverageTwoYears:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageFiveDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageTenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageOneHundredFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageTwoHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageYTD:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageOneMonth:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageThreeMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageSixMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageNineMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageOneYear:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        percentFromMovingAverageTwoYears:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageFiveDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageTenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageOneHundredFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageTwoHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageYTD:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageOneMonth:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageThreeMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageSixMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageNineMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageOneYear:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        exponentialMovingAverageTwoYears:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeFiveDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeTenDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeOneHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeOneHundredFiftyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeTwoHundredDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeYTD:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeOneMonth:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeThreeMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeSixMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeNineMonths:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeOneYear:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeVolumeTwoYears:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        bollingerBandPercentTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        bollingerBandRankTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        keltnerBandPercentTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        keltnerBandRankTwentyDay:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        closeLowRange:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        range:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        rangeHighLowPercent:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        rangeOpenClosePercent:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        highLowDifference:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                        relativeStrengthIndexRank:
+                          description: N/A
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: null
+                      required:
+                      - symbol
+                      - movingAverageFiveDay
+                      - movingAverageTenDay
+                      - movingAverageTwentyDay
+                      - movingAverageFiftyDay
+                      - standardDeviation
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getSignal.json:
+    get:
+      tags:
+      - Charts and Analytics
+      summary: getSignal
+      operationId: get-getSignal
+      description: The getSignal API provides the Barchart Technical Opinion / Signal (buy, sell or hold) based on a variety of short, medium and long-term technical indicators based on a symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used. For futures, notation such as <root_symbol*0> for the active contract or <root_symbol*1> for the first nearby is supported, as is <root_symbol^F> for all futures contracts for a given root symbol, as is <root_symbol^O> for all options contracts for a given underlying futures symbol.
+        required: true
+        schema:
+          type: string
+          example: AAPL,GOOG
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: trendspotterOpinion,adi7DayOpinion,parabolic50DaySignal
+      - in: query
+        name: maxRecords
+        description: The maximum number of records to show in the return.
+        required: false
+        schema:
+          type: integer
+          example: 10
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        name:
+                          description: The full name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Apple Inc
+                        trendspotterOpinion:
+                          description: The Trend Seeker&#174; (composite indicator) buy, sell or hold opinion.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        trendspotterStrength:
+                          description: The Trend Seeker&#174; Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Maximum
+                        trendspotterDirection:
+                          description: The Trend Seeker&#174; Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        adx7DayOpinion:
+                          description: 7-day Average Directional Indicator (short-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        adx7DayStrength:
+                          description: 7-Day Average Strengthal Indicator Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Maximum
+                        adx7DayDirection:
+                          description: 7 Day Average Directional Indicator Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        maHiLo10_8DayOpinion:
+                          description: 10 - 8 Day Moving Average Hilo Channel (short-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        maHiLo10_8DayStrength:
+                          description: 10 - 8 Day Moving Average Hilo Channel Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Strong
+                        maHiLo10_8DayDirection:
+                          description: 10 - 8 Day Moving Average Hilo Channel Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        ma20DaySignal:
+                          description: 20-Day Moving Average vs Price Indicator (short-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        ma20DayStrength:
+                          description: 20-Day Moving Average vs Price Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Maximum
+                        ma20DayDirection:
+                          description: 20-Day Moving Average vs Price Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        macd20_50DaySignal:
+                          description: 20-50 Day MACD Oscillator (short-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        macd20_50DayStrength:
+                          description: 20-50 Day MACD Oscillator Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Soft
+                        macd20_50DayDirection:
+                          description: 20-50 Day MACD Oscillator Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        macd20_200DaySignal:
+                          description: 20-200 Day MACD Oscillator (short-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        macd20_200DayStrength:
+                          description: 20-200 Day MACD Oscillator Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Average
+                        macd20_200DayDirection:
+                          description: 20-200 Day MACD Oscillator Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        bbands20DaySignal:
+                          description: 20-Day Bollinger Bands (short-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        bbands20DayStrength:
+                          description: 20-Day Bollinger Bands Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Strong
+                        bbands20DayDirection:
+                          description: 20-Day Bollinger Bands Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakening
+                        shortTermAverageSignal:
+                          description: Average signal based on all short-term indicators.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        shortTermAveragePercent:
+                          description: The percentage / weight of the average signal.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 50
+                        cci40DaySignal:
+                          description: 40-Day Commodity Channel Index (medium-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        cci40DayStrength:
+                          description: 40-Day Commodity Channel Index Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Maximum
+                        cci40DayDirection:
+                          description: 40-Day Commodity Channel Index Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakening
+                        ma50DaySignal:
+                          description: 50-Day Moving Average vs Price (medium-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        ma50DayStrength:
+                          description: 50-Day Moving Average vs Price Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Average
+                        ma50DayDirection:
+                          description: 50-Day Moving Average vs Price Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        macd20_100DaySignal:
+                          description: 20 - 100 Day MACD Oscillator (medium-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        macd20_100DayStrength:
+                          description: 20 - 100 Day MACD Oscillator Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Strong
+                        macd20_100DayDirection:
+                          description: 20 - 100 Day MACD Oscillator Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        macd50_150DaySignal:
+                          description: 50 - 150 Day MACD Oscillator (medium-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        macd50_150DayStrength:
+                          description: 50 - 150 Day MACD Oscillator Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Average
+                        macd50_150DayDirection:
+                          description: 50 - 150 Day MACD Oscillator Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        macd50_200DaySignal:
+                          description: 50 - 200 Day MACD Oscillator (medium-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        macd50_200DayStrength:
+                          description: 50 - 200 Day MACD Oscillator Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Strong
+                        macd50_200DayDirection:
+                          description: 50 - 200 Day MACD Oscillator Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        parabolic50DaySignal:
+                          description: 50-Day Parabolic Time/Price (medium-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        parabolic50DayStrength:
+                          description: 50-Day Parabolic Time/Price Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Maximum
+                        parabolic50DayDirection:
+                          description: 50-Day Parabolic Time/Price Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        mediumTermAverageSignal:
+                          description: Average signal based on all medium-term indicators.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        mediumTermAveragePercent:
+                          description: The percentage / weight of the average signal.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 50
+                        cci60DaySignal:
+                          description: 60-Day Commodity Channel Index (long-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        cci60DayStrength:
+                          description: 60-Day Commodity Channel Index Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Weak
+                        cci60DayDirection:
+                          description: 60-Day Commodity Channel Index Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        ma100DaySignal:
+                          description: 100-Day Moving Average vs Price (long-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        ma100DayStrength:
+                          description: 100-Day Moving Average vs Price Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Weak
+                        ma100DayDirection:
+                          description: 100-Day Moving Average vs Price Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        ma150DaySignal:
+                          description: 150-Day Moving Average vs Price (long-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        ma150DayStrength:
+                          description: 150-Day Moving Average vs Price Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Weak
+                        ma150DayDirection:
+                          description: 150-Day Moving Average vs Price Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        ma200DaySignal:
+                          description: 200-Day Moving Average vs Price (long-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        ma200DayStrength:
+                          description: 200-Day Moving Average vs Price Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Weak
+                        ma200DayDirection:
+                          description: 200-Day Moving Average vs Price Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        macd50_100DaySignal:
+                          description: 50 - 100 Day MACD Oscillator (long-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        macd50_100DayStrength:
+                          description: 50 - 100 Day MACD Oscillator Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Average
+                        macd50_100DayDirection:
+                          description: 50 - 100 Day MACD Oscillator Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        macd100_200DaySignal:
+                          description: 100 - 200 Day MACD Oscillator (long-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        macd100_200DayStrength:
+                          description: 100 - 200 Day MACD Oscillator Strength
+                          type:
+                          - string
+                          - 'null'
+                          example: Strong
+                        macd100_200DayDirection:
+                          description: 100 - 200 Day MACD Oscillator Direction
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        longTermAverageSignal:
+                          description: Average signal based on all long-term indicators.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        longTermAveragePercent:
+                          description: The percentage / weight of the average signal.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 50
+                        overallAverageSignal:
+                          description: Average signal based on all indicators.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        overallAveragePercent:
+                          description: The percentage / weight of the average signal.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 40
+                        overallAverageStrength:
+                          description: Average strength based on all indicators.
+                          type:
+                          - string
+                          - 'null'
+                          example: Weak
+                        overallAverageDirection:
+                          description: Average direction based on all indicators.
+                          type:
+                          - string
+                          - 'null'
+                          example: Weakest
+                        previousDaySignal:
+                          description: Signal based on previous business day's performance.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        previousDayPercent:
+                          description: The percentage / weight of previous business day's signal.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 56
+                        lastWeekSignal:
+                          description: Average signal based on last week's performance.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        lastWeekPercent:
+                          description: The percentage / weight of last week's signal.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 80
+                        lastMonthSignal:
+                          description: Average signal based on last month's performance.
+                          type:
+                          - string
+                          - 'null'
+                          example: Buy
+                        lastMonthPercent:
+                          description: The percentage / weight of last month's signal.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 100
+                        trendspotterNewSignal:
+                          description: Indicates that the symbol made a NEW Trend Seeker&#174; signal today.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        adx7DayNewSignal:
+                          description: 7-Day Average Directional Indicator.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        maHiLo10_8DayNewSignal:
+                          description: 10-8-Day Moving Average Hilo Channelю
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        ma20DayNewSignal:
+                          description: 20-Day Moving Average Versus Price.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        macd20_50DayNewSignal:
+                          description: 20-50-Day MACD Oscillator.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        bbands20DayNewSignal:
+                          description: 20-Day Bollinger Bands.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        cci40DayNewSignal:
+                          description: 40-Day Commodity Channel Index.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        ma50DayNewSignal:
+                          description: 50-Day Moving Average Versus Price.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        macd20_100DayNewSignal:
+                          description: 20-100-Day MACD Oscillator.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        parabolic50DayNewSignal:
+                          description: 50-Day Parabolic Time / Price.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        cci60DayNewSignal:
+                          description: 60-Day Commodity Channel Index.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        ma100DayNewSignal:
+                          description: 100-Day Moving Average Versus Price.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        macd50_100DayNewSignal:
+                          description: 50-100 Day MACD Oscillator.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        macd20_200DayNewSignal:
+                          description: 20-200-Day MACD Oscillator.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        macd50_150DayNewSignal:
+                          description: 50-150-Day MACD Oscillator.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        macd50_200DayNewSignal:
+                          description: 50-200-Day MACD Oscillator.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        ma150DayNewSignal:
+                          description: 150-Day Moving Average Versus Price.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        ma200DayNewSignal:
+                          description: 200-Day Moving Average Versus Price.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        macd100_200DayNewSignal:
+                          description: 100-200-Day MACD Oscillator.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        macd9_18DaySignal:
+                          description: 9-18 Day MACD Oscillator (short-term indicator) buy, sell or hold signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        macd9_18DayStrength:
+                          description: 9-18 Day MACD Oscillator Strength.
+                          type:
+                          - string
+                          - 'null'
+                          example: Soft
+                        macd9_18DayDirection:
+                          description: 9-18 Day MACD Oscillator Direction.
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        macd9_18DayNewSignal:
+                          description: 9-18 Day Mov Avg.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        macd12_26_9DayStrength:
+                          description: The strength of the signal compared to its historical performance where Maximum is the strongest this signal has been and Minimum is the weakest.
+                          type:
+                          - string
+                          - 'null'
+                          example: Maximum
+                        macd12_26_9DayDirection:
+                          description: Indicates whether the Buy or Sell signal is strengthening or weakening or whether a Hold signal is heading towards a buy or sell signal.
+                          type:
+                          - string
+                          - 'null'
+                          example: Strongest
+                        macd12_26_9DaySignal:
+                          description: The signal from the 12-26-9 Day eMACD, which uses a Exponential Moving Averages in its calculation.
+                          type:
+                          - string
+                          - 'null'
+                          example: Sell
+                        macd12_26_9DayNewSignal:
+                          description: Indicates that the symbol made a NEW 12-26-9 Day eMACD signal today.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                      required:
+                      - symbol
+                      - name
+                      - trendspotterStrength
+                      - trendspotterDirection
+                      - shortTermAverageSignal
+                      - shortTermAveragePercent
+                      - mediumTermAverageSignal
+                      - mediumTermAveragePercent
+                      - longTermAverageSignal
+                      - longTermAveragePercent
+                      - overallAverageSignal
+                      - overallAveragePercent
+                      - overallAverageStrength
+                      - overallAverageDirection
+                      - previousDaySignal
+                      - previousDayPercent
+                      - lastWeekSignal
+                      - lastWeekPercent
+                      - lastMonthSignal
+                      - lastMonthPercent
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getMomentum.json:
+    get:
+      tags:
+      - Charts and Analytics
+      summary: getMomentum
+      operationId: get-getMomentum
+      description: The getMomentum API provides a daily summary on the number of advancing, declining and unchanged stocks, as well as the percentage of stocks above moving averages of different lengths.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: country
+        description: A country code identifying a group of stocks listed in a country.
+        required: false
+        schema:
+          type: string
+          example: US
+      - in: query
+        name: exchanges
+        description: The code for the exchange a group of financial instruments are listed on.
+        required: false
+        schema:
+          type: string
+          example: NASDAQ
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        country:
+                          description: A country code identifying a group of stocks listed in a country.
+                          type:
+                          - string
+                          - 'null'
+                          example: US
+                        advancesToday:
+                          description: The total number of advancing stocks for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1085
+                        advancesYesterday:
+                          description: The total number of advancing stocks for yesterday.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2285
+                        advancesLastWeek:
+                          description: The total number of advancing stocks last week.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2943
+                        advancesLastMonth:
+                          description: The total number of advancing stocks last month.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 3067
+                        unchgToday:
+                          description: The total number of unchanged stocks for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 40
+                        unchgYesterday:
+                          description: The total number of unchanged stocks for yesterday.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 80
+                        unchgLastWeek:
+                          description: The total number of unchanged stocks last week.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 275
+                        unchgLastMonth:
+                          description: The total number of unchanged stocks last month.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 192
+                        declinesToday:
+                          description: The total number of declining stocks for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 4022
+                        declinesYesterday:
+                          description: The total number of declining stocks for yesterday.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2806
+                        declinesLastWeek:
+                          description: The total number of declining stocks last week.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1569
+                        declinesLastMonth:
+                          description: The total number of declining stocks last month.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1548
+                        percentAbove20dMAtoday:
+                          description: The percentage of stocks above their 20-day moving average for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 54
+                        percentAbove20dMAyesterday:
+                          description: The percentage of stocks above their 20-day moving average yesterday.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 67.01
+                        percentAbove20dMALastWeek:
+                          description: The percentage of stocks above their 20-day moving average last week.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 63.43
+                        percentAbove20dMALastMonth:
+                          description: The percentage of stocks above their 20-day moving average last month.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 44.45
+                        percentAbove50dMAtoday:
+                          description: The percentage of stocks above their 50-day moving average for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 69.66
+                        percentAbove50dMAyesterday:
+                          description: The percentage of stocks above their 50-day moving average yesterday.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 77.53
+                        percentAbove50dMALastWeek:
+                          description: The percentage of stocks above their 50-day moving average last week.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 56.11
+                        percentAbove50dMALastMonth:
+                          description: The percentage of stocks above their 50-day moving average last month.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 50.09
+                        percentAbove100dMAtoday:
+                          description: The percentage of stocks above their 100-day moving average for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 82.56
+                        percentAbove100dMAyesterday:
+                          description: The percentage of stocks above their 100-day moving average yesterday.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 86.1
+                        percentAbove100dMALastWeek:
+                          description: The percentage of stocks above their 100-day moving average last week.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 60.12
+                        percentAbove100dMALastMonth:
+                          description: The percentage of stocks above their 100-day moving average last month.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 58.25
+                        percentAbove150dMAtoday:
+                          description: The percentage of stocks above their 150-day moving average for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 85.61
+                        percentAbove150dMAyesterday:
+                          description: The percentage of stocks above their 150-day moving average yesterday.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 87.91
+                        percentAbove150dMALastWeek:
+                          description: The percentage of stocks above their 150-day moving average last week.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 60.66
+                        percentAbove150dMALastMonth:
+                          description: The percentage of stocks above their 150-day moving average last month.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 57.98
+                        percentAbove200dMAtoday:
+                          description: The percentage of stocks above their 200-day moving average for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 86.25
+                        percentAbove200dMAyesterday:
+                          description: The percentage of stocks above their 200-day moving average yesterday.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 88.85
+                        percentAbove200dMALastWeek:
+                          description: The percentage of stocks above their 200-day moving average last week.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 60.49
+                        percentAbove200dMALastMonth:
+                          description: The percentage of stocks above their 200-day moving average last month.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 58.05
+                        exchange:
+                          description: The code for the exchange a group of financial instruments are listed on.
+                          type:
+                          - string
+                          - 'null'
+                          example: NASDAQ
+                        advancingIssues:
+                          description: The total number of advancing issues for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 505
+                        decliningIssues:
+                          description: The total number of declining issues for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2426
+                        unchangedIssues:
+                          description: The total number of unchanged issues for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 24
+                        advancingIssuesPct:
+                          description: The percentage of advancing issues for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 17.09
+                        decliningIssuesPct:
+                          description: The percentage of declining issues for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 82.1
+                        unchangedIssuesPct:
+                          description: The percentage of unchanged issues for the current day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.81
+                        advancingShares:
+                          description: The total number of advancing shares for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 428
+                        decliningShares:
+                          description: The total number of declining shares for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2862
+                        unchangedShares:
+                          description: The total number of unchanged shares for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 6
+                        newHighs:
+                          description: The number of new 52-week highs for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 101
+                        newLows:
+                          description: The number of new 52-week highs for the current day.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 9
+                      required:
+                      - country
+                      - advancesToday
+                      - advancesYesterday
+                      - advancesLastWeek
+                      - advancesLastMonth
+                      - unchgToday
+                      - unchgYesterday
+                      - unchgLastWeek
+                      - unchgLastMonth
+                      - declinesToday
+                      - declinesYesterday
+                      - declinesLastWeek
+                      - declinesLastMonth
+                      - percentAbove20dMAtoday
+                      - percentAbove20dMAyesterday
+                      - percentAbove20dMALastWeek
+                      - percentAbove20dMALastMonth
+                      - percentAbove50dMAtoday
+                      - percentAbove50dMAyesterday
+                      - percentAbove50dMALastWeek
+                      - percentAbove50dMALastMonth
+                      - percentAbove100dMAtoday
+                      - percentAbove100dMAyesterday
+                      - percentAbove100dMALastWeek
+                      - percentAbove100dMALastMonth
+                      - percentAbove150dMAtoday
+                      - percentAbove150dMAyesterday
+                      - percentAbove150dMALastWeek
+                      - percentAbove150dMALastMonth
+                      - percentAbove200dMAtoday
+                      - percentAbove200dMAyesterday
+                      - percentAbove200dMALastWeek
+                      - percentAbove200dMALastMonth
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getTechnicalIndicatorData.json:
+    get:
+      tags:
+      - Charts and Analytics
+      summary: getTechnicalIndicatorData
+      operationId: get-getTechnicalIndicatorData
+      description: The getTechnicalIndicatorData API from Barchart OnDemand provides the requested technical indicators data for the requested symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: requestType
+        description: The type of response requested from the API. <i>getStudies</i> will return the list of all available indicators with their input sources, periodicity, offset, and meta information. <i>getStudy</i> will return the data for the requested indicator.
+        required: true
+        schema:
+          type: string
+          enum:
+          - getStudies
+          - getStudy
+          example: getStudy
+      - in: query
+        name: symbol
+        description: A symbol or code that identifies a financial instrument.
+        required: true
+        schema:
+          type: string
+          example: AAPL
+      - in: query
+        name: studyId
+        description: A valid indicator code that identifies a technical indicator when the argument is passed to <i>getStudies</i>.
+        required: true
+        schema:
+          type: string
+          example: MA
+      - in: query
+        name: startDate
+        description: The start date for which the indicator records should be returned.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2026-06-22'
+      - in: query
+        name: endDate
+        description: The end date for which the indicator records should be returned.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2026-07-22'
+      - in: query
+        name: unit
+        description: This parameter specifies whether the data to be returned should be tick, minutes (intraday), day (daily), weekly, monthly, quarterly, or yearly.
+        required: true
+        schema:
+          type: string
+          enum:
+          - tick
+          - intraday
+          - day
+          - week
+          - month
+          - quarter
+          - year
+      - in: query
+        name: numberOfBars
+        description: The maximum number of records requested over the requested date range.
+        required: false
+        schema:
+          type: integer
+          example: 100
+      - in: query
+        name: inputs
+        description: You can pass any valid input values for the selected study that are not always returned via this parameter. For example, for <i>Moving Average (MA)</i>, you can pass values as - inputs[Period]=50&inputs[Source]=Open&inputs[Offset]=1. For an input field of type enumeration, please ensure you pass a value from the provided list of values.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: fields
+        description: 'Pass any optional price fields you would like to be included in the response.<br/>Available values (multiple values separated by a comma may be used): *open, high, low, close, volume, open_interest*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: open,high
+      - in: query
+        name: spec
+        description: This parameter is used to specify whether the data should be plain, nearest or continuation records. Nearest and continuation are ignored for equities, and if specified the query will simply return plain records.
+        required: false
+        schema:
+          type: string
+          enum:
+          - none
+          - nearest
+          - continue
+          - per_count
+          - per_volume
+          - per_range
+          - per_seconds
+          - top_of_book
+      - in: query
+        name: size
+        description: N/A
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: isContractVolume
+        description: For futures, this parameter determines whether the returned volume should be the contract volume or the total volume. By default, it returns the total volume.
+        required: false
+        schema:
+          type: string
+          example: 'true'
+      - in: query
+        name: dividendsAdjust
+        description: Turns on/off dividends adjustment for stock data. By default it is off.
+        required: false
+        schema:
+          type: string
+          example: 'true'
+      - in: query
+        name: backAdjust
+        description: This parameter specifies whether the contracts in the series will be adjusted based on the roll-gap between the closing prices of the current contract and the previous contract on the day of the switch. Valid values are true and false. If not specified, the default value is false resulting in a non-adjusted query. Adjustments are reflected starting from the current date, regardless if an end date is set or not. This parameter only applies to multi-contract futures queries and is ignored for all other queries.
+        required: false
+        schema:
+          type: string
+          example: 'true'
+      - in: query
+        name: daysToExpiration
+        description: This parameter specifies the number of calendar days prior to a contract expiration when the series of contracts will be switched to the next contract in the series. Valid values are 0 through 60. A value of 0 will tell the system to use the day of expiration. If not specified, the default value (1) is used, resulting in each contract in the series to run until (and including) the day prior to its expiration. This parameter only applies to multi-contract futures queries and is ignored for all other queries.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: contractRoll
+        description: For futures, this parameter determines the switch from one contract to the next in the series is calculated. When the value specified is 'expiration', the switch from one contract to the next in the series will be based on the expiration date (and the value of the 'daystoexpiration' parameter if specified). When the value specified is 'combined', a combination of volume and openinterest will be used to determine when to switch from one contract to the next in the series (when using this value, the 'daystoexpiration' parameter is ignored).
+        required: false
+        schema:
+          type: string
+          enum:
+          - combined
+          - expiration
+      - in: query
+        name: decimalPrecision
+        description: The decimal precision to be applied to the requested study fields in the response.
+        required: false
+        schema:
+          type: string
+          enum:
+          - auto
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+      - in: query
+        name: interval
+        description: To aggregate sets of contiguous minute records (the number of minute records in each set is equal to the specified interval) into one record.
+        required: false
+        schema:
+          type: integer
+          example: 5
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        data:
+                          description: Returns timestamped values for each indicator.
+                      required:
+                      - symbol
+                      - data
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error

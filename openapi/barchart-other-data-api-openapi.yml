@@ -1,0 +1,3117 @@
+openapi: 3.2.0
+info:
+  title: OnDemand Other Data API
+  version: 1.0.1
+  description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
+  contact:
+    name: onDemand API Support
+    url: https://www.barchart.com/ondemand
+    email: support@barchart.com
+  termsOfService: https://www.barchart.com/solutions/company/terms-and-privacy
+servers:
+- url: https://ondemand.websol.barchart.com
+tags:
+- name: Other Data
+paths:
+  /getWeather.json:
+    get:
+      tags:
+      - Other Data
+      summary: getWeather
+      operationId: get-getWeather
+      description: Barchart OnDemand's getWeather API provides current conditions and forecasts based on zip code. As well as weather maps based on type or region.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: weatherType
+        description: 'The type of weather requested. Includes: Current Conditions ("CC") and Forecast ("F").
+
+          '
+        required: false
+        schema:
+          type: string
+          enum:
+          - CC
+          - F
+          - MAP
+          example: CC
+      - in: query
+        name: zipCode
+        description: The zip code of the location as a 5-digit numeric value.
+        required: false
+        schema:
+          type: string
+          example: '60606'
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: windDirection,windSpeed,humidity,dewpoint,forcastedDay,forcastedPrecipitation
+      - in: query
+        name: mapType
+        description: The type of map required. Only valid when using the "MAP" weatherType.
+        required: false
+        schema:
+          type: string
+          enum:
+          - localRadarAnimation
+          - usRadarSatellite
+          - usRadarSatelliteAnimation
+          - todaysWeatherMap
+          - currentWindConditions
+          - todaysPrecipitationAccumulation
+          - dailyPrecipitation
+          - usSoilMoisture
+          - usCurrentTemperatures
+      - in: query
+        name: mapRegion
+        description: The region of map required.
+        required: false
+        schema:
+          type: string
+          enum:
+          - centralPlains
+          - dakotas
+          - californiaArizona
+          - colorado
+          - deepSouth
+          - delta
+          - farWest
+          - florida
+          - greatBasin
+          - greatLakes
+          - midAtlantic
+          - montana
+          - northEast
+          - ohioValley
+          - pacificNorthwest
+          - rockyMountains
+          - southAtlantic
+          - southPlains
+          - southTexas
+          - southWest
+      - in: query
+        name: mapWidth
+        description: The width of the map.
+        required: false
+        schema:
+          type: integer
+          example: 255
+      - in: query
+        name: mapHeight
+        description: The height of the map.
+        required: false
+        schema:
+          type: integer
+          example: 220
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        weatherType:
+                          description: 'The type of weather requested. Includes: Current Conditions ("CC") or Forecast ("F").
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          example: F
+                        zipCode:
+                          description: The zip code of the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: '60606'
+                        location:
+                          description: The city or town related to the zip code.
+                          type:
+                          - string
+                          - 'null'
+                          example: Chicago, Illinois
+                        currentCondition:
+                          description: The descriptive of the current condition.
+                          type:
+                          - string
+                          - 'null'
+                          example: Few Clouds
+                        currentConditionIcon:
+                          description: The condition icon's URL.
+                          type:
+                          - string
+                          - 'null'
+                          example: https://shared.websol.barchart.com/images/weather/pcldyicon.jpg
+                        currentTemperature:
+                          description: The current temperature.
+                          type:
+                          - string
+                          - 'null'
+                          example: 43\u0026deg;F
+                        currentPressure:
+                          description: The current atmospheric pressure in Hg.
+                          type:
+                          - string
+                          - 'null'
+                          example: 29.77 in. Hg
+                        feelsLike:
+                          description: The current feels like temperature.
+                          type:
+                          - string
+                          - 'null'
+                          example: 33.8\u0026deg;F
+                        windDirection:
+                          description: The current wind direction.
+                          type:
+                          - string
+                          - 'null'
+                          example: Northwest
+                        windSpeed:
+                          description: The current wind speed.
+                          type:
+                          - string
+                          - 'null'
+                          example: 9 mph
+                        humidity:
+                          description: The current level of humidity.
+                          type:
+                          - string
+                          - 'null'
+                          example: 81%
+                        dewpoint:
+                          description: The current dew point.
+                          type:
+                          - string
+                          - 'null'
+                          example: 31\u0026deg;F
+                        forecastedDay:
+                          description: The name of the day of the week forecasted.
+                          type:
+                          - string
+                          - 'null'
+                          example: Wednesday
+                        forcastedPrecipitation:
+                          description: The amount of forecasted precipitation in inches.
+                          type:
+                          - string
+                          - 'null'
+                          example: 0.01 in.
+                        chancePrecipitationDay:
+                          description: The daytime chance of precipitation.
+                          type:
+                          - string
+                          - 'null'
+                          example: 14%
+                        chancePrecipitationNight:
+                          description: The nighttime chance of precipitation.
+                          type:
+                          - string
+                          - 'null'
+                          example: '%'
+                        windchill:
+                          description: The forecasted windchill temperature.
+                          type:
+                          - string
+                          - 'null'
+                          example: 33.8\u0026deg;F
+                        dewFrostWeight:
+                          description: The dew/frost weight.
+                          type:
+                          - string
+                          - 'null'
+                          example: Frost
+                        hoursSun:
+                          description: The hours of sunlight for today.
+                          type:
+                          - string
+                          - 'null'
+                          example: '3.9'
+                        soilMoisture:
+                          description: The current soil moisture.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2.05'
+                        evaporation:
+                          description: The current level of evaporation.
+                          type:
+                          - string
+                          - 'null'
+                          example: '0.25'
+                        dryingIndex:
+                          description: The current drying index.
+                          type:
+                          - string
+                          - 'null'
+                          example: Excellent
+                        solarRadiation:
+                          description: The current level of solar radiation.
+                          type:
+                          - string
+                          - 'null'
+                          example: '3960'
+                        livestockSafteyIndex:
+                          description: The current livestock safety index.
+                          type:
+                          - string
+                          - 'null'
+                          example: Alert
+                        cumulativeHDD:
+                          description: The cumulative heating degree days.
+                          type:
+                          - string
+                          - 'null'
+                          example: '31'
+                        cumulativeGDD:
+                          description: The cumulative growing degree days.
+                          type:
+                          - string
+                          - 'null'
+                          example: '173'
+                        forecastDayCondition:
+                          description: A descriptive of the weather forecasted for the day.
+                          type:
+                          - string
+                          - 'null'
+                          example: Mostly Cloudy
+                        forecastDayConditionIcon:
+                          description: The condition icon's URL.
+                          type:
+                          - string
+                          - 'null'
+                          example: https://shared.websol.barchart.com/images/weather/mcldyicon.jpg
+                        forecastNightCondition:
+                          description: A descriptive of the weather forecasted for the night.
+                          type:
+                          - string
+                          - 'null'
+                          example: Cloudy
+                        forecastNightConditionIcon:
+                          description: The condition icon's URL.
+                          type:
+                          - string
+                          - 'null'
+                          example: https://shared.websol.barchart.com/images/weather/cldyicon.jpg
+                        forecastHighTemperature:
+                          description: The forecasted high temperature for the day.
+                          type:
+                          - string
+                          - 'null'
+                          example: 39\u0026deg;F
+                        forecastLowTemperature:
+                          description: The forecasted low temperature for the day.
+                          type:
+                          - string
+                          - 'null'
+                          example: 27\u0026deg;F
+                        mapRegion:
+                          description: The map region.
+                          type:
+                          - string
+                          - 'null'
+                          example: 'null'
+                        mapType:
+                          description: The map type.
+                          type:
+                          - string
+                          - 'null'
+                          example: localRadarAnimation
+                        mapUrl:
+                          description: The map image's URL.
+                          type:
+                          - string
+                          - 'null'
+                          example: https://shared.websol.barchart.com/weather/weathermap.php/interrad?zipcode=60606\u0026width=560\u0026height=440
+                      required:
+                      - weatherType
+                      - zipCode
+                      - location
+                      - currentCondition
+                      - currentConditionIcon
+                      - currentTemperature
+                      - currentPressure
+                      - feelsLike
+                      - mapRegion
+                      - mapType
+                      - mapUrl
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getGrainBids.json:
+    get:
+      tags:
+      - Other Data
+      summary: getGrainBids
+      operationId: get-getGrainBids
+      description: The getGrainBids API provides cashbid data for 30 closest locations in relation to the requested zip code. Learn more about Barchart's proprietary <a href="https://www.barchart.com/cmdty" target="_blank">commodity data</a> and grain <a href="https://www.barchart.com/cmdty/indexes" target="_blank">cmdtyIndexes</a>.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: requestType
+        description: The type of request that is being requested in order to determine the type of data to be returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - commodities
+          - locations
+          - bids
+      - in: query
+        name: location
+        description: 'A location id or a code identifies a or multiple grain buying location(s) that cash bid will be returned for. A valid code consist of multiple location ids separated by a comma, and the code can contain up to 100 locations. A list of valid location ids can be retrieved by using this API with input: requestType = location. location and several other inputs -geographic coordinates, zipCode, maxDistance, county, totalLocations- are mutually exclusive.
+
+          '
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: latitude
+        description: The latitude of a valid geographic coordinates to define the center of area that cashbid will be returned for. Geographic coordinates and Zipcode are mutually exclusive.
+        required: false
+        schema:
+          type:
+          - number
+          - 'null'
+          format: double
+      - in: query
+        name: longitude
+        description: The longitude of a valid geographic coordinates to define the center of area that cashbid will be returned for. Geographic coordinates and Zipcode are mutually exclusive.
+        required: false
+        schema:
+          type:
+          - number
+          - 'null'
+          format: double
+      - in: query
+        name: zipCode
+        description: A valid US or Canadian zip code to define the area that cash bids orginate from.
+        required: false
+        schema:
+          type: string
+          example: '60606'
+      - in: query
+        name: maxDistance
+        description: The maximum distance from searched zipcode or the requested geo coordinates in miles. This input helps to define the area that cash bids will be returned from. Maximum value is 250.
+        required: false
+        schema:
+          type:
+          - number
+          - 'null'
+          format: double
+      - in: query
+        name: county
+        description: A valid string code which represents the concatenation of county name and state code seperated by a hyphen.
+        required: false
+        schema:
+          type: string
+          example: BOONE COUNTY-IA
+      - in: query
+        name: fipsCode
+        description: A concatenation of state FIPS code and county FIPS code without separator to define the county that cash bids will be returned for. Please click <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">here</a> to get a list of possible values.
+        required: false
+        schema:
+          type: integer
+          example: 17053
+      - in: query
+        name: commodityName
+        description: 'A standard commodity name or a name list that separated by pipe (|) to filter cashbid. Note that the input need to be encoded in UTF-8. A list of valid commodity names can be retrieved by using this API with input: requestType = commodities.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: Soybeans|Corn (#2 Yellow)
+      - in: query
+        name: totalLocations
+        description: The maximum number of locations to be returned based of the zip code provided by the user. Default value is 30.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: getAllBids
+        description: Return all cash bids for each location.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: bidsPerCom
+        description: The maximum number of cash bids to be returned for each commodity per location. This parameter should be set to the maximum number of cash bids the user wishes to be returned.
+        required: false
+        schema:
+          type: integer
+          example: 2
+      - in: query
+        name: numOfDecimals
+        description: The level of precision in decimal places of price and basis to be returned.
+        required: false
+        schema:
+          type: integer
+          example: 2
+      - in: query
+        name: companyName
+        description: Name of the applicable grain buying elevator.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: getAllLocations
+        description: Return all locations based of the searched zip code.
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: rawDistance
+        description: Remove the appended string, "mile away", from output:distance.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: fields
+        description: Additional as per-requested fields that the user can define. Requested fields should be separated by a comma.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: deliveryStart
+        description: The start date for the delivery period for qualified bids.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: deliveryEnd
+        description: The end date for the delivery period for qualified bids.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        bids:
+                          description: A list of cash bids from a grain buying location. Each cash bid contains the meta and price data applicable to that location.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: object
+                              example:
+                                id: 43423878
+                                commodity: CORN
+                                symbol: ZCH21
+                                delivery_start: 2021-02-21 00:00:00
+                                delivery_end: 2021-02-28 23:59:59
+                                basis: 4.0
+                                notes: null
+                                active: true
+                                sym_root: ZC
+                                commodity_id: 121541
+                                customer_commodity_id: 10269
+                                commodity_display_name: Corn (#2 Yellow)
+                                unitvalue: 1
+                                unitweight: 56
+                                currency: USD
+                                deliveryMonth: Feb21
+                                deliveryYear: 2021
+                                basismonth: Mar 2021
+                                timestamp: 1614186100
+                                as_of: 661
+                                price: 5.64
+                                pricecwt: 10.071429
+                                basiscwt: 7.14
+                                pricetonne: 222.036729
+                                basistonne: 157.47
+                                change: 0.0625
+                                rawchange: 0.0625
+                                pctchange: 1.12
+                                cashprice: 5.64
+                                cashpricetonne: 222.036729
+                                delivery_sort: 2021-02-21 00:00:00
+                                delivery_start_raw: 2021-02-21 00:00:00
+                                delivery_end_raw: 2021-02-28 23:59:59
+                                basisSymbol: ZCBG21L-58118-10269.CM
+                                cashPriceSymbol: ZCPG21L-58118-10269.CM
+                        distance:
+                          description: Distance of the elevator in miles from the input zip code.
+                          type:
+                          - string
+                          - 'null'
+                          example: 13 miles away
+                        company:
+                          description: Name of the applicable grain buying elevator.
+                          type:
+                          - string
+                          - 'null'
+                          example: Elburn Coop
+                        elevatorId:
+                          description: The elevator id.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 390
+                        locationId:
+                          description: The location id.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 58118
+                        location:
+                          description: Name of location that grain bid originated from.
+                          type:
+                          - string
+                          - 'null'
+                          example: Ingredion
+                        facility_type:
+                          description: The type of facility.
+                          type:
+                          - string
+                          - 'null'
+                          example: Export Terminal
+                        address:
+                          description: The street address of the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: 6400 S Archer Rd
+                        city:
+                          description: City associated with the underlying grain bid.
+                          type:
+                          - string
+                          - 'null'
+                          example: Bedford Park
+                        state:
+                          description: 2-char abbreviation of the state that contains the applicable cash bid.
+                          type:
+                          - string
+                          - 'null'
+                          example: IL
+                        lng:
+                          description: The longitude of the location.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -87.826071
+                        lat:
+                          description: The latitude of the location.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 41.775032
+                        phone:
+                          description: The phone number for the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: 815-899-8964
+                        url:
+                          description: The public website of the grain company.
+                          type:
+                          - string
+                          - 'null'
+                          example: www.chselburn.com
+                        zip:
+                          description: The zip code for the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: '60501'
+                        county:
+                          description: The name of the county containing the applicable cash bid.
+                          type:
+                          - string
+                          - 'null'
+                          example: Cook County
+                        county_code:
+                          description: Concatenation of stateFipsCode, countyFipsCode, and classFipsCode.
+                          type:
+                          - string
+                          - 'null'
+                          example: IL-17-031-H1
+                        fips_code:
+                          description: FIPS code for the county. Concatenation of stateFipsCode and countyFipsCode.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 17031
+                        crop_district:
+                          description: District code of crop reporting district that is associated with the applicable cash bid.
+                          type:
+                          - string
+                          - 'null'
+                          example: D20
+                        basisTimestamp:
+                          description: Time when basis was last updated for given elevator.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-24T09:00:30-06:00'
+                        commodities:
+                          description: The commodity names.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: string
+                              example: Barley
+                            - type: string
+                              example: Beans
+                            - type: string
+                              example: Beans (Garbonzo)
+                            - type: string
+                              example: Beans (Lentil)
+                            - type: string
+                              example: Beans (Pinto)
+                        basisTimestampRaw:
+                          description: Unix timestamp when basis was last updated for the given elevator.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1614178830
+                      required:
+                      - bids
+                      - distance
+                      - company
+                      - locationId
+                      - location
+                      - facility_type
+                      - address
+                      - city
+                      - state
+                      - lng
+                      - lat
+                      - phone
+                      - url
+                      - zip
+                      - county
+                      - basisTimestamp
+                      - basisTimestampRaw
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getUSDAGrainPrices.json:
+    get:
+      tags:
+      - Other Data
+      summary: getUSDAGrainPrices
+      operationId: get-getUSDAGrainPrices
+      description: Barchart OnDemand's getUSDAGrainPrices API provides daily cash grain bids and prices for grain buying locations throughout the United States covering corn, wheat, oats and soybeans sourcing from USDA reports. This API refreshes on an hourly basis, so bids and prices from USDA reports would be available within an hour after the report is released.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: commodityTypes
+        description: 'The type of commodity. Includes: Corn ("C"), Corn Crude Oil ("CCO"), Crude Soybean Oil ("CSO"), DNS/NS Wheat 14% ("WDN"), HRW Wheat ("HRW"), HRW Wheat 11.5% ("HRW11"), Oats ("O"), Ord HRW Wheat ("HRWORD"), Soybean Meal 48% ("SM"), Soybeans ("S"), SRW Wheat ("SRW"), SWW Wheat ("SWW").<br/>Available values (multiple values separated by a comma may be used): *C, CCO, CSO, WDN, HRW, HRW11, O, HRWORD, SM, S, SRW, SWW*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: C
+      - in: query
+        name: bidTypes
+        description: 'The type of bid. Includes: Export ("E"), Processor ("P"), River ("R"), Terminal ("T") and Barge Loading ("B").<br/>Available values (multiple values separated by a comma may be used): *E, P, R, T, B*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: E
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        commodityType:
+                          description: 'The type of commodity. Includes: Corn ("C"), Corn Crude Oil ("CCO"), Crude Soybean Oil ("CSO"), DNS/NS Wheat 14% ("WDN"), HRW Wheat ("HRW"), HRW Wheat 11.5% ("HRW11"), Oats ("O"), Ord HRW Wheat ("HRWORD"), Soybean Meal 48% ("SM"), Soybeans ("S"), SRW Wheat ("SRW"), SWW Wheat ("SWW").
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          example: Corn
+                        grade:
+                          description: The grade level of commodity.
+                          type:
+                          - string
+                          - 'null'
+                          example: 'US #1'
+                        protein:
+                          description: The protein level of commodity.
+                          type:
+                          - string
+                          - 'null'
+                          example: Ordinary
+                        locationState:
+                          description: The state where the handling facility is located in.
+                          type:
+                          - string
+                          - 'null'
+                          example: IL
+                        locationCity:
+                          description: The city where the handling facility is located in.
+                          type:
+                          - string
+                          - 'null'
+                          example: Springfield
+                        location:
+                          description: 'The location of the handling facility. Includes: Atlantic ("A"), Central Illinois ("CIL"), Chicago ("CHGO"), Cincinnati Ohio River ("CIN"), Gulf ("GULF"), Kansas City ("KC"), Memphis Mississippi River ("MEM"), Minneapolis ("MIN"), Mt. Vernon Ohio River ("MTV"), N. Peoria Illinois River ("NPEO"), Omaha ("OMA"), Portland ("PORT"), S. Iowa Mississippi River ("SIOWA"), S. Peoria Illinois River ("SPEO"), St. Louis Mississippi River ("SLOU"), Toledo Non-River ("TLNON"), Toledo On-River ("TLON").
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          example: Chicago
+                        bidType:
+                          description: 'The type of bid. Includes: Export ("E"), Processor ("P"), River ("R"), Terminal ("T") and Barge Loading ("B").
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          example: Export
+                        lowPrice:
+                          description: The low price for the day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.0256
+                        lowPriceChange:
+                          description: The change in low price compared to the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 5.0435
+                        lowBasis:
+                          description: The low basis of the day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -20
+                        lowBasisChange:
+                          description: The change in low basis compared to the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 4
+                        lowBasisMonth:
+                          description: The futures contract month associated with low basis.
+                          type:
+                          - string
+                          - 'null'
+                          example: K
+                        highPrice:
+                          description: The high price for the day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 3.22
+                        highPriceChange:
+                          description: The change in high price compared to the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 2.94
+                        highBasis:
+                          description: The high basis for the day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 24
+                        highBasisChange:
+                          description: The change in high basis compared to the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 4.5
+                        highBasisMonth:
+                          description: The futures contract month associated with high basis.
+                          type:
+                          - string
+                          - 'null'
+                          example: Z
+                        freight:
+                          description: The shipment agreements of the transportation of goods between buyers and sellers, i.e. CIF.
+                          type:
+                          - string
+                          - 'null'
+                          example: Delivered
+                        transMode:
+                          description: The transportation mode of the trade, i.e. Truck, Barge, etc.
+                          type:
+                          - string
+                          - 'null'
+                          example: Truck
+                        current:
+                          description: The indicator of delivery window whether spot or not.
+                          type:
+                          - string
+                          - 'null'
+                          example: 'Yes'
+                        deliveryStart:
+                          description: The date delivery starts.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2026-07-01'
+                        deliveryStartHalf:
+                          description: The delivery starts for half month window.
+                          type:
+                          - string
+                          - 'null'
+                          example: Last Half
+                        deliveryEnd:
+                          description: The date delivery ends.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2026-07-01'
+                        deliveryEndHalf:
+                          description: The delivery ends for half month window.
+                          type:
+                          - string
+                          - 'null'
+                          example: Last Half
+                        report:
+                          description: The name of sourcing report.
+                          type:
+                          - string
+                          - 'null'
+                          example: Illinois Grain Bids
+                        reportDate:
+                          description: The release date of sourcing report.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2026-07-22'
+                        priceChange:
+                          description: The price change in cents compared to the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -4
+                        basis:
+                          description: The basis range in cents.
+                          type:
+                          - string
+                          - 'null'
+                          example: -25.0000 U to -5.0000 U
+                        bidChange:
+                          description: The change in bid price compared to the previous day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                      required:
+                      - commodityType
+                      - grade
+                      - protein
+                      - locationState
+                      - locationCity
+                      - location
+                      - bidType
+                      - lowPrice
+                      - lowPriceChange
+                      - lowBasis
+                      - lowBasisChange
+                      - lowBasisMonth
+                      - highPrice
+                      - highPriceChange
+                      - highBasis
+                      - highBasisChange
+                      - highBasisMonth
+                      - freight
+                      - transMode
+                      - current
+                      - deliveryStart
+                      - deliveryStartHalf
+                      - deliveryEnd
+                      - deliveryEndHalf
+                      - report
+                      - reportDate
+                      - priceChange
+                      - basis
+                      - bidChange
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getCmdtyStatsId.json:
+    get:
+      tags:
+      - Other Data
+      summary: getCmdtyStatsId
+      operationId: get-getCmdtyStatsId
+      description: The getCmdtyStatsId API is used identify instrument identifiers that can be passed to getCmdtyStats in order to request data on the applicable series.  Users can search for data series based on search parameters covering content, source, area, frequency, and more.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: commodity
+        description: The primary subject of item of a data series. User can pass values such as "soy" and expect data series infomation for "soybean" and "soybeans" to be returned
+        required: false
+        schema:
+          type: string
+          example: Corn
+      - in: query
+        name: measurement
+        description: The measured aspect of a item
+        required: false
+        schema:
+          type: string
+          example: Production
+      - in: query
+        name: area
+        description: The geographic location of data series. Passing less specific queires - such as "america" in lieu of "united states" may be preferable to return meta for all possibly applicable data series
+        required: false
+        schema:
+          type: string
+          example: United States of America
+      - in: query
+        name: source
+        description: The originating sources of a data series. May include organization, associated report, data table, down to sourcing figure
+        required: false
+        schema:
+          type: string
+          example: USDA
+      - in: query
+        name: maxRecords
+        description: The maximum amount of records returned. This parameter should be set to the maximum number of records desired.
+        required: false
+        schema:
+          type: string
+          enum:
+          - '50'
+          - '100'
+          - '150'
+          - '200'
+          - '250'
+          - '300'
+          - '350'
+          - '400'
+          - '450'
+          - '500'
+          example: '50'
+      - in: query
+        name: page
+        description: The page value to use in order to determine the offset while returning results.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        shortSymbol:
+                          description: A shorter alernate symbol for the data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: UD04006K.CS
+                        seriesDescription:
+                          description: 'A short description of the data series, that is created via concatenation of the following 4 data elements delimited by semicolons: "item";"measurement,frequency,unitDescription";"area";"sourcing figure"
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          example: Corn;Production,Annual,Bushel;Arkansas;Corn for Grain Area Harvested, Yield, and Production
+                      required:
+                      - shortSymbol
+                      - seriesDescription
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getCmdtyStats.json:
+    get:
+      tags:
+      - Other Data
+      summary: getCmdtyStats
+      operationId: get-getCmdtyStats
+      description: The getCmdtyStats API is used to request information on various fundamentals, commodity statistics, and economic data.  Users can request information by data series with historical information available through to inception for most series. cmdtyStats™ is the premier source of aggregated commodity statistics – all made available in one easy to use API.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbol
+        description: A unique symbol that identifies a data series.
+        required: true
+        schema:
+          type: string
+          example: USDA-SOYB-PROD-MS-96.CS
+      - in: query
+        name: startDate
+        description: The start date of the historical data query. This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the 1 year back from current data.  Note that if the date range requested by the user is more extensive than the user's permissions allow for, the output range will be determined based on an offset from the startDate.
+        required: false
+        schema:
+          type: string
+          example: '20250722'
+      - in: query
+        name: endDate
+        description: The end date of the historical data query. This parameter should be set to the desired end date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the last day of current year.  Note that if the date range requested by the user is more extensive than the user's permissions allow for, the output range will be determined based on an offset from the startDate.
+        required: false
+        schema:
+          type: string
+          example: '20260722'
+      - in: query
+        name: order
+        description: An arrangement of fields within a particular record (ascending or descending). This parameter can be set to one of two values ("asc" and "desc") in order to specify the chronological order of the result set returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: asc
+      - in: query
+        name: fields
+        description: Additional fields that the API should return.
+        required: false
+        schema:
+          type: string
+          example: measurements,contents
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A unique symbol that identifies a data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: USDA-SOYB-PROD-MS-96.CS
+                        shortSymbol:
+                          description: A shorter alernate symbol for the data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: UD09002O.CS
+                        shortName:
+                          description: The short name for the data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: MS Soybeans PROD
+                        mediumName:
+                          description: The medium name for the data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: MS Soybeans PROD
+                        longName:
+                          description: The long name for the data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: MS Soybeans Production
+                        seriesDescription:
+                          description: 'A short description of the data series, that is created via concatenation of the following 4 data elements delimited by semicolons: "item";"measurement,frequency,unitDescription";"area";"sourcing figure"
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          example: Soybeans;Production,Annual,Bushel;Mississippi;Soybeans for Beans Area Harvested, Yield, and Production
+                        item:
+                          description: The primary subject of data series
+                          type:
+                          - string
+                          - 'null'
+                          example: Soybeans
+                        measurement:
+                          description: The measured aspect of a item
+                          type:
+                          - string
+                          - 'null'
+                          example: Production
+                        measurements:
+                          description: The class hierarchy of measurement
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: string
+                              example: Flows
+                            - type: string
+                              example: Production
+                        frequency:
+                          description: Periodicity with which the underlying data series is released, updated, or recorded
+                          type:
+                          - string
+                          - 'null'
+                          example: Annual
+                        unit:
+                          description: The unit associated with data series
+                          type:
+                          - string
+                          - 'null'
+                          example: Bushel
+                        multiplier:
+                          description: The multiplier of unit
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1
+                        area:
+                          description: Geographic location that defines the data series
+                          type:
+                          - string
+                          - 'null'
+                          example: Mississippi
+                        areaType:
+                          description: Geographic granularity or aggregation level of the data
+                          type:
+                          - string
+                          - 'null'
+                          example: State
+                        sources:
+                          description: The originating sources of a data series.  May include organization, associated report, data table, down to sourcing figure
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: string
+                              example: USDA
+                            - type: string
+                              example: NASS
+                            - type: string
+                              example: Crop Production
+                            - type: string
+                              example: Soybeans for Beans Area Harvested, Yield, and Production
+                            - type: string
+                              example: NASS Crops
+                        contents:
+                          description: The class hierarchy of commodity
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: string
+                              example: cmdty
+                            - type: string
+                              example: Ag
+                            - type: string
+                              example: Grains
+                            - type: string
+                              example: Soy
+                            - type: string
+                              example: Soybeans
+                        unitDescription:
+                          description: Plain text description of unit associated with data series
+                          type:
+                          - string
+                          - 'null'
+                          example: Bushel
+                        lastRefresh:
+                          description: Time of last update
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-11-10'
+                        stats:
+                          description: A time series array consisting of date and value for each applicable record. Date represents the last day of a period covering the underlying data, which is indicated by frequency. Value will be the underlying data record or null if not available for any reason.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: object
+                              example:
+                                date: '2020-12-31'
+                                value: '11124000'
+                      required:
+                      - symbol
+                      - shortSymbol
+                      - shortName
+                      - mediumName
+                      - longName
+                      - seriesDescription
+                      - item
+                      - measurement
+                      - frequency
+                      - unit
+                      - multiplier
+                      - area
+                      - areaType
+                      - sources
+                      - unitDescription
+                      - lastRefresh
+                      - stats
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getGrainInstruments.json:
+    get:
+      tags:
+      - Other Data
+      summary: getGrainInstruments
+      operationId: get-getGrainInstruments
+      description: The getGrainInstruments API is used to request symbol and metadata information regarding physical grain instruments across Barchart's cash bids and grain indexes.  Users can request information based on crop type / root symbol, geo-location, or areas that are codified by FIPS standards. Returned instruments and their corresponding symbols can be passed to getQuote or getHistory to retrieve the associated price data - as requested by the end user. Find our more about our <a target="_blank" href="https://www.barchart.com/cmdty">commodity data</a> offerings here.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: instrumentType
+        description: The type of grain instruments. This parameter should be set to the desired instrument type for the query.
+        required: true
+        schema:
+          type: string
+          enum:
+          - bidBasis
+          - bidCash
+          - indexBasis
+          - indexCash
+          example: indexBasis
+      - in: query
+        name: instrumentRoot
+        description: 'A 2-char indicator for commodities. This parameter should be set to the root that represents the desired commodity for the query. Roots that are denoted as "all" are valid for both bid and index data - if "bids" then there is no index associated with that root.<br /><br />ZC: All kinds of Corn and Milo/Sorghum (all), ZS: All kinds of Soybeans (all), ZW: All kinds of Soft Red Winter Wheat (all), MW: All kinds of Spring Wheat (all), KE: All kinds of Hard Red Winter Wheat (all), FW: All kinds of Feed Wheat (bids), DW:  All kinds of Durum Wheat (bids), CW: Wheat (Club) (bids), ZM: Soybean Meal (bids), HS: Soybeans (Hulls) (bids), ZO: Oats (bids), BB: Barley (bids), ZR: Rice (bids), ZK: Ethanol (E85) (bids), GP: Peas (Green) (bids), YP: Peas (Yellow) (bids), SF: Birdseed or Sunflowers (bids), RY: Rye (bids), RS: Canola (bids), PC: Pulse Crops (Peas, Dry Beans, Lentils & Chickpeas) (bids), PB: Beans (Pinto) (bids), LB: Beans (Lentil) (bids), GB: Beans (Garbonzo) (bids), MI: Millet (bids), MD: Distiller Grains (MWDGS) (bids), DG: Distiller Grains (DDGS) (bids), FL: Flax (bids), CS: Cottonseed (bids)
+
+          '
+        required: true
+        schema:
+          type: string
+          example: ZC
+      - in: query
+        name: zipCode
+        description: A valid zip code to refine the area that cash bids orgin from. This parameter is required if stateFipsCode has not been set. This is the only way to query Canada grain bids.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: stateFipsCode
+        description: A valid 2-digit state code used to define the area that the underlying grain data (bids or indexes) will be returned from. This parameter is required if zipCode and indexGroup have not been set. Note that calls using this field will return instruments for counties and districts that are associated with the requested stateFipsCode - in addition any instruments with an area equal to the user specified stateFipsCode.<br /><br />Please click <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">here</a> to get a list of possible values.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: districtCode
+        description: A valid 2-digit district code used to define the area that the underlying grain data (bids or indexes) will be returned from. Note that calls using this field will return instruments for counties that are associated with the requested districtCode - in addition any instruments with an area equal to the user specified districtCode.<br /><br />Please click <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">here</a> to get a list of possible values.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: countyFipsCode
+        description: A valid 3-digit county code use to define the the area that the underlying grain data (bids or indexes) will be returned from.<br /><br />Please click <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">here</a> to get a list of possible values.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: deliveryMonth
+        description: 'The last month in the delivery window for cash bids or indexes using the following format: "YYYYMM"(i.e. 202607). For example, a bid with a delivery window of 202612 through 202703 can only be retrieved by input of 202703.<br /><br />For instrumentType = ''IndexBasis'' or ''IndexCash'', this parameter accepts rolling month codes: ''A'' - ''L'', which represent the forward delivery month from front month (A) to the 11th (L) forward month
+
+          '
+        required: false
+        schema:
+          type: string
+          example: '202607'
+      - in: query
+        name: indexGroup
+        description: 'A valid index aggregate level that returns all index instruments belonging to a specific indexGroup.Combining indexGroup and country or region are the only way to query national indexes and regional indexes.<br /><br />This parameter may required if stateFipsCode has not been set.<br/>Available values (multiple values separated by a comma may be used): *nation, region, state, district, county*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: nation
+      - in: query
+        name: country
+        description: The short country name to further refine the index instruments.
+        required: false
+        schema:
+          type: string
+          example: US
+      - in: query
+        name: region
+        description: A short region name to further refine the index instruments.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Delta
+          - Eastern
+          - Western
+          - Others
+      - in: query
+        name: maxRecords
+        description: The maximum amount of records returned. This parameter should be set to the maximum number of records desired. Default value is 200
+        required: false
+        schema:
+          type: string
+          enum:
+          - '25'
+          - '50'
+          - '100'
+          - '150'
+          - '200'
+          - '250'
+          - '300'
+          - '350'
+          - '400'
+          - '450'
+          - '500'
+          example: '25'
+      - in: query
+        name: page
+        description: The value to set for pagination.
+        required: true
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: locationId
+        description: The locationId for which all cash bid symbol should be returned.
+        required: false
+        schema:
+          type: integer
+          example: 4435
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A unique symbol that identifies a grain bid or a grain index.
+                          type:
+                          - string
+                          - 'null'
+                          example: ZCBG21US.CM
+                        symbolDescription:
+                          description: A short description of a grain bid or a grain index.
+                          type:
+                          - string
+                          - 'null'
+                          example: cmdty National Corn Basis Idx Feb 2021
+                        elevator:
+                          description: Name of the applicable grain buying elevator.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: Elburn Coop
+                        commodity:
+                          description: Standardized commodity name.
+                          type:
+                          - string
+                          - 'null'
+                          example: Corn (#2 Yellow)
+                        underlyingFuture:
+                          description: Futures symbol of tied futures contract.
+                          type:
+                          - string
+                          - 'null'
+                          example: ZCH21
+                        deliveryStart:
+                          description: Delivery start date of grain bid.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-01-23T06:59:59-06:00'
+                        deliveryEnd:
+                          description: Delivery end date of the associated grain instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-28T17:59:59-06:00'
+                        location:
+                          description: Name of location that grain bid originated from.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: Ingredion
+                        facilityType:
+                          description: The type of facility.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: Export Terminal
+                        phone:
+                          description: Phone number of location.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: 815-899-8964
+                        website:
+                          description: Website associated with elevator.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: www.chselburn.com
+                        address:
+                          description: The street address of the location.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: 6400 S Archer Rd
+                        city:
+                          description: City associated with the underlying grain bid.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: 6400 S Archer Rd
+                        state:
+                          description: 2-char abbreviation of the state that contains the applicable cash bid or index.
+                          type:
+                          - string
+                          - 'null'
+                          example: IL
+                        zipCode:
+                          description: Zip code associated with the underlying grain bid.
+                          type:
+                          - string
+                          - 'null'
+                          example: '60501'
+                        longitude:
+                          description: The longitude of the location.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: '-87.826071'
+                        latitude:
+                          description: The latitude of the location.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: '41.775032'
+                        county:
+                          description: The name of the county containing the applicable cash bid or index.
+                          type:
+                          - string
+                          - 'null'
+                          example: Cook County
+                        indexGroup:
+                          description: A index aggregate level (National, Regional, State, Crop Reporting District, County).<br />(ONLY returned for instrument type indexBasis or indexCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: region
+                        country:
+                          description: The country associated with the indexing area.<br />(ONLY returned for instrument type indexBasis or indexCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: US
+                        region:
+                          description: The region associated with the applicable indexing area.<br />(ONLY returned for instrument type indexBasis or indexCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: Eastern
+                        countyCode:
+                          description: Concatenation of stateFipsCode, countyFipsCode, and classFipsCode.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: IL-17-031-H1
+                        fipsCode:
+                          description: FIPS code for the county. Concatenation of stateFipsCode and countyFipsCode.<br />(ONLY returned for instrument type bidBasis or bidCash.)
+                          type:
+                          - string
+                          - 'null'
+                          example: '17031'
+                        countyFipsCode:
+                          description: 3-digit FIPS code of the county is associated with the applicable cash bid or index.
+                          type:
+                          - string
+                          - 'null'
+                          example: 069
+                        districtCode:
+                          description: 2-digit district code of crop reporting district that is associated with the applicable cash bid or index.
+                          type:
+                          - string
+                          - 'null'
+                          example: D20
+                        stateFipsCode:
+                          description: 2-digit FIPS code of state that is associated with the applicable cash bid or index.
+                          type:
+                          - string
+                          - 'null'
+                          example: '39'
+                      required:
+                      - symbol
+                      - symbolDescription
+                      - commodity
+                      - underlyingFuture
+                      - deliveryEnd
+                      - state
+                      - county
+                      - countyFipsCode
+                      - districtCode
+                      - stateFipsCode
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getBLSIndexes.json:
+    get:
+      tags:
+      - Other Data
+      summary: getBLSIndexes
+      operationId: get-getBLSIndexes
+      description: The getBLSIndexes API provides historical price data for our cmdty BLS Commodity Price Index Family. The cmdty BLS Commodity Price Indexes measure price movements of 22 basic commodities whose markets are among the first to be influenced by changes in economic conditions. Sub-indices for six major asset classes are calculated.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: type
+        description: The type of historical data to return, including tick data, minute data, and end-of-day data.
+        required: true
+        schema:
+          type: string
+          enum:
+          - ticks
+          - minutes
+          - nearbyMinutes
+          - formTMinutes
+          - daily
+          - dailyNearest
+          - dailyContinue
+          - weekly
+          - weeklyNearest
+          - weeklyContinue
+          - monthly
+          - monthlyNearest
+          - monthlyContinue
+          - quarterly
+          - quarterlyNearest
+          - quarterlyContinue
+          - yearly
+          - yearlyNearest
+          - yearlyContinue
+          example: minutes
+      - in: query
+        name: startDate
+        description: The start date of the historical data query.  This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the date 6 months back from present day. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00).
+        required: false
+        schema:
+          type: string
+          example: '20100101'
+      - in: query
+        name: endDate
+        description: The end data of the historical data query.  This parameter should be set to the desired end date/time for the query (the result set will include records up to, but not including, this value). If not set, the value will default to the end of the current day. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00).
+        required: false
+        schema:
+          type: string
+          example: '20130101'
+      - in: query
+        name: maxRecords
+        description: The maximum amount of records returned.  This parameter should be set to the maximum number of records desired. If not specified, there number of records returned will be determined by the date/time parameters specified as well as any defaults that apply to the query.
+        required: false
+        schema:
+          type: integer
+          example: 10
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: BZY00
+                        name:
+                          description: The name/description for the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: cmdty BLS Commodity Price Index
+                        history:
+                          description: An object with the date and close price for the provided date range.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: object
+                              example:
+                                tradingDay: '2020-08-23'
+                                close: 387.45
+                            - type: object
+                              example:
+                                tradingDay: '2020-08-25'
+                                close: 389.97
+                      required:
+                      - symbol
+                      - name
+                      - history
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getCmdtyCalendar.json:
+    get:
+      tags:
+      - Other Data
+      summary: getCmdtyCalendar
+      operationId: get-getCmdtyCalendar
+      description: The getCmdtyCalendar API provides user the latest updates of US economic activity and commodity trading events, including previous, revised, and actual values, updated 3 times a day. Users can request calendar events for desired period, and filter the output via various methods - category, importance, event country, and event symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: startDate
+        description: The start date of the historical data query. This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the beginning of this data series. Note that if the date range requested by the user is more extensive than the user's permissions allow for, the output range will be determined based on an offset from the startDate.
+        required: true
+        schema:
+          type: string
+          example: '20250722'
+      - in: query
+        name: endDate
+        description: The end date of the historical data query. This parameter should be set to the desired end date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the last day of current year.
+        required: true
+        schema:
+          type: string
+          example: '20261231'
+      - in: query
+        name: category
+        description: 'Filter returned result by category. Accept string concat category code by comma.<br/>Available values (multiple values separated by a comma may be used): *All, Ag, Energy, Econ*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: Ag,Energy
+      - in: query
+        name: country
+        description: Filter returned result by country/countries. Accept string concat iso-3 country code by comma.
+        required: false
+        schema:
+          type: string
+          example: USA,CHN
+      - in: query
+        name: importance
+        description: 'Filter returned result by importance level/levels. Accept string concat integer by comma.<br />1 = low, 2 = medium, 3 = high<br/>Available values (multiple values separated by a comma may be used): *1, 2, 3*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: 2,1
+      - in: query
+        name: symbol
+        description: Filter returned result by symbol. Accept valid symbol, which is a unique identifier of a time series, and multiple symbols separated by a comma.
+        required: false
+        schema:
+          type: string
+          example: USCB-WHSLETRADE-SALES-CHG-SA-USA-13652.CM,USCB-WHSLETRADE-INV-CHG-SA-USA-13610.CM
+      - in: query
+        name: order
+        description: An arrangement of fields within a particular record (ascending or descending). This parameter can be set to one of two values ("asc" and "desc") in order to specify the chronological order of the result set returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: asc
+      - in: query
+        name: fields
+        description: 'Return extra columns if requested, invalid input is a string concats optional output fields by comma.<br/>Available values (multiple values separated by a comma may be used): *reference_ending, prior_reference_ending, status*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: reference_ending,prior_reference_ending
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          description: Release time and date in UTC.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2020-03-26T12:30:00+00:00'
+                        country:
+                          description: Country Name.
+                          type:
+                          - string
+                          - 'null'
+                          example: USA
+                        event:
+                          description: Specific event name in the calendar.
+                          type:
+                          - string
+                          - 'null'
+                          example: Retail Inventories
+                        report:
+                          description: Report that event data released from.
+                          type:
+                          - string
+                          - 'null'
+                          example: Advance Economic Indicators
+                        source:
+                          description: Source of data.
+                          type:
+                          - string
+                          - 'null'
+                          example: US Census
+                        category:
+                          description: Category of event.
+                          type:
+                          - string
+                          - 'null'
+                          example: Econ
+                        reference:
+                          description: Reference period for latest released value.
+                          type:
+                          - string
+                          - 'null'
+                          example: Feb
+                        reference_ending:
+                          description: Ending date of the reference period in "YYYY-MM-DD" format.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-02-29'
+                        actual:
+                          description: Latest released value.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 657502
+                        prior_reference_ending:
+                          description: Ending date of the prior reference period in "YYYY-MM-DD" format.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-01-31'
+                        prior:
+                          description: Value for the previous period before the revision (if revision is applicable).
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 660227
+                        revised:
+                          description: Value for the previous period after the revision (if revision is applicable).
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 659246
+                        unit:
+                          description: Unit of the value.
+                          type:
+                          - string
+                          - 'null'
+                          example: Million U.S. Dollar
+                        status:
+                          description: Event updating status.
+                          type:
+                          - string
+                          - 'null'
+                          example: updated
+                        refreshed:
+                          description: Last refresh timestamp.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-04-16'
+                        symbol:
+                          description: A unique identifier for event's time series stored in cmdtyStats.
+                          type:
+                          - string
+                          - 'null'
+                          example: USCB-RETTRADE-INV-SA-USA-15511.CS
+                        importance:
+                          description: The priority level of the event.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1
+                      required:
+                      - date
+                      - country
+                      - event
+                      - report
+                      - source
+                      - category
+                      - reference
+                      - actual
+                      - prior
+                      - revised
+                      - unit
+                      - refreshed
+                      - symbol
+                      - importance
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getFuelPrices.json:
+    get:
+      tags:
+      - Other Data
+      summary: getFuelPrices
+      operationId: get-getFuelPrices
+      description: The getFuelPrices API provides refined fuel price data and reference data. Refined fuel data can be requested for fuel selling locations, for geographic coordinates and radius, for zip code and radius, and for a specified county. Refined fuel data can be filtered by product name(s), and by number of locations will be returned. Reference data contains fuel selling locations and product names, providing valid values in use for requesting refined fuel data. Reference data can be requested for geographic coordinates and radius. If no geographic coordinates are given, reference data will return all valid values by default.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: requestType
+        description: A type of reference data to define what reference data will be returned.
+        required: false
+        schema:
+          type: string
+          enum:
+          - products
+          - locations
+          - prices
+      - in: query
+        name: location
+        description: 'A location id or a code identifies a or multiple fuel selling location(s) that fuel prices will be returned for. A valid code consist of multiple location ids separated by a comma, and the code can contain up to 100 locations. A list of valid location ids can be retrieved by using this API with input: requestType = location. location and several other inputs -geographic coordinates, zipCode, maxDistance, county, totalLocations- are mutually exclusive.
+
+          '
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: latitude
+        description: The latitude of a valid geographic coordinates to define the center of area that fuel prices will be returned for. Geographic coordinates and Zipcode are mutually exclusive.
+        required: false
+        schema:
+          type:
+          - number
+          - 'null'
+          format: double
+      - in: query
+        name: longitude
+        description: The longitude of a valid geographic coordinates to define the center of area that fuel prices will be returned for. Geographic coordinates and Zipcode are mutually exclusive.
+        required: false
+        schema:
+          type:
+          - number
+          - 'null'
+          format: double
+      - in: query
+        name: zipCode
+        description: A valid US or Canadian zip code to define the center of area that fuel prices will be returned for. Default value is 60606. Geographic coordinates and Zipcode are mutually exclusive.
+        required: false
+        schema:
+          type: string
+          example: '60606'
+      - in: query
+        name: maxDistance
+        description: A maximum distance from geographic coordinates input or from the center of zip code input in miles to help user define the area that fuel prices will be returned for. Maximum value is 250
+        required: false
+        schema:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100
+      - in: query
+        name: county
+        description: A valid string code which represents the concatenation of county name and state code seperated by a hyphen.
+        required: false
+        schema:
+          type: string
+          example: BOONE COUNTY-IA
+      - in: query
+        name: state
+        description: A valid 2-char state code.
+        required: false
+        schema:
+          type: string
+          example: IL
+      - in: query
+        name: fipsCode
+        description: A string concatenation of state FIPS code and county FIPS code without separator to define the county that fuel prices will be returned for. Please click <a target="_blank" href="https://www2.census.gov/geo/docs/reference/codes/files/national_county.txt">here</a> to get a list of possible values.
+        required: false
+        schema:
+          type: integer
+          example: 17053
+      - in: query
+        name: productName
+        description: 'A standard product name or a name list that''s separated by pipe (|) to filter prices. Note that the input needs to be encoded in UTF-8. A list of valid product names can be retrieved by using this API with input: requestType = products.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: USLD
+      - in: query
+        name: totalLocations
+        description: The maximum amount of fuel selling locations that fuel prices will be returned for. If zip code is set, then API will provide cashbid for given amount closet locations in relation to the requested zip code. Maximum value is 100.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: page
+        description: The page number.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: fields
+        description: Additional as per-requested fields that the user can define. Requested fields should be separated by a comma. Valid per-requested fields are companyId,  locationType, mailingAddress, fax, defLanes, dieselLanes, bioBlend, businessHours, productId, productShort, productFull
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        prices:
+                          description: A list of fuel prices from a fuel selling location. Each fuel price contains the meta and price data applicable to that location.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: object
+                              example:
+                                symbol: HOPA-1070-16.CM
+                                seriesName: Road Ranger Chicago, IL Auto Diesel Price
+                                productId: 16
+                                product: Auto Diesel
+                                price: 2.859
+                                date: '2021-01-11'
+                            - type: object
+                              example:
+                                symbol: HOPA-1070-1.CM
+                                seriesName: Road Ranger Chicago, IL Diesel Price
+                                productId: 1
+                                product: Diesel
+                                price: 2.859
+                                date: '2021-01-11'
+                            - type: object
+                              example:
+                                symbol: RBPA-1070-4.CM
+                                seriesName: Road Ranger Chicago, IL Regular Gas Price
+                                productId: 4
+                                product: Regular Gas
+                                price: 2.599
+                                date: '2021-01-11'
+                        distance:
+                          description: Distance of the fuel selling location in miles from the input zip code/geographic coordinates.
+                          type:
+                          - string
+                          - 'null'
+                          example: 5 miles away
+                        locationId:
+                          description: A internal identifier of fuel selling location.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1070
+                        location:
+                          description: Name of fuel selling location that fuel price originated from.
+                          type:
+                          - string
+                          - 'null'
+                          example: 3401 S California Ave
+                        companyId:
+                          description: A internal identifier of fuel selling company.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 3
+                        company:
+                          description: A full-length name for companies.
+                          type:
+                          - string
+                          - 'null'
+                          example: Road Ranger
+                        locationType:
+                          description: The type of fuel selling location.
+                          type:
+                          - string
+                          - 'null'
+                          example: Fuel Stop
+                        address:
+                          description: The street address of the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: 3401 S California Ave
+                        mailingAddress:
+                          description: The mailing address of the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: 3401 S California Ave, Chicago, IL 60608, USA
+                        highway:
+                          description: The nearby highway exit(s).
+                          type:
+                          - string
+                          - 'null'
+                          example: I-57 Exit 353 I-294 Exit 12A
+                        zipCode:
+                          description: The zip code for the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: '60608'
+                        city:
+                          description: City that contains the applicable fuel price.
+                          type:
+                          - string
+                          - 'null'
+                          example: Chicago
+                        county:
+                          description: The name of the county containing the applicable fuel price.
+                          type:
+                          - string
+                          - 'null'
+                          example: Cook
+                        fipsCode:
+                          description: A string concatenation of state FIPS code and county FIPS code to identify a county.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 17031
+                        state:
+                          description: 2-char abbreviation of the state that contains the applicable fuel price.
+                          type:
+                          - string
+                          - 'null'
+                          example: IL
+                        country:
+                          description: ISO-3 country code of the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: USA
+                        longitude:
+                          description: The longitude of the location.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -87.6945368
+                        latitude:
+                          description: The latitude of the location.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 41.83145
+                        phone:
+                          description: The phone number for the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: 815-977-7020
+                        fax:
+                          description: The fax number for the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: 815-977-7020
+                        showers:
+                          description: The total number or availability of showers.
+                          type:
+                          - string
+                          - 'null'
+                          example: 'No'
+                        truckSpaces:
+                          description: The total number or availability of truck parking spaces.
+                          type:
+                          - string
+                          - 'null'
+                          example: 'No'
+                        defLanes:
+                          description: The total number or availability of DEF lanes.
+                          type:
+                          - string
+                          - 'null'
+                          example: 'No'
+                        dieselLanes:
+                          description: The total number or availability of diesel lanes.
+                          type:
+                          - string
+                          - 'null'
+                          example: '7'
+                        weighScales:
+                          description: The brand or availability of weight scale.
+                          type:
+                          - string
+                          - 'null'
+                          example: CAT
+                        bioBlend:
+                          description: The type or availability of bio-blend fuel.
+                          type:
+                          - string
+                          - 'null'
+                          example: B12
+                        businessHours:
+                          description: The operating hours for the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: 24/7/365
+                        currency:
+                          description: The currency used for the location.
+                          type:
+                          - string
+                          - 'null'
+                          example: USD
+                        metric:
+                          description: The units system a location used for quoting.
+                          type:
+                          - string
+                          - 'null'
+                          example: U.S. Customary Units
+                        locationUpdateDate:
+                          description: Date when the meta data was last updated for a location in Central Time Zone.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2019-02-12'
+                        lastUpdateTimestamp:
+                          description: Date that prices were last updated for a location in Central Time Zone.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-01-11T00:00:00-06:00'
+                        productShort:
+                          description: A short-length name for products.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        product:
+                          description: A medium-length name for products.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        productFull:
+                          description: A full-length name for products.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        productDescription:
+                          description: A short description for the product.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                      required:
+                      - prices
+                      - distance
+                      - locationId
+                      - location
+                      - company
+                      - address
+                      - highway
+                      - zipCode
+                      - city
+                      - county
+                      - fipsCode
+                      - state
+                      - country
+                      - longitude
+                      - latitude
+                      - phone
+                      - showers
+                      - truckSpaces
+                      - weighScales
+                      - currency
+                      - metric
+                      - locationUpdateDate
+                      - lastUpdateTimestamp
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getCropFactors.json:
+    get:
+      tags:
+      - Other Data
+      summary: getCropFactors
+      operationId: get-getCropFactors
+      description: The getCropFactors API provides weather data/factors specific to Ag Industry. With this API, you can retrieve satellite imagery derived weather factors, like Normalized Difference Vegetation Index (<b>NDVI</b>), Normalized Difference Water Index (<b>NDWI</b>), and Land Surface Temperature(<b>LSTD</b> & <b>LSTN</b>), and station collected weather data, like air temperature(<b>TMAX</b> & <b>TMIN</b>), and accumulated precipitation(<b>PRCP</b>).<br />Data can be requested for a combination of counties and observation windows.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: countyCode
+        description: A county FIPS code or a code that identifies multiple counties. A valid code consists of multiple county FIPS codes separated by a comma, and the code can contain up to 100 counties. Mutually exclusive with stateCode.<br />Please <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">click</a> here to get a list of possible values.
+        required: true
+        schema:
+          type: string
+          example: 17031,17111
+      - in: query
+        name: stateCode
+        description: A state FIPS code or a code that identifies multiple states. A valid code consists of multiple state FIPS codes separated by a comma, and the code can contain up to 20 states.<br />Please <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">click</a> here to get a list of possible values.
+        required: false
+        schema:
+          type: string
+          example: 19,17
+      - in: query
+        name: startDate
+        description: The start date of the historical data query. This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to 20260101
+        required: true
+        schema:
+          type: string
+          example: '20260601'
+      - in: query
+        name: endDate
+        description: The end data of the historical data query. This parameter should be set to the desired end date/time for the query (the result set will include records up to, and including, this value). If not set, the value will default to the day specified in the start parameter.
+        required: false
+        schema:
+          type: string
+          example: '20260722'
+      - in: query
+        name: fields
+        description: 'Additional as per-requested fields that the user can define. Requested fields should be separated by a comma.<br/>Available values (multiple values separated by a comma may be used): *ndviCount, ndwiCount, lstdCount, lstnCount, tmaxCount, tminCount, prcpCount*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: ndviCount,ndwiCount
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        countyCode:
+                          description: FIPS code for the county. Concatenation of stateFipsCode and countyFipsCode.
+                          type:
+                          - string
+                          - 'null'
+                          example: '19041'
+                        county:
+                          description: The name of the county corresponds to the weather data.
+                          type:
+                          - string
+                          - 'null'
+                          example: Clay County
+                        state:
+                          description: 2-char abbreviation of the state.
+                          type:
+                          - string
+                          - 'null'
+                          example: IA
+                        startDate:
+                          description: Start date of 8-days composite window.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-01-01'
+                        endDate:
+                          description: End date of 8-days composite window.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-01-08'
+                        ndvi:
+                          description: Average Normalized Difference Vegetation Index (NDVI) for croplands within a county calculated based on MODIS with daily updating.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -0.00899
+                        ndviCount:
+                          description: Count of cropland grids(250m * 250m) that contributed to calculating NDVI
+                          type:
+                          - integer
+                          - 'null'
+                          example: 12548
+                        ndwi:
+                          description: Average Normalized Difference Water Index (NDWI) for croplands within a county calculated based on MODIS with daily updating.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.75143
+                        ndwiCount:
+                          description: Count of cropland grids(250m * 250m) that contributed to calculating NDWI
+                          type:
+                          - integer
+                          - 'null'
+                          example: 12548
+                        lstd:
+                          description: Average Land Surface Temperature Daytime (LSTD) in Celsius degrees for croplands within a county calculated based on MODIS with daily updating. Unit in celsius degrees.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -0.87
+                        lstdCount:
+                          description: Count of cropland grids(250m * 250m) that contributed to calculating LSTD
+                          type:
+                          - integer
+                          - 'null'
+                          example: 12548
+                        lstn:
+                          description: Average Land Surface Temperature Nighttime (LSTN) in Celsius degrees for croplands within a county calculated based on MODIS with daily updating. Unit in celsius degrees.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -14.31
+                        lstnCount:
+                          description: Count of cropland grids(250m * 250m) that contributed to calculating LSTN.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 12548
+                        tmax:
+                          description: Average Maximum Air Temperature in Celsius degrees for a county calculated based on land surface stations with daily updating.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.31
+                        tmaxCount:
+                          description: Count of land surface stations that contributed to calculating TMAX.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2
+                        tmin:
+                          description: Average Minimum Air Temperature in Celsius degrees for a county calculated based on land surface stations with daily updating.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -10.06
+                        tminCount:
+                          description: Count of land surface stations that contributed to calculating TMIN.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2
+                        prcp:
+                          description: Average accumulated precipitation in millimeter for a county in the 8-days window.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                        prcpCount:
+                          description: Count of land surface stations that contributed to calculating PRCP.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 2
+                        updatedAt:
+                          description: Date that factors were last updated for a county.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-01-17T00:00:00-06:00'
+                      required:
+                      - countyCode
+                      - county
+                      - state
+                      - startDate
+                      - endDate
+                      - ndvi
+                      - ndwi
+                      - lstd
+                      - lstn
+                      - tmax
+                      - tmin
+                      - prcp
+                      - updatedAt
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getUniqueIdentifier.json:
+    get:
+      tags:
+      - Other Data
+      summary: getUniqueIdentifier
+      operationId: get-getUniqueIdentifier
+      description: The getUniqueIdentifier provides the Financial Instrument Global Identifier (FIGI) information for all available instruments. For more information on FIGI, please <a target="_blank" href="https://www.openfigi.com/about/figi">click here</a>.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: identifierType
+        description: 'The code/value for the global identifier protocol.<br/>Available values (multiple values separated by a comma may be used): *openFIGI*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: openFIGI
+      - in: query
+        name: barchartSymbols
+        description: The unique barchart identifier. Multiple symbols can be requested separated by a comma.
+        required: false
+        schema:
+          type: string
+          example: IBM,GOOGL
+      - in: query
+        name: exchange
+        description: A valid exchange identifer code.
+        required: false
+        schema:
+          type: string
+          example: NYSE
+      - in: query
+        name: openFIGIGlobal
+        description: The unique global OpenFIGI id. Multiple IDs can be requested separated by a comma.
+        required: false
+        schema:
+          type: string
+          example: BBG0015VZ6S1
+      - in: query
+        name: openFIGIComposite
+        description: The unique composite OpenFIGI id. Multiple IDs can be requested separated by a comma.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: SLNLF
+                        symbolName:
+                          description: The name of the financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Stella International Holdings Ltd.
+                        exchange:
+                          description: Exchange code for the marketplace where the financial instruments are listed.
+                          type:
+                          - string
+                          - 'null'
+                          example: HKEX
+                        openFIGI:
+                          description: An object with OpenFIGI unique identifer information (global and composite) for each available symbol.
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            global:
+                              type: string
+                              example: BBG000RPRDK4
+                            composite:
+                              type: string
+                              example: BBG000RPRDK4
+                            name:
+                              type: string
+                              example: STELLA INTERNATIONAL
+                      required:
+                      - symbol
+                      - symbolName
+                      - exchange
+                      - openFIGI
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getYieldForecastPlanet.json:
+    get:
+      tags:
+      - Other Data
+      summary: getYieldForecastPlanet
+      operationId: get-getYieldForecastPlanet
+      description: The getYieldForecast API provides Barchart proprietary grain yield forecast data. Yield Index data can be filtered by commodity, by indexGroup, by state, by district, and by county. The unit is in Bushel per Acre.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: country
+        description: The ISO-2 country code to further refine the instruments.
+        required: true
+        schema:
+          type: string
+          enum:
+          - US
+          example: US
+      - in: query
+        name: state
+        description: An ANSI-2 state abbreviation to define the state that yield forecast index will be returned for.
+        required: false
+        schema:
+          type: string
+          example: IL
+      - in: query
+        name: stateFips
+        description: A valid 2-digits state fips code used to define the state that yield forecast index will be returned for. Please click <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">here</a> to get a list of possible values.
+        required: false
+        schema:
+          type: string
+          example: '17'
+      - in: query
+        name: districtCode
+        description: A valid 2-digit district code used to define the district that yield forecast index will be returned for. Please click <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">here</a> to get a list of possible values.
+        required: false
+        schema:
+          type: string
+          example: '50'
+      - in: query
+        name: county
+        description: A county name to define the county that yield forecast index will be returned for.
+        required: false
+        schema:
+          type: string
+          example: Champaign County
+      - in: query
+        name: countyFips
+        description: A valid 3-digits county fips code to define the county that yield forecast index will be returne for. Please click <a target="_blank" href="https://www.nass.usda.gov/Data_and_Statistics/County_Data_Files/Frequently_Asked_Questions/county_list.txt">here</a> to get a list of possible values.
+        required: false
+        schema:
+          type: string
+          example: 019
+      - in: query
+        name: crop
+        description: A commodity name to filter yield forecast index.
+        required: false
+        schema:
+          type: string
+          enum:
+          - corn
+          - soybean
+          example: corn
+      - in: query
+        name: indexGroup
+        description: A valid index aggregate level to filter yield forecast index.
+        required: false
+        schema:
+          type: string
+          enum:
+          - national
+          - state
+          - district
+          - county
+          example: district
+      - in: query
+        name: fields
+        description: 'Additional output fields requested. Requested fields should be separated by a comma.<br/>Available values (multiple values separated by a comma may be used): *shortName*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: shortName
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A unique symbol that identifies the data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        name:
+                          description: The name of the data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        shortName:
+                          description: The short name of the data series.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        indexGroup:
+                          description: An index aggregate level (National, State, Crop Reporting District, County).
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        crop:
+                          description: The crop name.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        country:
+                          description: The ISO-2 country code abbreviation associated with the indexing area.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        state:
+                          description: The 2-char abbreviation of the state associated with the indexing area.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        stateFipsCode:
+                          description: The -digit FIPS code of state associated with the indexing area.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        district:
+                          description: 2-digit district code of crop reporting district that is associated with the indexing area.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        county:
+                          description: The name of the county that is associated with the indexing area.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        countyFipsCode:
+                          description: 3-digit FIPS code of the county is associated with the indexing area.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        lastUpdated:
+                          description: The date of the index last updated.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: null
+                      required:
+                      - symbol
+                      - name
+                      - indexGroup
+                      - crop
+                      - country
+                      - state
+                      - stateFipsCode
+                      - district
+                      - county
+                      - countyFipsCode
+                      - lastUpdated
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error

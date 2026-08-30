@@ -1,0 +1,822 @@
+openapi: 3.2.0
+info:
+  title: OnDemand News and Filings API
+  version: 1.0.1
+  description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
+  contact:
+    name: onDemand API Support
+    url: https://www.barchart.com/ondemand
+    email: support@barchart.com
+  termsOfService: https://www.barchart.com/solutions/company/terms-and-privacy
+servers:
+- url: https://ondemand.websol.barchart.com
+tags:
+- name: News and Filings
+paths:
+  /getNews.json:
+    get:
+      tags:
+      - News and Filings
+      summary: getNews
+      operationId: get-getNews
+      description: Barchart OnDemand's getNews API returns news headlines, articles and related photos based upon news sources, category, sub-category and/or keyword.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: sources
+        description: 'The news feed code.<br/>Available values (multiple values separated by a comma may be used): *AP, APAI, BC, BCNEWS, CP, CNW, CRB, CMTX, CMTX:PCS, CMTX:PCC, CMTX:SEC, IF, USDA, PRNW, ZACKS, BRUG, AGWEB, SETZ, SPC, NASS, ESTMZ, DVND, LME-WHS, DLFRX, GLDRPT, COT, MAX, CMDTY_AGLITE, CMDTY_AG, CMDTY_ENERGY, BCCONT, SYNDTGAM, FCTGAM, BCSYND, HDLNE, HDLNEG, HDLNEP, BARCHART_PT, DJ*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: AP,IF
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.
+        required: false
+        schema:
+          type: string
+          example: AMZN,GOOG,AAPL
+      - in: query
+        name: category
+        description: A grouping of related news content.
+        required: false
+        schema:
+          type: string
+          enum:
+          - companies
+          - politics
+          - geography
+          - futures
+          - economics
+          - stocks
+          example: stocks
+      - in: query
+        name: subCategory
+        description: A more specific category of related news content.
+        required: false
+        schema:
+          type: string
+          enum:
+          - private companies
+          - ' stock equities'
+          - stock trading
+          - stock options
+          - regulatory
+          - corporate events
+          - analyst ratings
+          - industries
+          - mergers & acquisitions
+          - employees
+          - financials
+          - consumer discretionary
+          - health care
+          - private equity
+          - management
+          - technology
+          - financing
+          - partnership
+          - shareholder voting
+          - media & telecom
+          - ipo
+          - industrials
+          - energy
+          - earnings
+          - technical analysis
+          - real estate
+          - insider transaction
+          - utilities
+          - consumer staples
+          - dividends
+          - analyst downgrade
+          - bankruptcies & insolvencies
+          - venture capital
+          - analyst upgrade
+          - materials
+          - elections
+          - law
+          - taxes
+          - iraq
+          - asia
+          - s. korea
+          - spain
+          - russia
+          - china
+          - philippines
+          - chile
+          - peru
+          - united states
+          - australia
+          - bolivia
+          - united kingdom
+          - europe
+          - canada
+          - japan
+          - mexico
+          - germany
+          - france
+          - brazil
+          - new zealand
+          - singapore
+          - cuba
+          - argentina
+          - en
+          - equity index
+          - agriculture
+          - grain
+          - futures education
+          - options on futures
+          - futures exchange
+          - food & beverage
+          - interest rates
+          - cryptocurrencies
+          - top news
+          - lumber
+          - forex
+          - weather
+          - metals
+          - fruits & vegetables
+          - softs
+          - livestock
+          - ethanol
+          - soybean
+          - coffee
+          - canola
+          - renewable energy
+          - hogs
+          - rubber
+          - e-waste
+          - lamb
+          - batteries
+          - nuts
+          - gold
+          - ferrous metals
+          - rice
+          - sugar
+          - fruits
+          - cocoa
+          - silver
+          - corn
+          - steel
+          - poultry
+          - government debt
+          - heating oil
+          - fertilizer
+          - cattle
+          - copper
+          - sorghum
+          - crude oil
+          - scrap metal
+          - coal
+          - cotton
+          - vegetables
+          - wheat
+          - corporate debt
+          - natural gas
+          - gasoil
+          - non-ferrous metals
+          - dairy
+          - global trade
+          - employment
+          - central banks
+          example: private companies
+      - in: query
+        name: series
+        description: 'A grouping of stories under a recurring news topic. e.g. Morning Call (MORNCALL).<br/>Available values (multiple values separated by a comma may be used): *MORNCALL, COD*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: MORNCALL
+      - in: query
+        name: keyword
+        description: A term used to create searches.
+        required: false
+        schema:
+          type: string
+          example: tablet
+      - in: query
+        name: maxRecords
+        description: The maximum number of records to show in the return.
+        required: false
+        schema:
+          type: integer
+          example: 10
+      - in: query
+        name: startDate
+        description: The beginning date for the query.
+        required: false
+        schema:
+          type: string
+          example: '2026-07-22T07:20:58'
+      - in: query
+        name: displayType
+        description: 'The type of new displayed: headlines only, headline and preview, or full.
+
+          '
+        required: true
+        schema:
+          type: string
+          enum:
+          - headline
+          - preview
+          - full
+          example: preview
+      - in: query
+        name: images
+        description: An option for returning the images contained in the news article.
+        required: false
+        schema:
+          type: string
+          example: 'true'
+      - in: query
+        name: storyId
+        description: 'Parameter allows to get specific story by providing newsID. Parameters: sources, symbols, category, subCategory, keyword, maxRecords, startDate will be ignored.
+
+          '
+        required: false
+        schema:
+          type: integer
+          example: 259220
+      - in: query
+        name: rss
+        description: Parameter formats XML requests as RSS feeds. This parameter has no effect on JSON or CSV requests.
+        required: false
+        schema:
+          type: string
+          example: 'false'
+      - in: query
+        name: rssTitle
+        description: Parameter overrides the default RSS feed title and description.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: fields
+        description: The additional fields requested.
+        required: false
+        schema:
+          type: string
+          example: publishDate
+      - in: query
+        name: barchartClassification
+        description: Classify stories in some categories.
+        required: false
+        schema:
+          type: string
+          example: FUT.SFT
+      - in: query
+        name: organization
+        description: 'N/A<br/>Available values (multiple values separated by a comma may be used): *Barchart, AgWeb, Brownfield Ag News, Successful Farming, Baystreet, Walsh Trading, Zacks, Brave NewCoin, Swift Trading Company, Best Weather Inc., CME Group, Sidwell Strategies, MarketBeat, Scrap Monster, Blue Line Futures, AI-generated - The Globe and Mail, Automated Summaries - The Globe and Mail, Grainnet, USDA Exports, USDA, Sunshine Profits, NatGasWeather.com, Sure Dividend, Taurus Trading LLC, DeCarley Trading, KeyStone Financial, Trade Precise, RJO Futures, Stock Picking, Options Trading for Income, Market Tea Leaves, Renewable Fuels Association, Elliott Wave Forecast, Total Farm Marketing, Levi Donohoe, Wavetraders, Direxion, Tradable Patterns, Prosper Trading Academy, CarbonCredits.com, Peter Knight, ElliottWaveTrader.net, The Futures Management Group, Luis Flavio Nunes, Marcus Weather Inc., The Smart Investor, Cannon Trading, GoldIRAGuide.com, Zaye Capital Markets, Due Inc., EdgeClear, The REIT Forum, CFRN, Peter Mooses, WealthUp, TradeGuidance, NO BULL, HTS Commodities, The Tokenist, Monica Kingsley, VMware Inc., My Trading IQ, Solvid, Hedder, ElliottWave-Forecast, ONE44 Analytics, Monetive Wealth, Kolhanov.com, Banghart Properties, TradingView, SpreadEdge Capital, LLC, Astocks92, Klarenbach Research, Capital Truth, Hackett Financial Advisors, Inc., Pinion Risk Management, Heartland Investor Services Inc., Tanvir Zafar, The PRICE Futures Group, IncomeInsider.org, HedgeFundTips.com, Hashtag Investing, OptionMetrics, Bull Strangle Newsletter, EW-Forecast.com, Gold Price Forecast, Coachman''s Research, OTOS Inc., MoneyShow, Young & The Invested, CommodityTrends, Archna Trades, Alpine Trading, Ivan Patriki, Gold Predictors, Espacio Media Incubator, Trade The Pool, 24/7 Wall St., New York Post, Decrypt, BullionVault, OilPrice.com, mint, tastytrade, Real Estate News, Business Standard, Banking Dive, DailyFX, Financial Post, Bitcoin Magazine, Financial Express, CBS News, ETF Express, TipRanks, Benzinga, FX Street, Moneycontrol, CoinDesk, ETF Trends, Brave New Coin, Seeking Alpha, AP, Dow Jones Newswires, PR Newswire, Canadian Press, CFTC, GlobeNewswire, ACCESS Newswire, Business Wire, ACN Newswire, ACCESSWIRE, Canada Newswire, Food Dive, Beef Magazine, StockStory, Markets Insider, Sugar Online, Rigzone, The Street, Kitco, Cotton Outlook, CNBC, FreightWaves, Daily Coffee News, EIA, Packaging World, Plastics Today, Stock Target Advisor, Stocktwits, Zacks Investment Research, Invezz, Wall Street Horizon, ETF Market Canada, Tipranks, The Globe and Mail, Under 30 CEO, INK Research, KillerStartups, B-TV.com, Fundata Canada Inc., wealthyventurecapitalist.com, Plus500, AllPennyStocks.com, ValuEngine, Inc, Zacks.com, Quiver Quantitative, Inc., NewsBTC, The Associated Press, NAWG, stocknews.com, Oil Market Journal, Schaeffers Investment Research, Business Insider, Exame, TechCrunch, wallstreet online, France24.com, Bank of England, Investimentos e Noticias, Fox Business, The Guardian Nigeria, Canal Rural, El Economista, Shine News, Bloomberg, finews.ch, CEPEA, European Energy Commission, The Real Deal, Malay Mail, Economic Times (India), MarketWatch, E&E News, El Comercio Ecuador, Renewable Energy World, US Federal Reserve, CNN, The Guardian, CNET, MSNBC, Journal of Commerce, Reuters, Hellenic Shipping News Worldwide, finanzen, El Comercio Peru, Bundesbank, Fox Weather, ETF.com, Deutsche Welle, Blockworks, Barron''s, Aljazeera, Quartz, Weather Channel, Investor''s Business Daily, FinanceFeeds, Connect CRE, Bisnow, Finextra, Advanced Biofuels Association, Supermarket News, Globe PR Wire, GetNews, Plentisoft, Press Advantage, PRISM News, Newsfile, Barchart Impact, Worldnewswire, Financial Times, Paper Advance, BBC, Meat & Poultry, Forbes, Papnews, Bio Bio Chile, Handelsblatt, The Economist, Securities and Exchange Commission, Biodiesel Magazine, Infobae, The Jerusalem Post, Undercurrent News, Risk.net, Biofuels International, WirtschaftsWoche, Offshore Energy, Wired, Japan Times, E15, Upstream, S&P Global, The Moscow Times, American Banker, IntraFish, Energypost.eu, Engadget, AgFax, Der Spiegel, Carbon Capture Magazine, Transport Topics, Wall Street Journal, Fortune, Hubtas*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: Barchart
+      - in: query
+        name: lang
+        description: 'The news story language. The stories returned will be in the requested language, if any exists.<br/>Available values (multiple values separated by a comma may be used): *all, hi, de, ps, en-us, pt, hu, zh-cn, yo, uk, cpe, id, ur, ig, aa, uz, mr, en, am, my, es, ar, vi, ne, ja, az, fa, fa-af, ro, en-gb, en-ca, ru, rw, fr, bn, br, si, es-ec, so, gd, om, sr, ko, sw, zh-tw, pt-br, ta, gu, ky, cs, te, pa, th, ti, cy, ha, pl, tr*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: en
+      - in: query
+        name: sourceFeed
+        description: Filter results by the original sourceFeed.
+        required: false
+        schema:
+          type: string
+          example: CONT2
+      - in: query
+        name: exactCategoryMatch
+        description: If set to true, the api will return stories with only the requested category and ignore any that might have additional categories associated with it.
+        required: false
+        schema:
+          type: string
+          example: 'false'
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        newsID:
+                          description: The identifying news code.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 259220
+                        timestamp:
+                          description: The timestamp for a news article.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2020-09-14T21:10:00-05:00'
+                        source:
+                          description: The origin of the news feed.
+                          type:
+                          - string
+                          - 'null'
+                          example: CMTX
+                        categories:
+                          description: A grouping of related news content.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: string
+                              example: stocks
+                        subCategories:
+                          description: A more specific category list of related news content.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: string
+                              example: corporate
+                            - type: string
+                              example: consprod
+                            - type: string
+                              example: tech
+                        headline:
+                          description: The title of the news article.
+                          type:
+                          - string
+                          - 'null'
+                          example: Mitsubishi Electric Wins Trademark Infringement Lawsuit Against Factory-automation Product Counterfeiters in China
+                        isExternal:
+                          description: A flag indicating if the news stories is from an external source.
+                          type:
+                          - string
+                          - 'null'
+                        headlineURL:
+                          description: The URL of the news article. This is used for headline only feeds.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        preview:
+                          description: A brief summary of the entire news article.
+                          type:
+                          - string
+                          - 'null'
+                          example: Mitsubishi Electric Corporation (TOKYO:6503) announced today that the Guangzhou Intellectual Property Court has upheld an earlier ruling in Mitsubishi Electric\u0027s favor regarding infringement of the company\u0027s trademarks by Guangzhou Lingye Automation Equipment, Guangzhou Longyan Automation Technology, Guangzhou Ouye Automation Technology and their owners located in Guangzhou, Guangdong Province, China.
+                        fullText:
+                          description: The full published text of the news article.
+                          type:
+                          - string
+                          - 'null'
+                          example: \u003Cp\u003EMitsubishi Electric Corporation (\u003Cspan class=\u0022symbol\u0022 title=\u0022TOKYO:6503\u0022\u003ETOKYO:6503\u003C\/span\u003E) announced today...
+                        imageURL:
+                          description: The URL of the image enclosed in the news article.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        imageCaption:
+                          description: A brief summary explaining an image.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        imageHeight:
+                          description: The height of an image.
+                          type:
+                          - integer
+                          - 'null'
+                          example: null
+                        imageWidth:
+                          description: The width of an image.
+                          type:
+                          - integer
+                          - 'null'
+                          example: null
+                        pdfURL:
+                          description: The web location of PDF version of the news article.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        publishDate:
+                          description: The actual publish date of the news story.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2020-09-14T21:10:00-05:00'
+                        largeImageURL:
+                          description: The URL of the alternative larger image enclosed in the article
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        largeImageHeight:
+                          description: The height of the larger image, if available.
+                          type:
+                          - integer
+                          - 'null'
+                          example: null
+                        largeImageWidth:
+                          description: The width of the larger image, if available.
+                          type:
+                          - integer
+                          - 'null'
+                          example: null
+                        organization:
+                          description: The news organization that published the story.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        canonicalUrl:
+                          description: The URL of the best representative page from a group of duplicate pages, according to Google
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        relatedSymbols:
+                          description: An array of symbols related to the given story.
+                          example: null
+                        sourceFeed:
+                          description: The original internal feed code.
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                      required:
+                      - newsID
+                      - timestamp
+                      - source
+                      - categories
+                      - subCategories
+                      - headline
+                      - isExternal
+                      - organization
+                      - canonicalUrl
+                      - relatedSymbols
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getNewsSources.json:
+    get:
+      tags:
+      - News and Filings
+      summary: getNewsSources
+      operationId: get-getNewsSources
+      description: The getNewsSources API from Barchart OnDemand provides access to public news sources and your authorization status per source.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: strict
+        description: Return only the authorized news sources.
+        required: false
+        schema:
+          type: string
+          example: 'true'
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: The Id of the news source.
+                          type:
+                          - string
+                          - 'null'
+                          example: AGCOM
+                        name:
+                          description: The name of the news source.
+                          type:
+                          - string
+                          - 'null'
+                          example: Agriculture.com
+                        permission:
+                          description: Your permission status for this news source.
+                          type:
+                          - string
+                          - 'null'
+                          example: 'false'
+                      required:
+                      - id
+                      - name
+                      - permission
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getNewsCategories.json:
+    get:
+      tags:
+      - News and Filings
+      summary: getNewsCategories
+      operationId: get-getNewsCategories
+      description: Barchart OnDemand's getNewsCategories API provides access to news source category and sub-category data.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: sources
+        description: An id or code that identifies a news source. Multiple sources separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: AP,CMTX,USDA
+      - in: query
+        name: depth
+        description: An integer that will limit how many levels of the category tree to show. By default all levels are returned.
+        required: false
+        schema:
+          type: integer
+          example: 2
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          description: The category symbol.
+                          type:
+                          - string
+                          - 'null'
+                          example: Futures
+                        subcategories:
+                          description: The sub-categories.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            properties:
+                              category:
+                                type: object
+                                example:
+                                  name: Dairy
+                                  symbol: DRY
+                      required:
+                      - category
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getSECFilings.json:
+    get:
+      tags:
+      - News and Filings
+      summary: getSECFilings
+      operationId: get-getSECFilings
+      description: Barchart OnDemand's getSECFilings API provides access to quarterly, annual and other required regulatory/SEC filings for U.S. publicly traded companies based on symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used.
+        required: true
+        schema:
+          type: string
+          example: IBM
+      - in: query
+        name: filingType
+        description: 'The type of SEC filing. Includes: All Filings, except stock transaction reports ("AllEx"), All, including stock transaction reports ("All"), Annual 10-K Reports ("10k") and Quarterly 10-Q Reports ("10q").
+
+          '
+        required: true
+        schema:
+          type: string
+          enum:
+          - AllEx
+          - All
+          - 10k
+          - 10q
+          example: AllEx
+      - in: query
+        name: maxRecords
+        description: The maximum number of records to show in the return.
+        required: false
+        schema:
+          type: integer
+          example: 10
+      - in: query
+        name: startDate
+        description: The beginning date for the query.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2026-06-22'
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        name:
+                          description: The name for the financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Apple Inc
+                        filingId:
+                          description: The identifying filing code.
+                          type:
+                          - string
+                          - 'null'
+                          example: '14721862'
+                        date:
+                          description: The timestamp for a news article.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-02-18'
+                        form:
+                          description: The type of filing.
+                          type:
+                          - string
+                          - 'null'
+                          example: PX14A6G
+                        description:
+                          description: The name of the filing.
+                          type:
+                          - string
+                          - 'null'
+                          example: Notice of exempt solicitation. Definitive material.
+                        pdfURL:
+                          description: The web location of a PDF version of the filing.
+                          type:
+                          - string
+                          - 'null'
+                          example: https://barchart.websol.barchart.com/?module=secFilings\u0026filingid=14721862\u0026type=CONVPDF\u0026popup=1\u0026override=1\u0026symbol=AAPL
+                        htmlURL:
+                          description: The web location of a HTML version of the filing.
+                          type:
+                          - string
+                          - 'null'
+                          example: https://barchart.websol.barchart.com/?module=secFilings\u0026filingid=14721862\u0026type=HTML\u0026popup=1\u0026override=1\u0026symbol=AAPL
+                        wordURL:
+                          description: The web location of a Word version of the filing.
+                          type:
+                          - string
+                          - 'null'
+                          example: https://barchart.websol.barchart.com/?module=secFilings\u0026filingid=14721862\u0026type=RTF\u0026popup=1\u0026override=1\u0026symbol=AAPL
+                        excelURL:
+                          description: The web location of an Excel version of the filing.
+                          type:
+                          - string
+                          - 'null'
+                          example: https://barchart.websol.barchart.com/?module=secFilings\u0026filingid=14721862\u0026type=XLS\u0026popup=1\u0026override=1\u0026symbol=AAPL
+                      required:
+                      - symbol
+                      - name
+                      - filingId
+                      - date
+                      - form
+                      - description
+                      - pdfURL
+                      - htmlURL
+                      - wordURL
+                      - excelURL
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error

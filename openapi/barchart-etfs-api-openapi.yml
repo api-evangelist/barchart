@@ -1,0 +1,678 @@
+openapi: 3.2.0
+info:
+  title: OnDemand ET Fs API
+  version: 1.0.1
+  description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
+  contact:
+    name: onDemand API Support
+    url: https://www.barchart.com/ondemand
+    email: support@barchart.com
+  termsOfService: https://www.barchart.com/solutions/company/terms-and-privacy
+servers:
+- url: https://ondemand.websol.barchart.com
+tags:
+- name: ETFs
+paths:
+  /getETFDetails.json:
+    get:
+      tags:
+      - ETFs
+      summary: getETFDetails
+      operationId: get-getETFDetails
+      description: Barchart OnDemand's getETFDetails API provides ETF profile information including descriptions, fund family, underlying index, inception date, alpha, beta, shares outstanding, management fee, assets under management, top 10 holdings and more.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A valid equity symbol.  Multiple symbols separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: SPY
+      - in: query
+        name: categories
+        description: A valid asset class value. Multiple asset classes separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: Equity
+      - in: query
+        name: subCategories
+        description: A valid sub-category (classification) value. Multiple values separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: Global
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument. Multiple symbols separated by a comma may be used.
+                          type:
+                          - string
+                          - 'null'
+                          example: SPY
+                        name:
+                          description: The name of the ETF.
+                          type:
+                          - string
+                          - 'null'
+                          example: SPDR S\u0026P 500 ETF
+                        fundFamily:
+                          description: The family of funds the ETF belongs to
+                          type:
+                          - string
+                          - 'null'
+                          example: State Street Global Advisors
+                        underlyingIndex:
+                          description: The underlying index the ETF belongs to
+                          type:
+                          - string
+                          - 'null'
+                          example: S\u0026P 500 Index
+                        description:
+                          description: An overview of the ETF
+                          type:
+                          - string
+                          - 'null'
+                          example: The SPDR SP 500 ETF Trust seeks to provide investment results that, before expenses, correspond generally to the price and yield performance of the SP 500 Index.
+                        assetClass:
+                          description: The type of assets the ETF invests in
+                          type:
+                          - string
+                          - 'null'
+                          example: Equity
+                        classification:
+                          description: The classification for the ETF.
+                          type:
+                          - object
+                          - 'null'
+                          properties:
+                            region:
+                              type: string
+                              example: North America
+                            country:
+                              type: string
+                              example: US
+                            sector:
+                              type: string
+                              example: Multi-Sector
+                            equity_index:
+                              type: string
+                              example: S\u0026P 500
+                            leveraged_family:
+                              type: string
+                              example: SPY
+                        sector:
+                          description: Sectors the ETF is part of
+                          type:
+                          - string
+                          - 'null'
+                          example: Large Cap
+                        inceptionDate:
+                          description: The launch date of the ETF
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '1993-01-22'
+                        firstTradeDate:
+                          description: The first day the ETF traded
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '1993-01-29'
+                        leverage:
+                          description: The leverage strategy of the ETF
+                          type:
+                          - string
+                          - 'null'
+                          example: Long
+                        alpha:
+                          description: The alpha of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -0.04
+                        beta:
+                          description: The beta of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.99
+                        standardDeviation:
+                          description: The standard deviation of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 33.41
+                        sharesOutstanding:
+                          description: The number of shares outstanding
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 869082.1
+                        managedAssets:
+                          description: The amount of assets invested in the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 336308704
+                        netAssetValue:
+                          description: The net assets value of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 386.97
+                        lastNAVUpdateDate:
+                          description: The date net asset value was last updated.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2026-01-22'
+                        firstTradePrice:
+                          description: The first traded price of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 43.97
+                        peRatio:
+                          description: The p/e ratio of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 23.79
+                        managementFee:
+                          description: The management fee of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 0.09
+                        options:
+                          description: If options are listed on the ETF
+                          type:
+                          - string
+                          - 'null'
+                          example: 'Yes'
+                        latestDividend:
+                          description: The latest dividend amount of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.58
+                        dividendDate:
+                          description: The date of the latest dividend for the ETF
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2020-12-18'
+                        annualDividend:
+                          description: The amount of the annual dividend for the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 5.69
+                        annualDividendYield:
+                          description: The annual dividend yield of the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.47
+                        latestSplit:
+                          description: The latest split ratio for the ETF
+                          type:
+                          - string
+                          - 'null'
+                          example: null
+                        splitDate:
+                          description: The date of the latest split
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: null
+                        ytdReturn:
+                          description: The year-to-date return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 2.64
+                        OneyearReturn:
+                          description: The one year return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 15.08
+                        ThreeyearReturn:
+                          description: The three year return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 43.83
+                        FiveyearReturn:
+                          description: The five year return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 93.1
+                        TenyearReturn:
+                          description: The ten year return on the ETF
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 190.67
+                        totalHoldings:
+                          description: Total number of holdings for the given symbol.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 16
+                        topHoldings1:
+                          description: The symbol for the number one holding
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        topHoldings1Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Apple Inc.
+                        topHoldings1Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 6.29
+                        topHoldings2:
+                          description: The symbol for the number two holding
+                          type:
+                          - string
+                          - 'null'
+                          example: MSFT
+                        topHoldings2Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Microsoft Corporation
+                        topHoldings2Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 5.52
+                        topHoldings3:
+                          description: The symbol for the number three holding
+                          type:
+                          - string
+                          - 'null'
+                          example: AMZN
+                        topHoldings3Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Amazon.com Inc.
+                        topHoldings3Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 4.2
+                        topHoldings4:
+                          description: The symbol for the number four holding
+                          type:
+                          - string
+                          - 'null'
+                          example: FB
+                        topHoldings4Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Facebook Inc. Class A
+                        topHoldings4Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.91
+                        topHoldings5:
+                          description: The symbol for the number five holding
+                          type:
+                          - string
+                          - 'null'
+                          example: GOOGL
+                        topHoldings5Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Alphabet Inc. Class A
+                        topHoldings5Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.9
+                        topHoldings6:
+                          description: The symbol for the number six holding
+                          type:
+                          - string
+                          - 'null'
+                          example: GOOG
+                        topHoldings6Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Alphabet Inc. Class C
+                        topHoldings6Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.85
+                        topHoldings7:
+                          description: The symbol for the number seven holding
+                          type:
+                          - string
+                          - 'null'
+                          example: TSLA
+                        topHoldings7Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Tesla Inc
+                        topHoldings7Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.8
+                        topHoldings8:
+                          description: The symbol for number eight holding
+                          type:
+                          - string
+                          - 'null'
+                          example: BRK.B
+                        topHoldings8Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Berkshire Hathaway Inc. Class B
+                        topHoldings8Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.43
+                        topHoldings9:
+                          description: The symbol for the number nine holding
+                          type:
+                          - string
+                          - 'null'
+                          example: JPM
+                        topHoldings9Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: JPMorgan Chase \u0026 Co.
+                        topHoldings9Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.37
+                        topHoldings10:
+                          description: The symbol for number ten holding
+                          type:
+                          - string
+                          - 'null'
+                          example: JNJ
+                        topHoldings10Name:
+                          description: The name of the holding
+                          type:
+                          - string
+                          - 'null'
+                          example: Johnson \u0026 Johnson
+                        topHoldings10Percent:
+                          description: The percent of holdings
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.3
+                      required:
+                      - symbol
+                      - name
+                      - fundFamily
+                      - underlyingIndex
+                      - description
+                      - assetClass
+                      - classification
+                      - sector
+                      - inceptionDate
+                      - firstTradeDate
+                      - leverage
+                      - alpha
+                      - beta
+                      - standardDeviation
+                      - sharesOutstanding
+                      - managedAssets
+                      - netAssetValue
+                      - lastNAVUpdateDate
+                      - firstTradePrice
+                      - peRatio
+                      - managementFee
+                      - options
+                      - latestDividend
+                      - dividendDate
+                      - annualDividend
+                      - annualDividendYield
+                      - latestSplit
+                      - splitDate
+                      - ytdReturn
+                      - OneyearReturn
+                      - ThreeyearReturn
+                      - FiveyearReturn
+                      - TenyearReturn
+                      - totalHoldings
+                      - topHoldings1
+                      - topHoldings1Name
+                      - topHoldings1Percent
+                      - topHoldings2
+                      - topHoldings2Name
+                      - topHoldings2Percent
+                      - topHoldings3
+                      - topHoldings3Name
+                      - topHoldings3Percent
+                      - topHoldings4
+                      - topHoldings4Name
+                      - topHoldings4Percent
+                      - topHoldings5
+                      - topHoldings5Name
+                      - topHoldings5Percent
+                      - topHoldings6
+                      - topHoldings6Name
+                      - topHoldings6Percent
+                      - topHoldings7
+                      - topHoldings7Name
+                      - topHoldings7Percent
+                      - topHoldings8
+                      - topHoldings8Name
+                      - topHoldings8Percent
+                      - topHoldings9
+                      - topHoldings9Name
+                      - topHoldings9Percent
+                      - topHoldings10
+                      - topHoldings10Name
+                      - topHoldings10Percent
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getETFConstituents.json:
+    get:
+      tags:
+      - ETFs
+      summary: getETFConstituents
+      operationId: get-getETFConstituents
+      description: The getETFConstituents API from Barchart OnDemand provides the complete list of constituents for a given ETF.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbol
+        description: A valid ETF symbol.
+        required: true
+        schema:
+          type: string
+          example: SPY
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: The symbol of the constituent instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: AAPL
+                        name:
+                          description: The name of the constituent instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Apple Inc
+                        holdingsPercent:
+                          description: The percent of holdings.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 6.51
+                        sharesHeld:
+                          description: Number of shares held.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 162992320
+                        exchange:
+                          description: Exchange code for the marketplace where the financial instruments are listed.
+                          type:
+                          - string
+                          - 'null'
+                          example: NASDAQ
+                      required:
+                      - symbol
+                      - name
+                      - holdingsPercent
+                      - sharesHeld
+                      - exchange
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error

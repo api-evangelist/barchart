@@ -1,0 +1,374 @@
+openapi: 3.2.0
+info:
+  title: OnDemand Cryptocurrency Data API
+  version: 1.0.1
+  description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
+  contact:
+    name: onDemand API Support
+    url: https://www.barchart.com/ondemand
+    email: support@barchart.com
+  termsOfService: https://www.barchart.com/solutions/company/terms-and-privacy
+servers:
+- url: https://ondemand.websol.barchart.com
+tags:
+- name: Cryptocurrency Data
+paths:
+  /getCrypto.json:
+    get:
+      tags:
+      - Cryptocurrency Data
+      summary: getCrypto
+      operationId: get-getCrypto
+      description: The getCrypto API provides price data by symbol for spot market cryptocurrencies, including Bitcoin, Ethereum, Ripple, Litecoin and more. <a href="https://www.barchart.com/futures/bitcoin" target="_blank">Bitcoin futures</a> are available through <a href="https://www.barchart.com/ondemand/api/getQuote" target="_blank">getQuote</a>. In addition to last price, other fields such as open, high, low, close, price change, percent change are available.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A valid cryptocurrency symbol. Multiple symbols separated by a comma may be used.
+        required: true
+        schema:
+          type: string
+          example: ^BTCUSD
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: The symbol or code that identifies the cryptocurrency
+                          type:
+                          - string
+                          - 'null'
+                          example: ^BTCUSD
+                        name:
+                          description: The name that identifies the cryptocurrency
+                          type:
+                          - string
+                          - 'null'
+                          example: Bitcoin - USD
+                        lastPrice:
+                          description: The last price the cryptocurrency traded at.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 51917.12
+                        open:
+                          description: The price at which the cryptocurrency opened for trading.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52125.16
+                        high:
+                          description: The highest price at which the cryptocurrency traded for the session.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52526.57
+                        low:
+                          description: The lowest price at which the cryptocurrency traded for the session.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 50932.95
+                        previousClose:
+                          description: The price at which the cryptocurrency closed the previous trade day.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52374.08
+                        netChange:
+                          description: The price change between the last price and previous close price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -463.46
+                        percentChange:
+                          description: The percent change between the last price and previous close price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: -0.88
+                        bid:
+                          description: The current bid price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 51909.9
+                        ask:
+                          description: The current ask price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 51921.67
+                        volume:
+                          description: 24 hour volume is composed of the exchanges included in our data feed and reflects the notional number of contracts traded in the prior rolling 24 hour window. Volume is measured in the asset found in the numerator of the pair.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 56280
+                        serverTimestamp:
+                          description: The time the message was generated on the server.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-18T14:52:17-06:00'
+                        tradeTimestamp:
+                          description: The exchange timestamp for the last traded price.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-18T14:52:16-06:00'
+                      required:
+                      - symbol
+                      - name
+                      - lastPrice
+                      - open
+                      - high
+                      - low
+                      - previousClose
+                      - netChange
+                      - percentChange
+                      - bid
+                      - ask
+                      - volume
+                      - serverTimestamp
+                      - tradeTimestamp
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getCryptoHistory.json:
+    get:
+      tags:
+      - Cryptocurrency Data
+      summary: getCryptoHistory
+      operationId: get-getCryptoHistory
+      description: The getCryptoHistory API provides historical price data for spot cryptocurrencies, including Bitcoin, Ethereum, Ripple, Litecoin and more. Bitcoin futures historical data is available through the getHistory API.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbol
+        description: A valid cryptocurrency symbol.
+        required: true
+        schema:
+          type: string
+          example: ^BTCUSD
+      - in: query
+        name: type
+        description: The type of historical data to return, including tick data, minute data, and end-of-day data.
+        required: true
+        schema:
+          type: string
+          enum:
+          - ticks
+          - minutes
+          - nearbyMinutes
+          - formTMinutes
+          - daily
+          - weekly
+          - monthly
+          - quarterly
+          - yearly
+          example: minutes
+      - in: query
+        name: startDate
+        description: The start date of the historical data query.  This parameter should be set to the desired start date/time for the query (the result set will include records back to, and including, this value). If not set, the value will default to the beginning of the day specified in the end parameter, if end is specified, or to the beginning of the current day, if end is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00).
+        required: false
+        schema:
+          type: string
+          example: '20260721'
+      - in: query
+        name: endDate
+        description: The end data of the historical data query.  This parameter should be set to the desired end date/time for the query (the result set will include records up to, but not including, this value). If not set, the value will default to the end of the day specified in the start parameter, if specified, or to the end of the current day, if start is not specified. The value should conform to the format yyyymmdd[hhmm[ss]], where fields in brackets are optional (Do not include the brackets themselves). Any optional fields that are not explicitly set will default to 0 (i.e. 20090203 will default to 20090203000000 or February 3, 2009 at 00:00:00).
+        required: false
+        schema:
+          type: string
+          example: '20260722'
+      - in: query
+        name: maxRecords
+        description: The maximum amount of records returned.  This parameter should be set to the maximum number of records desired. If not specified, there number of records returned will be determined by the date/time parameters specified as well as any defaults that apply to the query.
+        required: false
+        schema:
+          type: integer
+          example: 10
+      - in: query
+        name: interval
+        description: The number of minutes for a minute query.
+        required: false
+        schema:
+          type: integer
+          example: 60
+      - in: query
+        name: order
+        description: An arrangement of fields within a particular record (ascending or descending). This parameter can be set to one of two values ("asc" and "desc") in order to specify the chronological order of the result set returned. If this parameter is not specified, the order results is not guaranteed.
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: asc
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: ^BTCUSD
+                        timestamp:
+                          description: 'The exchange time of the price. Format: HH:MM:SS.FFF
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-18T00:00:00-06:00'
+                        tradingDay:
+                          description: 'The date of the trade. Format: YYYY-MM-DD
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-02-18'
+                        sessionCode:
+                          description: A code used to differentiate between composite market prices, overnight session prices, and day session prices for futures.  Not all futures exchanges use session codes.  "G" is electronic session and "R" is pit session.
+                          type:
+                          - string
+                          - 'null'
+                          example: ' '
+                        tickPrice:
+                          description: The price traded for a single transaction.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52200.85
+                        tickSize:
+                          description: The volume traded for a single transaction.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 1
+                        open:
+                          description: The opening (first) price for the period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52200.85
+                        high:
+                          description: The highest traded price for the period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52201.39
+                        low:
+                          description: The lowest traded price for the period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52192.97
+                        close:
+                          description: The last traded price for the period.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 52192.97
+                        volume:
+                          description: 24 hour volume is composed of the exchanges included in our data feed and reflects the number of contracts traded in the prior rolling 24 hour window. Volume is measured in the asset found in the numerator of the pair. Note that historical 24 hour volume is a snapshot of this measure at 5 EST for the day in question.
+                          type:
+                          - integer
+                          - 'null'
+                          example: 28
+                      required:
+                      - symbol
+                      - timestamp
+                      - tradingDay
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error

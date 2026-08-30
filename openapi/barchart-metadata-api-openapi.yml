@@ -1,0 +1,1079 @@
+openapi: 3.2.0
+info:
+  title: OnDemand Metadata API
+  version: 1.0.1
+  description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
+  contact:
+    name: onDemand API Support
+    url: https://www.barchart.com/ondemand
+    email: support@barchart.com
+  termsOfService: https://www.barchart.com/solutions/company/terms-and-privacy
+servers:
+- url: https://ondemand.websol.barchart.com
+tags:
+- name: Metadata
+paths:
+  /getInstrumentDefinition.json:
+    get:
+      tags:
+      - Metadata
+      summary: getInstrumentDefinition
+      operationId: get-getInstrumentDefinition
+      description: The getInstrumentDefinition API from Barchart OnDemand is available to request metadata on financial instruments by symbol, exchange, or exchange MIC. Metadata includes instrument names, exchange codes, tick increments, base codes, expiration dates and more.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: exchanges
+        description: 'Exchange code for the marketplace where the financial instruments are listed.<br/>Available values (multiple values separated by a comma may be used): *FOREX, RATE, RATES, SECTOR, DGCX, DME, MATBA, ROFEX, ASX, SFE, BMF, BSE, CNSX, INDEX-TSX, MNTRL, TSX, TSX-V, WCE, CFFEX, CZCE, DCE, SHFE, EEX, EUIDX, EUREX, MEFF, MATIF, HKFE, MCX, NCDEX, NSE, ISE, JPX, TOCOM, KFE, MDEX, NZX, MOEX, OMX, ICESI, TFEX, TAIWA, ICE, LCE, LIFFE, LME, LSE, AMEX, BATS, CADFUNDS, CBOT, CBOTM, CFE, CME, COMEX, CRYPTO, CXMI, ERIS, FUND, GBLX, GREEN, ICEUS, INDEX, INDEX-CBOE, INDEX-DOW, INDEX-NQ, INDEX-NY, INDEX-RL, INDEX-SP, KCBT, MIAX, NASDAQ, NYMEX, NYMI, NYSE, OTC-BB, OTHER OTC, TRADAIR, SAFEX, SIMEX, C3, C3_BUNKER, PLATTS, CXE, BXE, DXE, EURNXT_EQ_BE, EURNXT_EQ_FR, EURNXT_EQ_NL, EURNXT_EQ_PT, ENDEX, EEX_POWER, OMX_POWER, GPC_PRICES*.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: CME
+      - in: query
+        name: exchangeMics
+        description: Market Indicator Code for the marketplace where the financial instruments are listed.
+        required: false
+        schema:
+          type: string
+          example: XCME
+      - in: query
+        name: maxRecords
+        description: The maximum number of records requested.
+        required: false
+        schema:
+          type: integer
+          example: 20
+      - in: query
+        name: offset
+        description: A value denoting where to start results from.
+        required: false
+        schema:
+          type: integer
+          example: 10
+      - in: query
+        name: returnExpired
+        description: If you would like to request data for an expired futures contract, please set this parameter to true.
+        required: false
+        schema:
+          type: string
+          example: '1'
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        guid:
+                          description: Globally Unique Identifier of a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: BRF2022
+                        id:
+                          description: Identifier of a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: '131403082'
+                        symbolRealtime:
+                          description: The Realtime name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: BRF2022
+                        symbolHistorical:
+                          description: The Historical name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: BRF22
+                        symbolDdf:
+                          description: The DDF name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: BRF2
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: BRF2
+                        symbolName:
+                          description: The full name of the instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: Brazilian Real (Pit)
+                        symbolExpiration:
+                          description: The last day that the financial instrument is traded.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-12-31'
+                        symbolCFI:
+                          description: The symbol's classification of financial instruments code.
+                          type:
+                          - string
+                          - 'null'
+                          example: FXXXXX
+                        exchange:
+                          description: Exchange code for the marketplace where the financial instruments are listed.
+                          type:
+                          - string
+                          - 'null'
+                          example: CME
+                        exchangeName:
+                          description: The name of the exchange.
+                          type:
+                          - string
+                          - 'null'
+                          example: CME
+                        exchangeCode:
+                          description: The smallest increment at which the financial instrument can be traded.
+                          type:
+                          - string
+                          - 'null'
+                          example: M
+                        tickIncrement:
+                          description: 'The number of units that make up one tick. For example, U.S. equities are quotes in decimals, and tick in decimals, and can go up +/- .01. So the tick increment is 1. But the e-mini S&P futures contract, though quoted in decimals, goes up in .25 increments, so the tick increment is 25.
+
+                            '
+                          type:
+                          - integer
+                          - 'null'
+                          example: 5
+                        baseCode:
+                          description: Indicates the fractional or decimal precision of the instrument.<br /><br />2 = 1/8 = one digit fraction, range is 0 - 7<br />3 = 1/16 = two digit fraction, range is 0 - 15<br />4 = 1/32 = two digit fraction, range is 0 - 31<br />5 = 1/64 = two digit fraction, range is 0 - 63<br />6 = 1/128 = three digit fraction, range is 0 - 127<br />7 = 1/256 = three digit fraction, range is 0 - 255<br />8 = 0 = no decimal places, a whole number<br />9 = 0.1 = one decimal place<br />A = 0.01 = two decimal places<br />B = 0.001 = three decimal places<br />C = 0.0001 = four decimal places<br />D = 0.00001 = five decimal places<br />E = 0.000001 = six decimal places<br />F = 0.0000001 = seven decimal places<br />* = unchanged = transmitted by ddfplus with size only data
+                          type:
+                          - string
+                          - 'null'
+                          example: D
+                        unitCode:
+                          description: The corresponding unit code
+                          type:
+                          - integer
+                          - 'null'
+                          example: 5
+                        pointValue:
+                          description: An indicator representing the value of one point in dollar terms. This applies to futures.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 100000
+                      required:
+                      - guid
+                      - id
+                      - symbolRealtime
+                      - symbolHistorical
+                      - symbolDdf
+                      - symbol
+                      - symbolName
+                      - symbolExpiration
+                      - symbolCFI
+                      - exchange
+                      - exchangeName
+                      - exchangeCode
+                      - tickIncrement
+                      - baseCode
+                      - unitCode
+                      - pointValue
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getFuturesSpecifications.json:
+    get:
+      tags:
+      - Metadata
+      summary: getFuturesSpecifications
+      operationId: get-getFuturesSpecifications
+      description: Barchart OnDemand's getFuturesSpecifications API provides contract information such as trading hours, contract size and tick size for futures contracts.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: GC,CL
+      - in: query
+        name: exchanges
+        description: The code for the exchange a group of financial instruments are listed on.
+        required: false
+        schema:
+          type: string
+          example: COMEX,NYMEX
+      - in: query
+        name: futuresCategory
+        description: 'Futures categories include: Energies, Financials, Grains, Indices, Meats, Metals, Softs and Currencies.
+
+          '
+        required: false
+        schema:
+          type: string
+          example: energies,metals
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used.
+                          type:
+                          - string
+                          - 'null'
+                          example: GCJ21
+                        root:
+                          description: The Future's root.
+                          type:
+                          - string
+                          - 'null'
+                          example: GC
+                        exchange:
+                          description: The code for the exchange a group of financial instruments are listed on.
+                          type:
+                          - string
+                          - 'null'
+                          example: COMEX
+                        futuresCategory:
+                          description: 'Futures categories include: Energies, Financials, Grains, Indices, Meats, Metals, Softs and Currencies.
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          example: Metals
+                        contractName:
+                          description: The name of the futures contract.
+                          type:
+                          - string
+                          - 'null'
+                          example: Gold 100-oz (GC)
+                        tradingHours:
+                          description: The futures contract's trading hours.
+                          type:
+                          - string
+                          - 'null'
+                          example: 5:00p.m. - 4:00p.m. (Sun-Fri) (RTH 7:20a.m. - 12:30p.m.) (Settles 12:30p.m.) CST
+                        ContractSize:
+                          description: The futures contract's size.
+                          type:
+                          - string
+                          - 'null'
+                          example: 100 fine troy ounces
+                        monthsTraded:
+                          description: The contract months listed for trading.
+                          type:
+                          - string
+                          - 'null'
+                          example: February, April, June, August, October, December (G, J, M, Q, V, Z)
+                        tickValue:
+                          description: The size and value of the minimum tick size.
+                          type:
+                          - string
+                          - 'null'
+                          example: 0.10 (10 cents) per troy ounce ($10.00 per contract)
+                        pointValue:
+                          description: The value of one full point.
+                          type:
+                          - string
+                          - 'null'
+                          example: $100
+                        optionsUnitValue:
+                          description: The price value of option point.
+                          type:
+                          - string
+                          - 'null'
+                          example: $100
+                        exchangeMargin:
+                          description: The margin maintenance required for the future.
+                          type:
+                          - string
+                          - 'null'
+                          example: $12,100/11,000
+                        exchangeSymbol:
+                          description: The actual exchange symbol for the corresponding future.
+                          type:
+                          - string
+                          - 'null'
+                          example: GC
+                        dailyLimit:
+                          description: The daily limit for the commodity.
+                          type:
+                          - string
+                          - 'null'
+                          example: 10% above or below previous settlement
+                      required:
+                      - symbol
+                      - root
+                      - exchange
+                      - futuresCategory
+                      - contractName
+                      - tradingHours
+                      - ContractSize
+                      - monthsTraded
+                      - tickValue
+                      - pointValue
+                      - optionsUnitValue
+                      - exchangeMargin
+                      - exchangeSymbol
+                      - dailyLimit
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getFuturesExpirations.json:
+    get:
+      tags:
+      - Metadata
+      summary: getFuturesExpirations
+      operationId: get-getFuturesExpirations
+      description: The getFuturesExpiration API from Barchart OnDemand provides first notice and last trade dates for futures contracts.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: roots
+        description: A symbol or code that identifies a futures root.
+        required: false
+        schema:
+          type: string
+          example: ZC,ZS
+      - in: query
+        name: contracts
+        description: A symbol or code that identifies a futures contract.
+        required: false
+        schema:
+          type: string
+          example: ZCN26,ZCU26
+      - in: query
+        name: fields
+        description: The fields requested.
+        required: false
+        schema:
+          type: string
+          example: lastTradingDay
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies the futures contract.
+                          type:
+                          - string
+                          - 'null'
+                          example: ZCH21
+                        exchange:
+                          description: The name of the exchange the instrument belongs to.
+                          type:
+                          - string
+                          - 'null'
+                          example: CBOT
+                        contract:
+                          description: The expiration month and year of the futures contract.
+                          type:
+                          - string
+                          - 'null'
+                          example: Mar 21
+                        firstNoticeDate:
+                          description: The first notice date of the futures contract.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-02-26'
+                        expirationDate:
+                          description: The expiration date.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-03-12'
+                        lastTradingDay:
+                          description: The last trade day of the futures contract.
+                          type:
+                          - string
+                          - 'null'
+                          example: The business day prior to the 15th calendar day of the contract month
+                      required:
+                      - symbol
+                      - exchange
+                      - contract
+                      - firstNoticeDate
+                      - expirationDate
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getFuturesOptionsExpirations.json:
+    get:
+      tags:
+      - Metadata
+      summary: getFuturesOptionsExpirations
+      operationId: get-getFuturesOptionsExpirations
+      description: The getFuturesOptionsExpirations API provides last trade dates for options on futures contracts.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: roots
+        description: A symbol or code that identifies a futures root. Multiple symbols separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: ZS
+      - in: query
+        name: contracts
+        description: A symbol or code that identifies a futures contract. Multiple symbols separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: ZCN14,ZCU14
+      - in: query
+        name: symbols
+        description: A symbol or code that identifies a futures option. Multiple symbols separated by a comma may be used.
+        required: false
+        schema:
+          type: string
+          example: ZCK260C,ZCK260P
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies the futures symbol.
+                          type:
+                          - string
+                          - 'null'
+                          example: BC1H21
+                        exchange:
+                          description: The name of the exchange the instrument belongs to.
+                          type:
+                          - string
+                          - 'null'
+                          example: CBOT
+                        underlyingContract:
+                          description: The contract the option belongs to.
+                          type:
+                          - string
+                          - 'null'
+                          example: ZCK21
+                        expirationDate:
+                          description: The expiration date.
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2021-04-23'
+                      required:
+                      - symbol
+                      - exchange
+                      - underlyingContract
+                      - expirationDate
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getSpecialOptionsClassification.json:
+    get:
+      tags:
+      - Metadata
+      summary: getSpecialOptionsClassification
+      operationId: get-getSpecialOptionsClassification
+      description: The getSpecialOptionsClassifications API from Barchart OnDemand provides the classification for weekly and special options by commodity.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: root
+        description: Commodity root code for which the classification is requested. Multiple roots can be passed, separated by a comma.
+        required: false
+        schema:
+          type: string
+          example: ZC
+      - in: query
+        name: category
+        description: The category classification of the special option
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        root:
+                          description: The code that identifies a commodity.
+                          type:
+                          - string
+                          - 'null'
+                          example: ZC
+                        category:
+                          description: The category classification of the special option
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: object
+                              example:
+                                categoryName: Short Dated New Crop Options
+                                data:
+                                  symbol: BCD
+                                  name: Corn Short Dated New Crop Options
+                      required:
+                      - root
+                      - category
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getForexForwardCurves.json:
+    get:
+      tags:
+      - Metadata
+      summary: getForexForwardCurves
+      operationId: get-getForexForwardCurves
+      description: The getForexForwardCurves API from Barchart OnDemand provides the bid, ask, and mid price data for all available forward curves (forward rates) for a given forex symbol.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbols
+        description: A valid forex symbol.
+        required: true
+        schema:
+          type: string
+          example: ^EURUSD
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: The forex symbol.
+                          type:
+                          - string
+                          - 'null'
+                          example: ^EURUSD
+                        name:
+                          description: Name of the forex.
+                          type:
+                          - string
+                          - 'null'
+                          example: Euro Fx/U.S. Dollar
+                        bid:
+                          description: The current bid price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.2142
+                        ask:
+                          description: The current ask price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.2145
+                        mid:
+                          description: The current mid price.
+                          type:
+                          - number
+                          - 'null'
+                          format: double
+                          example: 1.2145
+                        lastUpdate:
+                          description: The exchange timestamp for the last traded price.
+                          type:
+                          - string
+                          - 'null'
+                          example: '2021-02-23T15:23:07-06:00'
+                        forwardCurves:
+                          description: A multi-dimensional array with symbol, name, bid, ask, mid and last update timestamp for all available forward curves for the requested forex symbol.
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            anyOf:
+                            - type: object
+                              example:
+                                symbol: EURUSD.O
+                                name: EUR/USD Overnight Forward
+                                bid: 0.22
+                                ask: 0.23
+                                mid: 0.225
+                                open: 0.5
+                                high: 0.5
+                                low: 0.455
+                                previous: 0.455
+                                lastUpdate: 2026-07-13 10:15:23-05:00
+                      required:
+                      - symbol
+                      - name
+                      - bid
+                      - ask
+                      - mid
+                      - lastUpdate
+                      - forwardCurves
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getSymbolChange.json:
+    get:
+      tags:
+      - Metadata
+      summary: getSymbolChange
+      operationId: get-getSymbolChange
+      description: The getSymbolChange API from Barchart OnDemand provides the list of symbols that have gone through a change.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: startDate
+        description: The start date for which the symbol change records should be returned.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2026-06-22'
+      - in: query
+        name: endDate
+        description: The end date for which the symbol change records should be returned.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2026-07-22'
+      - in: query
+        name: coverage
+        description: The exchange/exchanges for which the symbol change records should be returned (Non-US coverage includes all available international markets).
+        required: false
+        schema:
+          type: string
+          enum:
+          - ALL
+          - USA
+          - CAN
+          - EUR
+          - ASX
+          - LSE
+      - in: query
+        name: fields
+        description: Include the requested optional fields in the output.
+        required: false
+        schema:
+          type: string
+          example: availableOn
+      - in: query
+        name: includeUpcomingChanges
+        description: N/A
+        required: false
+        schema:
+          type: string
+          example: '1'
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        oldSymbol:
+                          description: The old name of the symbol.
+                          type:
+                          - string
+                          - 'null'
+                          example: NSPX
+                        newSymbol:
+                          description: The new name of the symbol.
+                          type:
+                          - string
+                          - 'null'
+                          example: NSPXD
+                        updatedOn:
+                          description: 'The date of the update. Format: YYYY-MM-DD.
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2019-10-01'
+                        availableOn:
+                          description: 'The date the update was available via the system. Format: YYYY-MM-DD
+
+                            '
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          example: '2026-03-22'
+                      required:
+                      - oldSymbol
+                      - newSymbol
+                      - updatedOn
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /getRelatedInstruments.json:
+    get:
+      tags:
+      - Metadata
+      summary: getRelatedInstruments
+      operationId: get-getRelatedInstruments
+      description: The getRelatedInstruments API from Barchart OnDemand provides the list of all symbols for a given company across different countries and exchanges.
+      parameters:
+      - in: query
+        name: apikey
+        description: Enter the secret API key.
+        required: true
+        schema:
+          type: string
+          example: YOUR_API_KEY
+      - in: query
+        name: symbol
+        description: A symbol or code that identifies a financial instrument.  Multiple symbols separated by a comma may be used.
+        required: true
+        schema:
+          type: string
+          example: IBM
+      - in: query
+        name: shareClassFigi
+        description: The unique share class code identifying an instrument globally.
+        required: false
+        schema:
+          type: string
+          example: BBG001S5S399
+      - in: query
+        name: figi
+        description: The unique code identifying an instrument across all exchanges in a country.
+        required: false
+        schema:
+          type: string
+          example: BBG000BLNQ16
+      - in: query
+        name: compositeFigi
+        description: N/A
+        required: false
+        schema:
+          type: string
+          example: BBG000BLNNH6
+      responses:
+        '200':
+          description: OK (Success)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    description: The status object when an error occurs or when a response is successful.
+                    required:
+                    - code
+                    - message
+                    properties:
+                      code:
+                        description: The status code of the response.
+                        type: integer
+                        example: 200
+                      message:
+                        description: The status message corresponding to the status code.
+                        type: string
+                        example: Success.
+                  results:
+                    description: The results object of the API operation.
+                    type: array
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          description: A symbol or code that identifies a financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: IBM
+                        symbolName:
+                          description: The name of the financial instrument.
+                          type:
+                          - string
+                          - 'null'
+                          example: International Business Machines
+                        exchange:
+                          description: Exchange code for the marketplace where the financial instruments are listed.
+                          type:
+                          - string
+                          - 'null'
+                          example: NYSE
+                        figi:
+                          description: This code is unique at exchange level, a pair of exchange and company is assigned a unique figi.
+                          type:
+                          - string
+                          - 'null'
+                          example: BBG000BLNQ16 (unique code for IBM for NYSE.)
+                        compositeFigi:
+                          description: This code is shared in all exchanges across a country for a given company.
+                          type:
+                          - string
+                          - 'null'
+                          example: BBG000BLNNH6 (unique code for IBM for US exchanges.)
+                        shareClassFigi:
+                          description: This code is shared in all exchanges across the world for a given company.
+                          type:
+                          - string
+                          - 'null'
+                          example: BBG001S5S399
+                      required:
+                      - symbol
+                      - symbolName
+                      - exchange
+                      - figi
+                      - compositeFigi
+                      - shareClassFigi
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
