@@ -461,6 +461,8 @@ apis:
   humanURL: https://www.barchart.com/ondemand/api/getQuote
   baseURL: https://ondemand.websol.barchart.com
   tags:
+  - News & Filings
+  tags_raw:
   - News and Filings
   properties:
   - type: OpenAPI
