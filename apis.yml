@@ -2,15 +2,14 @@ aid: barchart
 url: https://raw.githubusercontent.com/api-evangelist/barchart/refs/heads/main/apis.yml
 name: Barchart
 kind: company
-description: >-
-  Barchart is a leading provider of market data and commodity data, delivering real-time, delayed,
+description: Barchart is a leading provider of market data and commodity data, delivering real-time, delayed,
   and historical financial and reference data across equities, futures, options, forex, cryptocurrencies,
-  ETFs, mutual funds, indexes, and physical commodities. The Barchart OnDemand API is a commercially
-  licensed REST/JSON (also XML and CSV) service hosted at ondemand.websol.barchart.com, authenticated
-  with an apikey and packaged into subscription and enterprise plans. It exposes a broad documented
-  endpoint catalog - getQuote, getHistory, getEquitiesByExchange, getFuturesOptions, getProfile,
-  getCrypto, getGrainBids, getNews, and dozens more - covering quotes, historical time series, fundamentals,
-  corporate actions, options analytics, agricultural and energy commodity data, technicals, and news.
+  ETFs, mutual funds, indexes, and physical commodities. The Barchart OnDemand API is a commercially licensed
+  REST/JSON (also XML and CSV) service hosted at ondemand.websol.barchart.com, authenticated with an apikey
+  and packaged into subscription and enterprise plans. It exposes a broad documented endpoint catalog
+  - getQuote, getHistory, getEquitiesByExchange, getFuturesOptions, getProfile, getCrypto, getGrainBids,
+  getNews, and dozens more - covering quotes, historical time series, fundamentals, corporate actions,
+  options analytics, agricultural and energy commodity data, technicals, and news.
 deliveryModel:
   model: saas
   open_source: false
@@ -49,361 +48,9 @@ tags:
 - Cryptocurrency
 - Agriculture
 created: '2026-07-11'
-modified: '2026-07-22'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
-- aid: barchart:barchart-commodities-agriculture-api
-  name: Barchart Commodities & Agriculture API
-  description: Grain bids, commodity statistics, fuel, and crop data.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Commodities & Agriculture
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-commodities-agriculture-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-corporate-actions-earnings-api
-  name: Barchart Corporate Actions & Earnings API
-  description: Splits, dividends, earnings, and calendars.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Corporate Actions & Earnings
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-corporate-actions-earnings-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-cryptocurrency-api
-  name: Barchart Cryptocurrency API
-  description: Spot crypto quotes and history.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Cryptocurrency
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-cryptocurrency-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-fundamentals-api
-  name: Barchart Fundamentals API
-  description: Company profiles and financial statements.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Fundamentals
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-fundamentals-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-futures-options-api
-  name: Barchart Futures & Options API
-  description: Futures and options market data and analytics.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Futures & Options
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-futures-options-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-history-api
-  name: Barchart History API
-  description: Historical tick, minute, and end-of-day time series.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - History
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-history-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-news-filings-api
-  name: Barchart News & Filings API
-  description: Financial news and SEC filings.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - News & Filings
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-news-filings-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-quotes-api
-  name: Barchart Quotes API
-  description: Real-time, delayed, and end-of-day price quotes.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Quotes
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-quotes-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-reference-equities-api
-  name: Barchart Reference & Equities API
-  description: Instrument metadata and bulk equities by exchange.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Reference & Equities
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-reference-equities-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-technicals-charts-api
-  name: Barchart Technicals & Charts API
-  description: Technical studies, signals, and chart images.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Technicals & Charts
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-technicals-charts-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
-- aid: barchart:barchart-weather-api
-  name: Barchart Weather API
-  description: Current conditions and forecasts.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - Weather
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-weather-api-openapi.yml
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getQuote
-  - type: PostmanCollection
-    url: collections/barchart.postman_collection.json
-  - type: OpenCollection
-    url: collections/barchart.opencollection.json
-  - type: Documentation
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getHistory
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getEquitiesByExchange
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getFuturesOptions
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getProfile
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api
-  - type: APIReference
-    url: https://www.barchart.com/ondemand/api/getWeather
 - aid: barchart:barchart-charts-and-analytics-api
   name: Barchart Charts and Analytics API
   description: The Charts and Analytics API from Barchart — 5 operation(s) for charts and analytics.
@@ -436,8 +83,7 @@ apis:
     url: openapi/barchart-etfs-api-openapi.yml
 - aid: barchart:barchart-leaderboards-and-lists-api
   name: Barchart Leaderboards and Lists API
-  description: >-
-    The Leaderboards and Lists API from Barchart — 3 operation(s) for leaderboards and lists.
+  description: The Leaderboards and Lists API from Barchart — 3 operation(s) for leaderboards and lists.
   humanURL: https://www.barchart.com/ondemand/api/getQuote
   baseURL: https://ondemand.websol.barchart.com
   tags:
@@ -489,8 +135,8 @@ apis:
     url: openapi/barchart-price-data-api-openapi.yml
 - aid: barchart:barchart-profiles-and-financial-data-api
   name: Barchart Profiles and Financial Data API
-  description: >-
-    The Profiles and Financial Data API from Barchart — 9 operation(s) for profiles and financial data.
+  description: The Profiles and Financial Data API from Barchart — 9 operation(s) for profiles and financial
+    data.
   humanURL: https://www.barchart.com/ondemand/api/getQuote
   baseURL: https://ondemand.websol.barchart.com
   tags:
@@ -500,9 +146,8 @@ apis:
     url: openapi/barchart-profiles-and-financial-data-api-openapi.yml
 - aid: barchart:barchart-splits-dividends-and-earnings-api
   name: Barchart Splits, Dividends, and Earnings API
-  description: >-
-    The Splits, Dividends, and Earnings API from Barchart — 8 operation(s) for splits, dividends, and
-    earnings.
+  description: The Splits, Dividends, and Earnings API from Barchart — 8 operation(s) for splits, dividends,
+    and earnings.
   humanURL: https://www.barchart.com/ondemand/api/getQuote
   baseURL: https://ondemand.websol.barchart.com
   tags:
@@ -534,7 +179,7 @@ common:
 - type: FinOps
   url: finops/barchart-finops.yml
 - type: OpenAPI
-  url: openapi/barchart-ondemand-official-openapi.yml
+  url: openapi/_original/barchart-ondemand-official-openapi.yml
   name: Barchart OnDemand official OpenAPI 3.0.3 (verbatim, 71 operations)
 - type: Packages
   url: packages/barchart-packages.yml
@@ -542,7 +187,10 @@ common:
   url: packages/barchart-packages.yml
 - type: X-MCPServerCandidate
   url: mcp/barchart-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/barchart-llms.txt
 - type: Overlay
