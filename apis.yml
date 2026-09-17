@@ -71,19 +71,10 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/barchart-cryptocurrency-data-api-openapi.yml
-- aid: barchart:barchart-etfs-api
-  name: Barchart ET Fs API
-  description: The ETFs API from Barchart — 2 operation(s) for etfs.
-  humanURL: https://www.barchart.com/ondemand/api/getQuote
-  baseURL: https://ondemand.websol.barchart.com
-  tags:
-  - ETFs
-  properties:
-  - type: OpenAPI
-    url: openapi/barchart-etfs-api-openapi.yml
 - aid: barchart:barchart-leaderboards-and-lists-api
   name: Barchart Leaderboards and Lists API
-  description: The Leaderboards and Lists API from Barchart — 3 operation(s) for leaderboards and lists.
+  description: >-
+    The Leaderboards and Lists API from Barchart — 3 operation(s) for leaderboards and lists.
   humanURL: https://www.barchart.com/ondemand/api/getQuote
   baseURL: https://ondemand.websol.barchart.com
   tags:
@@ -135,8 +126,8 @@ apis:
     url: openapi/barchart-price-data-api-openapi.yml
 - aid: barchart:barchart-profiles-and-financial-data-api
   name: Barchart Profiles and Financial Data API
-  description: The Profiles and Financial Data API from Barchart — 9 operation(s) for profiles and financial
-    data.
+  description: >-
+    The Profiles and Financial Data API from Barchart — 9 operation(s) for profiles and financial data.
   humanURL: https://www.barchart.com/ondemand/api/getQuote
   baseURL: https://ondemand.websol.barchart.com
   tags:
@@ -146,8 +137,9 @@ apis:
     url: openapi/barchart-profiles-and-financial-data-api-openapi.yml
 - aid: barchart:barchart-splits-dividends-and-earnings-api
   name: Barchart Splits, Dividends, and Earnings API
-  description: The Splits, Dividends, and Earnings API from Barchart — 8 operation(s) for splits, dividends,
-    and earnings.
+  description: >-
+    The Splits, Dividends, and Earnings API from Barchart — 8 operation(s) for splits, dividends, and
+    earnings.
   humanURL: https://www.barchart.com/ondemand/api/getQuote
   baseURL: https://ondemand.websol.barchart.com
   tags:
@@ -155,6 +147,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/barchart-splits-dividends-and-earnings-api-openapi.yml
+- aid: barchart:barchart-etfs-api
+  name: Barchart ET Fs API
+  description: The ETFs API from Barchart — 2 operation(s) for etfs.
+  humanURL: https://www.barchart.com/ondemand/api/getQuote
+  baseURL: https://ondemand.websol.barchart.com
+  tags:
+  - ETFs
+  properties:
+  - type: OpenAPI
+    url: openapi/barchart-etfs-api-openapi.yml
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/barchart/overview
