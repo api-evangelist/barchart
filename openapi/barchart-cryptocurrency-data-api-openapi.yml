@@ -19,7 +19,7 @@ paths:
       - Cryptocurrency Data
       summary: getCrypto
       operationId: get-getCrypto
-      description: The getCrypto API provides price data by symbol for spot market cryptocurrencies, including Bitcoin, Ethereum, Ripple, Litecoin and more. <a href="https://www.barchart.com/futures/bitcoin" target="_blank">Bitcoin futures</a> are available through <a href="https://www.barchart.com/ondemand/api/getQuote" target="_blank">getQuote</a>. In addition to last price, other fields such as open, high, low, close, price change, percent change are available.
+      description: The getCrypto API provides price data by symbol for spot market cryptocurrencies, including Bitcoin, Ethereum, Ripple, Litecoin and more. Bitcoin futures are available through getQuote. In addition to last price, other fields such as open, high, low, close, price change, percent change are available.
       parameters:
       - in: query
         name: apikey

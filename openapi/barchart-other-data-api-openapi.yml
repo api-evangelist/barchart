@@ -378,7 +378,7 @@ paths:
       - Other Data
       summary: getGrainBids
       operationId: get-getGrainBids
-      description: The getGrainBids API provides cashbid data for 30 closest locations in relation to the requested zip code. Learn more about Barchart's proprietary <a href="https://www.barchart.com/cmdty" target="_blank">commodity data</a> and grain <a href="https://www.barchart.com/cmdty/indexes" target="_blank">cmdtyIndexes</a>.
+      description: The getGrainBids API provides cashbid data for 30 closest locations in relation to the requested zip code. Learn more about Barchart's proprietary commodity data and grain cmdtyIndexes.
       parameters:
       - in: query
         name: apikey
@@ -1060,7 +1060,7 @@ paths:
       - Other Data
       summary: getCmdtyStatsId
       operationId: get-getCmdtyStatsId
-      description: The getCmdtyStatsId API is used identify instrument identifiers that can be passed to getCmdtyStats in order to request data on the applicable series.  Users can search for data series based on search parameters covering content, source, area, frequency, and more.
+      description: The getCmdtyStatsId API is used identify instrument identifiers that can be passed to getCmdtyStats in order to request data on the applicable series. Users can search for data series based on search parameters covering content, source, area, frequency, and more.
       parameters:
       - in: query
         name: apikey
@@ -1181,7 +1181,7 @@ paths:
       - Other Data
       summary: getCmdtyStats
       operationId: get-getCmdtyStats
-      description: The getCmdtyStats API is used to request information on various fundamentals, commodity statistics, and economic data.  Users can request information by data series with historical information available through to inception for most series. cmdtyStats™ is the premier source of aggregated commodity statistics – all made available in one easy to use API.
+      description: The getCmdtyStats API is used to request information on various fundamentals, commodity statistics, and economic data. Users can request information by data series with historical information available through to inception for most series. cmdtyStats™ is the premier source of aggregated commodity statistics – all made available in one easy to use API.
       parameters:
       - in: query
         name: apikey
@@ -1437,7 +1437,7 @@ paths:
       - Other Data
       summary: getGrainInstruments
       operationId: get-getGrainInstruments
-      description: The getGrainInstruments API is used to request symbol and metadata information regarding physical grain instruments across Barchart's cash bids and grain indexes.  Users can request information based on crop type / root symbol, geo-location, or areas that are codified by FIPS standards. Returned instruments and their corresponding symbols can be passed to getQuote or getHistory to retrieve the associated price data - as requested by the end user. Find our more about our <a target="_blank" href="https://www.barchart.com/cmdty">commodity data</a> offerings here.
+      description: The getGrainInstruments API is used to request symbol and metadata information regarding physical grain instruments across Barchart's cash bids and grain indexes. Users can request information based on crop type / root symbol, geo-location, or areas that are codified by FIPS standards. Returned instruments and their corresponding symbols can be passed to getQuote or getHistory to retrieve the associated price data - as requested by the end user. Find our more about our commodity data offerings here.
       parameters:
       - in: query
         name: apikey
@@ -2555,7 +2555,9 @@ paths:
       - Other Data
       summary: getCropFactors
       operationId: get-getCropFactors
-      description: The getCropFactors API provides weather data/factors specific to Ag Industry. With this API, you can retrieve satellite imagery derived weather factors, like Normalized Difference Vegetation Index (<b>NDVI</b>), Normalized Difference Water Index (<b>NDWI</b>), and Land Surface Temperature(<b>LSTD</b> & <b>LSTN</b>), and station collected weather data, like air temperature(<b>TMAX</b> & <b>TMIN</b>), and accumulated precipitation(<b>PRCP</b>).<br />Data can be requested for a combination of counties and observation windows.
+      description: 'The getCropFactors API provides weather data/factors specific to Ag Industry. With this API, you can retrieve satellite imagery derived weather factors, like Normalized Difference Vegetation Index (NDVI), Normalized Difference Water Index (NDWI), and Land Surface Temperature(LSTD & LSTN), and station collected weather data, like air temperature(TMAX & TMIN), and accumulated precipitation(PRCP).
+
+        Data can be requested for a combination of counties and observation windows.'
       parameters:
       - in: query
         name: apikey
@@ -2785,7 +2787,7 @@ paths:
       - Other Data
       summary: getUniqueIdentifier
       operationId: get-getUniqueIdentifier
-      description: The getUniqueIdentifier provides the Financial Instrument Global Identifier (FIGI) information for all available instruments. For more information on FIGI, please <a target="_blank" href="https://www.openfigi.com/about/figi">click here</a>.
+      description: The getUniqueIdentifier provides the Financial Instrument Global Identifier (FIGI) information for all available instruments. For more information on FIGI, please click here.
       parameters:
       - in: query
         name: apikey

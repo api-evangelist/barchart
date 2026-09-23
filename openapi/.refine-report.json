@@ -1,34 +1,43 @@
 {
   "provider": "barchart",
   "sources": [
-    "barchart-commodities-agriculture-api-openapi.yml",
-    "barchart-corporate-actions-earnings-api-openapi.yml",
-    "barchart-cryptocurrency-api-openapi.yml",
-    "barchart-fundamentals-api-openapi.yml",
-    "barchart-futures-options-api-openapi.yml",
-    "barchart-history-api-openapi.yml",
-    "barchart-news-filings-api-openapi.yml",
-    "barchart-quotes-api-openapi.yml",
-    "barchart-reference-equities-api-openapi.yml",
-    "barchart-technicals-charts-api-openapi.yml",
-    "barchart-weather-api-openapi.yml"
+    "_original/barchart-ondemand-official-openapi.yml"
   ],
   "outputs": [
-    "barchart-commodities-agriculture-api-openapi.yml",
-    "barchart-corporate-actions-earnings-api-openapi.yml",
-    "barchart-cryptocurrency-api-openapi.yml",
-    "barchart-fundamentals-api-openapi.yml",
-    "barchart-futures-options-api-openapi.yml",
-    "barchart-history-api-openapi.yml",
-    "barchart-news-filings-api-openapi.yml",
-    "barchart-quotes-api-openapi.yml",
-    "barchart-reference-equities-api-openapi.yml",
-    "barchart-technicals-charts-api-openapi.yml",
-    "barchart-weather-api-openapi.yml"
+    "barchart-charts-and-analytics-api-openapi.yml",
+    "barchart-cryptocurrency-data-api-openapi.yml",
+    "barchart-etfs-api-openapi.yml",
+    "barchart-leaderboards-and-lists-api-openapi.yml",
+    "barchart-metadata-api-openapi.yml",
+    "barchart-news-and-filings-api-openapi.yml",
+    "barchart-other-data-api-openapi.yml",
+    "barchart-price-data-api-openapi.yml",
+    "barchart-profiles-and-financial-data-api-openapi.yml",
+    "barchart-splits-dividends-and-earnings-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "barchart-ondemand-official-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "superseded outputs removed: barchart-et-fs-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 10 total)"
+  ],
+  "skipped": [
+    "_original/barchart-openapi.yml: archived document superseded by a larger archived document",
+    "barchart-charts-and-analytics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-cryptocurrency-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-et-fs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-leaderboards-and-lists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-news-and-filings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-other-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-price-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-profiles-and-financial-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-splits-dividends-and-earnings-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

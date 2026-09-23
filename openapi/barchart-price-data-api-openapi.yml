@@ -3995,7 +3995,7 @@ paths:
       - Price Data
       summary: getEquityOptionsOverviewSummary
       operationId: get-getEquityOptionsOverviewSummary
-      description: The getEquityOptionsOverviewSummary API  provides implied volatility option metrics for equity symbols intraday. It delivers current-day values such as weighted implied volatility, IV rank and percentile, total volume, open interest, and put/call ratios.
+      description: The getEquityOptionsOverviewSummary API provides implied volatility option metrics for equity symbols intraday. It delivers current-day values such as weighted implied volatility, IV rank and percentile, total volume, open interest, and put/call ratios.
       parameters:
       - in: query
         name: apikey
@@ -4498,7 +4498,7 @@ paths:
       - Price Data
       summary: getAmeriborRate
       operationId: get-getAmeriborRate
-      description: AMERIBOR&reg; is an interbank interest rate reflecting the borrowing rates based on actual transactions of the members of the American Financial Exchange (AFX). AMERIBOR&reg; is a transaction-based short-term interest rate based on loans executed between U.S. depositories on the American Financial Exchange Electronic Trading System. The rate is calculated using the 30 trading day rolling average of the weighted average daily volume in the AFX overnight unsecured market. The rate is denoted as a 360-day annualized percentage rate up to the fifth decimal.
+      description: AMERIBOR® is an interbank interest rate reflecting the borrowing rates based on actual transactions of the members of the American Financial Exchange (AFX). AMERIBOR® is a transaction-based short-term interest rate based on loans executed between U.S. depositories on the American Financial Exchange Electronic Trading System. The rate is calculated using the 30 trading day rolling average of the weighted average daily volume in the AFX overnight unsecured market. The rate is denoted as a 360-day annualized percentage rate up to the fifth decimal.
       parameters:
       - in: query
         name: apikey
