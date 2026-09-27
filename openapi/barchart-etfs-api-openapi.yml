@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: OnDemand ET Fs API
+  title: OnDemand ETFs API
   version: 1.0.1
   description: Barchart features a diverse set of market and information APIs that can be easily integrated into your website. Whether you're looking for a small, medium, large or enterprise solution, we'll create a custom package for you that exceeds your expectations.
   contact:

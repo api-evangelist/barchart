@@ -15,23 +15,20 @@
     "barchart-profiles-and-financial-data-api-openapi.yml",
     "barchart-splits-dividends-and-earnings-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "1 archived document(s) dropped as subsets of other archived documents",
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "barchart-ondemand-official-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "superseded outputs removed: barchart-et-fs-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 10 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "_original/barchart-openapi.yml: archived document superseded by a larger archived document",
     "barchart-charts-and-analytics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "barchart-cryptocurrency-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "barchart-et-fs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "barchart-etfs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "barchart-leaderboards-and-lists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "barchart-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "barchart-news-and-filings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
