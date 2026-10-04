@@ -1,24 +1,22 @@
-# Kin Score artifact — barchart — 2026-08-25T125852
+# Kin Score artifact — barchart — 2026-09-25T232841
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: barchart
-  schema_version: 0.14.0
-  scored_at: '2026-08-25'
-  run_ts: 2026-08-25T125852
-  composite: 61.6
+  schema_version: 0.23.0
+  scored_at: '2026-09-25'
+  run_ts: 2026-09-25T232841
+  composite: 54.7
   band: strong
   facets:
-    discoverability: 74.1
-    contract_quality: 54.7
-    governance: 16.7
-    operational_transparency: 50.0
-    developer_ergonomics: 63.7
-    commercial_clarity: 84.2
-    contract_governance: 16.7
-    access_clarity: 84.2
+    discoverability: 66.1
+    contract_quality: 48.4
+    contract_governance: 4.5
+    operational_transparency: 46.8
+    developer_ergonomics: 60.1
+    access_clarity: 81.1
   agent_readiness:
-    score: 30.2
+    score: 30.6
     band: agent-ready
     dimensions:
       spec_presence: true
@@ -27,8 +25,8 @@ kin_score:
       mcp_server: false
       auth_clarity: bearer
       idempotency: na
-      error_semantics: documented
-      openapi_examples: partial
+      error_semantics: derived
+      openapi_examples: verified
       rate_limit_signal: documented
       event_surface_described: false
       agent_skills: derived
@@ -44,7 +42,7 @@ kin_score:
     applies: true
     regime: Securities & Market Data
     regime_id: securities_market_data
-    score: 51.7
+    score: 28.7
     matched_via: tags
   provenance:
     mcp: derived
@@ -52,7 +50,7 @@ kin_score:
     agentic_access: derived
     conformance: derived
     contracts:
-      total: 12
+      total: 10
       derived: 0
       coverage: 0.0
       callable: 100.0
