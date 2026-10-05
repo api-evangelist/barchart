@@ -1,0 +1,12 @@
+{
+ "url": "https://ondemand.websol.barchart.com/openapi.yaml",
+ "requested_url": "https://ondemand.websol.barchart.com/openapi.yaml",
+ "status": 200,
+ "content_type": "text/plain;charset=UTF-8",
+ "bytes": 766768,
+ "sha256": "ad883f63544c4fe3be968809a3571f5fe16b62221138b64b338b37ad694e8d9d",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
