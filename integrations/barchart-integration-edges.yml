@@ -1,0 +1,76 @@
+edges:
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@barchart/alerts-client-js
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@barchart/alerts-client-js'
+      version: 4.22.0
+      released: '2026-06-25'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@barchart/alerts-client-js
+      repo_leg: github-org:barchart
+      publisher_leg: email:barchart.com
+      matched_by: domain
+    - name: '@barchart/marketdata-api-js'
+      version: 6.3.3
+      released: '2026-08-17'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@barchart/marketdata-api-js
+      repo_leg: github-org:barchart
+      publisher_leg: email:barchart.com
+      matched_by: domain
+    - name: '@barchart/portfolio-client-js'
+      version: 16.0.1
+      released: '2026-10-05'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@barchart/portfolio-client-js
+      repo_leg: domain:barchart.com
+      publisher_leg: email:barchart.com
+      matched_by: domain
+    - name: '@barchart/watchlist-client-js'
+      version: 8.5.3
+      released: '2026-06-25'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@barchart/watchlist-client-js
+      repo_leg: domain:barchart.com
+      publisher_leg: email:barchart.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+generated: '2026-10-18'
+method: searched
+source:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
+checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
