@@ -2168,3 +2168,9 @@ paths:
           description: Bad Request
         '500':
           description: Internal Server Error
+x-provenance:
+  method: harvested
+  publisher: Barchart
+  source: https://ondemand.websol.barchart.com/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
