@@ -1,4 +1,4 @@
-# Barchart (barchart)
+# Barchart
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,132 +64,170 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Barchart is a leading provider of market data and commodity data, delivering real-time, delayed, and historical financial and reference data across equities, futures, options, forex, cryptocurrencies, ETFs, mutual funds, indexes, and physical commodities. The Barchart OnDemand API is a commercially licensed REST service hosted at `ondemand.websol.barchart.com`, authenticated with an `apikey` query parameter and returning JSON, XML, or CSV (GET, POST, and SOAP are supported). It exposes a broad documented endpoint catalog — `getQuote`, `getHistory`, `getEquitiesByExchange`, `getFuturesOptions`, `getProfile`, `getCrypto`, `getGrainBids`, `getNews`, `getWeather`, and dozens more — covering quotes, historical time series, fundamentals, corporate actions, options analytics, agricultural and energy commodity data, technicals, and news.
+Barchart is a leading provider of market data and commodity data, delivering real-time, delayed, and historical financial and reference data across equities, futures, options, forex, cryptocurrencies, ETFs, mutual funds, indexes, and physical commodities. The Barchart OnDemand API is a commercially licensed REST/JSON (also XML and CSV) service hosted at ondemand.websol.barchart.com, authenticated with an apikey and packaged into subscription and enterprise plans. It exposes a broad documented endpoint catalog - getQuote, getHistory, getEquitiesByExchange, getFuturesOptions, getProfile, getCrypto, getGrainBids, getNews, and dozens more - covering quotes, historical time series, fundamentals, corporate actions, options analytics, agricultural and energy commodity data, technicals, and news.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/barchart/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/barchart/refs/heads/main/apis.yml)
+**Areas:** Market Data · Financial Data · Commodities · Futures · Options · Reference Data · Stocks · Historical Data · Cryptocurrency · Agriculture
 
-## Access Model (Honest Note)
+## Barchart on APIs.io
 
-Barchart OnDemand is **subscription and enterprise gated**, not a free or open API. Every request requires a Barchart-issued `apikey`, provisioned through a subscription or custom enterprise agreement; a limited **free trial** key is available for evaluation. Real-time exchange data carries additional **exchange licensing fees** beyond the Barchart subscription, and some tiers serve delayed (up to ~20 minutes) or end-of-day data. Default result sets are capped at 20 records unless a `maxRecords` parameter is supplied.
+Everything profiled for Barchart is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/barchart/](https://apis.io/providers/barchart/)** — or go straight to one of the APIs or properties below.
 
-The **endpoint names, HTTP method, `apikey` authentication, format suffixes, and request parameters** in this repository are accurate and drawn from Barchart's public OnDemand documentation. Because full response payloads and field catalogs are entitlement-specific and not published in machine-readable form, the OpenAPI **response schemas are honestly modeled** (`endpointsModeled: true`) rather than captured from live authenticated responses. Field sets returned depend on your Barchart data license.
+### APIs (10)
 
-Barchart maintains open-source **client** libraries on GitHub (e.g. `barchart-ondemand-client-js`), but the data service itself is proprietary.
+- [Barchart Charts and Analytics API](https://apis.io/apis/barchart/barchart-charts-and-analytics-api/) — The Charts and Analytics API from Barchart — 5 operation(s) for charts and analytics.
+- [Barchart Cryptocurrency Data API](https://apis.io/apis/barchart/barchart-cryptocurrency-data-api/) — The Cryptocurrency Data API from Barchart — 2 operation(s) for cryptocurrency data.
+- [Barchart Leaderboards and Lists API](https://apis.io/apis/barchart/barchart-leaderboards-and-lists-api/) — The Leaderboards and Lists API from Barchart — 3 operation(s) for leaderboards and lists.
+- [Barchart Metadata API](https://apis.io/apis/barchart/barchart-metadata-api/) — The Metadata API from Barchart — 8 operation(s) for metadata.
+- [Barchart News and Filings API](https://apis.io/apis/barchart/barchart-news-and-filings-api/) — The News and Filings API from Barchart — 4 operation(s) for news and filings.
+- [Barchart Other Data API](https://apis.io/apis/barchart/barchart-other-data-api/) — The Other Data API from Barchart — 12 operation(s) for other data.
+- [Barchart Price Data API](https://apis.io/apis/barchart/barchart-price-data-api/) — The Price Data API from Barchart — 18 operation(s) for price data.
+- [Barchart Profiles and Financial Data API](https://apis.io/apis/barchart/barchart-profiles-and-financial-data-api/) — The Profiles and Financial Data API from Barchart — 9 operation(s) for profiles and financial data.
+- [Barchart Splits, Dividends, and Earnings API](https://apis.io/apis/barchart/barchart-splits-dividends-and-earnings-api/) — The Splits, Dividends, and Earnings API from Barchart — 8 operation(s) for splits, dividends, and earnings.
+- [Barchart ET Fs API](https://apis.io/apis/barchart/barchart-etfs-api/) — The ETFs API from Barchart — 2 operation(s) for etfs.
 
-## Tags
+### Published properties
 
-- Market Data
-- Financial Data
-- Commodities
-- Futures
-- Options
-- Reference Data
-- Equities
-- Historical Data
-- Cryptocurrency
-- Agriculture
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### MCP servers (1)
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+Model Context Protocol servers that expose the API to agents.
 
-## APIs
+- [barchart-ondemand](https://apis.io/servers/barchart/barchart-ondemand/)
 
-### Barchart Quotes API
+#### Agentic access (1)
 
-Real-time, delayed, and end-of-day price quotes by symbol across stocks, indexes, mutual funds, ETFs, futures, forex, and cryptocurrencies — `getQuote`, `getQuoteEod`, `getClosePrice` — plus market movers via `getLeaders` and 52-week `getHighsLows`.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://www.barchart.com/ondemand/api/getQuote](https://www.barchart.com/ondemand/api/getQuote)
-- **Base URL:** `https://ondemand.websol.barchart.com`
+- [Barchart Agentic Access](https://apis.io/agentic-access/barchart/barchart-agentic-access/)
 
-### Barchart History API
+#### Collections (24)
 
-Historical time series on stocks, indexes, ETFs, futures, forex, and crypto via `getHistory` — tick, minute-bar, and end-of-day data with daily, weekly, monthly, quarterly, yearly, and nearest/continuation contract variants.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://www.barchart.com/ondemand/api/getHistory](https://www.barchart.com/ondemand/api/getHistory)
-- **Base URL:** `https://ondemand.websol.barchart.com`
+- [Barchart OnDemand API](https://apis.io/collections/barchart/open-barchart/)
+- [Barchart OnDemand Commodities & Agriculture API](https://apis.io/collections/barchart/open-barchart-commodities-agriculture-api/)
+- [Barchart OnDemand Commodities & Agriculture Corporate Actions & Earnings API](https://apis.io/collections/barchart/open-barchart-corporate-actions-earnings-api/)
+- [Barchart OnDemand Commodities & Agriculture Cryptocurrency API](https://apis.io/collections/barchart/open-barchart-cryptocurrency-api/)
+- [Barchart OnDemand Commodities & Agriculture Fundamentals API](https://apis.io/collections/barchart/open-barchart-fundamentals-api/)
+- [Barchart OnDemand Commodities & Agriculture Futures & Options API](https://apis.io/collections/barchart/open-barchart-futures-options-api/)
+- [Barchart OnDemand Commodities & Agriculture History API](https://apis.io/collections/barchart/open-barchart-history-api/)
+- [Barchart OnDemand Commodities & Agriculture News & Filings API](https://apis.io/collections/barchart/open-barchart-news-filings-api/)
+- [OnDemand APIs](https://apis.io/collections/barchart/open-barchart-ondemand-official/)
+- [Barchart OnDemand Commodities & Agriculture Quotes API](https://apis.io/collections/barchart/open-barchart-quotes-api/)
+- [Barchart OnDemand Commodities & Agriculture Reference & Equities API](https://apis.io/collections/barchart/open-barchart-reference-equities-api/)
+- [Barchart OnDemand Commodities & Agriculture Technicals & Charts API](https://apis.io/collections/barchart/open-barchart-technicals-charts-api/)
+- [Barchart OnDemand Commodities & Agriculture Weather API](https://apis.io/collections/barchart/open-barchart-weather-api/)
+- [Barchart OnDemand Commodities & Agriculture API](https://apis.io/collections/barchart/postman-barchart-commodities-agriculture-api/)
+- [Barchart OnDemand Commodities & Agriculture Corporate Actions & Earnings API](https://apis.io/collections/barchart/postman-barchart-corporate-actions-earnings-api/)
+- [Barchart OnDemand Commodities & Agriculture Cryptocurrency API](https://apis.io/collections/barchart/postman-barchart-cryptocurrency-api/)
+- [Barchart OnDemand Commodities & Agriculture Fundamentals API](https://apis.io/collections/barchart/postman-barchart-fundamentals-api/)
+- [Barchart OnDemand Commodities & Agriculture Futures & Options API](https://apis.io/collections/barchart/postman-barchart-futures-options-api/)
+- [Barchart OnDemand Commodities & Agriculture History API](https://apis.io/collections/barchart/postman-barchart-history-api/)
+- [Barchart OnDemand Commodities & Agriculture News & Filings API](https://apis.io/collections/barchart/postman-barchart-news-filings-api/)
+- [Barchart OnDemand Commodities & Agriculture Quotes API](https://apis.io/collections/barchart/postman-barchart-quotes-api/)
+- [Barchart OnDemand Commodities & Agriculture Reference & Equities API](https://apis.io/collections/barchart/postman-barchart-reference-equities-api/)
+- [Barchart OnDemand Commodities & Agriculture Technicals & Charts API](https://apis.io/collections/barchart/postman-barchart-technicals-charts-api/)
+- [Barchart OnDemand Commodities & Agriculture Weather API](https://apis.io/collections/barchart/postman-barchart-weather-api/)
 
-### Barchart Reference & Equities API
+#### Overlays (1)
 
-Reference and instrument metadata plus bulk equities by exchange — `getEquitiesByExchange`, `getInstrumentDefinition`, `getRelatedInstruments`, `getSymbolChange`, `getUniqueIdentifier` (FIGI).
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- **Human URL:** [https://www.barchart.com/ondemand/api/getEquitiesByExchange](https://www.barchart.com/ondemand/api/getEquitiesByExchange)
-- **Base URL:** `https://ondemand.websol.barchart.com`
+- [Barchart Ondemand Official Overlay](https://apis.io/overlays/barchart/barchart-ondemand-official-overlay/)
 
-### Barchart Futures & Options API
+#### Security (2)
 
-Futures and options market data and analytics — `getFuturesByExchange`, `getFuturesOptions`, `getFuturesOptionsEOD`, `getFuturesSpreads`, `getEquityOptions`, `getOptionsScreener`, and contract reference via `getFuturesSpecifications` and `getFuturesExpirations`.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://www.barchart.com/ondemand/api/getFuturesOptions](https://www.barchart.com/ondemand/api/getFuturesOptions)
-- **Base URL:** `https://ondemand.websol.barchart.com`
+- [Barchart Authentication](https://apis.io/security/barchart/barchart-authentication/)
+- [Barchart Domain Security](https://apis.io/security/barchart/barchart-domain-security/)
 
-### Barchart Fundamentals API
+#### Plans and pricing (1)
 
-Company fundamentals and financial statements — `getProfile`, `getFinancialHighlights`, `getFinancialRatios`, `getIncomeStatements`, `getBalanceSheets`, `getCashFlow`, `getRatings`, `getCompetitors`, `getIndexMembers`.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://www.barchart.com/ondemand/api/getProfile](https://www.barchart.com/ondemand/api/getProfile)
-- **Base URL:** `https://ondemand.websol.barchart.com`
+- [Barchart Plans Pricing](https://apis.io/plans/barchart/barchart-plans-pricing/)
 
-### Barchart Corporate Actions & Earnings API
+#### Rate limits (1)
 
-Splits, dividends, and earnings reference data — `getCorporateActions`, `getEarningsEstimates`, `getDividendData`, `getDividendStocks`, plus forward calendars via `getEarningsCalendar` and `getDividendsCalendar`.
+Published request limits.
 
-- **Human URL:** [https://www.barchart.com/ondemand/api](https://www.barchart.com/ondemand/api)
-- **Base URL:** `https://ondemand.websol.barchart.com`
+- [Barchart Rate Limits](https://apis.io/rate-limits/barchart/barchart-rate-limits/)
 
-### Barchart Cryptocurrency API
+#### FinOps (1)
 
-Spot cryptocurrency market data — `getCrypto` for current spot prices (Bitcoin, Ethereum, Ripple, Litecoin, etc.) and `getCryptoHistory` for historical spot time series.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://www.barchart.com/ondemand/api](https://www.barchart.com/ondemand/api)
-- **Base URL:** `https://ondemand.websol.barchart.com`
+- [Barchart Finops](https://apis.io/finops/barchart/barchart-finops/)
 
-### Barchart Commodities & Agriculture API
+## Where to find this API
 
-Physical commodity, agricultural, and economic reference data — `getGrainBids`, `getUSDAGrainPrices`, `getCmdtyStats`, `getBLSIndexes`, `getCmdtyCalendar`, `getFuelPrices`, `getCropFactors`, `getYieldForecastPlanet`, and `getForexForwardCurves`.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://www.barchart.com/ondemand/api](https://www.barchart.com/ondemand/api)
-- **Base URL:** `https://ondemand.websol.barchart.com`
-
-### Barchart Technicals & Charts API
-
-Technical analysis and charting data — `getChart`, `getTechnicals`, `getTechnicalIndicatorData`, `getSignal`, `getMomentum`, and `getSectors`.
-
-- **Human URL:** [https://www.barchart.com/ondemand/api](https://www.barchart.com/ondemand/api)
-- **Base URL:** `https://ondemand.websol.barchart.com`
-
-### Barchart News & Filings API
-
-Financial news and regulatory filings — `getNews`, `getNewsSources`, `getNewsCategories`, and `getSECFilings`.
-
-- **Human URL:** [https://www.barchart.com/ondemand/api](https://www.barchart.com/ondemand/api)
-- **Base URL:** `https://ondemand.websol.barchart.com`
-
-### Barchart Weather API
-
-Weather data via `getWeather` — current conditions, forecasts, and maps by zip code, complementing Barchart's agricultural and commodity data.
-
-- **Human URL:** [https://www.barchart.com/ondemand/api/getWeather](https://www.barchart.com/ondemand/api/getWeather)
-- **Base URL:** `https://ondemand.websol.barchart.com`
-
-## Common Properties
-
-- [Authentication](authentication/barchart-authentication.yml)
-- [Domain Security](security/barchart-domain-security.yml)
-- [LinkedIn](https://www.linkedin.com/company/barchart-com)
 - [Website](https://www.barchart.com)
 - [Documentation](https://www.barchart.com/ondemand/api)
-- [Sign Up](https://www.barchart.com/solutions/services/ondemand)
-- [Plans](plans/barchart-plans-pricing.yml)
-- [Rate Limits](rate-limits/barchart-rate-limits.yml)
-- [Fin Ops](finops/barchart-finops.yml)
+- [Getting started](https://www.barchart.com/ondemand/free-market-data-api)
+- [Pricing](https://www.barchart.com/solutions/services/ondemand)
+- [Sign up](https://www.barchart.com/solutions/services/ondemand)
+- [Support](https://help.barchart.com)
+- [Blog](https://www.barchart.com/news)
+- [Terms of service](https://www.barchart.com/terms)
+- [Privacy policy](https://www.barchart.com/terms#privacy-policy)
+- [GitHub](https://github.com/barchart)
+- [Status](https://status.barchart.com)
 
-## Review
+## API Evangelist rating
 
-Does Barchart expose a documented public WebSocket API? **No.** See [review.yml](review.yml). Barchart's documented public surface is request/response REST/SOAP with an `apikey`. Real-time push exists only as sales-gated products (the Event-Based API over REST/Socket.IO and a separate streaming market-data service), with no published raw public WebSocket contract.
+**Kin Score 46.4** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 48.4 |
+| Contract governance | 4.5 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 60.1 |
+| Access clarity | 52.6 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 29.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 28.7** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/barchart/](https://apis.io/providers/barchart/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Barchart: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/barchart/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
